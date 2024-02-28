@@ -1,0 +1,124 @@
+https://clockify.me/signup/5e0c571799edc01a0ea63902/invitation
+
+Tues
+Meeting 9 to 10:10
+10:30 to 1:00
+Stock soko bootstrap installation for library
+2:00 to 7:00
+Mtender -- work on submitted in supplier dashboard and check flow of project.
+
+wed
+Meeting 9 to 10:00
+10:20 to 1:30
+Mtender -- Work on supplier bashboard check status in mongodb PQ parent and PQ sub catagory debug project.
+2:30 to 7:30
+Mtender -- Work on supplier dashboard PQ Live to add to card,purchased and submitted to  debug project and understand flow of project. 
+
+thusday
+Meeting 9 to 10:00
+10:15 to 1:30
+Skock soko Library download and install header file error.
+
+2:30 to 7:40
+Mtender -- Create creator , creater Approved, Evalutor, Evaluator Approved , validaor check status and work on database 
+
+
+2:30 to 4:30
+Mtender Mongo db data pass
+friday
+Meeting 9 to 10:00
+10:15 to 1:10
+Work on Stock soko in Netserver and FeedTest on passing path on linked and work on Mtender
+
+2:00 to 7:15
+Work on NetServer solve error in passing path in link. And work on commonLib error.
+and work on Mtender   
+
+Saturday
+10:20 1:00
+Stock soko Library installation 
+
+12:30 to 1:30
+Discuss with sameer on Mtender project
+
+2:30 to 9:00
+Mtender -- Create Archive tab in supplier dashboard and create method check flow in status close.
+
+
+13/01/20
+Monday
+10 to 1:30
+Work on Archive and check close sttus and Mongodb database.
+
+2:30 to 9
+Wonk on Archive 
+
+Tuesday
+9 to 10
+project meeting
+
+10:00 to 1:30
+Work on stock soko Library error on cpp file find solution for error in files.
+
+20:30 to 7:30
+Library Related issues set path configuration property try to solve error.
+
+Wed
+9:15 to 10:00 project meeting
+
+Work on stock soko exe file search deploy project from exe file and related topic.
+
+
+
+Thusday
+9:30 to 1:00
+Work on stock soko header file error in file cannot be find try to solve.
+
+3 to 6:30
+Work on stock soko header file error in file cannot be find try to solve.
+
+fri
+work on stock soko
+
+sat
+9 to 7
+Mtender Project
+Work on payment proceed
+
+
+20/01/20
+ project meeting 9 to 10:00
+work on stock soko library error
+
+
+loading 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+saturday
+Meeting 9 to 10:30
+10:30 to 1:40
+Work on Archive create grid and method check status close PQ 
+
+2:30 to 9:00
+Work on Archive check Evaluator and create method in java flow in project 
+
+
+2:30 to 9 
+
+monday
