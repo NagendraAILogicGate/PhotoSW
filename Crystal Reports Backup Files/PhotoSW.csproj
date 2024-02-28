@@ -1,0 +1,2511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{75592A8D-8683-423B-922D-36AE4D7DB5CF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoSW</RootNamespace>
+    <AssemblyName>PhotoSW</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Baracoda.Cameleon.PC.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Baracoda.Cameleon.PC.Modularity, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Modularity.dll</HintPath>
+    </Reference>
+    <Reference Include="Baracoda.Cameleon.PC.Readers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Readers.dll</HintPath>
+    </Reference>
+    <Reference Include="BurnMedia">
+      <HintPath>..\BurnMedia\bin\Debug\BurnMedia.dll</HintPath>
+    </Reference>
+    <Reference Include="CGEditor_WinForms, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\CGEditor_WinForms.exe</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.Engine.13.0.3501\lib\net20\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.ClientDoc.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.CommLayer.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.CommLayer.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.CommonControls.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.CommonControls.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.CommonObjectModel.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.CommonObjectModel.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.Controllers.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.Controllers.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CubeDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.CubeDefModel.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.CubeDefModel.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.DataDefModel.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.DataDefModel.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.DataSetConversion.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ObjectFactory, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.ObjectFactory.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.ObjectFactory.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Prompting, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.Prompting.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.Prompting.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ReportDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.ReportDefModel.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.ReportDefModel.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.XmlSerialize, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportAppServer.XmlSerialize.13.0.3501\lib\net20\CrystalDecisions.ReportAppServer.XmlSerialize.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.ReportSource.13.0.3501\lib\net20\CrystalDecisions.ReportSource.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.Shared.13.0.3501\lib\net20\CrystalDecisions.Shared.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="DigiAuditLogger, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiAuditLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="Digiphoto.Cache, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Digiphoto.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="DigiPhoto.DigiSync.Model, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiPhoto.DigiSync.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="DigiPhoto.DigiSync.ServiceLiabrary, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiPhoto.DigiSync.ServiceLiabrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DigiPhoto.UtilityRepository, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiPhoto.UtilityRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ErrorHandler, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ErrorHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifLib, Version=1.2.6000.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ExifLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifMetadata, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ExifMetadata.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtendedGrid, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ExtendedGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Facebook.6.0.16\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\FlashControlV71.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FrameworkHelper, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FrameworkHelper\bin\Debug\FrameworkHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Gif.Components, Version=0.0.0.1, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Gif.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MCHROMAKEYLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MCHROMAKEYLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MCOLORSLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MCOLORSLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MLPROXYLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MLPROXYLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MPLATFORMLib, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MPLATFORMLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MControls, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MControls.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataExtractor, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MetadataExtractor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="nikoncswrapper, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\nikoncswrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.CF.DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PhotoSW.CF.DataLayer\bin\Debug\PhotoSW.CF.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.DataLayer">
+      <HintPath>..\PhotoSW.DataLayer\bin\Debug\PhotoSW.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.Business">
+      <HintPath>..\PhotoSW.IMIX.Business\bin\Debug\PhotoSW.IMIX.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.Model">
+      <HintPath>..\PhotoSW.IMIX.Model\bin\Debug\PhotoSW.IMIX.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="PresentationFramework.AeroLite" />
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="PresentationFramework.Luna" />
+    <Reference Include="PresentationFramework.Royale" />
+    <Reference Include="SAPBusinessObjects.WPF.Viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.WPF.Viewer.13.0.3501\lib\net20\SAPBusinessObjects.WPF.Viewer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalReports.WPF.ViewerShared.13.0.3501\lib\net20\SAPBusinessObjects.WPF.ViewerShared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\ShockwaveFlashObjects.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SQLite.CodeFirst, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\SQLite.CodeFirst.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Windows.Forms.Ribbon35, Version=3.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Windows.Forms.Ribbon35.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="VimbaNET, Version=1.4.1.18091, Culture=neutral, PublicKeyToken=96b729f24f119b9a, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\VimbaNET.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit.Extended, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="xpburncomponent, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\xpburncomponent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Animations\BlockAnimation.cs" />
+    <Compile Include="Animations\BlockPhotoSave.cs" />
+    <Compile Include="Animations\CircleAnimation.cs" />
+    <Compile Include="Animations\DissolvedAnimation.cs" />
+    <Compile Include="Animations\GIFAnimations.cs" />
+    <Compile Include="Animations\InterlacedAnimation.cs" />
+    <Compile Include="Animations\RandomNumberFromAGivenSetOfNumbers.cs" />
+    <Compile Include="Animations\WaterFallAnimation.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\ActivityDataSet.cs">
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\ActivityDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsActivity.cs">
+      <DependentUpon>dsActivity.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsActivity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsActivity.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsFinancialauditreport.cs">
+      <DependentUpon>dsFinancialauditreport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsFinancialauditreport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFinancialauditreport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsLocationPerformance.cs">
+      <DependentUpon>dsLocationPerformance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsLocationPerformance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsLocationPerformance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsOperatorPerformanceReport.cs">
+      <DependentUpon>dsOperatorPerformanceReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsOperatorPerformanceReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOperatorPerformanceReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsOrderDiscountReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOrderDiscountReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPaymentSummaryInfo.cs">
+      <DependentUpon>dsPaymentSummaryInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPaymentSummaryInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPaymentSummaryInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPhotoGrapherPerformanceReport.cs">
+      <DependentUpon>dsPhotoGrapherPerformanceReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPhotoGrapherPerformanceReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPhotoGrapherPerformanceReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPrintLogReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintLogReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPrintSummaryReport.cs">
+      <DependentUpon>dsPrintSummaryReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsPrintSummaryReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintSummaryReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsProductionSummaryTaxDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProductionSummaryTaxDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsProductSummary.cs">
+      <DependentUpon>dsProductSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsProductSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProductSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsSummary.cs">
+      <DependentUpon>dsSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\dsTakingReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTakingReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\TestDataSet.cs">
+      <DependentUpon>TestDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\DataSet\TestDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\ActivityReports.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActivityReports.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptActivityReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptActivityReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptFinancialauditreport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptFinancialauditreport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptLocationPerformance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptLocationPerformance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptOperatorPerformanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptOperatorPerformanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptOrderDiscountReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptOrderDiscountReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptPhotoGrapherPerformanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptPhotoGrapherPerformanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptPrintLogReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptPrintLogReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptProductSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptProductSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\crptTakingReports.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptTakingReports.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\Financialauditreport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Financialauditreport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\IPContentTrackingReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IPContentTrackingReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\LocationPerformance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocationPerformance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\OperationAuditTrail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationAuditTrail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\OperatorPerformanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperatorPerformanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\OrderDiscountReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDiscountReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\Payment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Payment.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\PhotoGrapherPerformanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhotoGrapherPerformanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\PrintLogReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintLogReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\Summary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Summary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\TakingReports.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TakingReports.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\TestActivityReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestActivityReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="bin\Debug\Reports\TestReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Calender\CalenderViewOperationType.cs" />
+    <Compile Include="Calender\ItemTemplateCalenderView.cs" />
+    <Compile Include="Calender\ItemTemplateDetail.cs" />
+    <Compile Include="Calender\ItemTemplateMaster.cs" />
+    <Compile Include="Calender\ItemTemplatePrintOrder.cs" />
+    <Compile Include="Calender\SelectedCalenderImageEdit.xaml.cs">
+      <DependentUpon>SelectedCalenderImageEdit.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Barcodes.cs" />
+    <Compile Include="Common\Code39.cs" />
+    <Compile Include="Common\FindCommandParameters.cs" />
+    <Compile Include="Common\FindCommandParametersConverter.cs" />
+    <Compile Include="Common\UriToBitmapConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataSync.Controller\ServiceProxy.cs" />
+    <Compile Include="DiscountItem.cs" />
+    <Compile Include="DragImage\DragImageCanvas.cs" />
+    <Compile Include="Interop\PanProperty.cs" />
+    <Compile Include="Interop\PhotoLayering.cs" />
+    <Compile Include="Interop\SlotProperty.cs" />
+    <Compile Include="Interop\TemplateListItems.cs" />
+    <Compile Include="Interop\TransitionProperty.cs" />
+    <Compile Include="Interop\VideoEffects.cs" />
+    <Compile Include="Interop\VideoElements.cs" />
+    <Compile Include="Interop\VideoFrames.cs" />
+    <Compile Include="Interop\VideoPage.cs" />
+    <Compile Include="Manage\AddEditUsers.xaml.cs">
+      <DependentUpon>AddEditUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\AddLocationstoSubstore.xaml.cs">
+      <DependentUpon>AddLocationstoSubstore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Archive.xaml.cs">
+      <DependentUpon>Archive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\CaptureFrameDownloader.xaml.cs">
+      <DependentUpon>CaptureFrameDownloader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\CardType.xaml.cs">
+      <DependentUpon>CardType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Configuration.xaml.cs">
+      <DependentUpon>Configuration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\EmailStatus.xaml.cs">
+      <DependentUpon>EmailStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageCamera.xaml.cs">
+      <DependentUpon>ManageCamera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageCurrencyProfile.xaml.cs">
+      <DependentUpon>ManageCurrencyProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageDevice.xaml.cs">
+      <DependentUpon>ManageDevice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageDiscount.xaml.cs">
+      <DependentUpon>ManageDiscount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageHome.xaml.cs">
+      <DependentUpon>ManageHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageLocations.xaml.cs">
+      <DependentUpon>ManageLocations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageMasterData.xaml.cs">
+      <DependentUpon>ManageMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManagePrinter.xaml.cs">
+      <DependentUpon>ManagePrinter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageProductPricing.xaml.cs">
+      <DependentUpon>ManageProductPricing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageReport.xaml.cs">
+      <DependentUpon>ManageReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ManageSubstores.xaml.cs">
+      <DependentUpon>ManageSubstores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\MLLiveCapture.xaml.cs">
+      <DependentUpon>MLLiveCapture.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manage\PrintLog.xaml.cs">
+      <DependentUpon>PrintLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Reports\ActivityReport.xaml.cs">
+      <DependentUpon>ActivityReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\RFIDMapping.xaml.cs">
+      <DependentUpon>RFIDMapping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\SoftwareHealthCheckup.xaml.cs">
+      <DependentUpon>SoftwareHealthCheckup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\SyncStatus.xaml.cs">
+      <DependentUpon>SyncStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\SystemPrinterQueuee.xaml.cs">
+      <DependentUpon>SystemPrinterQueuee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\BurnImagesForCD.cs" />
+    <Compile Include="Orders\BurnMediaOrderList.xaml.cs">
+      <DependentUpon>BurnMediaOrderList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\DirectoryItem.cs" />
+    <Compile Include="Orders\IMediaItem.cs" />
+    <Compile Include="Orders\OrderRefund.xaml.cs">
+      <DependentUpon>OrderRefund.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\Payment.xaml.cs">
+      <DependentUpon>Payment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\PaymentItem.cs" />
+    <Compile Include="Orders\PlaceOrder.xaml.cs">
+      <DependentUpon>PlaceOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\PrintPlateform.xaml.cs">
+      <DependentUpon>PrintPlateform.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\SelectPrinter.xaml.cs">
+      <DependentUpon>SelectPrinter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\TestBill.xaml.cs">
+      <DependentUpon>TestBill.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\AssociateImage.xaml.cs">
+      <DependentUpon>AssociateImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Calender\SelectedCalenderImageEdit.xaml.cs">
+      <DependentUpon>SelectedCalenderImageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Calender\SelectedCalenderList.xaml.cs">
+      <DependentUpon>SelectedCalenderList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Discount.xaml.cs">
+      <DependentUpon>Discount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shader\BloomEffect.cs" />
+    <Compile Include="Shader\SoftSkinEffect.cs" />
+    <Compile Include="ViewModels\AllGraphics.cs" />
+    <Compile Include="ViewModels\AllProductType.cs" />
+    <Compile Include="ViewModels\BGMaster.cs" />
+    <Compile Include="ViewModels\BurnOrderElements.cs" />
+    <Compile Include="ViewModels\CryptorEngine.cs" />
+    <Compile Include="ViewModels\DispatcherHelper.cs" />
+    <Compile Include="ViewModels\DraggablePopup.cs" />
+    <Compile Include="ViewModels\GenerateQRCode.cs" />
+    <Compile Include="ViewModels\Global.cs" />
+    <Compile Include="ViewModels\LstMyItems.cs" />
+    <Compile Include="ViewModels\MemoryManagement.cs" />
+    <Compile Include="ViewModels\PrinterDetails.cs" />
+    <Compile Include="ViewModels\PrintOrderPage.cs" />
+    <Compile Include="ViewModels\ProductListWithPricing.cs" />
+    <Compile Include="ViewModels\ProductTypeList.cs" />
+    <Compile Include="ViewModels\RobotImageLoader.cs" />
+    <Compile Include="ViewModels\SelectedSubStores.cs" />
+    <Compile Include="ViewModels\serialize.cs" />
+    <Compile Include="Views\Authorize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Authorize.Designer.cs">
+      <DependentUpon>Authorize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Burningimage.xaml.cs">
+      <DependentUpon>Burningimage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Exposure.xaml.cs">
+      <DependentUpon>Exposure.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagePrinting.xaml.cs">
+      <DependentUpon>ManagePrinting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\OfflineMasterDataFile.cs" />
+    <Compile Include="Manage\UserPermission.xaml.cs">
+      <DependentUpon>UserPermission.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Taskbar.cs" />
+    <Compile Include="ViewModels\Venue.cs" />
+    <Compile Include="Orders\BoolToVisibilityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Orders\discount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Orders\DiscRecorderValueConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Orders\LineItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Orders\Printer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PSControls\AcquiredFrames.xaml.cs">
+      <DependentUpon>AcquiredFrames.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\AngleRotate.xaml.cs">
+      <DependentUpon>AngleRotate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CashBoxes.xaml.cs">
+      <DependentUpon>CashBoxes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CashPayment.xaml.cs">
+      <DependentUpon>CashPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlCardPayment.xaml.cs">
+      <DependentUpon>CtrlCardPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlCashPayment.xaml.cs">
+      <DependentUpon>CtrlCashPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlExistCodePopup.xaml.cs">
+      <DependentUpon>CtrlExistCodePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlInventoryConsumables.xaml.cs">
+      <DependentUpon>CtrlInventoryConsumables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlOfflineClosingForm.xaml.cs">
+      <DependentUpon>CtrlOfflineClosingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlOpenCloseForm.xaml.cs">
+      <DependentUpon>CtrlOpenCloseForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlOpeningForm.xaml.cs">
+      <DependentUpon>CtrlOpeningForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlOperationalStatistics.xaml.cs">
+      <DependentUpon>CtrlOperationalStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\CtrlProfileRate.xaml.cs">
+      <DependentUpon>CtrlProfileRate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ctrProductType.xaml.cs">
+      <DependentUpon>ctrProductType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\DigiMessageBox.xaml.cs">
+      <DependentUpon>DigiMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\DynamicImgCrop.xaml.cs">
+      <DependentUpon>DynamicImgCrop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\EditAddCard.xaml.cs">
+      <DependentUpon>EditAddCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\EditingControl.xaml.cs">
+      <DependentUpon>EditingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\FormsPopup.xaml.cs">
+      <DependentUpon>FormsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\GeneralEffectsControl.xaml.cs">
+      <DependentUpon>GeneralEffectsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ImageCalculator.xaml.cs">
+      <DependentUpon>ImageCalculator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ImageInfo.xaml.cs">
+      <DependentUpon>ImageInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Invoice.xaml.cs">
+      <DependentUpon>Invoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\JRotate.xaml.cs">
+      <DependentUpon>JRotate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\KeyBoard.xaml.cs">
+      <DependentUpon>KeyBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ManualDownload.xaml.cs">
+      <DependentUpon>ManualDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\MLMediaPlayer.xaml.cs">
+      <DependentUpon>MLMediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ModeRatePopup.xaml.cs">
+      <DependentUpon>ModeRatePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\PanControl.xaml.cs">
+      <DependentUpon>PanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\PopupKeyboard.xaml.cs">
+      <DependentUpon>PopupKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\RangeSlider.xaml.cs">
+      <DependentUpon>RangeSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Re_Print.xaml.cs">
+      <DependentUpon>Re_Print.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\RFIDPopupKeyboard.cs" />
+    <Compile Include="PSControls\RFIDPopupKeyboard.xaml.cs">
+      <DependentUpon>RFIDPopupKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\MLFrameExtractor.xaml.cs">
+      <DependentUpon>MLFrameExtractor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SaveGroup.xaml.cs">
+      <DependentUpon>SaveGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SaveMail.xaml.cs">
+      <DependentUpon>SaveMail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SelectedAlbumlist.xaml.cs">
+      <DependentUpon>SelectedAlbumlist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SelectedImages.xaml.cs">
+      <DependentUpon>SelectedImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SelectedImagesQrCode.xaml.cs">
+      <DependentUpon>SelectedImagesQrCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SelectedProcessedVideos.xaml.cs">
+      <DependentUpon>SelectedProcessedVideos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\SendEmailOrder.xaml.cs">
+      <DependentUpon>SendEmailOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\TransitionControl.xaml.cs">
+      <DependentUpon>TransitionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\VideoPlayer.xaml.cs">
+      <DependentUpon>VideoPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\VideoSlotsTime.xaml.cs">
+      <DependentUpon>VideoSlotsTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ViewFrameControl.xaml.cs">
+      <DependentUpon>ViewFrameControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shader\Cartoonize.cs" />
+    <Compile Include="Shader\ChromaEffectAllColor.cs" />
+    <Compile Include="Shader\ChromaKeyHSVEffect.cs" />
+    <Compile Include="Shader\ColorKeyAlphaEffect.cs" />
+    <Compile Include="Shader\ContrastAdjustEffect.cs" />
+    <Compile Include="Shader\EmbossedEffect.cs" />
+    <Compile Include="Shader\GreyScaleEffect.cs" />
+    <Compile Include="Shader\InvertColorEffect.cs" />
+    <Compile Include="Shader\MonochromeEffect.cs" />
+    <Compile Include="Shader\MultiChannelContrastEffect.cs" />
+    <Compile Include="Shader\RedEyeEffect.cs" />
+    <Compile Include="Shader\redeyeMultiple.cs" />
+    <Compile Include="Shader\ShaderBaseClass.cs" />
+    <Compile Include="Shader\SharpenEffect.cs" />
+    <Compile Include="Shader\ShEffect.cs" />
+    <Compile Include="Shader\ShiftHueEffect.cs" />
+    <Compile Include="Shader\SketchGraniteEffect.cs" />
+    <Compile Include="Shader\ToneMappingEffect.cs" />
+    <Compile Include="Shader\UndoBrushEffect.cs" />
+    <Compile Include="ViewModels\AllPrinterQueue.cs" />
+    <Compile Include="ViewModels\CameraAttribute.cs" />
+    <Compile Include="ViewModels\fileClass.cs" />
+    <Compile Include="ViewModels\Item.cs" />
+    <Compile Include="ViewModels\PackageDetail.cs" />
+    <Compile Include="ViewModels\photosDetails.cs" />
+    <Compile Include="ViewModels\RectangleViewModel.cs" />
+    <Compile Include="ViewModels\Site.cs" />
+    <Compile Include="Views\BusyWindow.xaml.cs">
+      <DependentUpon>BusyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientView.xaml.cs">
+      <DependentUpon>ClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImageDownloader.xaml.cs">
+      <DependentUpon>ImageDownloader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImagePreviewer.xaml.cs">
+      <DependentUpon>ImagePreviewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\KeyboardState.cs" />
+    <Compile Include="PSControls\ImportProduct.xaml.cs">
+      <DependentUpon>ImportProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSControls\ImportSpecProductImages.xaml.cs">
+      <DependentUpon>ImportSpecProductImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainModel.cs" />
+    <Compile Include="PSControls\PopupKeyboard.cs" />
+    <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\ObservableObject.cs" />
+    <Compile Include="ViewModels\Presenter.cs" />
+    <Compile Include="Views\ConverterControl.xaml.cs">
+      <DependentUpon>ConverterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConvertWindow.xaml.cs">
+      <DependentUpon>ConvertWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManageProduct.xaml.cs">
+      <DependentUpon>ManageProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhotoFrame.xaml.cs">
+      <DependentUpon>PhotoFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReceiptReprint.xaml.cs">
+      <DependentUpon>ReceiptReprint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RfidManualDownload.xaml.cs">
+      <DependentUpon>RfidManualDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaveMail.xaml.cs">
+      <DependentUpon>SaveMail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchByPhoto.xaml.cs">
+      <DependentUpon>SearchByPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult.xaml.cs">
+      <DependentUpon>SearchResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewOrderSection.xaml.cs">
+      <DependentUpon>ViewOrderSection.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\TextConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="bin\Debug\Reports\ActivityReports.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ActivityReports.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptActivityReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptActivityReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptFinancialauditreport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptFinancialauditreport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptLocationPerformance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptLocationPerformance.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptOperatorPerformanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOperatorPerformanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptOrderDiscountReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOrderDiscountReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptPhotoGrapherPerformanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPhotoGrapherPerformanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptPrintLogReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPrintLogReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptProductSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptProductSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\crptTakingReports.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptTakingReports.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\Financialauditreport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Financialauditreport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\IPContentTrackingReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IPContentTrackingReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\LocationPerformance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LocationPerformance.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\OperationAuditTrail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OperationAuditTrail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\OperatorPerformanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OperatorPerformanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\OrderDiscountReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrderDiscountReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\Payment.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Payment.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\PhotoGrapherPerformanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PhotoGrapherPerformanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\PrintLogReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintLogReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\Summary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Summary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\TakingReports.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TakingReports.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\TestActivityReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TestActivityReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\TestReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TestReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="bin\Debug\DataSet\ActivityDataSet.xsc">
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\ActivityDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ActivityDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\ActivityDataSet.xss">
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsActivity.xsc">
+      <DependentUpon>dsActivity.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsActivity.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsActivity.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsActivity.xss">
+      <DependentUpon>dsActivity.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsFinancialauditreport.xsc">
+      <DependentUpon>dsFinancialauditreport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsFinancialauditreport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFinancialauditreport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsFinancialauditreport.xss">
+      <DependentUpon>dsFinancialauditreport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsLocationPerformance.xsc">
+      <DependentUpon>dsLocationPerformance.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsLocationPerformance.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLocationPerformance.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsLocationPerformance.xss">
+      <DependentUpon>dsLocationPerformance.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOperatorPerformanceReport.xsc">
+      <DependentUpon>dsOperatorPerformanceReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOperatorPerformanceReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOperatorPerformanceReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOperatorPerformanceReport.xss">
+      <DependentUpon>dsOperatorPerformanceReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOrderDiscountReport.xsc">
+      <DependentUpon>dsOrderDiscountReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOrderDiscountReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOrderDiscountReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsOrderDiscountReport.xss">
+      <DependentUpon>dsOrderDiscountReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPaymentSummaryInfo.xsc">
+      <DependentUpon>dsPaymentSummaryInfo.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPaymentSummaryInfo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPaymentSummaryInfo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPaymentSummaryInfo.xss">
+      <DependentUpon>dsPaymentSummaryInfo.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPhotoGrapherPerformanceReport.xsc">
+      <DependentUpon>dsPhotoGrapherPerformanceReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPhotoGrapherPerformanceReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPhotoGrapherPerformanceReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPhotoGrapherPerformanceReport.xss">
+      <DependentUpon>dsPhotoGrapherPerformanceReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintLogReport.xsc">
+      <DependentUpon>dsPrintLogReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintLogReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintLogReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintLogReport.xss">
+      <DependentUpon>dsPrintLogReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintSummaryReport.xsc">
+      <DependentUpon>dsPrintSummaryReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintSummaryReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintSummaryReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsPrintSummaryReport.xss">
+      <DependentUpon>dsPrintSummaryReport.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductionSummaryTaxDetails.xsc">
+      <DependentUpon>dsProductionSummaryTaxDetails.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductionSummaryTaxDetails.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProductionSummaryTaxDetails.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductionSummaryTaxDetails.xss">
+      <DependentUpon>dsProductionSummaryTaxDetails.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductSummary.xsc">
+      <DependentUpon>dsProductSummary.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProductSummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsProductSummary.xss">
+      <DependentUpon>dsProductSummary.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsSummary.xsc">
+      <DependentUpon>dsSummary.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsSummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsSummary.xss">
+      <DependentUpon>dsSummary.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsTakingReports.xsc">
+      <DependentUpon>dsTakingReports.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\dsTakingReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTakingReports.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\dsTakingReports.xss">
+      <DependentUpon>dsTakingReports.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\TestDataSet.xsc">
+      <DependentUpon>TestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\DataSet\TestDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TestDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="bin\Debug\DataSet\TestDataSet.xss">
+      <DependentUpon>TestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="bin\Debug\Reports\CashBill.rpt" />
+    <None Include="bin\Debug\Reports\ProductSummary.rpt" />
+    <None Include="images\brght.ps" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Shader\SoftSkin.ps" />
+    <Resource Include="Shader\ToneMapping.ps" />
+    <Resource Include="Shader\UndoBrush.ps" />
+    <Resource Include="Shader\brght.ps" />
+    <Resource Include="Shader\bricon.ps" />
+    <Resource Include="Shader\Cartoonize.ps" />
+    <Resource Include="Shader\Bloom.ps" />
+    <Resource Include="Shader\ChromaKeyHSV.ps" />
+    <Resource Include="Shader\cntrst.ps" />
+    <Resource Include="Shader\ColorKeyAlphaEffect.ps" />
+    <Resource Include="Shader\ColorKeyShader.ps" />
+    <Resource Include="Shader\ColorTone.ps" />
+    <Resource Include="Shader\Embossed.ps" />
+    <Resource Include="Shader\InvertColor.ps" />
+    <Resource Include="Shader\Monochrome.ps" />
+    <Resource Include="Shader\multi.ps" />
+    <Resource Include="Shader\redeyeFurther.ps" />
+    <Resource Include="Shader\redeyeMultiple.ps" />
+    <Resource Include="Shader\sh.ps" />
+    <Resource Include="Shader\ShiftHue.ps" />
+    <Resource Include="Shader\SketchGranite.ps" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Calender\SelectedCalenderImageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\AddEditUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\AddLocationstoSubstore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\Archive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\CaptureFrameDownloader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\CardType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\Configuration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\EmailStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\ManageCamera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageCurrencyProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageDevice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageDiscount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\ManageLocations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManagePrinter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\ManageProductPricing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\ManageSubstores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manage\MLLiveCapture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\PrintLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\Reports\ActivityReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\RFIDMapping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\SoftwareHealthCheckup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\SyncStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\SystemPrinterQueuee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Orders\BurnMediaOrderList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Orders\OrderRefund.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Orders\Payment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Orders\PlaceOrder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Orders\PrintPlateform.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Orders\SelectPrinter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Orders\TestBill.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\AssociateImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\Calender\SelectedCalenderImageEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\Calender\SelectedCalenderList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\Discount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Burningimage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Exposure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManagePrinting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\UserPermission.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\AcquiredFrames.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\AngleRotate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CashBoxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CashPayment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlCardPayment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlCashPayment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlExistCodePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlInventoryConsumables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlOfflineClosingForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlOpenCloseForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlOpeningForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlOperationalStatistics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\CtrlProfileRate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\ctrProductType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\DigiMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\DynamicImgCrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\EditAddCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\EditingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\FormsPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\GeneralEffectsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\ImageCalculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\ImageInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\Invoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\JRotate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\KeyBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\ManualDownload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\MLMediaPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\ModeRatePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\PanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\PopupKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\RangeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\Re_Print.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\RFIDPopupKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\MLFrameExtractor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\SaveGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SaveMail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SelectedAlbumlist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SelectedImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SelectedImagesQrCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SelectedProcessedVideos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\SendEmailOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\TransitionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\VideoPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\VideoSlotsTime.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\ViewFrameControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BusyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConverterControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConvertWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImageDownloader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImagePreviewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSControls\ImportProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PSControls\ImportSpecProductImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManageProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PhotoFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReceiptReprint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RfidManualDownload.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SaveMail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchByPhoto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewOrderSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="itemtemplate\calendar\blue\apr.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\aug.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\dec.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\feb.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\jan.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\jul.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\jun.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\mar.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\may.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\nov.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\oct.jpg" />
+    <Resource Include="itemtemplate\calendar\blue\sep.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\apr.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\aug.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\dec.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\feb.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\jan.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\jul.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\jun.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\mar.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\may.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\nov.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\oct.jpg" />
+    <Resource Include="itemtemplate\calendar\brown\sep.jpg" />
+    <Resource Include="itemtemplate\calendar\green\apr.jpg" />
+    <Resource Include="itemtemplate\calendar\green\aug.jpg" />
+    <Resource Include="itemtemplate\calendar\green\dec.jpg" />
+    <Resource Include="itemtemplate\calendar\green\feb.jpg" />
+    <Resource Include="itemtemplate\calendar\green\jan.jpg" />
+    <Resource Include="itemtemplate\calendar\green\jul.jpg" />
+    <Resource Include="itemtemplate\calendar\green\jun.jpg" />
+    <Resource Include="itemtemplate\calendar\green\mar.jpg" />
+    <Resource Include="itemtemplate\calendar\green\may.jpg" />
+    <Resource Include="itemtemplate\calendar\green\nov.jpg" />
+    <Resource Include="itemtemplate\calendar\green\oct.jpg" />
+    <Resource Include="itemtemplate\calendar\green\sep.jpg" />
+    <Resource Include="itemtemplate\calendar\red\apr.jpg" />
+    <Resource Include="itemtemplate\calendar\red\aug.jpg" />
+    <Resource Include="itemtemplate\calendar\red\dec.jpg" />
+    <Resource Include="itemtemplate\calendar\red\feb.jpg" />
+    <Resource Include="itemtemplate\calendar\red\jan.jpg" />
+    <Resource Include="itemtemplate\calendar\red\jul.jpg" />
+    <Resource Include="itemtemplate\calendar\red\jun.jpg" />
+    <Resource Include="itemtemplate\calendar\red\mar.jpg" />
+    <Resource Include="itemtemplate\calendar\red\may.jpg" />
+    <Resource Include="itemtemplate\calendar\red\nov.jpg" />
+    <Resource Include="itemtemplate\calendar\red\oct.jpg" />
+    <Resource Include="itemtemplate\calendar\red\sep.jpg" />
+    <Resource Include="keybtns\key-close-normal.png" />
+    <Resource Include="keybtns\key-close-pressed.png" />
+    <Resource Include="keybtns\key-delete-normal.png" />
+    <Resource Include="keybtns\key-delete-pressed.png" />
+    <Resource Include="keybtns\key-enter-normal.png" />
+    <Resource Include="keybtns\key-enter-pressed.png" />
+    <Resource Include="keybtns\key-normal.png" />
+    <Resource Include="keybtns\key-numeric-normal.png" />
+    <Resource Include="keybtns\key-numeric-pressed.png" />
+    <Resource Include="keybtns\key-pressed.png" />
+    <Resource Include="keybtns\key-space-normal.png" />
+    <Resource Include="keybtns\key-space-pressed.png" />
+    <Resource Include="keybtns\key-up-normal.png" />
+    <Resource Include="keybtns\key-up-pressed.png" />
+    <Resource Include="keybtns\sml-key-cancel-normal.png" />
+    <Resource Include="keybtns\sml-key-cancel-pressed.png" />
+    <Resource Include="keybtns\sml-key-enter-normal.png" />
+    <Resource Include="keybtns\sml-key-enter-pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\images\all_frames_new.png" />
+    <Resource Include="Views\images\thumbnailview1.png" />
+    <Resource Include="Views\images\thumbnailview1_active.png" />
+    <Resource Include="images\125412626.jpg" />
+    <Resource Include="images\16blocks_black.png" />
+    <Resource Include="images\16blocks_red.png" />
+    <Resource Include="images\4.jpg" />
+    <Resource Include="images\6x8_print.png" />
+    <Resource Include="images\8x10_print.png" />
+    <Resource Include="images\9blocks_black.png" />
+    <Resource Include="images\9blocks_red.png" />
+    <Resource Include="images\acquire_live.png" />
+    <Resource Include="images\add-to-album.png" />
+    <Resource Include="images\addmore.png" />
+    <Resource Include="images\adv_aspectratio_btn.png" />
+    <Resource Include="images\adv_aspectratio_btn_disable.png" />
+    <Resource Include="images\adv_background_btn.png" />
+    <Resource Include="images\adv_border_btn.png" />
+    <Resource Include="images\adv_chroma_btn.png" />
+    <Resource Include="images\adv_chroma_btn_disable.png" />
+    <Resource Include="images\adv_close_btn.png" />
+    <Resource Include="images\adv_copyvideo_btn.png" />
+    <Resource Include="images\adv_edit_video.png" />
+    <Resource Include="images\adv_enablevideo_btn_disable.png" />
+    <Resource Include="images\adv_graphics_btn.png" />
+    <Resource Include="images\adv_load_btn.png" />
+    <Resource Include="images\adv_pause_btn.png" />
+    <Resource Include="images\adv_play_btn.png" />
+    <Resource Include="images\adv_preview_btn.png" />
+    <Resource Include="images\adv_preview_btn_disable.png" />
+    <Resource Include="images\adv_record_btn.png" />
+    <Resource Include="images\adv_replay_btn.png" />
+    <Resource Include="images\adv_save_btn.png" />
+    <Resource Include="images\adv_settings_btn.png" />
+    <Resource Include="images\adv_settings_btn_disable.png" />
+    <Resource Include="images\adv_sound_btn.png" />
+    <Resource Include="images\adv_sound_btn_disable.png" />
+    <Resource Include="images\adv_stop_btn.png" />
+    <Resource Include="images\adv_zoom_in.png" />
+    <Resource Include="images\adv_zoom_out.png" />
+    <Resource Include="images\albumrotate.png" />
+    <Resource Include="images\all_frames.png" />
+    <Resource Include="images\all_frames_new.png" />
+    <Resource Include="images\all_frames_new11.png" />
+    <Resource Include="images\amplify1.png" />
+    <Resource Include="images\animated_gif.png" />
+    <Resource Include="images\anti-rotate.png" />
+    <Resource Include="images\anti_rotate.png" />
+    <Resource Include="images\anti_rotaten.png" />
+    <Resource Include="images\app_screenshot_search.png" />
+    <Resource Include="images\arrow.png" />
+    <Resource Include="images\audio.png" />
+    <Resource Include="images\audioico.png" />
+    <Resource Include="images\audio_square.png" />
+    <Resource Include="images\audollar.png" />
+    <Resource Include="images\bg.png" />
+    <Resource Include="images\bg_login.png" />
+    <Resource Include="images\bg_new.png" />
+    <Resource Include="images\bg_new1.png" />
+    <Resource Include="images\big_yellow_frame.png" />
+    <Resource Include="images\blank.png" />
+    <Resource Include="images\blur.png" />
+    <Resource Include="images\board.png" />
+    <Resource Include="images\border.png" />
+    <Resource Include="images\border1.png" />
+    <Resource Include="images\border_disable.png" />
+    <Resource Include="images\bottomframe.png" />
+    <Resource Include="images\brightplus.png" />
+    <Resource Include="images\brightreduce.png" />
+    <Resource Include="images\brigtness-new.png" />
+    <Resource Include="images\browseproduct.png" />
+    <Resource Include="images\btn-middle-bg.png" />
+    <Resource Include="images\btn-middle-shadow.png" />
+    <Resource Include="images\btn_guestset.png" />
+    <Resource Include="images\btn_hideml.png" />
+    <Resource Include="images\btn_login.png" />
+    <Resource Include="images\btn_quickset.png" />
+    <Resource Include="images\btn_red.png" />
+    <Resource Include="images\burn-orders.png" />
+    <Resource Include="images\burn.png" />
+    <Resource Include="images\camera_details.png" />
+    <Resource Include="images\camera_live.png" />
+    <Resource Include="images\cancel-btn.png" />
+    <Resource Include="images\cancel-btn1.png" />
+    <Resource Include="images\cancel.png" />
+    <Resource Include="images\capture_live.png" />
+    <Resource Include="images\card-type.png" />
+    <Resource Include="images\cardtype.png" />
+    <Resource Include="images\cartoonize.png" />
+    <Resource Include="images\cartoonizeo.png" />
+    <Resource Include="images\cash-box.png" />
+    <Resource Include="images\cashbox.png" />
+    <Resource Include="images\cdimage.png" />
+    <Resource Include="images\centerframe.png" />
+    <Resource Include="images\check_drive.png" />
+    <Resource Include="images\child.png" />
+    <Resource Include="images\chroma.png" />
+    <Resource Include="images\chroma1.png" />
+    <Resource Include="images\chromabg1.png" />
+    <Resource Include="images\chroma_square.png" />
+    <Resource Include="images\clear-group.png" />
+    <Resource Include="images\clearframes_live.png" />
+    <Resource Include="images\close-btn.png" />
+    <Resource Include="images\close_file4.png" />
+    <Resource Include="images\clour_effect.png" />
+    <Resource Include="images\clour_effect_disable.png" />
+    <Resource Include="images\color_btn.png" />
+    <Resource Include="images\colour_adjust.png" />
+    <Resource Include="images\colour_adjusto.png" />
+    <Resource Include="images\colour_adjustoo.png" />
+    <Resource Include="images\colour_adjust_disable.png" />
+    <Resource Include="images\configuration.png" />
+    <Resource Include="images\contrast-new.png" />
+    <Resource Include="images\contrast.png" />
+    <Resource Include="images\crop_disable.png" />
+    <Resource Include="images\crop_old.png" />
+    <Resource Include="images\dateicon.png" />
+    <Resource Include="images\defaultimg.png" />
+    <Resource Include="images\defogger.png" />
+    <Resource Include="images\delete-icon.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\deletecirbig.png" />
+    <Resource Include="images\deletecirmedium.png" />
+    <Resource Include="images\deletecirsmall.png" />
+    <Resource Include="images\deleteold.png" />
+    <Resource Include="images\deletesqbig.png" />
+    <Resource Include="images\deletesqmedium.png" />
+    <Resource Include="images\deletesqsmall.png" />
+    <Resource Include="images\delete_disable.png" />
+    <Resource Include="images\delgrd.png" />
+    <Resource Include="images\digi-back-icon.png" />
+    <Resource Include="images\digi-blue.png" />
+    <Resource Include="images\digi-colorfilter.png" />
+    <Resource Include="images\digi-edge-detect.png" />
+    <Resource Include="images\digi-emboss.png" />
+    <Resource Include="images\digi-grayscale.png" />
+    <Resource Include="images\digi-green.png" />
+    <Resource Include="images\digi-hue.png" />
+    <Resource Include="images\digi-invert.png" />
+    <Resource Include="images\digi-lightness.png" />
+    <Resource Include="images\digi-lightred.png" />
+    <Resource Include="images\digi-lime.png" />
+    <Resource Include="images\digi-magenta.png" />
+    <Resource Include="images\digi-meanremoval.png" />
+    <Resource Include="images\digi-orange.png" />
+    <Resource Include="images\digi-pink.png" />
+    <Resource Include="images\digi-red.png" />
+    <Resource Include="images\digi-restore.png" />
+    <Resource Include="images\digi-restoren.png" />
+    <Resource Include="images\digi-saturation.png" />
+    <Resource Include="images\digi-sepia.png" />
+    <Resource Include="images\digi-sepiaold.png" />
+    <Resource Include="images\digi-sharpen.png" />
+    <Resource Include="images\digi-sharpenold.png" />
+    <Resource Include="images\digi-skyblue.png" />
+    <Resource Include="images\digi-smooth.png" />
+    <Resource Include="images\digi-yellow.png" />
+    <Resource Include="images\digimagic.png" />
+    <Resource Include="images\digiphoto_logo_sml.png" />
+    <Resource Include="images\discount.png" />
+    <Resource Include="images\dollar.png" />
+    <Resource Include="images\down.png" />
+    <Resource Include="images\down2.png" />
+    <Resource Include="images\down_square.png" />
+    <Resource Include="images\editphoto_icon.png" />
+    <Resource Include="images\editphoto_icon_disable.png" />
+    <Resource Include="images\editvideo.png" />
+    <Resource Include="images\edit_icon2.png" />
+    <Resource Include="images\email-status.png" />
+    <Resource Include="images\email.png" />
+    <Resource Include="images\enlarge.png" />
+    <Resource Include="images\enter-btn.png" />
+    <Resource Include="images\equalize1.png" />
+    <Resource Include="images\euro.png" />
+    <Resource Include="images\exit.png" />
+    <Resource Include="images\exposure.png" />
+    <Resource Include="images\exposure_disable.png" />
+    <Resource Include="images\financial-report.png" />
+    <Resource Include="images\financialreport.png" />
+    <Resource Include="images\flip.png" />
+    <Resource Include="images\flipo.png" />
+    <Resource Include="images\flip_disable.png" />
+    <Resource Include="images\font.png" />
+    <Resource Include="images\footer-bg.png" />
+    <Resource Include="images\frames1.png" />
+    <Resource Include="images\fwd_square.png" />
+    <Resource Include="images\general1.png" />
+    <Resource Include="images\go_down.png" />
+    <Resource Include="images\go_up.png" />
+    <Resource Include="images\graphic.png" />
+    <Resource Include="images\graphic1.png" />
+    <Resource Include="images\graphic4.png" />
+    <Resource Include="images\graphic5.png" />
+    <Resource Include="images\graphico.png" />
+    <Resource Include="images\graphic_disable.png" />
+    <Resource Include="images\grd_next.png" />
+    <Resource Include="images\grd_prev.png" />
+    <Resource Include="images\green_button.png" />
+    <Resource Include="images\grey_frame.png" />
+    <Resource Include="images\gumball.png" />
+    <Resource Include="images\happybirthdaypink.png" />
+    <Resource Include="images\health-checkup.png" />
+    <Resource Include="images\healthcheckup.png" />
+    <Resource Include="images\help.png" />
+    <Resource Include="images\hide.png" />
+    <Resource Include="images\home.png" />
+    <Resource Include="images\home1.png" />
+    <Resource Include="images\hot-player.png" />
+    <Resource Include="images\image-download.png" />
+    <Resource Include="images\images-back-btn.jpg" />
+    <Resource Include="images\images-banner.jpg" />
+    <Resource Include="images\images-config.ico" />
+    <Resource Include="images\images-desert.jpg" />
+    <Resource Include="images\images-digiwatch.ico" />
+    <Resource Include="images\images-icon_kiosk02.ico" />
+    <Resource Include="images\images-imix.ico" />
+    <Resource Include="images\images-imix_old.ico" />
+    <Resource Include="images\images-penguins.jpg" />
+    <Resource Include="images\images-print.ico" />
+    <Resource Include="images\images-processing.gif" />
+    <Resource Include="images\images-qrcodesearch.jpg" />
+    <Resource Include="images\images-rupee.jpg" />
+    <Resource Include="images\images-setup_img.ico" />
+    <Resource Include="images\images-uninstall.ico" />
+    <Resource Include="images\imagesstrips.png" />
+    <Resource Include="images\image_upload.png" />
+    <Resource Include="images\img-description.png" />
+    <Resource Include="images\import-master-data.png" />
+    <Resource Include="images\importfromxml.png" />
+    <Resource Include="images\include_all.png" />
+    <Resource Include="images\info-text.png" />
+    <Resource Include="images\jpgfloppy.png" />
+    <Resource Include="images\key-back.png" />
+    <Resource Include="images\key-close-normal.png" />
+    <Resource Include="images\key-close-pressed.png" />
+    <Resource Include="images\key-delete-normal.png" />
+    <Resource Include="images\key-delete-pressed.png" />
+    <Resource Include="images\key-enter-normal.png" />
+    <Resource Include="images\key-enter-pressed.png" />
+    <Resource Include="images\key-normal.png" />
+    <Resource Include="images\key-numeric-normal.png" />
+    <Resource Include="images\key-numeric-pressed.png" />
+    <Resource Include="images\key-pressed.png" />
+    <Resource Include="images\key-space-normal.png" />
+    <Resource Include="images\key-space-pressed.png" />
+    <Resource Include="images\key-up-normal.png" />
+    <Resource Include="images\key-up-pressed.png" />
+    <Resource Include="images\keyuptst.png" />
+    <Resource Include="images\left1.png" />
+    <Resource Include="images\leftarrow.png" />
+    <Resource Include="images\locked.png" />
+    <Resource Include="images\login-bg.png" />
+    <Resource Include="images\login_head.png" />
+    <Resource Include="images\logo.png" />
+    <Resource Include="images\logo1.png" />
+    <Resource Include="images\logo_mid.png" />
+    <Resource Include="images\manage-camara.png" />
+    <Resource Include="images\manage-currency.png" />
+    <Resource Include="images\manage-device.png" />
+    <Resource Include="images\manage-location.png" />
+    <Resource Include="images\manage-printer.png" />
+    <Resource Include="images\manage-product.png" />
+    <Resource Include="images\manage-site.png" />
+    <Resource Include="images\manage.png" />
+    <Resource Include="images\managecurrency.png" />
+    <Resource Include="images\managelocation.png" />
+    <Resource Include="images\managestores.png" />
+    <Resource Include="images\manage_new.png" />
+    <Resource Include="images\manage_product.png" />
+    <Resource Include="images\markgraphics.png" />
+    <Resource Include="images\markt1.png" />
+    <Resource Include="images\maximize.png" />
+    <Resource Include="images\maximize_disable.png" />
+    <Resource Include="images\minimize.png" />
+    <Resource Include="images\move.png" />
+    <Resource Include="images\move_disable.png" />
+    <Resource Include="images\mute-on.png" />
+    <Resource Include="images\mute.png" />
+    <Resource Include="images\next-icon.png" />
+    <Resource Include="images\next_red.png" />
+    <Resource Include="images\noimage.png" />
+    <Resource Include="images\online.png" />
+    <Resource Include="images\open_close_pro.png" />
+    <Resource Include="images\open_icon4.png" />
+    <Resource Include="images\order-printer-queue.png" />
+    <Resource Include="images\order-station.png" />
+    <Resource Include="images\overlay_btn.png" />
+    <Resource Include="images\pagename.png" />
+    <Resource Include="images\pan1.png" />
+    <Resource Include="images\panel_middle.png" />
+    <Resource Include="images\pause_live.png" />
+    <Resource Include="images\pause_square.png" />
+    <Resource Include="images\photoalbum_icon.png" />
+    <Resource Include="images\photoalbum_icon_disable.png" />
+    <Resource Include="images\photoid_icon.png" />
+    <Resource Include="images\photoid_icon_disable.png" />
+    <Resource Include="images\placeorder_icon.png" />
+    <Resource Include="images\placeorder_icon_disable.png" />
+    <Resource Include="images\placeorder_icon_o.png" />
+    <Resource Include="images\playbutton_left.png" />
+    <Resource Include="images\playbutton_right.png" />
+    <Resource Include="images\play_prev.png" />
+    <Resource Include="images\play_square.png" />
+    <Resource Include="images\play_trans.png" />
+    <Resource Include="images\pound.png" />
+    <Resource Include="images\prev-icon.png" />
+    <Resource Include="images\previewframes_live.png" />
+    <Resource Include="images\previewphoto_icon.png" />
+    <Resource Include="images\previewphoto_icon_disable.png" />
+    <Resource Include="images\preview_hide.png" />
+    <Resource Include="images\preview_led_square.png" />
+    <Resource Include="images\preview_play.png" />
+    <Resource Include="images\prev_red.png" />
+    <Resource Include="images\print-accept.png" />
+    <Resource Include="images\print-group.png" />
+    <Resource Include="images\print-icon.png" />
+    <Resource Include="images\printer-icon.png" />
+    <Resource Include="images\printer.png" />
+    <Resource Include="images\process.png" />
+    <Resource Include="images\processed.png" />
+    <Resource Include="images\receipt.png" />
+    <Resource Include="images\reduce.png" />
+    <Resource Include="images\red_button.png" />
+    <Resource Include="images\red_eye.png" />
+    <Resource Include="images\red_eyen.png" />
+    <Resource Include="images\red_eyeold.png" />
+    <Resource Include="images\red_eye_disable.png" />
+    <Resource Include="images\reel.png" />
+    <Resource Include="images\refresh.png" />
+    <Resource Include="images\refund.png" />
+    <Resource Include="images\remap-printers.png" />
+    <Resource Include="images\removegraphic.png" />
+    <Resource Include="images\removegroup.png" />
+    <Resource Include="images\removegroupn.png" />
+    <Resource Include="images\removegroupold.png" />
+    <Resource Include="images\replay.png" />
+    <Resource Include="images\reprint-receipt.png" />
+    <Resource Include="images\reset_square.png" />
+    <Resource Include="images\restore.png" />
+    <Resource Include="images\resume.png" />
+    <Resource Include="images\resume_live.png" />
+    <Resource Include="images\revertbig.png" />
+    <Resource Include="images\revertcirbig.png" />
+    <Resource Include="images\revertcirmedium.png" />
+    <Resource Include="images\revertcirsmall.png" />
+    <Resource Include="images\revertmedium.png" />
+    <Resource Include="images\revertsmall.png" />
+    <Resource Include="images\RFDIs_Downloads.png" />
+    <Resource Include="images\RFID-Match.png" />
+    <Resource Include="images\rfidimgassociation.png" />
+    <Resource Include="images\right.png" />
+    <Resource Include="images\rightarrow.png" />
+    <Resource Include="images\rightpanelbtm.png" />
+    <Resource Include="images\rightpanelmiddle.png" />
+    <Resource Include="images\rightpaneltop.png" />
+    <Resource Include="images\rotate.png" />
+    <Resource Include="images\rotaten.png" />
+    <Resource Include="images\rotate_disable.png" />
+    <Resource Include="images\rotate_old.png" />
+    <Resource Include="images\save.png" />
+    <Resource Include="images\scroll-btn-down.png" />
+    <Resource Include="images\scroll-btn-up.png" />
+    <Resource Include="images\scroll-btn.png" />
+    <Resource Include="images\scroll-shadow-up.png" />
+    <Resource Include="images\scroll-shadow.png" />
+    <Resource Include="images\search -images.png" />
+    <Resource Include="images\search-button.png" />
+    <Resource Include="images\search-image.png" />
+    <Resource Include="images\search-text.png" />
+    <Resource Include="images\search-text1.png" />
+    <Resource Include="images\search_icon.png" />
+    <Resource Include="images\search_icon_disable.png" />
+    <Resource Include="images\select.png" />
+    <Resource Include="images\selectprinter.png" />
+    <Resource Include="images\select_disable.png" />
+    <Resource Include="images\set.png" />
+    <Resource Include="images\settings.png" />
+    <Resource Include="images\settings_live.png" />
+    <Resource Include="images\shut-down.png" />
+    <Resource Include="images\shutdown.png" />
+    <Resource Include="images\sixbyeightbyten.png" />
+    <Resource Include="images\skip_home.png" />
+    <Resource Include="images\slider-dragger.png" />
+    <Resource Include="images\slider-minus.png" />
+    <Resource Include="images\slider-plus.png" />
+    <Resource Include="images\sml-key-cancel-normal.png" />
+    <Resource Include="images\sml-key-cancel-pressed.png" />
+    <Resource Include="images\sml-key-enter-normal.png" />
+    <Resource Include="images\sml-key-enter-pressed.png" />
+    <Resource Include="images\sml-unlock.png" />
+    <Resource Include="images\softwareupdate.png" />
+    <Resource Include="images\spectra_logo.png" />
+    <Resource Include="images\splash_screen.png" />
+    <Resource Include="images\startrecord_live.png" />
+    <Resource Include="images\stopprocess.png" />
+    <Resource Include="images\stoprecord_live.png" />
+    <Resource Include="images\stop_square.png" />
+    <Resource Include="images\sync-status.png" />
+    <Resource Include="images\sync.png" />
+    <Resource Include="images\system-printer-queue.png" />
+    <Resource Include="images\text.png" />
+    <Resource Include="images\text1.png" />
+    <Resource Include="images\textbox.png" />
+    <Resource Include="images\textold.png" />
+    <Resource Include="images\text_disable.png" />
+    <Resource Include="images\thumbnailview1.png" />
+    <Resource Include="images\thumbnailview1_active.png" />
+    <Resource Include="images\thumbnailview2.png" />
+    <Resource Include="images\thumbnailview2_active.png" />
+    <Resource Include="images\tick.png" />
+    <Resource Include="images\transition1.png" />
+    <Resource Include="images\underwater.png" />
+    <Resource Include="images\undo.png" />
+    <Resource Include="images\unique4x5.png" />
+    <Resource Include="images\unlock.png" />
+    <Resource Include="images\unmarkt1.png" />
+    <Resource Include="images\up1.png" />
+    <Resource Include="images\up2.png" />
+    <Resource Include="images\upperframe.png" />
+    <Resource Include="images\up_square.png" />
+    <Resource Include="images\user-manage.png" />
+    <Resource Include="images\usermanagement.png" />
+    <Resource Include="images\versionicon.png" />
+    <Resource Include="images\videot1.png" />
+    <Resource Include="images\video_frame.png" />
+    <Resource Include="images\video_reel.png" />
+    <Resource Include="images\video_square.png" />
+    <Resource Include="images\vidico.png" />
+    <Resource Include="images\vidremove_square.png" />
+    <Resource Include="images\view-accept.png" />
+    <Resource Include="images\view-group.png" />
+    <Resource Include="images\viewgroup_icon.png" />
+    <Resource Include="images\viewgroup_icon_disable.png" />
+    <Resource Include="images\view_open_order.png" />
+    <Resource Include="images\wallet.png" />
+    <Resource Include="images\yellow_arrow-down.png" />
+    <Resource Include="images\yellow_arrow-up.png" />
+    <Resource Include="images\zoom-in-icon.png" />
+    <Resource Include="images\zoom-in-iconold.png" />
+    <Resource Include="images\zoom-out-icon.png" />
+    <Resource Include="images\zoom-out-iconold.png" />
+    <Resource Include="images\QRCodeSearch.jpg" />
+    <Resource Include="images\ExitPhoto_icon.png" />
+    <Resource Include="images\QRCodeSearch.png" />
+    <Resource Include="images\bg_red.png" />
+    <Resource Include="images\brightness.png" />
+    <Resource Include="images\cancel_red.png" />
+    <Resource Include="images\ok_red.png" />
+    <Resource Include="images\restore_red.png" />
+    <Resource Include="images\brightness_red.png" />
+    <Resource Include="images\contrast_red.png" />
+    <Resource Include="images\munis_new.png" />
+    <Resource Include="images\plus_new.png" />
+    <Resource Include="images\icon_0014_Rectangle-5-copy.png" />
+    <Resource Include="images\DeleteSQsmall2.png" />
+    <Resource Include="images\DeleteSQsmall3.png" />
+    <Resource Include="images\DeleteSQsmall4.png" />
+    <Resource Include="images\DeleteSQsmall5.png" />
+    <Resource Include="images\DeleteSQsmall6.png" />
+    <Resource Include="images\DeleteSQsmall7.png" />
+    <Resource Include="images\DeleteSQsmall8.png" />
+    <Resource Include="images\DeletecirSmall2.png" />
+    <Resource Include="images\DeletecirSmall3.png" />
+    <Resource Include="images\DeletecirSmall4.png" />
+    <Resource Include="images\DeletecirSmall5.png" />
+    <Resource Include="images\DeletecirSmall6.png" />
+    <Resource Include="images\DeletecirSmall7.png" />
+    <Resource Include="images\DeletecirSmall8.png" />
+    <Resource Include="images\fill.png" />
+    <Resource Include="images\tol.png" />
+    <Resource Include="images\Back-Icon.png" />
+    <Resource Include="images\revert.png" />
+    <Resource Include="images\icon_erase.png" />
+    <Resource Include="images\icon_block_erase.png" />
+    <Resource Include="images\icon_inverse_erase.png" />
+    <Resource Include="images\icon_preview.png" />
+    <Resource Include="images\icon-close.png" />
+    <Resource Include="images\icon_cross.png" />
+    <Resource Include="images\icon_green_ok.png" />
+    <Resource Include="images\editphoto_0011_Shape-2.png" />
+    <Resource Include="images\1.png" />
+    <Resource Include="images\10.png" />
+    <Resource Include="images\11.png" />
+    <Resource Include="images\12.png" />
+    <Resource Include="images\13.png" />
+    <Resource Include="images\14.png" />
+    <Resource Include="images\2.png" />
+    <Resource Include="images\3.png" />
+    <Resource Include="images\4.png" />
+    <Resource Include="images\5.png" />
+    <Resource Include="images\6.png" />
+    <Resource Include="images\7.png" />
+    <Resource Include="images\8.png" />
+    <Resource Include="images\9.png" />
+    <Resource Include="images\28.png" />
+    <Resource Include="images\crop.png" />
+    <Resource Include="images\deletecirbig1.png" />
+    <Resource Include="images\deletecirmedium1.png" />
+    <Resource Include="images\deletesqbig1.png" />
+    <Resource Include="images\deletesqsmall1.png" />
+    <Resource Include="images\print-group1.png" />
+    <Resource Include="images\search-button1.png" />
+    <Resource Include="images\bgChange_new.png" />
+    <Resource Include="images\Greenbtn.png" />
+    <Resource Include="images\Editgrd.png" />
+    <Resource Include="images\sharpness_red.png" />
+    <Resource Include="images\move_left.png" />
+    <Resource Include="images\movedown.png" />
+    <Resource Include="images\move_middle.png" />
+    <Resource Include="images\move_right.png" />
+    <Resource Include="images\move_up.png" />
+    <Resource Include="images\rotation_chromaLeft.png" />
+    <Resource Include="images\rotation_chromaRight.png" />
+    <Resource Include="images\Chromakey_masking.png" />
+    <Resource Include="images\AnimatinGIF.png" />
+    <Resource Include="images\Clone_Stamp.png" />
+    <Resource Include="images\Collage.png" />
+    <Resource Include="images\UndoMain.png" />
+    <Resource Include="images\bgMain_new.png" />
+    <Resource Include="images\Chroma_act.png" />
+    <Resource Include="images\colour_adjust_act.png" />
+    <Resource Include="images\graphic_act.png" />
+    <Resource Include="images\crop_act.png" />
+    <Resource Include="images\colour_effect_act.png" />
+    <Resource Include="images\delete_act.png" />
+    <Resource Include="images\Digi-Restore_act.png" />
+    <Resource Include="images\ExitPhoto_icon_act.png" />
+    <Resource Include="images\move_act.png" />
+    <Resource Include="images\red_eye_act.png" />
+    <Resource Include="images\UndoMain_act.png" />
+    <Resource Include="images\zoom-in-icon_act.png" />
+    <Resource Include="images\zoom-out-icon_act.png" />
+    <Resource Include="images\AnimatinGIF_act.png" />
+    <Resource Include="images\OkBlue.png" />
+    <Resource Include="images\CancelNew.png" />
+    <Resource Include="images\QRCodeSearch_act.png" />
+    <Resource Include="images\brightness_red_act.png" />
+    <Resource Include="images\munis_new_act.png" />
+    <Resource Include="images\plus_new_act.png" />
+    <Resource Include="images\contrast_red_act.png" />
+    <Resource Include="images\OkBlue_act.png" />
+    <Resource Include="images\rollback.png" />
+    <Resource Include="images\rollfront.png" />
+    <Resource Include="images\border_act.png" />
+    <Resource Include="images\Digi-Back-Icon_act.png" />
+    <Resource Include="images\roll back_act.png" />
+    <Resource Include="images\text_act.png" />
+    <Resource Include="images\rollback_act.png" />
+    <Resource Include="images\rollfront_act.png" />
+    <Resource Include="images\rotate_act.png" />
+    <Resource Include="images\anti-rotate_act.png" />
+    <Resource Include="images\crop_3x3.png" />
+    <Resource Include="images\crop_3x3_activate.png" />
+    <Resource Include="images\crop_4x6_activate.png" />
+    <Resource Include="images\crop_5x7.png" />
+    <Resource Include="images\crop_5x7_activate.png" />
+    <Resource Include="images\crop_6x8.png" />
+    <Resource Include="images\crop_6x8_activate.png" />
+    <Resource Include="images\crop_8x10.png" />
+    <Resource Include="images\crop_8x10_activate.png" />
+    <Resource Include="images\crop_8x12.png" />
+    <Resource Include="images\crop_8x12_activate.png" />
+    <Resource Include="images\Enlarge_act.png" />
+    <Resource Include="images\flip_act.png" />
+    <Resource Include="images\leftRotate.png" />
+    <Resource Include="images\reduce_act.png" />
+    <Resource Include="images\rotateN_act.png" />
+    <Resource Include="images\crop_4x6.png" />
+    <Resource Include="images\leftRotate_act.png" />
+    <Resource Include="images\Cartoonize_act.png" />
+    <Resource Include="images\defogger_act.png" />
+    <Resource Include="images\Digi-Edge-Detect_act.png" />
+    <Resource Include="images\Digi-Emboss_act.png" />
+    <Resource Include="images\Digi-GrayScale_act.png" />
+    <Resource Include="images\Digi-Sepia_act.png" />
+    <Resource Include="images\Digimagic_act.png" />
+    <Resource Include="images\restore_act.png" />
+    <Resource Include="images\underwater_act.png" />
+    <Resource Include="images\Digi-Sharpen_act.png" />
+    <Resource Include="images\homeLogo.png" />
+    <Resource Include="images\bgtop.png" />
+    <Resource Include="images\btnAssociate.png" />
+    <Resource Include="images\btnSearchNew.png" />
+    <Resource Include="images\LogoutImg.png" />
+    <Resource Include="images\colorImg.png" />
+    <Resource Include="images\colorImg_act.png" />
+    <Resource Include="images\btnBgImg.png" />
+    <Resource Include="images\btnBgImg_act.png" />
+    <Resource Include="images\UndoRight.png" />
+    <Resource Include="images\UndoRight_act.png" />
+    <Resource Include="images\chromabottomA.png" />
+    <Resource Include="images\keepIcon.png" />
+    <Resource Include="images\keepbrush.png" />
+    <Resource Include="images\keepPen.png" />
+    <Resource Include="images\keepSquare.png" />
+    <Resource Include="images\closeEyes.png" />
+    <Resource Include="images\squaresImg.jpg" />
+    <Resource Include="images\cEnlargeReduce.png" />
+    <Resource Include="images\cEnlargeReduceAct.png" />
+    <Resource Include="images\cRotate.png" />
+    <Resource Include="images\cRotateAct.png" />
+    <Resource Include="images\cSpacing.png" />
+    <Resource Include="images\cSpacingAct.png" />
+    <Resource Include="images\collage_3 photos.png" />
+    <Resource Include="images\collage_ 5 photos.png" />
+    <Resource Include="images\collage_ 7A photos.png" />
+    <Resource Include="images\collage_ 7B photos.png" />
+    <Resource Include="images\collage_ 7C photos.png" />
+    <Resource Include="images\collage_4 photos.png" />
+    <Resource Include="images\collage_ 5.png" />
+    <Resource Include="images\collage_ 7A.png" />
+    <Resource Include="images\collage_ 7B.png" />
+    <Resource Include="images\collage_ 7C.png" />
+    <Resource Include="images\collage_3.png" />
+    <Resource Include="images\collage_4.png" />
+    <Resource Include="images\collage_5.png" />
+    <Resource Include="images\collage_7A.png" />
+    <Resource Include="images\collage_7B.png" />
+    <Resource Include="images\collage_7C.png" />
+    <Resource Include="images\Collage_act.png" />
+    <Resource Include="images\viewCollage.png" />
+    <Resource Include="images\viewCollageAct.png" />
+    <Resource Include="images\collageAct4.png" />
+    <Resource Include="images\collageAct_3.png" />
+    <Resource Include="images\collageAct_5.png" />
+    <Resource Include="images\collageAct_7A.png" />
+    <Resource Include="images\collageAct_7B.png" />
+    <Resource Include="images\collageAct_7C.png" />
+    <Resource Include="images\editPhoto_iconAct.png" />
+    <Resource Include="images\animationGIF.png" />
+    <Resource Include="images\animationGIFAct.png" />
+    <Resource Include="images\keepIconAct.png" />
+    <Resource Include="images\chromabottomGreen.png" />
+    <Resource Include="images\chromabottomAA.png" />
+    <Resource Include="images\chromabottomblue.png" />
+    <Resource Include="images\RedSquare.png" />
+    <Resource Include="images\whiteSquare.png" />
+    <Resource Include="images\keepSquareAct.png" />
+    <Resource Include="images\keepBrushAct.png" />
+    <Resource Include="images\facebook.png" />
+    <Resource Include="images\network.png" />
+    <Content Include="Shader\cntrst.fx" />
+    <Resource Include="Views\images\bg_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Manage\Reports\rpt\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7849F0FD-2659-4A2A-8348-972685F6EA4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FrameworkHelper</RootNamespace>
+    <AssemblyName>FrameworkHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Baracoda.Cameleon.PC.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Baracoda.Cameleon.PC.Modularity, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Modularity.dll</HintPath>
+    </Reference>
+    <Reference Include="Baracoda.Cameleon.PC.Readers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eadcc2aa76dbe74b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Baracoda.Cameleon.PC.Readers.dll</HintPath>
+    </Reference>
+    <Reference Include="DigiPhoto.DataLayer, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiPhoto.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="DigiPhoto.IMIX.Business, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DigiPhoto.IMIX.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="ErrorHandler, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ErrorHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MCHROMAKEYLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MCHROMAKEYLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MLPROXYLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MLPROXYLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MPLATFORMLib, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.MPLATFORMLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MControls, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PhotoSW.DataLayer\bin\Debug\PhotoSW.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.Business">
+      <HintPath>..\PhotoSW.IMIX.Business\bin\Debug\PhotoSW.IMIX.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PhotoSW.IMIX.Model\bin\Debug\PhotoSW.IMIX.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChromaKeypluginLic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\clsBackup.cs" />
+    <Compile Include="Common\ContantValueForMainWindow.cs" />
+    <Compile Include="Common\MachineIdentification.cs" />
+    <Compile Include="Common\MLHelpers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\ModifyRegistry.cs" />
+    <Compile Include="Common\VideoColorEffects.cs" />
+    <Compile Include="DecoderlibLic.cs" />
+    <Compile Include="EncoderlibLic.cs" />
+    <Compile Include="FrameworkHelper.RfidLib\BtReaderCached.cs" />
+    <Compile Include="FrameworkHelper.RfidLib\DataContainer.cs" />
+    <Compile Include="FrameworkHelper.RfidLib\DataEventArgs.cs" />
+    <Compile Include="FrameworkHelper.RfidLib\ReadersAddedEventArgs.cs" />
+    <Compile Include="FrameworkHelper.RfidLib\SdkModelBase.cs" />
+    <Compile Include="FrameworkHelper\ActionType.cs" />
+    <Compile Include="FrameworkHelper\CommonUtility.cs" />
+    <Compile Include="FrameworkHelper\Crop.cs" />
+    <Compile Include="FrameworkHelper\CropContraint.cs" />
+    <Compile Include="FrameworkHelper\CursorHelper.cs" />
+    <Compile Include="FrameworkHelper\DisposableResource.cs" />
+    <Compile Include="FrameworkHelper\FlvMetaDataReader.cs" />
+    <Compile Include="FrameworkHelper\FlvMetaInfo.cs" />
+    <Compile Include="FrameworkHelper\LogEffect.cs" />
+    <Compile Include="FrameworkHelper\LogObject.cs" />
+    <Compile Include="FrameworkHelper\MyImageClass.cs" />
+    <Compile Include="FrameworkHelper\MyImageClassList.cs" />
+    <Compile Include="FrameworkHelper\Taskbar.cs" />
+    <Compile Include="FrameworkHelper\UIConstant.cs" />
+    <Compile Include="FrameworkHelper\ValueTypeGroupEnum.cs" />
+    <Compile Include="FrameworkHelper\VideoProcessingClass.cs" />
+    <Compile Include="LoginModule.Keyboard\TouchScreenKeyboard.cs" />
+    <Compile Include="MComposerlibLic.cs" />
+    <Compile Include="MPlatformSDKLic.cs" />
+    <Compile Include="PhotoSW.Common\AsyncImageLoader.cs" />
+    <Compile Include="PhotoSW.Common\BarCodeGenerator.cs" />
+    <Compile Include="PhotoSW.Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="PhotoSW.Common\CroppingAdorner.cs" />
+    <Compile Include="PhotoSW.Common\DecimalProductPrice.cs" />
+    <Compile Include="PhotoSW.Common\DispatcherHelper.cs" />
+    <Compile Include="PhotoSW.Common\DragCanvas.cs" />
+    <Compile Include="PhotoSW.Common\FileInformation.cs" />
+    <Compile Include="PhotoSW.Common\ICanGetThumbBitmapImage.cs" />
+    <Compile Include="PhotoSW.Common\ICanGetThumbPath.cs" />
+    <Compile Include="PhotoSW.Common\ICanXMLExportImport.cs" />
+    <Compile Include="PhotoSW.Common\IInstantiateProperty.cs" />
+    <Compile Include="PhotoSW.Common\InstantiatePropertyAsyncConverter.cs" />
+    <Compile Include="PhotoSW.Common\IntToBooleanConverter.cs" />
+    <Compile Include="PhotoSW.Common\LoginUser.cs" />
+    <Compile Include="PhotoSW.Common\MessageListener.cs" />
+    <Compile Include="PhotoSW.Common\ObservableCollection2D-T, T2, T3-.cs" />
+    <Compile Include="PhotoSW.Common\OpaqueClickableImage.cs" />
+    <Compile Include="PhotoSW.Common\ProductPrice.cs" />
+    <Compile Include="PhotoSW.Common\PuncturedRect.cs" />
+    <Compile Include="PhotoSW.Common\QueuedTaskScheduler.cs" />
+    <Compile Include="PhotoSW.Common\ReadImageMetaData.cs" />
+    <Compile Include="PhotoSW.Common\ResetDPI.cs" />
+    <Compile Include="PhotoSW.Common\Splasher.cs" />
+    <Compile Include="PhotoSW.Common\StackedTaskScheduler.cs" />
+    <Compile Include="PhotoSW.Common\TextBoxService.cs" />
+    <Compile Include="PhotoSW.Common\UriToBitmapConverter.cs" />
+    <Compile Include="PhotoSW.ExtensionMethods\Class1.cs" />
+    <Compile Include="PhotoSW.ExtensionMethods\ExtensionMethods.cs" />
+    <Compile Include="PhotoSW.ExtensionMethods\LogConfigurator.cs" />
+    <Compile Include="PhotoSW.ImageGallery\ImageCollection.cs" />
+    <Compile Include="PhotoSW.ImageGallery\ImageFile.cs" />
+    <Compile Include="PhotoSW.ImageGallery\ImageGallery.cs" />
+    <Compile Include="PhotoSW.ImageGallery\UserControl_ManagedImage.cs" />
+    <Compile Include="PhotoSW\AllGraphics.cs" />
+    <Compile Include="PhotoSW\AllProductType.cs" />
+    <Compile Include="PhotoSW\BGMaster.cs" />
+    <Compile Include="PhotoSW\BurnOrderElements.cs" />
+    <Compile Include="PhotoSW\CryptorEngine.cs" />
+    <Compile Include="PhotoSW\DispatcherHelper.cs" />
+    <Compile Include="PhotoSW\GenerateQRCode.cs" />
+    <Compile Include="PhotoSW\LstMyItems.cs" />
+    <Compile Include="PhotoSW\MemoryManagement.cs" />
+    <Compile Include="PhotoSW\PrintOrderPage.cs" />
+    <Compile Include="PhotoSW\RobotImageLoader.cs" />
+    <Compile Include="PhotoSW\SelectedSubStores.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

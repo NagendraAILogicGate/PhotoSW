@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C334FA9-7AD7-4AA8-88EF-0409ED948C16}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>FrameworkHelper</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="Baracoda.Cameleon.PC.Modularity" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="log4net" />
+    <Reference Include="DigiPhoto.IMIX.Model" />
+    <Reference Include="DigiPhoto.IMIX.Business" />
+    <Reference Include="DigiPhoto.DataLayer" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Interop.MCHROMAKEYLib" />
+    <Reference Include="Interop.MPLATFORMLib" />
+    <Reference Include="Interop.MLPROXYLib" />
+    <Reference Include="Baracoda.Cameleon.PC.Readers" />
+    <Reference Include="Baracoda.Cameleon.PC.Common" />
+    <Reference Include="System.Core" />
+    <Reference Include="ErrorHandler" />
+    <Reference Include="Microsoft.SqlServer.SmoExtended" />
+    <Reference Include="Microsoft.SqlServer.Smo" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo" />
+    <Reference Include="Ionic.Zip" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="MControls" />
+    <Reference Include="System.Windows.Forms" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="DigiPhoto\Common\IInstantiateProperty.cs" />
+    <Compile Include="DigiPhoto\Common\FileInformation.cs" />
+    <Compile Include="DigiPhoto\Common\InstantiatePropertyAsyncConverter.cs" />
+    <Compile Include="DigiPhoto\Common\QueuedTaskScheduler.cs" />
+    <Compile Include="DigiPhoto\Common\StackedTaskScheduler.cs" />
+    <Compile Include="DigiPhoto\Common\AsyncImageLoader.cs" />
+    <Compile Include="DigiPhoto\Common\BarCodeGenerator.cs" />
+    <Compile Include="DigiPhoto\Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="DigiPhoto\ExtensionMethods\ExtensionMethods.cs" />
+    <Compile Include="DigiPhoto\ExtensionMethods\LogConfigurator.cs" />
+    <Compile Include="FrameworkHelper\Common\clsBackup.cs" />
+    <Compile Include="FrameworkHelper\Common\ContantValueForMainWindow.cs" />
+    <Compile Include="DigiPhoto\Common\UriToBitmapConverter.cs" />
+    <Compile Include="DigiPhoto\Common\IntToBooleanConverter.cs" />
+    <Compile Include="DigiPhoto\Common\CroppingAdorner.cs" />
+    <Compile Include="DigiPhoto\RobotImageLoader.cs" />
+    <Compile Include="DigiPhoto\LstMyItems.cs" />
+    <Compile Include="DigiPhoto\PrintOrderPage.cs" />
+    <Compile Include="DigiPhoto\MemoryManagement.cs" />
+    <Compile Include="DigiPhoto\DispatcherHelper.cs" />
+    <Compile Include="DigiPhoto\CryptorEngine.cs" />
+    <Compile Include="DigiPhoto\BGMaster.cs" />
+    <Compile Include="DigiPhoto\AllProductType.cs" />
+    <Compile Include="DigiPhoto\AllGraphics.cs" />
+    <Compile Include="DigiPhoto\SelectedSubStores.cs" />
+    <Compile Include="DigiPhoto\BurnOrderElements.cs" />
+    <Compile Include="DigiPhoto\GenerateQRCode.cs" />
+    <Compile Include="DigiPhoto\Common\DispatcherHelper.cs" />
+    <Compile Include="DigiPhoto\Common\DragCanvas.cs" />
+    <Compile Include="DigiPhoto\Common\ImagingProvider.cs" />
+    <Compile Include="DigiPhoto\Common\ICanXMLExportImport.cs" />
+    <Compile Include="DigiPhoto\Common\ICanGetThumbPath.cs" />
+    <Compile Include="DigiPhoto\Common\ICanGetThumbBitmapImage.cs" />
+    <Compile Include="DigiPhoto\Common\LoginUser.cs" />
+    <Compile Include="FrameworkHelper\Common\MachineIdentification.cs" />
+    <Compile Include="DigiPhoto\Common\MessageListener.cs" />
+    <Compile Include="FrameworkHelper\Common\MLHelpers.cs" />
+    <Compile Include="FrameworkHelper\Common\VideoColorEffects.cs" />
+    <Compile Include="FrameworkHelper\Common\ModifyRegistry.cs" />
+    <Compile Include="DigiPhoto\Common\ObservableCollection2D!3.cs" />
+    <Compile Include="DigiPhoto\Common\OpaqueClickableImage.cs" />
+    <Compile Include="DigiPhoto\Common\DecimalProductPrice.cs" />
+    <Compile Include="DigiPhoto\Common\ProductPrice.cs" />
+    <Compile Include="DigiPhoto\Common\PuncturedRect.cs" />
+    <Compile Include="DigiPhoto\Common\ReadImageMetaData.cs" />
+    <Compile Include="DigiPhoto\Common\ResetDPI.cs" />
+    <Compile Include="DigiPhoto\Common\Splasher.cs" />
+    <Compile Include="DigiPhoto\Common\TextBoxService.cs" />
+    <Compile Include="LoginModule\Keyboard\TouchScreenKeyboard.cs" />
+    <Compile Include="FrameworkHelper\LogObject.cs" />
+    <Compile Include="FrameworkHelper\LogEffect.cs" />
+    <Compile Include="FrameworkHelper\CropContraint.cs" />
+    <Compile Include="FrameworkHelper\Crop.cs" />
+    <Compile Include="FrameworkHelper\DisposableResource.cs" />
+    <Compile Include="FrameworkHelper\CursorHelper.cs" />
+    <Compile Include="FrameworkHelper\Taskbar.cs" />
+    <Compile Include="FrameworkHelper\MyImageClass.cs" />
+    <Compile Include="FrameworkHelper\MyImageClassList.cs" />
+    <Compile Include="FrameworkHelper\VideoProcessingClass.cs" />
+    <Compile Include="FrameworkHelper\CommonUtility.cs" />
+    <Compile Include="FrameworkHelper\FlvMetaInfo.cs" />
+    <Compile Include="FrameworkHelper\FlvMetaDataReader.cs" />
+    <Compile Include="DigiPhoto\ImageGallery\ImageFile.cs" />
+    <Compile Include="DigiPhoto\ImageGallery\ImageCollection.cs" />
+    <Compile Include="DigiPhoto\ImageGallery\ImageGallery.cs" />
+    <Compile Include="DigiPhoto\ImageGallery\UserControl_ManagedImage.cs" />
+    <Compile Include="ChromaKeypluginLic.cs" />
+    <Compile Include="DecoderlibLic.cs" />
+    <Compile Include="EncoderlibLic.cs" />
+    <Compile Include="MComposerlibLic.cs" />
+    <Compile Include="MPlatformSDKLic.cs" />
+    <Compile Include="FrameworkHelper\RfidLib\BtReaderCached.cs" />
+    <Compile Include="FrameworkHelper\RfidLib\DataContainer.cs" />
+    <Compile Include="FrameworkHelper\RfidLib\ReadersAddedEventArgs.cs" />
+    <Compile Include="FrameworkHelper\RfidLib\DataEventArgs.cs" />
+    <Compile Include="FrameworkHelper\RfidLib\SdkModelBase.cs" />
+    <Compile Include="FrameworkHelper\UIConstant.cs" />
+    <Compile Include="FrameworkHelper\ActionType.cs" />
+    <Compile Include="FrameworkHelper\ValueTypeGroupEnum.cs" />
+    <EmbeddedResource Include="FrameworkHelper.g.resources" />
+  </ItemGroup>
+</Project>
