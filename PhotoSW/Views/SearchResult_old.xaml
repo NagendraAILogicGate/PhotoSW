@@ -1,0 +1,504 @@
+﻿<Window x:Class="PhotoSW.Views.SearchResult" Title="View/Order Station" 
+        WindowState="Maximized" WindowStyle="None" Background="#00FFFFFF"
+        Loaded="Window_Loaded" 
+        Closed="Window_Closed"
+        KeyUp="Window_KeyUp" 
+        Unloaded="Window_Unloaded"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:utbc="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper"
+        xmlns:dmb="clr-namespace:PhotoSW.PSControls"
+   
+        >
+    <!--Loaded="Window_Loaded" 
+        Closed="Window_Closed"
+        KeyUp="Window_KeyUp" 
+        Unloaded="Window_Unloaded"-->
+    <!--xmlns:dmb="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null"-->
+    <Window.Resources>
+        <utbc:UriToBitmapConverter x:Key="Imageconverter" />
+        <Style x:Key="RedGlowItemContainer" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="IconBorder" Background="#00FFFFFF" CornerRadius="8" BorderThickness="1" Margin="15,0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="IconBorder">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFFB0202" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                    <Setter.Value>
+                                        <OuterGlowBitmapEffect GlowColor="Red" GlowSize="5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemsControl.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate x:Name="mytemplate">
+                        <Grid Name="grdMain" Margin="2" Width="{Binding GridMainWidth}" Height="{Binding GridMainHeight}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding GridMainRowHeight1}" />
+                                <RowDefinition Height="{Binding GridMainRowHeight2}" />
+                            </Grid.RowDefinitions>
+                            <Image HorizontalAlignment="Stretch" Margin="15,-4.166,15,0" Grid.Row="1" Source="/PhotoSW;component/images/img-description.png" Stretch="Fill" Width="Auto" Grid.RowSpan="1" Height="55.391" VerticalAlignment="Top" />
+                            <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="0" Margin="0" Background="#FFC8C8C8">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="10" Visibility="Collapsed">
+                  <Run Text="Loading.." />
+                                </TextBlock>
+                            </Border>
+                            <Button Name="button" Margin="2" Style="{StaticResource ButtonStyleAlpha2}" CommandParameter="{Binding PhotoId}" Tag="{Binding FilePath}">
+                                <Grid Name="thumbGrd" Height="{Binding ActualHeight, ElementName=button, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}">
+                                    <Image Name="thumbimage" Stretch="Uniform" Source="{Binding FilePath, Converter={StaticResource Imageconverter}, IsAsync=True}" Width="{Binding ActualWidth, ElementName=thumbGrd, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=thumbGrd, Mode=OneWay}" />
+                                    <Image Name="vidPlay" Source="/PhotoSW;component/images/play_trans.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding PlayVisible}" />
+                                    <Image Name="thumbBdr" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}" Source="{Binding FrameBrdr, Converter={StaticResource Imageconverter}, IsAsync=True}" Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}" />
+                                </Grid>
+                            </Button>
+                            <Grid Name="Lockbtns" Margin="0,17.667,0,21" Grid.Row="1" HorizontalAlignment="Center" Width="Auto" Grid.Column="0" VerticalAlignment="Stretch" Height="Auto" Visibility="{Binding IsPassKeyVisible}">
+                                <Button Name="btnUnlock" HorizontalAlignment="Center" Width="49" Style="{StaticResource ButtonStyleAlpha2}" Height="Auto" BorderThickness="0" Margin="0,6.663,0,-6.663" Tag="{Binding Name}" CommandParameter="{Binding PhotoId}" BorderBrush="{x:Null}">
+                                    <Image Source="/PhotoSW;component/images/Locked.png" Margin="0,10,0,0" />
+                                </Button>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" TextBlock.FontSize="12" Grid.Row="1" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Height="Auto" Width="Auto" Grid.ColumnSpan="5" MaxWidth="112" Text="{Binding Name}" />
+                            <Grid Name="Printbtns" Margin="15,2,15,0" Grid.Row="1" VerticalAlignment="Top" Height="49.225" HorizontalAlignment="Stretch" Width="Auto" Visibility="{Binding IsLocked}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="55" />
+                                    <ColumnDefinition Width="0.662*" />
+                                    <ColumnDefinition Width="Auto" MinWidth="11.3176666666667" />
+                                    <ColumnDefinition Width="0.338*" />
+                                    <ColumnDefinition Width="55" />
+                                </Grid.ColumnDefinitions>
+                                <Button Name="btnPrint" Margin="0,0,3,5" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Add to print group" HorizontalAlignment="Right" Grid.Column="4" Height="45" Tag="{Binding Name}" CommandParameter="{Binding PhotoId}">
+                                    <Image Width="46" Height="44" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding PrintGroup}" />
+                                </Button>
+                                <Image Name="imgProcessed" Source="/PhotoSW;component/images/processed.png" Grid.Column="2" Width="22" Height="22" Margin="0,4,0,0" ToolTip="Processed Video" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ProcessedVisible}" />
+                                <Button Name="btnAddToGroup" Margin="3,5,0,0" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Add to group" HorizontalAlignment="Left" Grid.Column="0" Height="44" Tag="{Binding Name}" CommandParameter="{Binding PhotoId}">
+                                    <Image Name="ImgAddToGroup" Width="46" Height="44" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding BmpImageGroup}" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        </Style>
+    </Window.Resources>
+    <Grid Name="grdCotrol">
+        <Grid Name="ModalDialogParent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="122" />
+                <RowDefinition />
+                <RowDefinition Height="17" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.RowSpan="3">
+                <Viewbox Name="vb1" MinWidth="500" MinHeight="500">
+                    <StackPanel Name="bg_withlogo" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel Name="FooterredLine" Margin="0" Grid.Row="2">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute"
+                                Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>
+            <Grid Name="MainGrd" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" MinWidth="152" MaxWidth="152" />
+                </Grid.ColumnDefinitions>
+                <Grid Name="ContentContainer" Margin="0,-30,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Name="row0" Height="Auto" MinHeight="30.8" />
+                        <RowDefinition />
+                        <RowDefinition Name="row2" Height="Auto" MinHeight="30.8" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Name="thumbPreview" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,-77.5,8" Grid.Row="1">
+                        <Grid Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Name="stpnlImages" Grid.Row="1">
+                                <Image Height="18" Margin="0" Source="/PhotoSW;component/images/scroll-shadow-up.png" VerticalAlignment="Top" />
+                                <Image Margin="0" Source="/PhotoSW;component/images/scroll-shadow.png" Height="18" VerticalAlignment="Bottom" />
+                                <ListBox Name="lstImages" BorderThickness="0" Background="#00FFFFFF" ScrollViewer.VerticalScrollBarVisibility="Hidden" Padding="-40,5,0,2" Template="{DynamicResource DigiListBoxControlTemplate}" HorizontalContentAlignment="Center" ItemContainerStyle="{DynamicResource RedGlowItemContainer}" VirtualizingStackPanel.IsVirtualizing="True" ItemsSource="{Binding}" SelectionChanged="lstImages_SelectionChanged" />
+                            </Grid>
+                            <Grid Name="stpnlNoImage" Grid.Row="1" Visibility="Collapsed">
+                                <Image Source="/PhotoSW;component/images/noimage.png" Margin="0,0,412.195,0" VerticalAlignment="Top" />
+                            </Grid>
+                            <Grid Name="grddwom" Grid.Row="1" Margin="0,280.921,0,-10" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="105" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Name="IMGFrame" Visibility="Collapsed" Margin="5,0,-50,0" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="75" />
+                        </Grid.RowDefinitions>
+                        <Grid Name="img" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid Name="GrdSharpen">
+                                <Border Name="picoriginal" BorderThickness="0" BorderBrush="#FF000000" ClipToBounds="True" Margin="0,0,12,0">
+                                    <Image Name="imgmain" Stretch="Uniform" Margin="0" Source="{Binding FullName, Converter={StaticResource Imageconverter}}" />
+                                </Border>
+                            </Grid>
+                            <Image Name="mainFrame" Stretch="Fill" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=imgmain, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=imgmain, Mode=OneWay}" />
+                            <TextBlock Name="txtMainImage" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-30" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" />
+                        </Grid>
+                        <Grid Name="vidoriginal" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,0,0" Background="#FFEEEFEF">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="500" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <Grid Name="gdMediaPlayer" Height="500" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" />
+                            <Grid Grid.Row="1">
+                                <TextBlock Name="txtMainVideo" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" />
+                            </Grid>
+                        </Grid>
+                        <Grid Name="frameBtns" Margin="0,0,56,0" Grid.Row="1">
+                            <StackPanel Name="spaddtoalbumnunlockedImages" HorizontalAlignment="Left" Margin="0,6,0,0" Width="76">
+                                <Button Width="40" Margin="0 10 0 0" Style="{DynamicResource DigiframeButtonStyle}" Padding="0" Height="42">
+                                    <Image Source="/PhotoSW;component/images/add-to-album.png" />
+                                </Button>
+                                <TextBlock TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
+                  <Run Text="Add to Album" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Name="spunlockedImages" Orientation="Horizontal" Margin="0,6,0,0" HorizontalAlignment="Right">
+                                <StackPanel Margin="0,9.37,10,0" VerticalAlignment="Bottom">
+                                    <Button Name="btnImageAddToGroup" CommandParameter="Add to group" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnImageAddToGroup_Click">
+                                        <Image Name="ImgAddToGroup" Source="/PhotoSW;component/images/view-group.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
+                    <Run Text="Add to Group" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Bottom" Margin="20 0 0 0">
+                                    <Button Name="btnPrintGroup" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnPrintGroup_Click">
+                                        <Image Name="imgprintgroup" Source="/PhotoSW;component/images/print-icon.png" />
+                                    </Button>
+                                    <TextBlock HorizontalAlignment="Center" TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
+                    <Run Text="Print" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Name="splockedImages" Orientation="Horizontal" Margin="0,6,0,0" HorizontalAlignment="Right">
+                                <StackPanel Margin="0,9.37,10,0" VerticalAlignment="Bottom">
+                                    <Button Name="btnUnloack" ToolTip="Unlock Image" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnUnlock_Click">
+                                        <Image Source="/PhotoSW;component/images/Unlock.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
+                    <Run Text="Unlock Image" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Name="RightPanel" Grid.Column="1" Margin="0,-30,10,-16" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition />
+                        <RowDefinition Height="90" />
+                    </Grid.RowDefinitions>
+                    <Border Name="rightTop" Height="75" Margin="0" VerticalAlignment="Bottom" Width="152">
+                        <Image Source="/PhotoSW;component/images/rightPanelTop.png" Stretch="Fill" />
+                    </Border>
+                    <Grid Name="Middle" Margin="7,0,0,0" Grid.Row="1">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/PhotoSW;component/images/RightPanelmiddle.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <Image Source="/PhotoSW;component/images/rightPanelBtm.png" Stretch="Fill" VerticalAlignment="Top" Height="55" Grid.Row="2" Margin="0,-2.016,0,0" />
+                    <Viewbox HorizontalAlignment="Right" Margin="0,15,30,-50" Width="91.608" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="-15,0,-40,30" Grid.Row="0" Orientation="Vertical">
+                                <TextBox Name="txtImageId" Margin="0,0,0,0" Width="220" Height="50" Style="{DynamicResource SearchIDTB}" FontSize="35" HorizontalAlignment="Right" FontWeight="Bold" Focusable="True" VerticalAlignment="Top" BorderThickness="2,2,2,1" MaxLength="18" 
+                                         dmb:RFIDPopupKeyboard.Placement="Bottom" dmb:RFIDPopupKeyboard.HorizontalOffset="920" dmb:RFIDPopupKeyboard.VerticalOffset="420" dmb:RFIDPopupKeyboard.Height="300" dmb:RFIDPopupKeyboard.Width="200" dmb:RFIDPopupKeyboard.IsEnabled="True" dmb:RFIDPopupKeyboard.PlacementTarget="{Binding ElementName=txtCardNumber}" TextChanged="txtImageId_TextChanged" 
+                                PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" Keyboard.KeyDown="bttnLogin_Enter" />
+                                <Button Name="Ok" Style="{StaticResource ButtonStyleAlpha}" Margin="0,5,0,0" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" Click="btnSearchImage_Click">
+                                    <Image Source="/PhotoSW;component/images/search-button.png" Height="70" Width="70" />
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="1">
+                                <StackPanel>
+                                    <Button Name="btnSearchPhoto" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Margin="40,0,39,0" Click="btnSearchPhoto_Click">
+                                        <Image Source="/PhotoSW;component/images/search_icon.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Search" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Name="imageInfoParent" Margin="0,5,0,5">
+                                    <Button Name="btnCaptureInfo" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Margin="48,0,47,0" Click="btnCaptureInfo_Click">
+                                        <Image Source="/PhotoSW;component/images/info-text.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Image/Video Info" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Name="stkLockImage" Margin="0,5,0,5">
+                                    <Button Name="btnLockmage" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Margin="48,0,47,0" Click="btnLockmage_Click">
+                                        <Image Source="/PhotoSW;component/images/preview_hide.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Lock Preview" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="2">
+                                <Button Style="{StaticResource ButtonStyleAlpha}" IsEnabled="False" HorizontalAlignment="Center">
+                                    <Image Source="/PhotoSW;component/images/photoID_icon.png" />
+                                </Button>
+                                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                  <Run Text="Save/Back" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <StackPanel>
+                                    <Button Name="btnEdit" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Click="btnEdit_Click">
+                                        <Image Source="/PhotoSW;component/images/editPhoto_icon.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Edit Photo" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Name="stkEditVideo" Visibility="Collapsed" Margin="5,0,0,0">
+                                    <Button Name="btnEditVideo" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Click="btnEditVideo_Click">
+                                        <Image Source="/PhotoSW;component/images/editVideo.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Edit Video" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Name="stkAdvVideoEdit" Margin="5" Grid.Row="4" HorizontalAlignment="Center" Visibility="Collapsed" Orientation="Horizontal">
+                                <StackPanel HorizontalAlignment="Left">
+                                    <Button Name="btnAdvanceVideoEditing" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Click="btnAdvanceVideoEditing_Click">
+                                        <Image Source="/PhotoSW;component/images/adv_edit_video.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Adv Video Editing" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Name="stkVideoOverlay" Margin="5" Grid.Row="5" HorizontalAlignment="Center" Visibility="Collapsed" Orientation="Horizontal">
+                                <StackPanel Name="stkExtractVideoFrame" Visibility="Visible" Margin="5,0,0,0">
+                                    <Button Name="btnExtractVideoFrame" Style="{StaticResource ButtonStyleAlpha}" Click="btnExtractVideoFrame_Click">
+                                        <Image Source="/PhotoSW;component/images/video_frame.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Extract Frames" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="6">
+                                <Grid Height="61.263" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="/PhotoSW;component/images/previewPhoto_icon.png" />
+                                    <CheckBox Name="btnchkpreview" Style="{DynamicResource DigiGrdImgCheckBoxStyle}" Click="btnpreview_Click" />
+                                </Grid>
+                                <TextBlock Name="txtpreview" TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                  <Run Text="Preview Photo" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Name="grdThumbPreview" Margin="5" Grid.Row="7" Visibility="Collapsed">
+                                <Grid Visibility="Visible" Height="61.263" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="/PhotoSW;component/images/previewPhoto_icon.png" />
+                                    <CheckBox Name="btnchkthumbpreview" Style="{DynamicResource DigiGrdImgCheckBoxStyle}" Click="btnthumbpreview_Click" />
+                                </Grid>
+                                <TextBlock Name="txtflippreview" TextBlock.TextAlignment="Center" Visibility="Visible" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                  <Run Text="Preview Thumbnail" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="8">
+                                <Button Name="btnPlaceOrder" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Click="btnPlaceOrder_Click">
+                                    <Image Source="/PhotoSW;component/images/PlaceOrder_icon.png" />
+                                </Button>
+                                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                  <Run Text="Place Order" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="9">
+                                <Button Name="btnViewGroup" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Click="btnViewGroup_Click">
+                                    <Image Source="/PhotoSW;component/images/viewGroup_icon.png" />
+                                </Button>
+                                <TextBlock Name="vwGroup" TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="View Group" TextBlock.FontSize="18.667" />
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="10">
+                                <Button Name="btnRemoveGroup" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Width="76" Height="79" Click="btnRemoveGroup_Click">
+                                    <Image Source="/PhotoSW;component/images/RemoveGroup.png" />
+                                </Button>
+                                <TextBlock Name="tbcleargroup" TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                  <Run Text="Clear Group" />
+                                </TextBlock>
+                                <TextBlock Name="txtgpnumber" Visibility="Collapsed" TextBlock.TextAlignment="Center" TextBlock.FontWeight="Normal" TextBlock.Foreground="#FFFFFF00" TextBlock.FontSize="14" />
+                            </StackPanel>
+                            <StackPanel Name="pnlPagex" Margin="5" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="11">
+                                <StackPanel Name="btnprev">
+                                    <Button Name="btnPrevButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" Click="btnScrollUp_Click">
+                                        <Image Source="/PhotoSW;component/images/grd_prev.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Previous" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Name="btnnext">
+                                    <Button Name="btnNextButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" Click="btnScrollDown_Click">
+                                        <Image Source="/PhotoSW;component/images/grd_next.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                    <Run Text="Next" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+                <Grid Name="grdSelectAll" Margin="0,-71.5,200.176,0" Visibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Right" Height="40" Width="900" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="135" />
+                        <ColumnDefinition Width="Auto" MinWidth="135" />
+                        <ColumnDefinition Width="Auto" MinWidth="135" />
+                    </Grid.ColumnDefinitions>
+                    <Canvas Name="SPSelectAll" Grid.Column="0" Margin="250,0,49,0" Grid.Row="1" HorizontalAlignment="Center" Height="40.5" Width="300" VerticalAlignment="TOP" ZIndex="7">
+                        <TextBlock Name="tbenablegroup" Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" VerticalAlignment="Center" Text="Select All:" TextBlock.Foreground="#FF000000" />
+                        <Viewbox Grid.Row="1" Grid.Column="0" Margin="90,5,0,0" Height="30" HorizontalAlignment="Left" Width="30" VerticalAlignment="Center">
+                            <CheckBox Name="chkSelectAll" Click="chkSelectAll_Click" />
+                        </Viewbox>
+                    </Canvas>
+                    <TextBlock Name="txtSelectImages" Margin="140,5,0,0" Grid.Column="1" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" VerticalAlignment="Center" TextBlock.Foreground="#FF000000" />
+                    <TextBlock Name="txtSelectedImages" Margin="50,5,0,0" HorizontalAlignment="Right" Grid.Column="2" TextBlock.FontWeight="Bold" TextBlock.FontSize="15.667" VerticalAlignment="Center" TextBlock.Foreground="#FF000000" />
+                </Grid>
+                <Grid Name="grdupscroll" Margin="0,-61.5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="40" Width="150" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="125" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button Name="btnWithoutPreview" Style="{StaticResource ButtonStyleAlpha}" Click="btnWithoutPreview_Click">
+                            <Image Name="imgwithoutPreview" Width="38" Height="40" Stretch="Fill" Source="/PhotoSW;component/images/16blocks_red.png" />
+                        </Button>
+                        <Button Name="btnWithoutPreview9" Style="{StaticResource ButtonStyleAlpha}" Click="btnWithoutPreview9_Click">
+                            <Image Name="imgwithoutPreview9" Width="38" Height="40" Stretch="Fill" Source="/PhotoSW;component/images/9blocks_black.png" />
+                        </Button>
+                        <Button Name="btnWithPreviewActive" Style="{StaticResource ButtonStyleAlpha}" Click="btnWithPreviewActive_Click">
+                            <Image Name="imgwithPreview" Width="38" Height="40" Stretch="Fill" Source="/PhotoSW;component/images/thumbnailview1.png" />
+                        </Button>
+                        <Button Name="btnQRSearch" Style="{StaticResource ButtonStyleAlpha}" Click="btnQRSearch_Click">
+                            <Image Name="imgQRCodeSearch" Width="38" Height="30" Source="/PhotoSW;component/images/QRCodeSearch.jpg" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,12.5,0,0">
+                <TextBlock Name="Memory_Status" TextBlock.FontWeight="Bold">
+          <Run Text="Memory Status" />
+                </TextBlock>
+                <TextBlock Name="txtStatus" TextBlock.FontWeight="Bold" Margin="5,0,0,0" />
+            </StackPanel>
+            <Grid HorizontalAlignment="Right" Margin="0,-7.5,10,0" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+                    <StackPanel Name="stackVideoSearchTypes" Orientation="Horizontal" Visibility="Collapsed">
+                        <RadioButton Name="rdbtnPhoto" FontWeight="Bold" GroupName="searchImageCriteria" TabIndex="0" Content="Images" Margin="10 0 0 0" Checked="rdbtnPhoto_checked" />
+                        <RadioButton Name="rdbtnVideo" FontWeight="Bold" GroupName="searchImageCriteria" TabIndex="0" Content="Videos" Margin="10 0 0 0" Checked="rdbtnVideo_Checked" />
+                        <RadioButton Name="rdbtnAll" FontWeight="Bold" GroupName="searchImageCriteria" TabIndex="0" Content="All" Margin="10 0 0 0" Checked="rdbtPVBoth_Checked" />
+                        <TextBlock Name="txtimageofphotographer" TextBlock.FontWeight="Bold" Margin="10 0 10 0" Visibility="Collapsed" />
+                        <TextBlock Margin="10 0 10 0" Visibility="Visible" />
+                    </StackPanel>
+                    <TextBlock Name="txtcountspace" TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16" Margin="10 0 10 0" Visibility="Visible">
+            <Run Text="|" />
+                    </TextBlock>
+                    <TextBlock TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16">
+            <Run Text="Pending burn orders:" />
+                    </TextBlock>
+                    <Button Name="btnPendingOrders" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}" Click="btnPendingOrders_Click">
+                        <TextBlock Name="lblPendingOrders"  Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16"/>
+                    </Button>
+                    <TextBlock Margin="10 0 10 0">
+            <Run Text="|" />
+                    </TextBlock>
+                    <TextBlock TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Logged in as:" />
+                    </TextBlock>
+                    <Button Name="btnUserName" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}" >
+                        <TextBlock Name="txbUserName"   Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16"/>
+                    </Button>
+                    <TextBlock Margin="10 0 0 0" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="|" />
+                    </TextBlock>
+                    <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0"  Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Store A" />
+                    </TextBlock>
+                    <Button Name="btnLogout" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}"  Click="btnLogout_Click">
+                        <TextBlock Text="Logout" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16" >
+                            <TextBlock.Effect>
+                                <DropShadowEffect Direction="330" Color="Red" Opacity="1.5" BlurRadius="2" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+            <Button Name="btnHome" IsDefault="False" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Opacity="0" Click="btnHome_Click">
+                <Image Height="40" Width="50" Source="/PhotoSW;component/images/Home.png" />
+            </Button>
+        </Grid>
+        <dmb:DigiMessageBox x:Name="MsgBox" Margin="0,-300,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" />
+        <dmb:ImageInfo x:Name="imageInfo" />
+    </Grid>
+</Window>

@@ -1,0 +1,164 @@
+﻿<Window x:Class="PhotoSW.Manage.ManageCamera"
+        Title="ManageCamera" WindowState="Maximized" WindowStyle="None" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:dmb="clr-namespace:PhotoSW.PSControls">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="19" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="bgContainer" Margin="0,0,-272,-452" Grid.RowSpan="2">
+            <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                    <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                </StackPanel>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Name="FooterredLine" Margin="0" Grid.Row="1">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+            </StackPanel.Background>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+            <TextBlock TextBlock.FontWeight="Bold">
+        <Run Text="Logged in as:" />
+            </TextBlock>
+            <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock Name="txbUserName" />
+            </Button>
+            <TextBlock Margin="10 0 0 0">
+        <Run Text="|" />
+            </TextBlock>
+            <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+        <Run Text="Store A" />
+            </TextBlock>
+            <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0" Click="btnLogout_Click">
+                <TextBlock Text="Logout" />
+            </Button>
+        </StackPanel>
+        <Grid Name="PageName" Margin="0,37,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Image Source="/PhotoSW;component/images/PageName.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="161.268" Margin="0,0,0,-18.694" />
+            <TextBlock Margin="0,0,0,76.219" TextWrapping="Wrap" Text="Manage Camera" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Center" TextBlock.FontSize="18.667" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid Name="Grid" Margin="5,160,5,5">
+            <Border Name="myBorder" BorderBrush="#FFFF0000" BorderThickness="0" Margin="5">
+                <Grid FlowDirection="LeftToRight" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="125" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="DGManageCamrea" Grid.Row="7" Margin="8" RowHeight="30" Padding="5" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="18.667" Foreground="#FF434343" Grid.ColumnSpan="4" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn FontWeight="Bold" Width="1.52*" IsReadOnly="True" Header="Camera Name" Binding="{Binding DG_Camera_Name}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.5*" IsReadOnly="True" Header="Camera Make" Binding="{Binding DG_Camera_Make}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.7*" IsReadOnly="True" Header="Camera Model" Binding="{Binding DG_Camera_Model}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.5*" IsReadOnly="True" Header="PhotoGrapher" Binding="{Binding PhotographerName}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.35*" IsReadOnly="True" Header="Photo Series" Binding="{Binding DG_Camera_Start_Series}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.8*" IsReadOnly="True" Header="Camera Folder" Binding="{Binding DG_CameraFolder}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.5*" IsReadOnly="True" Header="Camera Series" Binding="{Binding SerialNo}" />
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Name="btnEdit"  Grid.Column="0" Width="Auto" VerticalAlignment="Top" Height="Auto" Style="{DynamicResource DigiGridEditButtonStyle}" Tag="{Binding DG_Camera_pkey}" />
+                                            <Button Name="btnDelete"  Grid.Column="1" Width="Auto" VerticalAlignment="Top" Height="Auto" Style="{DynamicResource DigiGridDelButtonStyle}" Tag="{Binding DG_Camera_pkey}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Name="btnBack" Grid.Row="8" Grid.Column="3" FontWeight="Bold" FontSize="18.667" Content="Back" Margin="0,0,3.075,-5" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Right" Width="127" Click="btnBack_Click" />
+                    <TextBlock Margin="5,0,0,0" TextWrapping="Wrap" Text="Camera Name :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Camera Make :" Grid.Row="1" HorizontalAlignment="Right" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,0,0,0">
+                        <TextBlock VerticalAlignment="Top" Margin="0,5,0,0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" Text="Is Live Stream :" TextBlock.Foreground="#FF000000" />
+                        <Viewbox Margin="5,5,0,0" Height="30" HorizontalAlignment="Left" Width="30" VerticalAlignment="Top">
+                            <CheckBox Name="chkIsLiveStream" />
+                        </Viewbox>
+                        <TextBlock VerticalAlignment="Top" Margin="20,5,0,0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" Text="Is Chroma color :" TextBlock.Foreground="#FF000000" />
+                        <Viewbox Margin="5,5,0,0" Height="30" HorizontalAlignment="Left" Width="30" VerticalAlignment="Top">
+                            <CheckBox Name="chkIsChromaColor" />
+                        </Viewbox>
+                    </StackPanel>
+                    <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width=".2*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="0" Grid.Column="0" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" Text="Is Trip Camera :" TextBlock.Foreground="#FF000000" />
+                        <Viewbox Margin="2,5,0,0" Height="30" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="30" VerticalAlignment="Top">
+                            <CheckBox Name="chkIsTripCam" Click="chkIsTripCam_Click" />
+                        </Viewbox>
+                        <TextBlock VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="2" Margin="5,5,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="18" Text="Cam Id:" TextBlock.Foreground="#FF000000" />
+                        <ComboBox Name="cmbTripCamModels" SelectedIndex="0" IsEnabled="False" Grid.Row="0" Grid.Column="3" Margin="2" HorizontalAlignment="Right" Height="35" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" SelectionChanged="cmbTripCamModels_SelectionChanged" />
+                    </Grid>
+                    <TextBlock Name="tbSerialNo" Grid.Row="5" TextWrapping="Wrap" Grid.Column="0" Margin="35,0,0,0" Text="Serial No :" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                    <TextBox Name="txtCameraSerialNumber" Grid.Row="5" VerticalAlignment="Center" Grid.Column="1" Margin="5,0,5,0" TextWrapping="Wrap" Height="40" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" HorizontalAlignment="Stretch" />
+                    <Button Name="btnAutoDetect" Grid.Row="5" Content="Detect Serial No" Grid.Column="2" Width="140" Style="{DynamicResource ButtonStylesubmit}" Margin="5,0,0,5" Foreground="#FFFFFFFF" FontSize="14.667" FontWeight="Bold" Height="53" Click="DetectCameraSerial" />
+                    <Grid Grid.Column="3" Margin="0,0,5,0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Name="btnSave" Content="Save" Width="127" Margin="0,40,10,0" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSave_Click" />
+                            <Button Name="btnClear" Content="Reset" Width="127" Margin="0,40,10,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnClear_Click" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Margin="5,0,0,0" TextWrapping="Wrap" Text="Camera Model :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" />
+                    <TextBox Name="txtCameraName" Grid.Column="1" Margin="5" TextWrapping="Wrap" Height="40" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" />
+                    <TextBox Name="txtCameraModel" Grid.Column="3" Margin="5" TextWrapping="Wrap" Height="40" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" />
+                    <TextBox Name="txtCameraMake" Grid.Column="1" Margin="5" TextWrapping="Wrap" Height="40" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" Grid.Row="1" />
+                    <TextBox Name="txtPhotoSeries" Grid.Column="1" Margin="5" TextWrapping="Wrap" Height="40" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" Grid.Row="2" PreviewTextInput="NumericOnly" />
+                    <ComboBox Name="cmbPhotoGraphers" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Column="3" Margin="5" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="1" />
+                    <TextBlock TextWrapping="Wrap" Text="Assign To :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="1" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Photo Series :" Grid.Row="2" HorizontalAlignment="Right" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" VerticalAlignment="Center" />
+                    <ComboBox Name="cmbSubStore" DisplayMemberPath="Key" SelectedValuePath="Value" Grid.Column="4" Margin="5" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="2" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" SelectionChanged="cmbStore_SelectionChanged" />
+                    <TextBlock TextWrapping="Wrap" Text="Sub Store :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="2" Margin="0,13,0,12" />
+                    <ComboBox Name="cmbLocation" DisplayMemberPath="Key" SelectedValuePath="Value" Grid.Column="3" Margin="5" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Top" Grid.Row="3" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" />
+                    <TextBlock TextWrapping="Wrap" Text="Location :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="3" />
+                    <ComboBox Name="cmbCharacter" DisplayMemberPath="Key" SelectedValuePath="Value" Grid.Column="3" Margin="5" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Top" Grid.Row="4" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" />
+                    <TextBlock TextWrapping="Wrap" Text="Character :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="4" />
+                    <TextBlock Name="tbDevice" TextWrapping="Wrap" Text="Device :" HorizontalAlignment="Right" VerticalAlignment="Top" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="0" Grid.Row="3" />
+                    <StackPanel Grid.Row="3" Grid.Column="1" Grid.RowSpan="2">
+                        <ListBox Name="lstDevice" ScrollViewer.CanContentScroll="False" Width="Auto" Margin="5" Height="90" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Orientation="Vertical">
+                                        <Viewbox Height="28" HorizontalAlignment="Left" Margin="5,4.057">
+                                            <CheckBox FontWeight="Bold" IsChecked="{Binding IsChecked}" Tag="{Binding DeviceId}" Content="{Binding Name}" />
+                                        </Viewbox>
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <dmb:DigiMessageBox x:Name="MsgBox" Margin="50,50,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" />
+        </Grid>
+    </Grid>
+</Window>

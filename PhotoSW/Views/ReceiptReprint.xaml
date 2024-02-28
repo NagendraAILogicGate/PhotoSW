@@ -1,0 +1,389 @@
+﻿<Window x:Class="PhotoSW.Views.ReceiptReprint" Title="ReceiptReprint" 
+        WindowState="Maximized" WindowStyle="None" Background="#696969" 
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Window.Resources>
+        <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemsControl.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate x:Name="mytemplate">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" MinHeight="15.96" />
+                                <RowDefinition Height="Auto" MinHeight="15.96" />
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="2" BorderBrush="#FF000000">
+                                <Grid Height="Auto" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Source="{Binding FilePath, Converter={StaticResource Imageconverter}}" Visibility="{Binding ImageVisibility}" />
+                                    <TextBlock TextBlock.FontSize="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="Auto" Text="{Binding PhotoName}" Visibility="{Binding OtherVisibility}" />
+                                </Grid>
+                            </Border>
+                            <TextBlock Grid.Row="1" Text="{Binding PhotoName}" />
+                            <TextBlock Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding AmountRefunded, StringFormat=N2}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="212" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" MinHeight="81" />
+                <RowDefinition Height="Auto" MinHeight="74" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Margin="0,0,-272,-474.132" Grid.RowSpan="4">
+                <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                    <!--<StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>-->
+                </Viewbox>
+            </StackPanel>
+            <!--<StackPanel Name="FooterredLine" Margin="0" Grid.Row="3" Height="17" VerticalAlignment="Bottom">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>-->
+          
+            <Image Source="/PhotoSW;component/images/scroll-shadow.png" Stretch="Fill" Margin="81,0,81,4" Height="23" VerticalAlignment="Bottom" />
+            <Image Margin="81,1,81,0" Source="/PhotoSW;component/images/scroll-shadow-up.png" Stretch="Fill" Grid.Row="2" Height="23" VerticalAlignment="Top" />
+            <DataGrid Name="dgOrderList" AutoGenerateColumns="False" Margin="10,-2,10,0" IsReadOnly="True" ColumnWidth="*" CanUserAddRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" Grid.Row="1" RowBackground="#808080" AlternatingRowBackground="#808080" SelectionMode="Single" AreRowDetailsFrozen="True" BorderThickness="0,0,0,3"  Background="#808080" HeadersVisibility="Column" GridLinesVisibility="Vertical" RowHeight="60" FontSize="18.667" Foreground="#FF434343" VerticalAlignment="Top" VerticalGridLinesBrush="#FFBCBCBC" ItemsPanel="{DynamicResource DigiItemsPanelTemplate}" BorderBrush="{x:Null}">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#808080" />
+                        <Setter Property="Foreground" Value="#FFFFFF" />
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Padding" Value="10,3,10,3"/>
+                        <Setter Property="BorderBrush" Value="Maroon"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFFFFF"/>
+                                <Setter Property="Foreground" Value="#696969"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Product Type" Binding="{Binding DG_Orders_ProductType_Name}" />
+                    <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Total Cost" Binding="{Binding DG_Orders_Details_Items_TotalCost, StringFormat=N2}" />
+                    <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Discount" Binding="{Binding DG_Orders_LineItems_DiscountAmount, StringFormat=N2}" />
+                    <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Quantity" Binding="{Binding DG_Orders_LineItems_Quantity}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Margin="20.397,0,10,5" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="91.739" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" MinWidth="112.339" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Margin="0,0,7.616,5" TextWrapping="Wrap" Text="Order Number" VerticalAlignment="Center" HorizontalAlignment="Right" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" TextBlock.Foreground="#FFFF" />
+                <TextBox Name="txtSearchOrderNO" Grid.Row="0" Grid.Column="1" IsTabStop="True" Margin="5" TextWrapping="Wrap" TabIndex="3" Style="{DynamicResource PhotoSWTextBoxStyle}" Height="50.857" VerticalAlignment="Top" LostFocus="txtSearchOrderNO_LostFocus" GotFocus="txtSearchOrderNO_GotFocus" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0">
+                    <Button Name="btnSearch" Content="Search" Height="44.768" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Width="102.339" FontSize="18.667" FontWeight="ExtraBold" Margin="5,0" Style="{DynamicResource ButtonStyleBgGreensubmit}" Foreground="#FFFFFFFF" Click="btnSearch_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <ListBox Name="lstOrders" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" MinHeight="30" MaxHeight="50" BorderThickness="0" Background="#00FFFFFF" SelectionChanged="lstOrders_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" Margin="0,0,30,0" Text="{Binding Value}" />
+                                <TextBlock HorizontalAlignment="Center" TextBlock.FontSize="14" TextBlock.Foreground="#FFFF" Text="{Binding Key}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <!--<Border Name="KeyBorderOrder" Visibility="Collapsed" Height="300" Margin="0" Grid.Row="1" VerticalAlignment="Top" Style="{DynamicResource DigiBorderStyleKeyboard}">
+                <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="5" Background="#FFFFEBEB">
+                    <Grid Margin="10,10,-1,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.689*" />
+                            <ColumnDefinition Width="2" />
+                            <ColumnDefinition Width="0.311*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                            </Grid.RowDefinitions>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Q" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="W" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="E" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="R" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="T" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="Y" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="U" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="I" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="O" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="P" Margin="1,-12,1,2" Grid.Column="9" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="Back" Margin="1,-12,-1,2" Grid.Column="10" Foreground="#FF040404" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="33,10,10,10" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="A" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="S" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="D" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="F" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="G" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="H" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="J" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="K" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="L" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="ENTER" Margin="1,-12,0,2" Grid.Column="9" Foreground="#FF000000" Grid.ColumnSpan="2" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="10" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="$" Margin="-1,-12,1,2" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="Z" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="X" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="C" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="V" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="B" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="N" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="M" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="#" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="@" Margin="1,-12,1,2" Grid.Column="9" Foreground="#FF000000" Click="btn_Click2" />
+                                <Button Content="*" Margin="1,-12,1,2" Grid.Column="10" Foreground="#FF000000" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="10" Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="-" Margin="-3,-12,14.061,2" Foreground="#FF000000" Grid.Column="9" Click="btn_Click2" />
+                                <Button Content="SPACE" Margin="-3,-12,5,2" Grid.ColumnSpan="9" Click="btn_Click2" />
+                                <Button Content="CLOSE" Margin="-12,-12,1,2" Grid.Column="10" Foreground="#FF000000" Click="btn_Click2" />
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="0,0,15,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                                <RowDefinition Height="0.25*" />
+                            </Grid.RowDefinitions>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="7" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="8" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="9" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="/" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="10" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="4" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="5" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="6" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="*" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="10" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="1" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="2" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="3" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="-" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                            </Grid>
+                            <Grid Margin="10" Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                    <ColumnDefinition Width="0.09*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="0" Margin="-1,-12,2,2" Foreground="#FF0C0B0B" Grid.ColumnSpan="2" Click="btn_Click2" />
+                                <Button Content="." Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                                <Button Content="+" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click2" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>-->
+       
+            
+            <Grid Name="TotalSection" Margin="5" Grid.Row="2" VerticalAlignment="Bottom">
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Total Cost:" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" VerticalAlignment="Bottom" TextBlock.Foreground="#FFFF" HorizontalAlignment="Left" />
+                    <TextBlock Name="txt_TotalAmount" TextWrapping="Wrap" Margin="5,0" HorizontalAlignment="Left" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" VerticalAlignment="Bottom" TextBlock.Foreground="#FFFF" />
+                    <TextBlock Name="lbl_TotalDiscount" Margin="10,0,0,0" TextWrapping="Wrap" Text="Discount:" VerticalAlignment="Bottom" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" HorizontalAlignment="Left" />
+                    <TextBlock Name="txt_TotalDiscount" TextWrapping="Wrap" Margin="5,0" HorizontalAlignment="Left" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" VerticalAlignment="Bottom" TextBlock.Foreground="#FFFF" />
+                    <TextBlock Margin="10,0,0,0" TextWrapping="Wrap" Text="Net Amount:" VerticalAlignment="Bottom" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" HorizontalAlignment="Left" />
+                    <TextBlock Name="txt_NetAmount" TextWrapping="Wrap" Margin="5,0" HorizontalAlignment="Left" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" VerticalAlignment="Bottom" TextBlock.Foreground="#FFFF" />
+                    <TextBlock Name="Currency" TextWrapping="Wrap" Margin="0" HorizontalAlignment="Left" TextBlock.FontSize="17.333" TextBlock.FontWeight="Bold" VerticalAlignment="Bottom" TextBlock.Foreground="#FFFF" />
+                </StackPanel>
+            </Grid>
+            <StackPanel Margin="0,-0.5,13,14.5" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right">
+                <Button Name="btnViewPhotos" Content="View Photos" Width="131" FontSize="17.333" FontWeight="ExtraBold" Style="{DynamicResource ButtonStyleBgGreensubmit}" Foreground="#FFFFFFFF" Height="50" Margin="5,0,0,0" Click="btnViewPhotos_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                            <GradientStop Color="White" Offset="1" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="btnPrintReceipt" Content="Print Receipt" Width="131" FontSize="17.333" FontWeight="ExtraBold" Style="{DynamicResource ButtonStyleBgGreensubmit}" Foreground="#FFFFFFFF" Height="50" Margin="5,0,0,0" Click="btnPrintReceipt_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                            <GradientStop Color="White" Offset="1" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="btnBack" Content="Back" Width="131" FontSize="17.333" FontWeight="ExtraBold" Style="{DynamicResource ButtonStyleBgRed}" Foreground="#FFFFFFFF" Height="50" Click="btnBack_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                            <GradientStop Color="White" Offset="1" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Name="GrdPrint" Margin="0" Visibility="Collapsed">
+            <Grid Margin="0">
+                <Border Background="#99000000" Visibility="{Binding Visibility}">
+                    <Border BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Background="#FFFFFFFF" CornerRadius="10" BorderBrush="#FF666464">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" MinHeight="14" />
+                                <RowDefinition Height="Auto" MinHeight="43" />
+                            </Grid.RowDefinitions>
+                            <Button Name="btnClose" Width="43" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyleAlpha2}" Margin="0,-25,-29,50" Click="btnClose_Click">
+                                <Image Source="/PhotoSW;component/images/close-btn.png" />
+                            </Button>
+                            <ListBox Name="lstItems" Grid.Row="1" Margin="8,5" MaxHeight="550" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <StackPanel HorizontalAlignment="Right" Margin="0,20,10,0" Orientation="Vertical" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Logged in as:" />
+                </TextBlock>
+                <Button Name="btnUserName" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}" >
+                    <TextBlock Name="txbUserName"   Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16"/>
+                </Button>
+                <TextBlock Margin="10 0 0 0" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="|" />
+                </TextBlock>
+                <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0"  Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Store A" />
+                </TextBlock>
+                <Button Name="btnLogout" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}"  Click="btnLogout_Click">
+                    <TextBlock Text="Logout" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect Direction="330" Color="Red" Opacity="1.5" BlurRadius="2" ShadowDepth="2"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,188 @@
+﻿<Window x:Class="PhotoSW.Manage.SoftwareHealthCheckup" 
+        Title="SoftwareHealthCheckup" WindowState="Maximized"
+        WindowStyle="None" Height="Auto" Width="Auto" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:c="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <Window.Resources>
+        <DataTemplate x:Key="SofthealthDataTemplate">
+            <Border CornerRadius="5" MinWidth="250" Margin="5,10">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Offset="0.109" Color="{Binding BackOffsetColor}" />
+                        <GradientStop Color="{Binding BackColor}" />
+                        <GradientStop Offset="0.906" Color="{Binding BackOffsetColor}" />
+                        <GradientStop Offset="1" Color="{Binding BackColor}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid Height="Auto" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Name="tbServiceName" Margin="5" TextWrapping="Wrap" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" Text="{Binding ServiceName}" />
+                    <TextBlock Name="tbStatus" Margin="5" Grid.Row="1" TextWrapping="Wrap" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" Text="{Binding RunningStatus}" />
+                    <Button Name="btnAction" HorizontalAlignment="Center" Margin="10" Grid.Row="0" Height="Auto" VerticalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" FontWeight="Bold" FontSize="14.667" Width="Auto" MinWidth="75" MinHeight="40" ToolTip="{Binding IsInterface}" Tag="{Binding Originalservicename}" CommandParameter="{Binding ServicePath}" Content="{Binding ButtonText}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="ListBoxItemStylehealth" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Background" Value="#00FFFFFF" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Control.VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Control.Padding" Value="2,0,0,0" />
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Padding="{TemplateBinding Control.Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Property="Border.Background" />
+                                <Setter Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" Property="Control.Foreground" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="ListBoxItem.IsSelected" Value="True" />
+                                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Property="Border.Background" />
+                                <Setter Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Property="Control.Foreground" />
+                            </MultiTrigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Property="Control.Foreground" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-22" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition MaxHeight="600" />
+            <RowDefinition Height="Auto" MinHeight="62" />
+            <RowDefinition Height="19" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="bgContainer" Grid.RowSpan="4" Margin="0,0,-105,-315.754">
+            <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                    <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                </StackPanel>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Name="FooterredLine" Margin="0,2,0,0" Grid.Row="3">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+            </StackPanel.Background>
+        </StackPanel>
+        <Grid Margin="0,0,0,22" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Image Source="/PhotoSW;component/images/PageName.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="102" />
+            <TextBlock Margin="0,29.916,0,0" TextWrapping="Wrap" Text="Health" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Center" TextBlock.FontSize="18.667" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,6,0">
+            <TextBlock TextBlock.FontWeight="Bold">
+        <Run Text="Logged in as:" />
+            </TextBlock>
+            <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock Name="txbUserName" />
+            </Button>
+            <TextBlock Margin="10 0 0 0">
+        <Run Text="|" />
+            </TextBlock>
+            <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+        <Run Text="Store A" />
+            </TextBlock>
+            <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0"  Click="btnLogout_Click">
+                <TextBlock Text="Logout" />
+            </Button>
+        </StackPanel>
+        <Grid Margin="0,3,0,0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="157" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <TextBlock Height="27.5" Margin="8,0,0,0" TextWrapping="Wrap" Text="System Details" VerticalAlignment="Top" Background="#FFBB3131" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" Padding="5,0,0,0" HorizontalAlignment="Left" Width="150" />
+                    <c:Chart Name="mcChart" FrameworkElement.Margin="8,5,5,5" Control.BorderBrush="#FFBA3131" Control.Background="#FFEDEDED">
+                        <c:PieSeries Title="Memory Usage" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" />
+                    </c:Chart>
+                    <c:Chart Name="mcChart1" FrameworkElement.Margin="8,5,5,5" Control.BorderBrush="#FFBB3131" Control.Background="#FFEDEDED">
+                        <c:PieSeries Title="PhotoSW Memory Status " IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" />
+                    </c:Chart>
+                    <TextBlock Height="27.5" Margin="8,10,0,5" TextWrapping="Wrap" Text="Memory Details" VerticalAlignment="Top" Background="#FFBB3131" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" Padding="5,0,0,0" HorizontalAlignment="Left" Width="150" />
+                    <Border Margin="8,5,8,5" BorderBrush="#FFB73131" BorderThickness="1" Background="#FFEDEDED">
+                        <StackPanel Margin="5">
+                            <TextBlock Name="TotalMemory" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="CPUUsage" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="AvailableMemory" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="Digi" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="DigiVersion" TextBlock.FontWeight="Bold" Text="Version:" TextBlock.Foreground="#FF000000"  />
+                                <TextBlock Name="DigiDate" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" Margin="3,0,0,0" />
+                                <Border Width="42" BorderThickness="0,0,0,1" BorderBrush="#FF0061FF" Margin="5,0,0,0">
+                                    <Button Name="btnexplore" Content="Explore" Style="{DynamicResource ButtonStyleAlpha}" Height="15.96" Foreground="#FF0061FF" Click="btnexplore_Click" />
+                                </Border>
+                            </StackPanel>
+                            <TextBlock Name="Processor" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="SystemType" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="MachineName" TextBlock.FontWeight="Bold" Margin="0,5,0,0" TextBlock.Foreground="#FF000000" />
+                            <TextBlock Name="OS" TextBlock.FontWeight="Bold" Margin="0,5" TextBlock.Foreground="#FF000000" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <ListBox Name="lstServices" Height="553" Margin="8,25,8,3" ItemTemplate="{DynamicResource SofthealthDataTemplate}" ItemContainerStyle="{DynamicResource ListBoxItemStylehealth}" ItemsPanel="{DynamicResource ItemsPanelTemplatehealth}" Grid.Column="1" Background="{x:Null}" />
+            </Grid>
+        </Grid>
+        <Button Name="btnback" Content="Back" Grid.Row="2" Height="61" HorizontalAlignment="Right" Margin="0,5,26,5" VerticalAlignment="Bottom" Width="172" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="18.667" />
+        <Grid Name="GrdPopup" Margin="0" Grid.RowSpan="4" Visibility="Collapsed">
+            <Grid Margin="0">
+                <Border Background="#99000000" Visibility="{Binding Visibility}">
+                    <Border HorizontalAlignment="Center" Margin="0,0,8,0" VerticalAlignment="Center" Width="500" Background="#FFFFFFFF" CornerRadius="5" BorderThickness="2" BorderBrush="#FF353535" MinHeight="250" MaxHeight="400">
+                        <Grid Margin="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".5*" />
+                                    <ColumnDefinition Width=".5*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Image Width="40" Height="40" Source="/PhotoSW;component/images/versionicon.png" Margin="0,0,10,0" />
+                                    <TextBlock TextBlock.FontSize="18" TextBlock.FontFamily="Verdana" TextBlock.Foreground="#FFFF0000" Text="Version Summary" VerticalAlignment="Center" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10">
+                                    <Image Width="40" Height="40" Source="/PhotoSW;component/images/dateicon.png" Margin="0,0,10,0" />
+                                    <TextBlock TextBlock.FontSize="18" TextBlock.FontFamily="Verdana" TextBlock.Foreground="#FFFF0000" Text="Date/Time" VerticalAlignment="Center" />
+                                </StackPanel>
+                                <ListBox Name="versionlist" Grid.Row="1" FontSize="16" FontFamily="Verdana" />
+                                <ListBox  Name="Datetimelist" Grid.Row="1" Grid.Column="1" FontFamily="Verdana" FontSize="16" />
+                            </Grid>
+                            <Button  Name="btncloseversion" Content="Close" HorizontalAlignment="Right" Height="51" Margin="0,-30.5,-25,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource ButtonStyleCancel}" Click="btncloseversion_Click"  />
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

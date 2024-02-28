@@ -1,0 +1,42 @@
+﻿<Window x:Class="PhotoSW.Views.ViewOrderSection" 
+        Title="View/Order Station" WindowState="Maximized" WindowStyle="None" 
+        Background="#00FFFFFF" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Viewbox Name="vb1" MinWidth="500" MinHeight="500">
+                <StackPanel Name="bg_withlogo" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                    <Image  Name="bg" Source="images\bg_new.png" />
+                </StackPanel>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Height="17">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+            </StackPanel.Background>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+            <TextBlock>Logged in as:</TextBlock>
+            <TextBlock Margin="10 0 0 0">John Doe</TextBlock>
+            <TextBlock Margin="10 0 0 0">|</TextBlock>
+            <TextBlock Margin="10 0 0 0">Store A</TextBlock>
+            <Button Content="Logout" Margin="10 0 0 0" Padding="20 0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Width="169" Height="200">
+                <Grid.Background>
+                    <ImageBrush ImageSource="images/grey_frame.png" />
+                </Grid.Background>
+                <Image Source="images/PlaceOrder_icon.png" Width="105" />
+                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 30" TextBlock.FontWeight="Bold">Photo ID, Barcode, RFID</TextBlock>
+            </Grid>
+            <Grid Width="169" Height="200" Margin="30 0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="images/grey_frame.png" />
+                </Grid.Background>
+                <Image Source="images/PlaceOrder_icon.png" Width="105" />
+                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 30" TextBlock.FontWeight="Bold">Face Recognition</TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

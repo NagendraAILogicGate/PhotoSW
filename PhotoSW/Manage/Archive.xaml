@@ -1,0 +1,74 @@
+﻿<Window x:Class="PhotoSW.Manage.Archive" 
+        Title="Archive" Height="717" Width="914.7" 
+        WindowStyle="None" WindowState="Maximized" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="134" />
+            <RowDefinition Height="73" />
+            <RowDefinition Height="79.764" />
+            <RowDefinition />
+            <RowDefinition Height="62" />
+            <RowDefinition Height="19" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="bgContainer" Grid.RowSpan="6" Margin="0,0,-105,-315.754">
+            <Viewbox  Name="vb2" MinWidth="500" MinHeight="500">
+                <StackPanel  Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                    <Image  Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                </StackPanel>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel  Name="FooterredLine" Margin="0,2,0,0" Grid.Row="5">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+            </StackPanel.Background>
+        </StackPanel>
+        <Button  Name="btnback" Content="Back" Grid.Row="4" Height="61" HorizontalAlignment="Right" Margin="0,0,8,3" VerticalAlignment="Bottom" Width="148" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="18.667" />
+        <Grid Margin="0,0,0,-19.665" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Image Source="/PhotoSW;component/images/PageName.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="102" />
+            <TextBlock Margin="0,29.916,0,0" TextWrapping="Wrap" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Center" TextBlock.FontSize="18.667" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Run Language="en-in" Text="Archive" />
+            </TextBlock>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,6,0">
+            <TextBlock TextBlock.FontWeight="Bold">
+        <Run Text="Logged in as:" />
+            </TextBlock>
+            <Button  Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock  Name="txbUserName" />
+            </Button>
+            <TextBlock Margin="10 0 0 0">
+        <Run Text="|" />
+            </TextBlock>
+            <TextBlock  Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+        <Run Text="Store A" />
+            </TextBlock>
+            <Button  Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock Text="Logout" />
+            </Button>
+        </StackPanel>
+        <Grid Margin="8,2.5,0,0" Grid.Row="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="67.46" />
+                <RowDefinition Height="80.804" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="202.189" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" MinWidth="165.193" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="0,0,8,0" TextWrapping="Wrap" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFBA3030" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <Run Language="en-in" Text="Select Folder :" />
+            </TextBlock>
+            <TextBox Name="txtSelectedfolder" Margin="0" TextWrapping="Wrap" Grid.Column="1" Style="{DynamicResource DigiTextBoxStyle}" />
+            <Button Name="btnSelectdFolder" Content="Browse" Margin="8,0,0,3.23" VerticalAlignment="Bottom" Height="61" Style="{DynamicResource ButtonStylesubmit}" FontWeight="Bold" FontSize="18.667" Foreground="#FFFFFFFF" Grid.Column="2" HorizontalAlignment="Left" Width="157.193" />
+            <Button Name="btnArchive" Content="Archive" Width="150" Grid.Row="1" Margin="-13,0,425.058,4.264" VerticalAlignment="Bottom" Height="68.54" Style="{DynamicResource ButtonStylesubmit}" FontWeight="Bold" FontSize="18.667" Foreground="#FFFFFFFF" Grid.Column="1" />
+        </Grid>
+        <ProgressBar  Name="ArchiveProgress" Margin="30,115,30,102.862" Grid.Row="3" />
+        <TextBlock  Name="txtstatus" Grid.Row="3" TextBlock.FontSize="24" TextWrapping="Wrap" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFBA3030" Margin="30,14.862,30,0" Height="62" VerticalAlignment="Top" />
+        <TextBlock  Name="txtfilescopied" Grid.Row="3" TextWrapping="Wrap" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFBA3030" Margin="30,190.862,30,0" Height="65" VerticalAlignment="Top" />
+    </Grid>
+</Window>

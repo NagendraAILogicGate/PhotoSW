@@ -1,0 +1,149 @@
+﻿<Window x:Class="PhotoSW.Views.Burningimage" 
+        Title="Burningimage" Height="200" Width="300" 
+        Loaded="Window_Loaded" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:bi="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended"
+        xmlns:dc="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper">
+    <Window.Resources>
+        <Style x:Key="SearchIDTB" TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
+            <Setter Property="Control.Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Control.Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="Control.BorderBrush" Value="{StaticResource TextBoxBorder}" />
+            <Setter Property="Control.BorderThickness" Value="1" />
+            <Setter Property="Control.Padding" Value="1" />
+            <Setter Property="UIElement.AllowDrop" Value="True" />
+            <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyleGraphic" TargetType="{x:Type Button}">
+            <Setter Property="Control.BorderThickness" Value="1" />
+            <Setter Property="Control.Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.Padding" Value="1" />
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="Chrome" SnapsToDevicePixels="True" BorderBrush="#00FF0000" BorderThickness="5">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused" />
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="Chrome">
+                                                <EasingColorKeyFrame KeyTime="0" Value="Red" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <bi:BusyIndicator IsBusy="True" />
+        </Grid>
+        <Grid Name="IMGFrame" Margin="0">
+            <Grid Name="img" Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" MinHeight="145" />
+                    <RowDefinition Height="2" />
+                </Grid.RowDefinitions>
+                <Grid Name="CanBgParent" Margin="0" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Opacity="0">
+                        <Grid Name="GrdSize" SnapsToDevicePixels="True">
+                            <Image Name="widthimg" Stretch="Uniform" ClipToBounds="True" Margin="0" SnapsToDevicePixels="True" />
+                        </Grid>
+                    </ScrollViewer>
+                    <Grid Name="grdZoomCanvas" Visibility="Visible">
+                        <Grid Name="forWdht" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
+                            <Grid Name="canbackground" ClipToBounds="True">
+                                <dc:DragCanvas Name="dragCanvas" ClipToBounds="True" SnapsToDevicePixels="True">
+                                    <Grid Name="GrdBrightness" Margin="0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                        <Grid Name="GrdHueShift">
+                                            <Grid Name="GrdGreyScale">
+                                                <Grid Name="GrdInvert">
+                                                    <Grid Name="GrdSharpen">
+                                                        <Grid Name="GrdSketchGranite">
+                                                            <Grid Name="GrdEmboss">
+                                                                <Grid Name="Grdcolorfilter">
+                                                                    <Grid Name="GrdSepia">
+                                                                        <Grid Name="GrdUnderWater">
+                                                                            <Grid Name="Grdcartoonize">
+                                                                                <Grid Name="GrdRedEyeFirst">
+                                                                                    <Grid Name="GrdRedEyeSecond">
+                                                                                        <Grid Name="GrdRedEyeMultiple">
+                                                                                            <Grid Name="GrdRedEyeMultiple1">
+                                                                                                <Grid Name="GrdGreenScreenDefault3" ClipToBounds="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                                                                    <InkCanvas Name="MyInkCanvas" HorizontalAlignment="Center" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Background="#00FFFFFF" VerticalAlignment="Center" ClipToBounds="True" Margin="0,0,0,0">
+                                                                                                        <InkCanvas.DefaultDrawingAttributes>
+                                                                                                            <DrawingAttributes StylusTipTransform="Identity" x:Name="attribute" Width="10" Height="10" Color="#00FF00" FitToCurve="True" />
+                                                                                                        </InkCanvas.DefaultDrawingAttributes>
+                                                                                                        <Image Name="mainImage" UseLayoutRounding="False" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="False" RenderOptions.EdgeMode="Aliased" ClipToBounds="True" Margin="0" />
+                                                                                                        <TextBlock Name="TbNumber" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,35,0,0">
+                                                                                                            <TextBlock.RenderTransform>
+                                                                                                                <TransformGroup>
+                                                                                                                    <ScaleTransform />
+                                                                                                                    <SkewTransform />
+                                                                                                                    <RotateTransform Angle="90" />
+                                                                                                                    <TranslateTransform />
+                                                                                                                </TransformGroup>
+                                                                                                            </TextBlock.RenderTransform>
+                                                                                                        </TextBlock>
+                                                                                                    </InkCanvas>
+                                                                                                </Grid>
+                                                                                            </Grid>
+                                                                                        </Grid>
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Name="frm" />
+                                </dc:DragCanvas>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Canvas Name="tempcanvas" Visibility="Hidden">
+                        <Canvas.Background>
+                            <ImageBrush />
+                        </Canvas.Background>
+                    </Canvas>
+                </Grid>
+                <StackPanel Grid.RowSpan="3" />
+            </Grid>
+            <StackPanel Margin="0,0,0,-15" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <TextBlock Name="txtMainImage" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" Height="25" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

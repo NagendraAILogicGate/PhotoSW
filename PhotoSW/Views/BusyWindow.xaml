@@ -1,0 +1,12 @@
+﻿<Window x:Class="PhotoSW.Views.BusyWindow" Title="BusyWindow" 
+        Height="200" Width="300" WindowStyle="None" 
+        WindowState="Maximized" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" Background="#50000000" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:bi="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended">
+    <Grid>
+        <bi:BusyIndicator IsBusy="True" />
+        <Image Source="images/processing.gif" Width="200" Height="150" Visibility="Collapsed" />
+    </Grid>
+</Window>

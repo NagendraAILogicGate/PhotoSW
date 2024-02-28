@@ -1,0 +1,229 @@
+﻿<Window x:Class="PhotoSW.Manage.Reports.ActivityReport" 
+        Title="ActivityReport" WindowState="Maximized" WindowStyle="None" 
+        Height="auto" Width="auto" 
+        Background="#696969"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+       
+        xmlns:dtp="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended" 
+        xmlns:sm="clr-namespace:PhotoSW.PSControls"
+        xmlns:crv="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+        >
+    <!--xmlns:crv="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"-->
+    <Grid Margin="0">
+        <Grid Name="emailPopUp" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="177" />
+                <RowDefinition />
+                <RowDefinition Height="62" />
+                <RowDefinition Height="19" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Grid.RowSpan="4" Margin="0,0,-105,-315.754">
+                <Viewbox Name="vb2" MinWidth="300" MinHeight="300">
+                    <!--<StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>-->
+                </Viewbox>
+            </StackPanel>
+            <DataGrid Name="DGActivityLog" Margin="25,85,25,8" RowHeight="50" Visibility="Collapsed" Grid.Row="1" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="18.667" Foreground="#FF434343" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Header="Activity Name" Binding="{Binding DG_Actions_Name}" />
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Header="Date/Time" Binding="{Binding DG_Acitivity_Date}" />
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Header="User" Binding="{Binding Name}" />
+                    <DataGridTemplateColumn Header="Description" Width="*" CanUserSort="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding DG_Acitivity_Descrption}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <crv:CrystalReportsViewer Name="ActivityReportviewer" FrameworkElement.Margin="25,125.5,25,8" Grid.Row="1" FrameworkElement.Width="auto" FrameworkElement.Height="auto" />
+            <DataGrid Name="gridReport" HorizontalAlignment="Stretch" AlternatingRowBackground="#FFD3D3D3" GridLinesVisibility="None" VerticalAlignment="Top" Grid.Row="1" Margin="25,125.5,25,8" Width="auto" CanUserSortColumns="False" Visibility="Collapsed" Height="auto" ColumnWidth="auto" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Control.FontWeight" Value="Bold" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+            <StackPanel Grid.Row=" 2" Orientation="Horizontal" Margin="5">
+                <Button Name="btnExport" Content="Export To Excel" VerticalAlignment="Bottom" Margin="5" HorizontalAlignment="Left" Width="140" Height="40" Style="{DynamicResource ButtonStyleBgGreensubmit}" FontWeight="Bold" FontSize="16" Foreground="#FFFFFFFF" Click="btnExport_Click" />
+                <Button Name="btnExporttopdf" Content="Export To Pdf" HorizontalAlignment="Left" Margin="5" Width="140" VerticalAlignment="Bottom" Height="40" Style="{DynamicResource ButtonStyleBgGreensubmit}" FontWeight="Bold" FontSize="16" Foreground="#FFFFFFFF" Click="btnExporttopdf_Click" />
+                <Button Name="btnExportToCSV" Content="Export To CSV" HorizontalAlignment="Left" Margin="5" Visibility="Collapsed" Width="140" VerticalAlignment="Bottom" Height="40" Style="{DynamicResource ButtonStylesubmit}" FontWeight="Bold" FontSize="16" Foreground="#FFFFFFFF" Click="btnExportToCSV_Click" />
+                <Button Name="btnMail" Content="E-Mail" HorizontalAlignment="Left" Width="140" Margin="5" VerticalAlignment="Bottom" Height="40" Style="{DynamicResource ButtonStyleBgGreensubmit}" FontWeight="Bold" FontSize="16" Foreground="#FFFFFFFF" Click="btnMail_Click" />
+            </StackPanel>
+            <!--<StackPanel Name="FooterredLine" Margin="0,2,0,0" Grid.Row="3">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>-->
+            <Button Name="btnback" Content="Back" Grid.Row="2" Height="40" HorizontalAlignment="Right" Margin="0,0,8,0" VerticalAlignment="Bottom" Width="100" Style="{DynamicResource ButtonStyleBgRed}" Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="18.667" Click="btnback_Click" />
+            <Grid Margin="0,0,0,22" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <!--<Image Source="/PhotoSW;component/images/PageName.png" VerticalAlignment="Top" Height="102" />-->
+                <TextBlock Margin="0,29.916,0,0" TextWrapping="Wrap" Text="Reports" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Center" TextBlock.FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <TextBlock.Effect>
+                    <DropShadowEffect Direction="330" Color="Red" Opacity="1.5" BlurRadius="5" ShadowDepth="2"/>
+                </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,6,0">
+                <TextBlock TextBlock.FontWeight="Bold">
+          <Run Text="Logged in as:" />
+                </TextBlock>
+                <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                    <TextBlock Name="txbUserName" />
+                </Button>
+                <TextBlock Margin="10 0 0 0">
+          <Run Text="|" />
+                </TextBlock>
+                <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+          <Run Text="Store A" />
+                </TextBlock>
+                <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0" Click="btnLogout_Click">
+                    <TextBlock Text="Logout" />
+                </Button>
+            </StackPanel>-->
+
+            <StackPanel HorizontalAlignment="Right" Margin="0,20,10,0" Orientation="Vertical" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Logged in as:" />
+                    </TextBlock>
+                    <Button Name="btnUserName" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}" >
+                        <TextBlock Name="txbUserName"   Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16"/>
+                    </Button>
+                    <TextBlock Margin="10 0 0 0" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="|" />
+                    </TextBlock>
+                    <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0"  Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Store A" />
+                    </TextBlock>
+                    <Button Name="btnLogout" Margin="10 0 0 0"  Padding="20 0" Style="{StaticResource HyperlinkLikeButton}"  Click="btnLogout_Click">
+                        <TextBlock Text="Logout" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16" >
+                            <TextBlock.Effect>
+                                <DropShadowEffect Direction="330" Color="Red" Opacity="1.5" BlurRadius="2" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            
+            <Grid Height="171.5" Margin="8,-50,0,0" VerticalAlignment="Top" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="61.5" />
+                </Grid.RowDefinitions>
+                <Grid Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.343*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.369*" />
+                        <ColumnDefinition Width="Auto" MinWidth="34" />
+                        <ColumnDefinition Width="0.288*" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Name="cmbReportType" DisplayMemberPath="Key" SelectedValuePath="Value" Margin="5,0,2.5,0" FontSize="16" FontWeight="Bold" Style="{DynamicResource ComboBoxFlatStyle}" SelectionChanged="cmbReportType_SelectionChanged" />
+                    <TextBlock Margin="50,8,4.994,8" TextWrapping="Wrap" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Run Language="en-in" Text="From" />
+            <Run Text=" :" />
+                    </TextBlock>
+                    <dtp:DateTimePicker Name="dtFrom" FontSize="16" BorderThickness="1" Width="350" Margin="8,0" Foreground="#FFFF" FontWeight="Bold" Grid.Column="2" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <!--<GradientStop Color="#FFF3F3F3" Offset="0" />-->
+                                <!--<GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />-->
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <dtp:DateTimePicker Name="dtTo" FontSize="16" BorderThickness="1" Margin="8,0.17,8,-0.17"  Foreground="#FFFF"  FontWeight="Bold" Grid.Column="4" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <!--<GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />-->
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <TextBlock Margin="-0.137,8,1.577,8" TextWrapping="Wrap" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" Grid.Column="3" VerticalAlignment="Center">
+            <Run Language="en-in" Text="To :" />
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="0,8,0,-3" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.343*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.369*" />
+                        <ColumnDefinition Width="Auto" MinWidth="34" />
+                        <ColumnDefinition Width="0.288*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="from1" Margin="50,8,4.994,8" TextWrapping="Wrap" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Visibility="Collapsed" TextBlock.Foreground="#FFFF" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Run Language="en-in" Text="From" />
+            <Run Text=" :" />
+                    </TextBlock>
+                    <dtp:DateTimePicker Name="dtFrom1" Visibility="Collapsed" Width="350" FontSize="16"  Foreground="#FFFF" FontWeight="Bold" AllowSpin="True" Grid.Column="2" Margin="8,0" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <!--<GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />-->
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <dtp:DateTimePicker Name="dtTo1" Visibility="Collapsed" FontSize="16"  Foreground="#FFFF" AllowSpin="True" FontWeight="Bold" Grid.Column="4" Margin="8,0" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <!--<GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />-->
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <TextBlock Name="to1" Margin="-0.137,8,1.577,8" TextWrapping="Wrap" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Visibility="Collapsed" TextBlock.Foreground="#FFFF" Grid.Column="3" VerticalAlignment="Center">
+            <Run Language="en-in" Text="To :" />
+                    </TextBlock>
+                    <Viewbox HorizontalAlignment="Right" Margin="0,0,5,0" Stretch="Fill" Width="30" Height="30">
+                        <CheckBox Name="chkChecked" Visibility="Collapsed" FontWeight="Bold" Checked="chkChecked_Checked" />
+                    </Viewbox>
+                </Grid>
+                <StackPanel Margin="0,7.468,0,0" Orientation="Horizontal" Grid.Row="2">
+                    <TextBlock Name="txtuser" Margin="0,13,5,13" TextWrapping="Wrap" Text="User :" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" Padding="5,0,2,0" VerticalAlignment="Center" />
+                    <ComboBox Name="cmbPhotographer" DisplayMemberPath="Key" SelectedValuePath="Value" Margin="0,5,5,5" FontSize="18.667" Width="300" Style="{DynamicResource ComboBoxFlatStyle}" />
+                    <TextBlock Name="txtlocation" Margin="0,13" TextWrapping="Wrap" Visibility="Collapsed" Text="Location :" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFBA3030" Padding="5,0,2,0" VerticalAlignment="Center" />
+                    <ComboBox Name="cmbLocation" DisplayMemberPath="Key" SelectedValuePath="Value" Visibility="Collapsed" Margin="0,5" FontSize="18.667" Width="300" Style="{DynamicResource ComboBoxFlatStyle}" />
+                    <Button Name="btnSearch" Content="Search" Width="100" VerticalAlignment="Bottom" Height="40" Style="{DynamicResource ButtonStyleBgGreensubmit}" FontWeight="Bold" FontSize="16" Foreground="#FFFFFFFF" Click="btnSearch_Click" />
+                    <StackPanel Name="stkRPTFormat" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,5">
+                        <RadioButton Name="rdbtnExcel" FontWeight="Bold" FontSize="15" GroupName="searchcriteria1" Foreground="#FFFF" TabIndex="0" Content="Excel" IsChecked="True" Margin="10 0 0, 0" />
+                        <RadioButton Name="rdbtnPDF" FontWeight="Bold" FontSize="15" GroupName="searchcriteria1" Foreground="#FFFF" TabIndex="1" Content="PDF" Margin="10 0 0 0" />
+                        <RadioButton Name="rdbtnCSV" FontWeight="Bold" FontSize="15" GroupName="searchcriteria1" Foreground="#FFFF" TabIndex="1" Content="CSV" Margin="10 0 0 0" />
+                    </StackPanel>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="700" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,5,5,5" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock Name="txtsubstore" TextWrapping="Wrap" Visibility="Collapsed" Text="Site :" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <ComboBox Name="cmbsubstore" DisplayMemberPath="Value" SelectedValuePath="Value" Visibility="Collapsed" FontSize="18.667" Width="250" Margin="0,0,5,0" 
+Style="{DynamicResource ComboBoxFlatStyle}"  />
+                    </StackPanel>
+                    <StackPanel Margin="50,5,5,5" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                        <TextBlock Name="txtPackages" Margin="0,13" TextWrapping="Wrap" Visibility="Collapsed" Text="Packages : " TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFF" Padding="5,0,2,0" VerticalAlignment="Center" />
+                        <ComboBox Name="cmbPackages" DisplayMemberPath="Key" SelectedValuePath="Value" Visibility="Collapsed" Margin="0,0,5,0" FontSize="18.667" Width="260" Style="{DynamicResource ComboBoxFlatStyle}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <sm:SaveMail x:Name="MailPopUp" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" Margin="5,5,5,5" />
+    </Grid>
+</Window>

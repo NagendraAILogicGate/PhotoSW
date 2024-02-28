@@ -1,0 +1,21 @@
+﻿<Window x:Class="PhotoSW.Views.SplashScreen" Title="PhotoSW"
+        Height="500" Width="800" WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" Background="Black" BorderBrush="#FFFF0000"
+        BorderThickness="0" ShowInTaskbar="True" ResizeMode="NoResize" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Viewbox Name="vb1" Stretch="Fill" MinWidth="500" MinHeight="500">
+            <StackPanel Name="bg_withlogo" ClipToBounds="True"  UseLayoutRounding="False">
+                <Image Name="bg" Source="/PhotoSW;component/images/splash_screen.png" />
+            </StackPanel>
+        </Viewbox>
+        <!--<Label Name="label1" Margin="19,22,17,80" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF5FFFA">
+            <Label.BitmapEffect>
+                <OuterGlowBitmapEffect GlowSize="15" />
+            </Label.BitmapEffect> PhotoSW
+        </Label>-->
+        <!--<Label  Name="label2" Height="28" Margin="19,0,17,15" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" 
+                Content="{Binding Source={x:Static local:MessageListener.Instance}, Path=Message}" />-->
+    </Grid>
+</Window>

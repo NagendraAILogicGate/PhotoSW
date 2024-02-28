@@ -1,0 +1,344 @@
+﻿<Window x:Class="PhotoSW.Manage.SyncStatus" 
+        Title="Sync Status" WindowState="Maximized" 
+        WindowStyle="None" Height="730" Width="900" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:dtp="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended" 
+        xmlns:s="clr-namespace:PhotoSW.PSControls">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="19" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Margin="0,0,-272,-452" Grid.RowSpan="2">
+                <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                    <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel Name="FooterredLine" Margin="0" Grid.Row="1">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+                <TextBlock TextBlock.FontWeight="Bold">
+          <Run Text="Logged in as:" />
+                </TextBlock>
+                <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                    <TextBlock Name="txbUserName" />
+                </Button>
+                <TextBlock Margin="10 0 0 0">
+          <Run Text="|" />
+                </TextBlock>
+                <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+          <Run Text="Store A" />
+                </TextBlock>
+                <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0" Click="btnLogout_Click">
+                    <TextBlock Text="Logout" />
+                </Button>
+            </StackPanel>
+            <Grid Name="PageName" Margin="0,57,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image Source="/PhotoSW;component/images/PageName.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="161.268" Margin="0,0,0,-18.694" />
+                <TextBlock Margin="0,0,0,76.219" TextWrapping="Wrap" Text="Sync Status" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Center" TextBlock.FontSize="18.667" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            </Grid>
+            <Grid Name="Grid" Margin="5,180,5,5">
+                <Border Name="myBorder" BorderBrush="#FFFF0000" BorderThickness="0" Margin="5">
+                    <TabControl>
+                        <TabItem Header="Online Orders" Height="50" Foreground="#FF000000" FontSize="15" Style="{DynamicResource DigiTabItemStyle}" FontWeight="Bold">
+                            <Grid Name="grdOnlineOrd" FlowDirection="LeftToRight" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.50*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" MinHeight="24" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.ColumnSpan="6" Grid.Row="1" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="0,17" Grid.Column="0" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Run Text="Select ALL :" />
+                                    </TextBlock>
+                                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="15,8,0,2" Stretch="Fill" Width="40" VerticalAlignment="Center">
+                                        <CheckBox Name="chkALLOnline" Height="17" Width="13" Checked="chkALLOnline_Checked" Unchecked="chkALLOnline_Unchecked" />
+                                    </Viewbox>
+                                    <Button Name="btnReSyncOnline" Content="Resync Order" Grid.Column="2" Width="135" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="57" HorizontalAlignment="Left" Margin="0,0,0,-3" Click="btnReSyncOnline_Click" />
+                                    <Button Name="btnReSyncImages" Content="Resync Images" Grid.Column="2" Width="140" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="57" HorizontalAlignment="Right" Margin="0,0,200,-3" Click="btnReSyncImages_Click" />
+                                    <Button Name="btnstatistics" Content="Statistics" Grid.Column="2" Width="140" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="57" HorizontalAlignment="Right" Margin="0,0,0,-3" Click="statistics_Click" />
+                                </Grid>
+                                <DataGrid Name="DGManageSyncStatus" Grid.Row="2" Grid.RowSpan="4" Margin="8,20,8,8" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="13" Foreground="#FF434343" Grid.ColumnSpan="6" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionChanged="DGManageSyncStatus_SelectionChanged">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.12*" IsReadOnly="True" Header="Order No" Binding="{Binding SyncOrderNumber}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.14*" IsReadOnly="True" Header="Asso. Code" Binding="{Binding QRCode}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.15*" IsReadOnly="True" Header="Order Date" Binding="{Binding SyncOrderdate}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.18*" IsReadOnly="True" Header="ImageID" Binding="{Binding PhotoRfid}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.19*" IsReadOnly="True" Header="Order status" Binding="{Binding Syncstatus}">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style>
+                                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.15*" IsReadOnly="True" Header="Sync Date" Binding="{Binding Syncdate}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="0.14*" IsReadOnly="True" Header="Synced/Total" Binding="{Binding ImageSynced}" />
+                                        <DataGridTemplateColumn Header="Actions">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Viewbox>
+                                                            <CheckBox Name="chkIsExists" IsChecked="{Binding IsAvailable, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Viewbox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Name="btnBack" Grid.Row="6" Grid.Column="5" FontWeight="Bold" FontSize="18.667" Content="Back" Margin="0,0,3.075,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Right" Width="127" />
+                                <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                                <Grid Grid.Column="5" Margin="0,0,5,0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button Name="btnSearch" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSearch_Click" />
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="5,100,0,0" />
+                                <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" />
+                                <dtp:DateTimePicker Name="dtFrom" FontSize="24" BorderThickness="1" Margin="8,0" FontWeight="Bold" Grid.Column="1" Style="{DynamicResource DigiDateTimePickerStyle}">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                                <dtp:DateTimePicker Name="dtTo" FontSize="24" BorderThickness="1" Margin="8,0.17,8,-0.17" FontWeight="Bold" Grid.Column="3" Style="{DynamicResource DigiDateTimePickerStyle}">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Normal Orders" Height="50" Foreground="#FF000000" FontSize="15" Style="{DynamicResource DigiTabItemStyle}" FontWeight="Bold">
+                            <Grid Name="grdNormalOrd" FlowDirection="LeftToRight" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.50*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" MinHeight="24" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.ColumnSpan="4" Grid.Row="1" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="0,17" Grid.Column="0" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Run Text="Select ALL :" />
+                                    </TextBlock>
+                                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="15,8,0,2" Stretch="Fill" Width="40" VerticalAlignment="Center">
+                                        <CheckBox Name="chkALLNormal" Height="17" Width="13" Checked="chkALLNormal_Checked" Unchecked="chkALLNormal_Unchecked" />
+                                    </Viewbox>
+                                    <Button Name="btnReSyncNormal" Content="Resync" Grid.Column="2" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" HorizontalAlignment="Left" Margin="0,0,0,-3" Click="btnReSyncNormal_Click" />
+                                </Grid>
+                                <DataGrid Name="DGManageSyncStatusNormalOrd" Grid.Row="2" Grid.RowSpan="3" Margin="8,20,8,8" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="14.667" Foreground="#FF434343" Grid.ColumnSpan="6" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Order No" Binding="{Binding SyncOrderNumber}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Order Date" Binding="{Binding SyncOrderdate}" />
+                                        <DataGridTextColumn Header="Photo RFID" FontWeight="Bold" Width="*" IsReadOnly="True" Binding="{Binding PhotoRfid}">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style>
+                                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Sync status" Binding="{Binding Syncstatus}">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style>
+                                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Sync Date" Binding="{Binding Syncdate}" />
+                                        <DataGridTemplateColumn Header="Actions">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Viewbox>
+                                                            <CheckBox Name="chkIsExists" IsChecked="{Binding IsAvailable, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Viewbox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Name="btnBackNormalOrd" Grid.Row="6" Grid.Column="5" FontWeight="Bold" FontSize="18.667" Content="Back" Margin="0,0,3.075,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Right" Width="127" Click="btnBackNormalOrd_Click" />
+                                <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                                <Grid Grid.Column="5" Margin="0,0,5,0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button Name="btnSearchNormal" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSearchNormal_Click" />
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="5,100,0,0" />
+                                <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" />
+                                <dtp:DateTimePicker Name="dtFromNormalOrd" FontSize="24" BorderThickness="1" Margin="8,0" FontWeight="Bold" Grid.Column="1" Style="{DynamicResource DigiDateTimePickerStyle}">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                                <dtp:DateTimePicker Name="dtToNormalOrd" FontSize="24" BorderThickness="1" Margin="8,0.17,8,-0.17" FontWeight="Bold" Grid.Column="3" Style="{DynamicResource DigiDateTimePickerStyle}">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Open/Close Procedure" Height="50" Foreground="#FF000000" FontSize="15" Style="{DynamicResource DigiTabItemStyle}" FontWeight="Bold">
+                            <Grid Name="grdOpenCloseProcedure" FlowDirection="LeftToRight" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.90*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.50*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" MinHeight="24" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.ColumnSpan="4" Grid.Row="1" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="0,17" Grid.Column="0" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Run Text="Select All :" />
+                                    </TextBlock>
+                                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="15,30,0,2" Stretch="Fill" Width="40" VerticalAlignment="Center">
+                                        <CheckBox Name="chkALLOpenCloseForm" Height="30" Width="13" Checked="chkALLOpenCloseForm_Checked" Unchecked="chkALLOpenCloseForm_Unchecked" />
+                                    </Viewbox>
+                                    <Button Name="btnReSyncOpenCloseForm" Content="Resync" Grid.Column="2" Width="135" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="57" HorizontalAlignment="Left" Margin="0,0,0,-3" Click="btnReSyncOpenCloseForm_Click" />
+                                    <Button Name="btnChkConnectivity" Content="Check Connectivity" Grid.Column="2" Width="180" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="97" HorizontalAlignment="right" Margin="0,0,200,-3" Click="btnChkConnectivity_Click" />
+                                </Grid>
+                                <DataGrid Name="DGManageSyncStatusOpenCloseForm" Grid.Row="2" Grid.RowSpan="3" Margin="8,20,8,8" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="14.667" Foreground="#FF434343" Grid.ColumnSpan="6" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Activity" Binding="{Binding Form}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Bussiness Date" Binding="{Binding SyncFormTransDate, StringFormat={}{0:dd-MMM-yyyy hh:mm:ss tt}}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="100*" Visibility="Collapsed" Header="ChangeTrackingId" Binding="{Binding ChangeTrackingId}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Sync Status" Binding="{Binding Syncstatus}" />
+                                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Sync Date" Binding="{Binding Syncdate, StringFormat={}{0:dd-MMM-yyyy hh:mm:ss tt}}" />
+                                        <DataGridTemplateColumn Header="Action">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Viewbox>
+                                                            <CheckBox Name="chkIsExists" IsChecked="{Binding IsAvailable, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Viewbox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Name="btnBackOpenCloseForm" Grid.Row="6" Grid.Column="5" FontWeight="Bold" FontSize="18.667" Content="Back" Margin="0,0,3.075,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Right" Width="127" Click="btnBackNormalOrd_Click" />
+                                <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                                <Grid Grid.Column="5" Margin="0,0,5,0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button Name="btnSearchOpenCloseForm" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSearchOpenCloseForm_Click" />
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="5,100,0,0" />
+                                <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Column="2" />
+                                <dtp:DateTimePicker Name="dtFromOpenCloseForm" FontSize="24" BorderThickness="1" Margin="8,0" FontWeight="Bold" Grid.Column="1" Style="{DynamicResource DigiDateTimePickerStyle}" Format="LongDate">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                                <dtp:DateTimePicker Name="dtToOpenCloseForm" FontSize="24" BorderThickness="1" Margin="8,0.17,8,-0.17" FontWeight="Bold" Grid.Column="3" Style="{DynamicResource DigiDateTimePickerStyle}" Format="LongDate">
+                                    <dtp:DateTimePicker.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                            <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dtp:DateTimePicker.Background>
+                                </dtp:DateTimePicker>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Border>
+            </Grid>
+        </Grid>
+        <s:Statistics x:Name="StatisticsControl" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" />
+    </Grid>
+</Window>

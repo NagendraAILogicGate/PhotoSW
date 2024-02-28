@@ -1,0 +1,441 @@
+﻿<Window x:Class="PhotoSW.Manage.RFIDMapping" 
+        Title="RFID Mapping" WindowState="Maximized" 
+        WindowStyle="None" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:dtp="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended">
+    <Window.Resources>
+        <Style x:Key="CheckBoxStyleimgDownloader" TargetType="{x:Type CheckBox}">
+            <Setter Property="Control.Background" Value="#FF448DCA" />
+            <Setter Property="Control.Foreground" Value="#FF000000" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Control.VerticalContentAlignment" Value="Top" />
+            <Setter Property="Control.Padding" Value="4,1,0,0" />
+            <Setter Property="Control.BorderThickness" Value="1" />
+            <Setter Property="Control.BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0" />
+                        <GradientStop Color="#FF8399A9" Offset="0.375" />
+                        <GradientStop Color="#FF718597" Offset="0.375" />
+                        <GradientStop Color="#FF617584" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0" />
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To=".55" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CheckIcon">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused" />
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="Valid" />
+                                    <VisualState x:Name="InvalidUnfocused" />
+                                    <VisualState x:Name="InvalidFocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Background="#00999919">
+                                <Path Name="CheckIcon" Stretch="Fill" Fill="#FFFF0000" Data="F1M966.002,669.046C968.721,666.325 1010.77,625.944 1010.77,625.944 1013.43,623.291 1012.63,620.605 1011.14,619.114L1001.18,609.161C999.691,607.664 997.003,606.875 994.354,609.518 994.354,609.518 968.921,634.957 966.191,637.679 963.472,634.957 953.863,625.336 953.863,625.336 951.209,622.681 948.524,623.482 947.036,624.968L937.075,634.929C935.583,636.424 934.787,639.102 937.442,641.76 937.442,641.76 947.054,651.372 949.775,654.096" HorizontalAlignment="Right" Height="26.666" Margin="0,-13.107,-17.326,0" VerticalAlignment="Top" Width="32" Opacity="0" StrokeThickness="0" />
+                            </Grid>
+                            <ContentPresenter Name="contentPresenter" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+                            <Rectangle Fill="#029C3131" Margin="1.5,0,0,0" StrokeThickness="0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85.116" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" MinHeight="24" />
+            <RowDefinition Height="21.694" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="bgContainer" Margin="0,0,-272,-452.132" Grid.RowSpan="4">
+            <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                    <Image Name="bg1" Source="/images/bg_new.png" />
+                </StackPanel>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Name="FooterredLine" Margin="0" Grid.Row="3" Height="17" VerticalAlignment="Bottom">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+            </StackPanel.Background>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+            <TextBlock TextBlock.FontWeight="Bold">
+        <Run Text="Logged in as:" />
+            </TextBlock>
+            <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock Name="txbUserName" />
+            </Button>
+            <TextBlock Margin="10 0 0 0">
+        <Run Text="|" />
+            </TextBlock>
+            <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0">
+        <Run Text="Store A" />
+            </TextBlock>
+            <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0" Click="btnLogout_Click">
+                <TextBlock Text="Logout" />
+            </Button>
+        </StackPanel>
+        <TabControl Margin="0,8,0,0" Grid.Row="1">
+            <TabItem Header="Dummy RFID" Height="50" FontSize="16" FontWeight="Bold" Foreground="#FFFF0000" Style="{DynamicResource DigiTabItemStyle}">
+                <Grid FlowDirection="LeftToRight" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="196.5" />
+                        <ColumnDefinition MinWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" MinHeight="24" />
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="DGDummyRFIDTags" Grid.Row="2" Margin="8,8,8,12" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="18.667" Foreground="#FF434343" Grid.ColumnSpan="2" Grid.RowSpan="2" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Tag ID" Binding="{Binding TagId}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="100" IsReadOnly="True" Header="IsActive" Binding="{Binding IsActive}" />
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Name="btnDeleteTag" Grid.Column="1" Width="Auto" VerticalAlignment="Top" Height="Auto" Style="{DynamicResource DigiGridDelButtonStyle}" Tag="{Binding DummyRFIDTagID}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Text="RFID Tag :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                    <TextBox Name="txtTag" Grid.Column="1" Margin="8" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" />
+                    <Grid Grid.Column="1" Margin="8,8,8,9.14" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="203.5" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Name="btnSaveTag" Content="Save" Width="127" Margin="0,0,10,0" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSaveTag_Click" />
+                        </StackPanel>
+                        <Viewbox Margin="0,-1.5,0,0">
+                            <CheckBox Name="chkIsTagActive" Content="Is Active" IsChecked="True" Height="18.21" Width="99.125" />
+                        </Viewbox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Separator RFID" Height="50" FontSize="16" FontWeight="Bold" Foreground="#FFFF0000" Style="{DynamicResource DigiTabItemStyle}">
+                <Grid FlowDirection="LeftToRight" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="31" />
+                        <ColumnDefinition Width="165" />
+                        <ColumnDefinition MinWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" MinHeight="24" />
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="DGSeperatorRFIDTags" Grid.Row="3" Margin="8,8,8,12" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="18.667" Foreground="#FF434343" Grid.ColumnSpan="3" Grid.RowSpan="2" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Tag ID" Binding="{Binding TagID}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Location" Binding="{Binding LocationName}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="100" IsReadOnly="True" Header="IsActive" Binding="{Binding IsActive}" />
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Name="btnDeleteSeperatorTag" Grid.Column="1" Width="Auto" VerticalAlignment="Top" Height="Auto" Style="{DynamicResource DigiGridDelButtonStyle}" Tag="{Binding SeparatorRFIDTagID}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="Separator RFID Tag :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.ColumnSpan="2" />
+                    <TextBox Name="txtSeperatortxtTag" Grid.Column="2" Margin="8" Style="{DynamicResource DigiTextBoxStyle}" FontSize="24" MaxLength="20" />
+                    <TextBlock Text="Location :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2" />
+                    <ComboBox Name="cmbLocation" Grid.Row="1" Grid.Column="2" Width="350" DisplayMemberPath="Key" SelectedValuePath="Value" Margin="8,8,0,0" Style="{DynamicResource DigiComboBoxStle}" Height="56" HorizontalAlignment="Left" />
+                    <Grid Grid.Column="2" Margin="8,8,8,9" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="203.5" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Name="btnSaveSeperatorTag" Content="Save" Width="127" Margin="0,0,10,0" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSaveSeperatorTag_Click" />
+                        </StackPanel>
+                        <Viewbox Margin="0,-1.5,0,0">
+                            <CheckBox Name="chkIsSeperatorTagActive" Content="Is Active" IsChecked="True" Height="18.21" Width="99.125" />
+                        </Viewbox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Associated Images" Height="50" FontSize="16" FontWeight="Bold" Foreground="#FFFF0000">
+                <Grid HorizontalAlignment="Stretch" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Photographer :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" />
+                    <ComboBox Name="cmbPhotographer" DisplayMemberPath="Value" SelectedValuePath="Key" Width="350" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Column="1" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="0" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" SelectionChanged="cmbPhotographer_SelectionChanged" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Device :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" Grid.Column="2" />
+                    <ComboBox Name="cmbDevice" DisplayMemberPath="Value" SelectedValuePath="Key" Width="350" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Column="3" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="0" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="1" />
+                    <dtp:DateTimePicker Name="dtFrom" FontSize="24" Grid.Row="1" Grid.Column="1" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="1" />
+                    <dtp:DateTimePicker Name="dtTo" FontSize="24" Grid.Row="1" Grid.Column="3" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <Grid Grid.Column="3" Margin="0,0,5,0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Name="btnSearch" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSearch_Click" />
+                    </Grid>
+                    <DataGrid Name="Dg_MappingStatus" Grid.Row="3" Margin="8" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="14.667" Foreground="#FF434343" Grid.ColumnSpan="4" AutoGenerateColumns="False" BorderBrush="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Device Name" Binding="{Binding DeviceName}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="RFID" Binding="{Binding RFID}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Photo Count" Binding="{Binding Count}" />
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Name="btnDetails" Grid.Column="0" Width="125" VerticalAlignment="Top" Height="50" Content="Details" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" CommandParameter="{Binding PhotoIds}" IsEnabled="{Binding IsShowDetailActive}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Non-Associated Images" FontSize="16" FontWeight="Bold" Foreground="#FFFF0000">
+                <Grid HorizontalAlignment="Stretch" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" MinHeight="24" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Photographer :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="1" />
+                    <ComboBox Name="cmbPhotographerNon" DisplayMemberPath="Value" SelectedValuePath="Key" Width="350" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Column="1" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="1" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" SelectionChanged="cmbPhotographerNon_SelectionChanged" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" />
+                    <dtp:DateTimePicker Name="FromDate" FontSize="24" Grid.Row="0" Grid.Column="1" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="0" />
+                    <dtp:DateTimePicker Name="ToDate" FontSize="24" Grid.Row="0" Grid.Column="3" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <Grid Grid.Column="3" Margin="0,0,5,0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Name="btnSearchNonAssociated" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" IsEnabled="False" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnSearchNonAssociated_Click" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Photographer RFID Association Report" Height="50" FontSize="16" FontWeight="Bold" Foreground="#FFFF0000">
+                <Grid HorizontalAlignment="Stretch" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="330" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="Photographer :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="1" />
+                    <ComboBox Name="cmbPhotographerRpt" DisplayMemberPath="Value" SelectedValuePath="Key" Width="350" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Column="1" Height="40" Style="{DynamicResource DigiComboBoxStle}" VerticalAlignment="Center" Grid.Row="1" ItemContainerStyle="{DynamicResource DigiFormComboBoxItemStyle}" />
+                    <TextBlock Margin="0" TextWrapping="Wrap" Text="From Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" />
+                    <dtp:DateTimePicker Name="dtFromRpt" FontSize="24" Grid.Row="0" Grid.Column="1" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <TextBlock TextWrapping="Wrap" Text="To Date :" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Column="2" Grid.Row="0" />
+                    <dtp:DateTimePicker Name="dtToRpt" FontSize="24" Grid.Row="0" Grid.Column="3" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="30,0,0,0" Height="40" Width="350" Style="{DynamicResource DigiDateTimePickerStyle}">
+                        <dtp:DateTimePicker.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                            </LinearGradientBrush>
+                        </dtp:DateTimePicker.Background>
+                    </dtp:DateTimePicker>
+                    <Grid Grid.Column="3" Margin="0,0,5,0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Name="btnSearchRpt" Content="Search" Width="127" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" Height="53" Click="btnReportearch_Click" />
+                    </Grid>
+                    <DataGrid Name="Dg_PhotographerReport" Grid.Row="3" Margin="8" RowHeight="50" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}" RowStyle="{DynamicResource DigiDataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" CellStyle="{DynamicResource DigiDataGridCellStyle}" Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="14.667" Foreground="#FF434343" Grid.ColumnSpan="4" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Photographer" Binding="{Binding PhotographerName}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Location" Binding="{Binding Location}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Total Captured" Binding="{Binding TotalCaptured}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Total Associated" Binding="{Binding TotalAssociated}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="1.1*" IsReadOnly="True" Header="Total NonAssociated" Binding="{Binding TotalNonAssociated}" />
+                            <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Last AssociatedOn" Binding="{Binding LastAssociatedOn, StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Name="btnBack" Grid.Row="2" FontWeight="Bold" FontSize="18.667" Content="Back" Margin="0,0,3.075,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Right" Width="127" Click="btnBack_Click" />
+        <Grid Name="GrdImageDetail" Margin="0" Grid.RowSpan="3" Visibility="Collapsed">
+            <Grid Margin="0">
+                <Border Background="#90000000">
+                    <Border BorderThickness="1" Margin="50" Background="#FFFFFFFF" CornerRadius="10">
+                        <Grid Margin="0,0,5,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="59" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="210" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Margin="0" Grid.ColumnSpan="2" CornerRadius="10,10,0,0" Background="#FFE5514F" />
+                                    <TextBlock TextBlock.Foreground="#FFFFFFFF" Grid.Column="0" HorizontalAlignment="Left" TextBlock.FontWeight="Bold" TextBlock.FontSize="21.333" Text="Images with Details" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                    <StackPanel Name="stkAssociation" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Visibility="Collapsed">
+                                        <TextBox Name="txtRFIDAssociate" Width="490" Margin="8" Style="{DynamicResource DigiTextBoxStyle}" FontSize="20" HorizontalAlignment="Left" MaxLength="50" />
+                                        <Button Name="btnAssociate" Grid.Row="2" FontWeight="Bold" FontSize="18.667" Content="Associate" Margin="0,0,3.075,0" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" HorizontalAlignment="Left" Width="127" Click="btnAssociate_Click" />
+                                    </StackPanel>
+                                </Grid>
+                                <Button Name="btnImageClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="97" Margin="0,-82.345,-60,0" Height="141.346">
+                                    <Image Source="../images/close-btn.png" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <ListBox Name="lstImages" ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0" Margin="15,48,15,20" HorizontalContentAlignment="Center" Template="{DynamicResource ListBoxControlTemplategeneral}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Height="Auto" MinWidth="77" Margin="3,15,3,3" MaxWidth="Infinity" Width="166">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="22" />
+                                                    <RowDefinition Height="100" />
+                                                    <RowDefinition Height="22" />
+                                                </Grid.RowDefinitions>
+                                                <Rectangle Fill="#FFFFFFFF" Grid.Row="0" Grid.RowSpan="3" Stroke="#FF000000" StrokeThickness="1" HorizontalAlignment="Stretch" />
+                                                <TextBlock Name="image_Date" Margin="5,0,0,0" Grid.Column="0" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="12" TextBlock.FontWeight="Normal" Width="Auto" Height="Auto" Grid.Row="0" TextBlock.TextAlignment="Center" TextBlock.Foreground="#FF000000" Text="{Binding DG_Photos_CreatedOn}" />
+                                                <Image Name="image" Margin="0" Stretch="Uniform" Grid.RowSpan="1" VerticalAlignment="Stretch" Grid.Row="1" Source="{Binding FileName}" />
+                                                <CheckBox Name="chkSelectedimages"  Content="CheckBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{DynamicResource CheckBoxStyleimgDownloader}" Width="Auto" Height="Auto" Grid.RowSpan="2" Margin="0,0,4,2" IsChecked="{Binding IsChecked}" IsEnabled="{Binding IsEnabled}" />
+                                                <TextBlock Name="image_RFID" Grid.Column="0" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="12" TextBlock.FontWeight="Normal" Width="Auto" Height="Auto" Grid.Row="2" TextBlock.TextAlignment="Center" TextBlock.Foreground="#FF000000" Text="{Binding PhotoRFID}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,979 @@
+﻿<!--<UserControl x:Class="PhotoSW.Manage.VideoEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">-->
+<UserControl 
+    x:Class="PhotoSW.Manage.VideoEditor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper"
+    >
+    <!--Window.Title="VideoEditor" 
+    Window.WindowState="Maximized" 
+     
+    Control.Background="#FF000000" 
+    Window.WindowStyle="None" 
+     Height="830" Width="1000"-->
+
+    <Grid>
+        <Grid Name="OuterBorder">
+            <Resources>
+                <ResourceDictionary>
+                    <Style Style.TargetType="{x:Type ListBoxItem}">
+                        <Setter Setter.Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate ControlTemplate.TargetType="{x:Type ListBoxItem}">
+                                    <Border Name="IconBorder" Background="#00FFFFFF" CornerRadius="8" BorderThickness="1" Margin="0,0">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="SelectionStates" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <VisualState x:Name="Unselected" />
+                                                <VisualState x:Name="Selected" />
+                                                <VisualState x:Name="SelectedUnfocused" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                            <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                                <Setter.Value>
+                                                    <OuterGlowBitmapEffect OuterGlowBitmapEffect.GlowColor="Blue" OuterGlowBitmapEffect.GlowSize="5" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Control.Background" Value="#FF448DCA" />
+                        <Setter Property="Control.Foreground" Value="#FF000000" />
+                        <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Control.VerticalContentAlignment" Value="Top" />
+                        <Setter Property="Control.Padding" Value="4,1,0,0" />
+                        <Setter Property="Control.BorderThickness" Value="1" />
+                        <Setter Property="Control.BorderBrush">
+                            <Setter.Value>
+                                <LinearGradientBrush LinearGradientBrush.EndPoint="0.5,1" LinearGradientBrush.StartPoint="0.5,0">
+                                    <GradientStop GradientStop.Color="#FFA3AEB9" GradientStop.Offset="0" />
+                                    <GradientStop GradientStop.Color="#FF8399A9" GradientStop.Offset="0.375" />
+                                    <GradientStop GradientStop.Color="#FF718597" GradientStop.Offset="0.375" />
+                                    <GradientStop GradientStop.Color="#FF617584" GradientStop.Offset="1" />
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type CheckBox}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="0" />
+                                        </Grid.ColumnDefinitions>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="MouseOver" />
+                                                <VisualState x:Name="Pressed" />
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Timeline.Duration="0" DoubleAnimation.To=".55" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="CheckStates" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <VisualState x:Name="Checked">
+                                                    <Storyboard>
+                                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CheckIcon">
+                                                            <EasingDoubleKeyFrame DoubleKeyFrame.KeyTime="0" DoubleKeyFrame.Value="1" />
+                                                        </DoubleAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Unchecked" />
+                                                <VisualState x:Name="Indeterminate" />
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="FocusStates" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <VisualState x:Name="Focused" />
+                                                <VisualState x:Name="Unfocused" />
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="ValidationStates" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <VisualState x:Name="Valid" />
+                                                <VisualState x:Name="InvalidUnfocused" />
+                                                <VisualState x:Name="InvalidFocused" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Panel.Background="#00999919">
+                                            <Path Name="CheckIcon" Shape.Stretch="Fill" Shape.Fill="#FFFF0000" 
+                                                  Data="F1M966.002,669.046C968.721,666.325 1010.77,625.944 1010.77,625.944 1013.43,623.291 1012.63,620.605 1011.14,619.114L1001.18,609.161C999.691,607.664 997.003,606.875 994.354,609.518 994.354,609.518 968.921,634.957 966.191,637.679 963.472,634.957 953.863,625.336 953.863,625.336 951.209,622.681 948.524,623.482 947.036,624.968L937.075,634.929C935.583,636.424 934.787,639.102 937.442,641.76 937.442,641.76 947.054,651.372 949.775,654.096" 
+                                                  HorizontalAlignment="Right" Height="20.666" Margin="0,-13.107,.326,0" VerticalAlignment="Bottom" Width="28" UIElement.Opacity="0" Shape.StrokeThickness="0" />
+                                        </Grid>
+                                        <ContentPresenter Name="contentPresenter" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+                                        <Rectangle Shape.Fill="#029C3131" Margin="1.5,0,0,0" Shape.StrokeThickness="0" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition RowDefinition.Height="19" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Margin="0,0,-272,-452" Grid.RowSpan="2" />
+            <StackPanel Name="FooterredLine" Margin="0" Grid.Row="1">
+                <Panel.Background>
+                    <ImageBrush ImageBrush.ImageSource="/PhotoSW;component/images/footer-bg.png" TileBrush.TileMode="Tile" TileBrush.ViewportUnits="Absolute" TileBrush.Viewport="0,0,42,42" />
+                </Panel.Background>
+            </StackPanel>
+            <StackPanel Width="Auto" Margin="5,5,5,5" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                <StackPanel Name="LeftPanel" Width="700" Panel.Background="#FF000000" Orientation="Vertical" Margin="0,10,20,-10">
+                    <Grid Name="grdMain" Width="Auto" Height="648" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition RowDefinition.Height="120" />
+                            <RowDefinition RowDefinition.Height="120" />
+                            <RowDefinition RowDefinition.Height="405" />
+                        </Grid.RowDefinitions>
+                        <ListBox Name="lstGuestImages" Control.Background="#FF000000" ItemsControl.ItemContainerStyle="{StaticResource RedGlowItemContainer}" VerticalAlignment="Center" Grid.Row="0" Height="Auto" ItemsControl.ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.VerticalScrollBarVisibility="Disabled" Control.Padding="0" Margin="50,0,20,10" Control.HorizontalContentAlignment="Center" Control.Template="{DynamicResource ListBoxControlTemplategeneral}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,1,0">
+                                        <StackPanel>
+                                            <Image Source="/PhotoSW;component/images/reel.png" HorizontalAlignment="Stretch" Width="86" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Border Border.BorderBrush="#FF000000" Border.Background="#FF000000" Border.BorderThickness="0" Grid.Column="0" Border.Padding="0" HorizontalAlignment="Center" Grid.RowSpan="1" VerticalAlignment="Stretch" Grid.Row="0">
+                                                <Grid Height="Auto" MinWidth="77" Panel.Background="#FF000000" MaxWidth="Infinity" Width="86" Margin="1,0,2,0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition RowDefinition.Height="50" />
+                                                        <RowDefinition RowDefinition.Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Rectangle Rectangle.Name="rect" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Shape.Stroke="#FF000000" Shape.StrokeThickness="0" />
+                                                    <Image Name="printType_icon" Height="50" Width="86" Margin="0" Stretch="Uniform" Grid.RowSpan="1" VerticalAlignment="Stretch" Grid.Row="0">
+                                                        <Source>
+                                                            <BitmapImage BitmapImage.UriSource="{Binding GuestImagePath}" />
+                                                        </Source>
+                                                    </Image>
+                                                    <Image Name="vidPlay" Source="/PhotoSW;component/images/play_trans.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" UIElement.Visibility="{Binding PlayVisible}" />
+                                                    <Image Source="/PhotoSW;component/images/reel.png" Width="86" Grid.Column="0" Grid.Row="1" />
+                                                    <CheckBox Name="ChkVideoTemplate" UIElement.IsEnabled="False" ToggleButton.IsChecked="True" Height="Auto" Margin="0,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleimgDownloader}" Grid.RowSpan="1" Grid.Row="0" UIElement.Visibility="{Binding isVideoTemplate}" UIElement.Uid="{Binding PageNo}" />
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                        <StackPanel VerticalAlignment="Top" StackPanel.Orientation="Horizontal" HorizontalAlignment="Center" Panel.Background="#00FFFFFF">
+                                            <Image Name="imgProcessed" Source="/PhotoSW;component/images/processed.png" Grid.Row="1" Width="17" Height="15" Margin="2,0,0,0" ToolTip="Processed Video" HorizontalAlignment="Left" VerticalAlignment="Top" UIElement.Visibility="{Binding ProcessedVisible}" />
+                                            <TextBlock Name="Name" TextBlock.Background="#00FFFFFF" Width="45" Margin="0,0,0,0" TextBlock.TextWrapping="Wrap" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Top" TextBlock.FontSize="11" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="{Binding Name}" />
+                                            <Button Name="btnImgPlay" Control.Background="#FFFFFFFF" Style="{StaticResource ButtonStyleAlpha}" Grid.Row="1" Width="17" Height="15" Margin="0,0,3,0" ToolTip="Click to preview" UIElement.Visibility="Visible" Tag="{Binding PhotoId}">
+                                                <Image Name="imgPlay" Source="/PhotoSW;component/images/preview_play.png" />
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                        <ListBox Name="lstDragImages" Control.Background="#FF000000" ItemsControl.ItemContainerStyle="{StaticResource RedGlowItemContainer}" VerticalAlignment="Center" Grid.Row="1" Height="Auto" ItemsControl.ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.VerticalScrollBarVisibility="Disabled" Control.Padding="0" Margin="50,0,20,10" Control.HorizontalContentAlignment="Center" Control.Template="{DynamicResource ListBoxControlTemplategeneral}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Name="lstDragImagesStackPanel" Tag="{Binding PhotoId}" UIElement.Uid="{Binding PageNo}" ToolTip="{Binding tooltip}">
+                                        <StackPanel Margin="0,0,1,0">
+                                            <StackPanel>
+                                                <Image Source="/PhotoSW;component/images/reel.png" HorizontalAlignment="Stretch" Width="86" />
+                                            </StackPanel>
+                                            <Border Grid.Column="1" Border.Padding="0" Border.Background="#FF000000" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Tag="{Binding .,ElementName=Viewbox2}">
+                                                <Grid Height="Auto" MinWidth="77" Margin="1,0,2,0" MaxWidth="Infinity" Width="86">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition RowDefinition.Height="50" />
+                                                        <RowDefinition RowDefinition.Height="auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" FontSize="12" Foreground="#FFD3D3D3" Text="{Binding slotTime}" />
+                                                    <Viewbox Name="ViewBox1" RenderOptions.EdgeMode="Aliased" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True" Grid.Column="0">
+                                                        <Image Name="img1" RenderOptions.EdgeMode="Aliased" Margin="0" RenderOptions.BitmapScalingMode="HighQuality" UseLayoutRounding="True" Source="{Binding FilePath}" />
+                                                    </Viewbox>
+                                                    <Image Name="vidPlay" Source="/PhotoSW;component/images/play_trans.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" UIElement.Visibility="{Binding PlayVisible}" />
+                                                    <Image Source="/PhotoSW;component/images/reel.png" Width="86" Grid.Column="0" Grid.Row="1" />
+                                                    <ContentControl Height="50" Tag="{Binding PhotoId}" UIElement.Uid="{Binding PageNo}">
+                                                        <Rectangle Name="btn1" Shape.Fill="#00FFFFFF" UIElement.AllowDrop="True" Tag="{Binding PhotoId}" UIElement.Uid="{Binding PageNo}" />
+                                                    </ContentControl>
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                        <StackPanel VerticalAlignment="Top" StackPanel.Orientation="Horizontal" Panel.Background="#00FFFFFF" HorizontalAlignment="Stretch">
+                                            <Image Name="imgDropProcessed" Source="/PhotoSW;component/images/processed.png" Grid.Row="1" Width="17" Height="15" Margin="2,0,0,0" ToolTip="Processed Video" HorizontalAlignment="Left" VerticalAlignment="Top" UIElement.Visibility="{Binding ProcessedVisible}" />
+                                            <TextBlock Name="txtDropImageName" TextBlock.Background="#00FFFFFF" Width="45" Grid.Column="0" Margin="0,0,0,0" TextBlock.TextWrapping="Wrap" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Grid.Row="1" TextBlock.TextAlignment="Center" VerticalAlignment="Top" Tag="{Binding PhotoId}" TextBlock.Text="{Binding Name}" />
+                                            <Button Name="btnDropImgPlay" Style="{StaticResource ButtonStyleAlpha}" Grid.Row="1" Width="17" Height="15" Margin="0,0,3,0" ToolTip="Click to preview" HorizontalAlignment="Right" VerticalAlignment="Top" Tag="{Binding PhotoId}" UIElement.Visibility="{Binding ProcessPlayVisible}">
+                                                <Image Name="imgDropPlay" Source="/PhotoSW;component/images/preview_play.png" />
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                        <Grid Name="playerMainGrid" Row="2" Margin="5,0,0,15" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ColumnDefinition.Width="510*" />
+                                <ColumnDefinition ColumnDefinition.Width="150" />
+                                <ColumnDefinition ColumnDefinition.Width="10" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Name="VideoEditPlayerPanel" Grid.Column="0" UIElement.Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="45,5,0,0">
+                                <Grid Name="videoEditorGrid" Width="495" Height="370" HorizontalAlignment="Center" Panel.Background="#FF000000">
+                                    <WindowsFormsHost Name="winMPreviewMixer" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                                        <WindowsFormsHost.Child>
+                                            <ml:MPreviewControlMixer wf:Control.Margin="0,0,0,0" 
+                                                                     x:Name="mPreviewControlMixer1" 
+                                                                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                                                                     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+                                                                     xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                                        </WindowsFormsHost.Child>
+                                    </WindowsFormsHost>
+                                </Grid>
+                                <StackPanel Height="21" Margin="0,10,0,10">
+                                    <ProgressBar x.Name="pbProgress" Height="21" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="400" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Grid Grid.Name="vidoriginal" Grid.Column="0" HorizontalAlignment="Center" UIElement.Visibility="Collapsed" VerticalAlignment="Center" Margin="45,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition RowDefinition.Height="495" />
+                                </Grid.RowDefinitions>
+                                <Grid Row="0" Column="0" Height="495" HorizontalAlignment="Left" VerticalAlignment="Center" Width="500" Margin="0,10,0,5">
+                                    <Grid Grid.Name="gdMediaPlayer" Height="495" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="500" />
+                                </Grid>
+                                <Grid Name="grdsize" Column="0" Row="0" Height="290" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" UIElement.Visibility="Hidden" Margin="0,0,0,0">
+                                    <Image Name="mainImagesize" Tag="mainImagesize" Stretch="Uniform" Source="/PhotoSW;component/images/blank.png" />
+                                </Grid>
+                                <Grid Name="canbackground"Column="0" ShowGridLines="True" Row="0" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ActualWidth,ElementName=grdsize,Mode=OneWay}" Height="{Binding ActualHeight,ElementName=grdsize,Mode=OneWay}">
+                                    <Panel.Background>
+                                        <ImageBrush />
+                                    </Panel.Background>
+                                    <Viewbox Name="ZoomBox" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Grid Name="grdZoom">
+                                            <Image Name="mainImage_Size" Tag="mainImage_Size" UIElement.ClipToBounds="True" Margin="0" UIElement.Opacity="0" Source="/PhotoSW;component/images/blank.png" />
+                                            <DigiPhoto_Common:DragCanvas x.Name="dragCanvas" DragCanvas.AllowDragOutOfView="True" p12:UIElement.ClipToBounds="True" DragCanvas.AllowDragging="True" xmlns:p12="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper">
+                                                <Grid Name="GrdBrightness" Margin="0">
+                                                    <Grid Name="GrdContrast">
+                                                        <Grid Name="GrdHueShift">
+                                                            <Grid Name="GrdGreyScale">
+                                                                <Grid Name="GrdInvert">
+                                                                    <Grid Name="GrdSharpen">
+                                                                        <Grid Name="GrdSketchGranite">
+                                                                            <Grid Name="GrdEmboss">
+                                                                                <Grid Name="Grdcolorfilter">
+                                                                                    <Grid Name="Grdcartoonize">
+                                                                                        <Image Name="mainImage" Tag="mainImage" UIElement.ClipToBounds="True" Margin="0" Source="/PhotoSW;component/images/blank.png" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                                <Image Name="dragImage" />
+                                            </DigiPhoto_Common:DragCanvas>
+                                        </Grid>
+                                    </Viewbox>
+                                    <Grid Name="frm" />
+                                </Grid>
+                            </Grid>
+                            <Grid Name="videoCapturePanel" Column="0" HorizontalAlignment="Center" UIElement.Visibility="Collapsed" VerticalAlignment="Center" Margin="45,5,0,0" />
+                            <StackPanel Name="templateListPanel" Column="1" Margin="0,5,-104,0" HorizontalAlignment="Center" VerticalAlignment="Center" StackPanel.Orientation="Horizontal" Height="auto" Width="150">
+                                <TextBlock Name="txtTemplateRotate" TextBlock.Text="Chroma Backgrounds" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" VerticalAlignment="Center">
+                  <LayoutTransform>
+                    <RotateTransform RotateTransform.Angle="-90" />
+                  </LayoutTransform>
+                                </TextBlock>
+                                <ListBox x.Name="lstTemplates" Width="112" ItemsControl.ItemContainerStyle="{StaticResource RedGlowItemContainer}" VerticalAlignment="Center" Height="300" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsControl.ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Control.Padding="0" Control.VerticalContentAlignment="Center" HorizontalAlignment="Center" Control.Template="{DynamicResource ListBoxControlTemplategeneral}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Border.BorderBrush="#FF000000" Margin="0,0" Border.BorderThickness="1" Width="100" Grid.Column="0" Border.Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                                <Grid Height="Auto" MinWidth="77" Margin="0,2,0,0" MaxWidth="Infinity" Width="102" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+                                                    <ToolTip>
+                                                        <Border Margin="-4,0,-4,-3" Border.Padding="10" Border.Background="#FFFFFFFF">
+                                                            <UIElement.BitmapEffect>
+                                                                <OuterGlowBitmapEffect />
+                                                            </UIElement.BitmapEffect>
+                                                            <Grid>
+                                                                <TextBlock TextBlock.FontWeight="Bold" TextBlock.Text="{Binding Tooltip}" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </ToolTip>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition RowDefinition.Height="70" />
+                                                        <RowDefinition RowDefinition.Height="22" />
+                                                    </Grid.RowDefinitions>
+                                                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Shape.Stroke="#FF000000" Shape.StrokeThickness="0" />
+                                                    <Image Name="lstTemplatesIcon" Width="96" Margin="0,0,0,0" HorizontalAlignment="Center" Grid.Row="0" Source="{Binding FilePath}" />
+                                                    <TextBlock Name="SelectedProductType_ID1" Grid.Column="0" Margin="0,3" TextBlock.TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="12" TextBlock.FontWeight="Normal" Width="Auto" Height="Auto" Grid.Row="1" TextBlock.TextAlignment="Center" TextBlock.Foreground="#FF000000" TextBlock.Text="{Binding DisplayName}" />
+                                                    <CheckBox Name="ChkSelected" Height="Auto" Margin="0,0,20,0" VerticalAlignment="Stretch" Style="{DynamicResource CheckBoxStyleimgDownloader}" Grid.RowSpan="1" Grid.Row="0" ButtonBase.CommandParameter="{Binding Name}" UIElement.Visibility="{Binding CheckedBoxVisible}" ToggleButton.IsChecked="{Binding IsChecked}" Tag="{Binding FilePath}" UIElement.Uid="{Binding Item_ID}" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Height="40" Margin="0,0,5,-55" VerticalAlignment="Top" StackPanel.Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Name="btnCloseTempList" ContentControl.Content="Close" HorizontalAlignment="Right" Width="51" Margin="100,15,-75,-20" Style="{DynamicResource ButtonStyleCancel}" Control.Foreground="#FF000000" Control.FontWeight="Bold" Height="40" VerticalAlignment="Top" />
+                            </StackPanel>
+                            <StackPanel  Name="stkbtnClosePreview" Grid.Column="1" Height="40" Margin="0,0,5,0" VerticalAlignment="Top" StackPanel.Orientation="Horizontal" HorizontalAlignment="Left" UIElement.Visibility="Collapsed">
+                                <Button Name="btnClosePreview" Style="{StaticResource ButtonStyleAlpha}" Margin="-20,-25,0,0" Height="55" Width="90" Control.Background="#00FFFFFF" Control.BorderBrush="#00FFFFFF" Control.BorderThickness="0">
+                                    <Image Source="/PhotoSW;component/images/btn_hideML.png" />
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Name="btnCollapse" Style="{StaticResource ButtonStyleAlpha}" Height="40" Width="30" Control.Background="#00FFFFFF" Control.BorderBrush="#00FFFFFF" Control.BorderThickness="0" Margin="0,0,-80,0">
+                                    <Image Name="imgCollapse" Source="/PhotoSW;component/images/RightArrow.png" UIElement.RenderTransformOrigin="0.5,0.525" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Name="grdCtrl">
+                        <Grid.RowDefinitions>
+                            <RowDefinition RowDefinition.Height="90" />
+                        </Grid.RowDefinitions>
+                        <Border Border.BorderThickness="1.5" Grid.Row="0" Border.Padding="0" Border.BorderBrush="#FFFFFFFF" Height="75" Margin=" 0,2,-30,0">
+                            <StackPanel Grid.Row="3" StackPanel.Orientation="Horizontal" Margin="0,0,5,0" VerticalAlignment="Center" Height="75">
+                                <ComboBox Name="CmbProductType" ItemsControl.DisplayMemberPath="Key" Width="190" Height="45" UIElement.Visibility="Collapsed" Selector.SelectedValuePath="Value" Style="{DynamicResource DigiComboBoxStle}" Margin="5,0,0,0" Control.FontSize="16" />
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnProcess" Style="{StaticResource ButtonStyleAlpha}" Height="40" Margin="0,0,5,-5" Width="50" Control.Background="#FFFFFFFF" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip=" Start processing">
+                                        <Image Source="/PhotoSW;component/images/video_reel.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Process" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnStopProcess" Style="{StaticResource ButtonStyleAlpha}" Height="40" Margin="0,0,5,-5" Width="40" Control.Background="#FFFFFFFF" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Stop processing" UIElement.IsEnabled="False">
+                                        <Image Source="/PhotoSW;component/images/StopProcess.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Stop" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                                    <Grid Height="40" Margin="0,0,0,-5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                        <Image Source="/PhotoSW;component/images/previewPhoto_icon.png" />
+                                        <Button Name="btnchkpreview" Style="{DynamicResource CheckBoxStyleimgDownloader}" Height="40" Width="40" Margin="0" />
+                                    </Grid>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Preview" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Button Name="btnIncludeAll" Style="{StaticResource ButtonStyleAlpha}" Margin="0,0,5,-5" Height="40" Width="40" ToolTip="Include all items into processing list">
+                                        <Image Source="/PhotoSW;component/images/include_All.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Include All" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Button Name="btnReset" Style="{StaticResource ButtonStyleAlpha}" Margin="0,0,5,-5" Height="40" Width="40" ToolTip="Clear processing list">
+                                        <Image Source="/PhotoSW;component/images/refresh.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Clear List" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnSave" Style="{StaticResource ButtonStyleAlpha}" Margin="0,0,0,-5" HorizontalAlignment="Center" Height="40" ToolTip="Save/Back">
+                                        <Image Source="/PhotoSW;component/images/photoID_icon.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Save/Back" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnExit" Style="{StaticResource ButtonStyleAlpha}" Margin="0,0,0,-5" HorizontalAlignment="Center" Height="40" ToolTip="Exit to VOS">
+                                        <Image Source="/PhotoSW;component/images/Exit.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Exit" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnDefaultSettings" Style="{StaticResource ButtonStyleAlpha}" Margin="0,0,0,-5" HorizontalAlignment="Center" Height="40" ToolTip="Apply default settings">
+                                        <Image Source="/PhotoSW;component/images/settings.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Reset" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                                    <Button Name="btnHide" Style="{StaticResource ButtonStyleAlpha}" Control.Background="#FFF5F5F5" Margin="0,0,0,-5" ToolTip="Hide" Width="40" Height="40">
+                                        <Image Source="/PhotoSW;component/images/Skip_Home.png" />
+                                    </Button>
+                                    <TextBlock TextBlock.TextAlignment="Center" Margin="0,5,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                    <Run Run.Text="Hide" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <Button Name="RightPanel" Width="300" HorizontalAlignment="Right" StackPanel.Orientation="Vertical">
+                    <Grid Margin="0,-0.252,0,-1" Height="751">
+                        <Grid.RowDefinitions>
+                            <RowDefinition RowDefinition.Height="80" />
+                            <RowDefinition />
+                            <RowDefinition RowDefinition.Height="80" />
+                        </Grid.RowDefinitions>
+                        <Image Source="/PhotoSW;component/images/rightPanelTop.png" HorizontalAlignment="Right" Stretch="Fill" VerticalAlignment="Bottom" Row="0" Margin="10,0,5,-2" />
+                        <Grid Name="Middle" Margin="25,0,5,0" Grid.Row="1">
+                            <Panel.Background>
+                                <ImageBrush ImageSource="/PhotoSW;component/images/RightPanelmiddle.png" />
+                            </Panel.Background>
+                        </Grid>
+                        <Image Source="/PhotoSW;component/images/rightPanelBtm.png" Stretch="Fill" VerticalAlignment="Top" Height="70" Grid.Row="2" Margin="10,0,5,5" />
+                        <Grid Row="0" RowSpan="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition RowDefinition.Height="80" />
+                                <RowDefinition RowDefinition.Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Name="btnVideo" Style="{StaticResource ButtonStyleAlpha}" Margin="5,16,5,15" Height="50" Width="40" ToolTip="Video effects">
+                                    <Image Source="/PhotoSW;component/images/video_square.png" />
+                                </Button>
+                                <Button Name="btnChroma" Style="{StaticResource ButtonStyleAlpha}" Margin="5,5,5,5" Height="50" Width="40" ToolTip="Guest Settings">
+                                    <Image Source="/PhotoSW;component/images/btn_GuestSet.png" />
+                                </Button>
+                                <Button Name="btnCapture" Style="{StaticResource ButtonStyleAlpha}" Margin="5,5,5,5" Height="50" Width="40" ToolTip="Quick Settings">
+                                    <Image Source="/PhotoSW;component/images/btn_QuickSet.png" />
+                                </Button>
+                                <Button Name="btnColorEffects" Style="{StaticResource ButtonStyleAlpha}" Margin="5" Height="50" Width="40" ToolTip="Color Settings">
+                                    <Image Source="/PhotoSW;component/images/color_btn.png" />
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1">
+                                <Grid Name="grdVideoControls" UIElement.Visibility="Visible" Margin="80,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="*" />
+                                        <RowDefinition RowDefinition.Height="200" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition ColumnDefinition.Width="70" />
+                                        <ColumnDefinition ColumnDefinition.Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Row="0" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10" Grid.ColumnSpan="2">
+                                        <TextBlock TextBlock.Text="Video Effects" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" />
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="buttonChromaProps" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Chroma settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_Chroma_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Chroma" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="btnBackgrounds" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Background Settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_Background_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Background" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="btnBorders" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Border Settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_border_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Border" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="btnAudioEffects" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Audio Settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_sound_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Audio" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="btnLoadGraphic" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Graphics settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_Graphics_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Graphics" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Margin="10,0,0,2" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <ToggleButton ToggleName="btnFullScreen" Height="40" Margin="0" Width="40" Control.Background="#FFFFFFFF" ToolTip="Preview Full Screen Editor">
+                                            <Control.Template>
+                                                <ControlTemplate ControlTemplate.TargetType="{x:Type ToggleButton}">
+                                                    <StackPanel StackPanel.Orientation="Horizontal">
+                                                        <Image>
+                                                            <Style>
+                                                                <Style>
+                                                                    <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_preview_btn.png" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger DataTrigger.Binding="{Binding IsChecked,RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" DataTrigger.Value="True">
+                                                                            <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_preview_btn_disable.png" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Style>
+                                                        </Image>
+                                                        <ContentPresenter ContentPresenter.Content="{TemplateBinding ContentControl.Content}" Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Control.Template>
+                                        </ToggleButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Full Screen" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="4" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <Button Name="btnLoadOverlay" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Width="50" Control.Background="#FFFFFFFF" ToolTip="Video Overlay settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/overlay_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Overlays" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Name="StackOverlayChroma" Grid.Row="4" Grid.Column="1" UIElement.Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Left">
+                                        <Button Name="btnOverlayChroma" Style="{StaticResource ButtonStyleAlpha2}" Height="50" Margin="0" Control.Background="#FFFFFFFF" ToolTip="Video Overlay settings" UIElement.IsEnabled="True">
+                                            <Image Source="/PhotoSW;component/images/adv_Chroma_btn.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Overlay Chroma" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Name="StackTransitions" UIElement.Visibility="Collapsed" Grid.Row="4" Margin="0,15,0,0" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <TextBlock Margin="0,0,5,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                      <Run Run.Text="Transitions :" />
+                                        </TextBlock>
+                                        <StackPanel StackPanel.Orientation="Horizontal">
+                                            <ComboBox Name="cmbTransitions" Selector.SelectedValuePath="Key" Control.Foreground="#FF000000" Height="30" ItemsControl.DisplayMemberPath="Value" Width="145" HorizontalAlignment="Left" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Name="StackImageDisplayTime" UIElement.Visibility="Collapsed" Margin="-20,30,5,0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Width="200">
+                                        <StackPanel Grid.Row="7" Width="200" HorizontalAlignment="Center" Margin="-20,0,0,0" StackPanel.Orientation="Horizontal">
+                                            <TextBlock Margin="0,0,5,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Display Time(Sec) :" />
+                                            </TextBlock>
+                                            <Viewbox Height="15" Width="15" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <CheckBox  Name="chkImgDTSetToAll" Control.FontSize="12" Control.Foreground="#FFFFFFFF" ToggleButton.IsChecked="False" />
+                                            </Viewbox>
+                                            <TextBlock VerticalAlignment="Center" TextBlock.Text="Set for all" TextBlock.FontSize="12" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Margin="3" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="9" Width="200" HorizontalAlignment="Center" Margin="-20,0,0,00" StackPanel.Orientation="Horizontal">
+                                            <TextBox TextBox.Name="txtImageDisplayTime" Control.FontSize="13" TextBox.MaxLength="3" Width="50" Margin="0,5,4,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextBox.Text="10" Style="{DynamicResource DigiTextBoxStyle}" Height="25" />
+                                            <Button Name="btnSetDisplayTime" Style="{StaticResource ButtonStyleAlpha}" Margin="15,0,5,0" Control.Background="#00FFFFFF" Height="25">
+                                                <Image Source="/PhotoSW;component/images/set.png" />
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Name="StackVideoStartEndTime" UIElement.Visibility="Collapsed" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,30,5,0">
+                                        <StackPanel Grid.Row="7" Width="200" HorizontalAlignment="Left" Margin="0,0,0,0" StackPanel.Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <TextBlock Margin="10,0,5,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Start" />
+                                            </TextBlock>
+                                            <TextBlock Margin="30,0,5,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="End" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="8" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10" StackPanel.Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <TextBox TextBox.Name="txtvideoStart" Control.FontSize="13" Width="50" Margin="10,5,4,5" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" Height="25" ToolTip="Video start time in seconds" DigiPhoto_Common:ProductPrice.IsNumericOnly="True" TextBox.MaxLength="4" TextBox.Text="{Binding ElementName=RangeSldGuestVideo,Path=LowerValue,UpdateSourceTrigger=PropertyChanged}" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" />
+                                            <TextBox TextBox.Name="txtVideoEnd" Control.FontSize="13" Width="50" Margin="10,5,4,5" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" Height="25" ToolTip="Video end time in seconds" DigiPhoto_Common:ProductPrice.IsNumericOnly="True" TextBox.MaxLength="4" TextBox.Text="{Binding ElementName=RangeSldGuestVideo,Path=UpperValue,UpdateSourceTrigger=PropertyChanged}" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" />
+                                            <Button Name="btnSetVideoTime" Style="{StaticResource ButtonStyleAlpha}" Control.Background="#00FFFFFF" Margin="5,0,5,0">
+                                                <Image Source="/PhotoSW;component/images/set.png" />
+                                            </Button>
+                                        </StackPanel>
+                                        <StackPanel StackPanel.Orientation="Horizontal" Margin="10,0,0,10">
+                                            <local:RangeSlider RangeSlider.Name="RangeSldGuestVideo" p12:Grid.Row="5" p12:Height="20" p12:Width="180" p12:Margin="0,0,0,10" RangeSlider.Minimum="0" xmlns:p12="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Name="StackVideoTemplatePlay" UIElement.Visibility="Collapsed" Grid.Row="7" Width="200" Margin="-30,30,5,0" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <StackPanel Grid.Row="8" Width="200" HorizontalAlignment="Center" Margin="0,0,0,10" StackPanel.Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <TextBlock Margin="10,0,5,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Play video template:" />
+                                            </TextBlock>
+                                            <Button Name="btnPlayVideoTemp" Style="{StaticResource ButtonStyleAlpha}" Control.Background="#00FFFFFF" Height="25" Margin="5,0,5,0" ToolTip="Click to preview">
+                                                <Image Source="/PhotoSW;component/images/preview_play.png" />
+                                            </Button>
+                                            <TextBox Name="txtSelVideoTemp" UIElement.Visibility="Collapsed" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Name="StackGuestVideoTemplate" UIElement.Visibility="Collapsed" Grid.Row="8" Width="200" StackPanel.Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <Button Name="btnGuestVideoTemplate" Tag="1" Style="{StaticResource ButtonStyleAlpha}" Grid.Row="1" ToolTip="Mark as template" Width="50" Height="50" Margin="-10,5,0,5" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <Image Name="markImage" Source="/PhotoSW;component/images/MarkT1.png" />
+                                        </Button>
+                                    </StackPanel>
+                                    <GroupBox Name="StackGraphicSettingPanel1" HeaderedContentControl.Header="Graphic Settings" Grid.Row="10" UIElement.Visibility="Collapsed" Margin="-20,5,10,0" Grid.Column="0" Grid.ColumnSpan="2" Control.Foreground="#FFFFFFFF" Control.FontSize="13">
+                                        <StackPanel Margin="10,0,0,0">
+                                            <StackPanel Name="StackGraphicSettingPanel15" UIElement.Visibility="Visible" Grid.Row="10" Margin="0,5,0,0" Grid.Column="0" Grid.ColumnSpan="2">
+                                                <StackPanel StackPanel.Orientation="Horizontal">
+                                                    <ComboBox Name="cmbGraphicsSettings" Selector.SelectedValuePath="Key" Control.Foreground="#FF000000" Height="30" ItemsControl.DisplayMemberPath="Value" Width="125" HorizontalAlignment="Left" />
+                                                    <Button Name="btnDelCGConfig" ContentControl.Content="Delete" Width="50" HorizontalAlignment="Right" Margin="5,0,40,0" />
+                                                </StackPanel>
+                                                <StackPanel StackPanel.Orientation="Vertical" HorizontalAlignment="Left">
+                                                    <Viewbox Height="21" HorizontalAlignment="Left" Margin="0,10,0,0">
+                                                        <CheckBox  Name="chkTextLogo" HorizontalAlignment="Left" ContentControl.Content="Enable Text Logo" Control.Foreground="#FFFFFFFF" Margin="0,0,0,0" Control.FontWeight="Normal" />
+                                                    </Viewbox>
+                                                    <TextBox Name="txtTextLogo" Width="180" Height="25" Margin="0,0,0,0" Control.FontWeight="Normal" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Name="StackGraphicSettingPanel2" UIElement.Visibility="Collapsed" Grid.Row="11" StackPanel.Orientation="Horizontal" Margin="0,5,0,0" Grid.Column="0" Grid.ColumnSpan="2">
+                                                <Button Name="btnCGEditor" Tag="1" UIElement.Focusable="False" Control.Foreground="#FFFFFFFF" Control.FontWeight="Bold" ContentControl.Content="Graphics Editor" ToolTip="Graphics Editor" Width="125" Control.Background="#FF800000" Height="30" Margin="0,5,0,5" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    <StackPanel Name="StackAudioStartEndTime" UIElement.Visibility="Collapsed" Grid.Row="11" Width="250" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <Grid HorizontalAlignment="Left" Margin="0,30,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Margin="0,0,5,0" Grid.Column="0" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Start" />
+                                            </TextBlock>
+                                            <TextBlock Margin="0,0,5,0" Grid.Column="1" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="End" />
+                                            </TextBlock>
+                                            <TextBlock Margin="0,0,5,0" Grid.Column="2" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Insert" />
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                                <ColumnDefinition ColumnDefinition.Width="50" />
+                                                <ColumnDefinition ColumnDefinition.Width="36" />
+                                                <ColumnDefinition ColumnDefinition.Width="36" />
+                                                <ColumnDefinition ColumnDefinition.Width="36" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox TextBox.Name="txtAudioStart" Control.FontSize="13" Grid.Column="0" Width="50" Margin="0,0,4,0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" Height="25" ToolTip="Audio start time in seconds" DigiPhoto_Common:ProductPrice.IsNumericOnly="True" TextBox.MaxLength="4" TextBox.Text="{Binding ElementName=RangeSliderAudio,Path=LowerValue,UpdateSourceTrigger=PropertyChanged}" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" />
+                                            <TextBox TextBox.Name="txtAudioEnd" Control.FontSize="13" Grid.Column="1" Width="50" Margin="0,0,4,0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource DigiTextBoxStyle}" Height="25" ToolTip="Audio end time in seconds" DigiPhoto_Common:ProductPrice.IsNumericOnly="True" TextBox.MaxLength="4" TextBox.Text="{Binding ElementName=RangeSliderAudio,Path=UpperValue,UpdateSourceTrigger=PropertyChanged}" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" />
+                                            <TextBox TextBox.Name="txtAudioInsert" Control.FontSize="13" Grid.Column="2" Width="50" Margin="0,0,4,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextBox.Text="0" Style="{DynamicResource DigiTextBoxStyle}" Height="25" ToolTip="Audio insert time in seconds" DigiPhoto_Common:ProductPrice.IsNumericOnly="True" TextBox.MaxLength="4" xmlns:DigiPhoto_Common="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" />
+                                            <Button Name="btnSetAudioTime" Style="{StaticResource ButtonStyleAlpha}" Grid.Column="3" Control.Background="#00FFFFFF" ToolTip="Set Start\End\Insert time" Margin="5,0,5,0">
+                                                <Image Source="/PhotoSW;component/images/set.png" />
+                                            </Button>
+                                            <Button Name="btnPlayAudio" Style="{StaticResource ButtonStyleAlpha}" Grid.Column="4" Height="25" Control.Background="#00FFFFFF" ToolTip="Click to preview" Margin="3,0,5,0">
+                                                <Image Source="/PhotoSW;component/images/preview_play.png" />
+                                            </Button>
+                                            <TextBox TextBox.Name="txtAudioId" UIElement.Visibility="Hidden" />
+                                        </Grid>
+                                        <StackPanel Name="VideoLength" Grid.Row="3" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <TextBlock Name="txtVideoLength" Margin="0,0,0,0" TextBlock.FontSize="12" TextBlock.FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+                        <Run Run.Text="Expected Video Length : " />
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <local:RangeSlider RangeSlider.Name="RangeSliderAudio" p11:Grid.Row="4" p11:HorizontalAlignment="Left" p11:Width="180" p11:Height="20" p11:Margin="0,10,0,0" RangeSlider.Minimum="0" xmlns:p11="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel>
+                                    <WindowsFormsHost Name="winMAttributesList" Height="290" Width="250" Margin="0,2,0,0" UIElement.Visibility="Collapsed">
+                                        <WindowsFormsHost.Child>
+                                            <ml:MAttributesList x:Name="mAttributesList1" wf:Control.Height="290" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                                        </WindowsFormsHost.Child>
+                                    </WindowsFormsHost>
+                                    <Grid Name="grdChromaControls" Height="600" HorizontalAlignment="Left" Width="230" UIElement.Visibility="Collapsed" Margin=" 45,0,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition RowDefinition.Height="Auto" />
+                                                <RowDefinition RowDefinition.Height="28" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="0" />
+                                                <RowDefinition RowDefinition.Height="0" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="25" />
+                                                <RowDefinition RowDefinition.Height="50" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition ColumnDefinition.Width="80" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.ColumnSpan="2">
+                                                <TextBlock TextBlock.Text="Guest Settings" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" />
+                                            </StackPanel>
+                                            <TextBlock TextBlock.Text="Position: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,2,0,0" />
+                                            <ComboBox Name="drpPosition" Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" />
+                                            <TextBlock TextBlock.Text="X-Axis: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtXAxis" Grid.Row="2" Grid.Column="1" Margin="0,2,0,2" TextBox.Text="{Binding ElementName=sldXAxis,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldXAxis" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Y-Axis: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtYAxis" Grid.Row="4" Grid.Column="1" Margin="0,2,0,2" TextBox.Text="{Binding ElementName=sldYAxis,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldYAxis" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Height: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtHeight" Grid.Row="6" Grid.Column="1" Margin="0,2,0,2" TextBox.Text="{Binding ElementName=sldHeight,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldHeight" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Width: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtWidth" Grid.Row="8" Grid.Column="1" Margin="0,2,0,2" TextBox.Text="{Binding ElementName=sldWidth,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldWidth" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Rotation: " TextBlock.Foreground="#FFFFFFFF" UIElement.Visibility="Collapsed" Grid.Row="10" Grid.Column="0" Margin="0,2,0,2" VerticalAlignment="Center" />
+                                            <TextBox Name="txtRotation" Grid.Row="10" Grid.Column="1" UIElement.Visibility="Collapsed" Margin="0,2,0,2" TextBox.Text="{Binding ElementName=sldRotation,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldRotation" Grid.Row="11" Grid.Column="0" UIElement.Visibility="Collapsed" Grid.ColumnSpan="2" RangeBase.Minimum="-360" RangeBase.Maximum="360.0" Slider.TickFrequency="1.0" Margin="0,2,0,0" />
+                                            <TextBlock Grid.Row="12" TextBlock.Foreground="#FFFFFFFF" Grid.Column="0" TextBlock.Text="Crop X-Axis:" VerticalAlignment="Center" />
+                                            <TextBox Name="txtCropX" Grid.Row="12" Margin="0,2,0,2" Grid.Column="1" TextBox.Text="{Binding ElementName=sldCropX,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldCropX" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Crop Y-Axis:" TextBlock.Foreground="#FFFFFFFF" Grid.Row="14" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtCropY" Margin="0,2,0,2" Grid.Row="14" Grid.Column="1" TextBox.Text="{Binding ElementName=sldCropX,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldCropY" Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="-1.0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Crop Height: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="16" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtCropH" Grid.Row="16" Margin="0,2,0,2" Grid.Column="1" TextBox.Text="{Binding ElementName=sldCropH,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldCropH" Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Crop Width: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="18" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtCropW" Grid.Row="18" Margin="0,2,0,2" Grid.Column="1" TextBox.Text="{Binding ElementName=sldCropW,Path=Value,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Slider Name="sldCropW" Grid.Row="19" Grid.Column="0" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="1.0" Slider.TickFrequency="0.1" Margin="0,2,0,0" />
+                                            <TextBlock TextBlock.Text="Crop position: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="20" Grid.Column="0" VerticalAlignment="Center" />
+                                            <ComboBox Name="drpCropP" Margin="0,2,0,2" Grid.Row="20" Grid.Column="1" />
+                                            <TextBlock TextBlock.Text="Audio Gain: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="21" Grid.Column="0" VerticalAlignment="Center" />
+                                            <TextBox Name="txtAudioGain" Grid.Row="21" Margin="0,2,0,2" Grid.Column="1" />
+                                            <TextBlock TextBlock.Text="Stream Id: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="22" Grid.Column="0" UIElement.Visibility="Collapsed" VerticalAlignment="Center" />
+                                            <TextBox Name="txtStreamId" Grid.Row="22" Margin="0,2,0,2" Grid.Column="1" UIElement.Visibility="Collapsed" />
+                                            <TextBlock TextBlock.Text="Zoom Settings: " TextBlock.Foreground="#FFFFFFFF" Grid.Row="23" Grid.Column="0" VerticalAlignment="Center" />
+                                            <StackPanel StackPanel.Orientation="Horizontal" Grid.Row="23" Grid.Column="1" Grid.ColumnSpan="1">
+                                                <RepeatButton RepeatName="buttonZoomIn" Control.Background="#00FFFFFF" Height="50" UIElement.Focusable="False" Margin="0" Width="50" Control.BorderThickness="0" ToolTip="Zoom-in" UIElement.IsEnabled="True">
+                                                    <Image Source="/PhotoSW;component/images/adv_zoom_in.png" />
+                                                </RepeatButton>
+                                                <RepeatButton RepeatName="buttonZoomOut" Height="50" Margin="0" Width="50" Control.Background="#00FFFFFF" UIElement.Focusable="False" ToolTip="Zoom-out" UIElement.IsEnabled="True">
+                                                    <Image Source="/PhotoSW;component/images/adv_zoom_out.png" />
+                                                </RepeatButton>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Name="grdColorEffects" Height="600" UIElement.Visibility="Visible" Width="220" Margin="10,0,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition RowDefinition.Height="85" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="20" />
+                                                <RowDefinition RowDefinition.Height="40" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                                <RowDefinition RowDefinition.Height="35" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition ColumnDefinition.Width="65" />
+                                                <ColumnDefinition ColumnDefinition.Width="15" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition ColumnDefinition.Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="3">
+                                                <TextBlock TextBlock.Text="Preset Effects: " TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,5,0,4" />
+                                                <StackPanel StackPanel.Orientation="Horizontal">
+                                                    <RadioButton Name="rbGrayScale" Control.Foreground="#FFFFFFFF" RadioButton.GroupName="rbPresetEffects" ContentControl.Content="Gray Scale" Margin="10,0,0,0" />
+                                                    <RadioButton Name="rbSepia" Control.Foreground="#FFFFFFFF" RadioButton.GroupName="rbPresetEffects" ContentControl.Content="Sepia" Margin="20,0,0,0" />
+                                                    <RadioButton Name="rbNone" Control.Foreground="#FFFFFFFF" RadioButton.GroupName="rbPresetEffects" ContentControl.Content="None" Margin="20,0,0,0" ToggleButton.IsChecked="True" />
+                                                    <RadioButton Name="rbInvert" Control.Foreground="#FFFFFFFF" RadioButton.GroupName="rbPresetEffects" ContentControl.Content="Invert" Margin="20,0,0,0" UIElement.Visibility="Collapsed" />
+                                                </StackPanel>
+                                                <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Color Effects: " TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,15,0,0" />
+                                                <Button Name="btnRefresh" UIElement.Visibility="Visible" Width="40" Height="20" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,-22,2,0" ContentControl.Content="Reset" />
+                                            </StackPanel>
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="U-Level: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldULevelSlider" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldULevelSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="UV-gain: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldUVGainSlider" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="100" ToolTip="{Binding ElementName=sldUVGainSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="V-level: " Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldVLevelSlider" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldVLevelSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Y-gain: " Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldYGainSlider" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="100" ToolTip="{Binding ElementName=sldYGainSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Y-level: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldYLevelSlider" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldYLevelSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Brigntness and Contrast: " TextBlock.FontSize="16" TextBlock.FontWeight="Bold" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,5,0,4" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Black level: " Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldBlackSlider" Grid.Row="8" Grid.ColumnSpan="2" Grid.Column="1" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldBlackSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Brightness: " Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldBrightnessSlider" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldBrightnessSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Color gain: " Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldColorSlider" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="100" ToolTip="{Binding ElementName=sldColorSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="Contrast: " Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldContrastSlider" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="-100" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="0" ToolTip="{Binding ElementName=sldContrastSlider,Path=Value}" />
+                                            <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.Text="White level: " Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,0,4" />
+                                            <Slider Name="sldWhiteSlider" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" RangeBase.Minimum="0" RangeBase.Maximum="100" Slider.TickFrequency="1" Margin="0,2,0,0" RangeBase.Value="100" ToolTip="{Binding ElementName=sldWhiteSlider,Path=Value}" />
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                                <Grid Name="grdVideoCaptureControls" Margin="0,10,15,0" HorizontalAlignment="Right" Width="250" UIElement.Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition RowDefinition.Height="60" />
+                                        <RowDefinition RowDefinition.Height="60" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="10,0,0,10" Grid.ColumnSpan="2">
+                                        <TextBlock TextBlock.Text="Quick Settings" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" />
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Margin="10,0,0,2" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                        <ToggleButton ToggleName="btnVideoPreview" Height="40" Margin="0" Width="40" Control.Background="#FFFFFFFF" ToolTip="Video preview">
+                                            <Control.Template>
+                                                <ControlTemplate ControlTemplate.TargetType="{x:Type ToggleButton}">
+                                                    <StackPanel StackPanel.Orientation="Horizontal">
+                                                        <Image>
+                                                            <Style>
+                                                                <Style>
+                                                                    <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_EnableVideo_btn.png" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger DataTrigger.Binding="{Binding IsChecked,RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" DataTrigger.Value="True">
+                                                                            <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_EnableVideo_btn_disable.png" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Style>
+                                                        </Image>
+                                                        <ContentPresenter ContentPresenter.Content="{TemplateBinding ContentControl.Content}" Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Control.Template>
+                                        </ToggleButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Video" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Margin="5,0,0,2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                        <ToggleButton ToggleName="btnAspectRatio" Height="40" Margin="0" Width="40" Control.Background="#FFFFFFFF" ToolTip="Aspect Ratio">
+                                            <Control.Template>
+                                                <ControlTemplate ControlTemplate.TargetType="{x:Type ToggleButton}">
+                                                    <StackPanel StackPanel.Orientation="Horizontal">
+                                                        <Image>
+                                                            <Style>
+                                                                <Style>
+                                                                    <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_AspectRatio_btn.png" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger DataTrigger.Binding="{Binding IsChecked,RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" DataTrigger.Value="True">
+                                                                            <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_AspectRatio_btn_disable.png" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Style>
+                                                        </Image>
+                                                        <ContentPresenter ContentPresenter.Content="{TemplateBinding ContentControl.Content}" Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Control.Template>
+                                        </ToggleButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Aspect Ratio" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="0,0,0,2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                        <ToggleButton ToggleName="btnAudios" Height="40" Margin="0" Width="40" Control.Background="#FFFFFFFF" ToolTip="Audio preview" ToggleButton.IsChecked="True">
+                                            <Control.Template>
+                                                <ControlTemplate ControlTemplate.TargetType="{x:Type ToggleButton}">
+                                                    <StackPanel StackPanel.Orientation="Horizontal">
+                                                        <Image>
+                                                            <Style>
+                                                                <Style>
+                                                                    <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_sound_btn.png" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger DataTrigger.Binding="{Binding IsChecked,RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" DataTrigger.Value="True">
+                                                                            <Setter Setter.Property="Source" Setter.Value="/PhotoSW;component/images/adv_sound_btn_disable.png" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Style>
+                                                        </Image>
+                                                        <ContentPresenter ContentPresenter.Content="{TemplateBinding ContentControl.Content}" Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Control.Template>
+                                        </ToggleButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Audio" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel StackPanel.Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="0,5,0,0" Grid.ColumnSpan="3">
+                                        <Slider Name="sldVolume" VerticalAlignment="Center" Height="30" Margin="75,0,0,5" RangeBase.Value="50" RangeBase.Minimum="0" RangeBase.Maximum="100" Slider.TickFrequency="1" />
+                                        <TextBlock TextBlock.TextAlignment="Center" Margin="70,0,0,0" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="13">
+                      <Run Run.Text="Volume" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <local:DigiMessageBox DigiMessageBox.Name="MsgBox" p3:Margin="0,-300,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:VideoSlotsTime VideoSlotsTime.Name="VideoSlotsTime" p3:Panel.ZIndex="100" p3:UIElement.Visibility="Collapsed" p3:Margin="0,100,0,0" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:TransitionControl TransitionControl.Name="TransitionBox" p3:Margin="-200,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:FrameControl FrameControl.Name="FrameBox" p3:Margin="0,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:GeneralEffectsControl GeneralEffectsControl.Name="GeneralEffectsBox" p3:Margin="0,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:LogoControl LogoControl.Name="LogoControlBox" p3:Margin="0,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:BorderControl BorderControl.Name="BorderControl" p3:Margin="0,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <local:ViewFrameControl ViewFrameControl.Name="viewControl" p3:Margin="0,0,0,0" p3:VerticalAlignment="Center" p3:HorizontalAlignment="Center" p3:UIElement.Visibility="Collapsed" xmlns:p3="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null" />
+        <StackPanel Name="stkSettingsBottomPanel" UIElement.Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Margin="2,2,0,0" Grid.Column="0" Grid.ColumnSpan="2">
+            <WindowsFormsHost Name="winMStreamsList" Height="150" HorizontalAlignment="Stretch" Width="726">
+                <WindowsFormsHost.Child>
+                    <ml:MStreamsList x:Name="mMixerList1" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                </WindowsFormsHost.Child>
+            </WindowsFormsHost>
+        </StackPanel>
+        <StackPanel Margin="5,5,0,0" StackPanel.Orientation="Vertical" HorizontalAlignment="Left" Width="255" UIElement.Visibility="Collapsed">
+            <WindowsFormsHost Name="winMElementsTree1" Height="100" Width="250" HorizontalAlignment="Left" Margin="0,2,0,0">
+                <WindowsFormsHost.Child>
+                    <ml:MComposerElementsTree x:Name="mElementsTree1" wf:Control.Height="120" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                </WindowsFormsHost.Child>
+            </WindowsFormsHost>
+        </StackPanel>
+        <StackPanel StackPanel.Orientation="Vertical" Panel.Background="#FFDBDADC" Margin="0,5,0,0" UIElement.Visibility="Collapsed">
+            <WindowsFormsHost Name="winMFormatControl" Width="250" HorizontalAlignment="Left">
+                <WindowsFormsHost.Child>
+                    <ml:MFormatControl x:Name="mFormatControl1" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                </WindowsFormsHost.Child>
+            </WindowsFormsHost>
+            <StackPanel Height="50" VerticalAlignment="Top" Width="250" UIElement.Visibility="Collapsed" HorizontalAlignment="Left">
+                <ComboBox Name="comboBoxProps" />
+                <ComboBox Name="comboBoxExtSources" Margin="0,5,0,0" />
+            </StackPanel>
+            <TextBlock TextBlock.Text="Codecs:" TextBlock.FontWeight="SemiBold" Margin="0,5,0,0" />
+            <WindowsFormsHost Name="winMConfigListl" Margin="0,2,0,0" Width="250" WindowsFormsHost.FontStyle="Normal" HorizontalAlignment="Left">
+                <WindowsFormsHost.Child>
+                    <ml:MConfigList x:Name="mConfigList1" wf:Control.Width="200" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ml="clr-namespace:MControls;assembly=MControls" />
+                </WindowsFormsHost.Child>
+            </WindowsFormsHost>
+        </StackPanel>
+    </Grid>
+</UserControl>
+ 
+
+ 
+
+

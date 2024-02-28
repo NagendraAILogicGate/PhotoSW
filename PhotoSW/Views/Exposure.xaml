@@ -1,0 +1,105 @@
+﻿<Window x:Class="PhotoSW.Views.Exposure" 
+        Title="DigiMain" WindowState="Maximized" 
+        WindowStyle="None" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Viewbox Name="vb1" MinWidth="500" MinHeight="500">
+                    <StackPanel  Name="bg_withlogo" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image   Name="bg" Source="images\bg_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom" Height="17">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+                <TextBlock>Logged in as:</TextBlock>
+                <TextBlock Margin="10 0 0 0">John Doe</TextBlock>
+                <TextBlock Margin="10 0 0 0">|</TextBlock>
+                <TextBlock Margin="10 0 0 0">Store A</TextBlock>
+                <Button Content="Logout" Margin="10 0 0 0" Padding="20 0" />
+            </StackPanel>
+            <Grid Width="1200" Margin="0 150 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="580" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0 0 0 10">ID: 134314134</TextBlock>
+                    <Border BorderBrush="#FFFFFF00" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="4" Grid.Row="1">
+                        <Image  Name="imgMain" VerticalAlignment="top" Stretch="UniformToFill" Source="/PhotoSW;component/images/4.JPG" />
+                    </Border>
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="2" Margin="0 10 0 0" TextBlock.FontWeight="Bold">Original</TextBlock>
+                    <Button Grid.Row="3" HorizontalAlignment="Left" Width="100" Style="{StaticResource ButtonStyleAlpha}">Cancel</Button>
+                    <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="4" Margin="0 15 0 0" Padding="10" Width="580" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" Margin="0 0 10 0" />
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" Margin="0 0 10 0" />
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" />
+                        </StackPanel>
+                    </ScrollViewer>
+                    <TextBlock Grid.Row="5" TextBlock.FontWeight="Bold" Margin="0 10 0 0" HorizontalAlignment="Center" Width="580">Contrast</TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Right" Width="580">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0 0 0 10">ID: 134314134</TextBlock>
+                    <Border BorderBrush="#FFFFFF00" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="4" Grid.Row="1">
+                        <Image  Name="imgMain2" VerticalAlignment="top" Stretch="UniformToFill" Source="/PhotoSW;component/images/4.JPG" />
+                    </Border>
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="2" Margin="0 10 0 0" TextBlock.FontWeight="Bold">Current</TextBlock>
+                    <Button Grid.Row="3" HorizontalAlignment="Left" Width="100" Style="{StaticResource ButtonStyleAlpha}">Save</Button>
+                    <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="4" Margin="0 15 0 0" Padding="10" Width="580" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" Margin="0 0 10 0" />
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" Margin="0 0 10 0" />
+                            <Image Source="/PhotoSW;component/images/4.JPG" Width="100" />
+                        </StackPanel>
+                    </ScrollViewer>
+                    <TextBlock Grid.Row="5" TextBlock.FontWeight="Bold" Margin="0 10 0 0" HorizontalAlignment="Center" Width="580">Brightness</TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid>
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <Canvas  Name="canvas" Background="#FFFFFFFF" Width="632" Height="500">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Path=Value, ElementName=zoomSlider}" ScaleY="{Binding Path=Value, ElementName=zoomSlider}" />
+                    </Canvas.LayoutTransform>
+                    <Image />
+                </Canvas>
+            </ScrollViewer>
+            <Slider  Name="zoomSlider" Minimum="0.1" Maximum="5" Value="1" />
+        </Grid>
+    </Grid>
+</Window>

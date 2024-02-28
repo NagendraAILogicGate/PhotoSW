@@ -1,0 +1,311 @@
+﻿<Window x:Class="PhotoSW.Orders.PlaceOrder" 
+        Loaded="Window_Loaded"
+        Title="PlaceOrder" Height="911" Width="1072" 
+        WindowState="Maximized" WindowStyle="None" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:utbc="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper" 
+        xmlns:pt="clr-namespace:PhotoSW.PSControls" 
+        xmlns:scl="clr-namespace:PhotoSW.PSControls.Calender">
+    <Window.Resources>
+        <utbc:UriToBitmapConverter x:Key="Imageconverter" />
+        <Style x:Key="ImageComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border" Padding="2" SnapsToDevicePixels="True">
+                            <WrapPanel MaxWidth="500">
+                                <ContentPresenter HorizontalAlignment="Center" />
+                            </WrapPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ComboBoxItem.IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Value="{StaticResource SelectedBackgroundBrush}" Property="Border.Background" />
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Value="{StaticResource DisabledForegroundBrush}" Property="Control.Foreground" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ImageComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type ComboBox}">
+            <Setter Property="ItemsControl.ItemContainerStyle" Value="{StaticResource ImageComboBoxItem}" />
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" Template="{StaticResource ComboBoxToggleButton}" Grid.Column="2" Focusable="False" ClickMode="Press" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding ComboBox.SelectionBoxItem}"  ContentTemplateSelector="{TemplateBinding ItemsControl.ItemTemplateSelector}" Margin="3,3,23,3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <TextBox Name="PART_EditableTextBox"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,3,23,3" Focusable="True" Background="#00FFFFFF" Visibility="Hidden" IsReadOnly="{TemplateBinding ComboBox.IsReadOnly}" Style="{x:Null}" />
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding FrameworkElement.ActualWidth}" MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                    <Border Name="DropDownBorder" BorderThickness="1"  />
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <Grid Name="itemsGrid" Height="Auto" Width="Auto" MaxWidth="{TemplateBinding FrameworkElement.MaxWidth}">
+                                            <WrapPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.HasItems" Value="False">
+                                <Setter TargetName="DropDownBorder" Property="FrameworkElement.MinHeight" Value="95" />
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Value="Black" Property="Control.Foreground" />
+                            </Trigger>
+                            <Trigger Property="ItemsControl.IsGrouping" Value="True">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
+                                <Setter TargetName="DropDownBorder" Property="Border.CornerRadius" Value="4" />
+                                <Setter TargetName="DropDownBorder" Property="FrameworkElement.Margin" Value="0,2,0,0" />
+                            </Trigger>
+                            <Trigger Property="ComboBox.IsEditable" Value="True">
+                                <Setter Property="Control.IsTabStop" Value="False" />
+                                <Setter TargetName="PART_EditableTextBox" Property="UIElement.Visibility" Value="Visible" />
+                                <Setter TargetName="ContentSite" Property="UIElement.Visibility" Value="Hidden" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="OderGrdComboDataTemplate">
+            <Grid Height="Auto" Margin="5" Width="Auto" Background="#FFEDEDED">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Stretch="Uniform" Height="100" Width="150" HorizontalAlignment="Stretch" Margin="0,5,0,0" MinWidth="0" MaxWidth="Infinity" Source="{Binding FilePath, Converter={StaticResource Imageconverter}, IsAsync=True}" />
+                <TextBlock Name="Quantity" Height="Auto" TextWrapping="Wrap" Margin="0" VerticalAlignment="Stretch" Grid.Row="1" TextBlock.FontSize="16" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Text="{Binding Quantity}" />
+                <CheckBox Name="ChkSelected" Height="Auto" Margin="0" VerticalAlignment="Stretch" Style="{DynamicResource DigiGrdImgCheckBoxStyle}" Grid.RowSpan="2" Uid="{Binding PhotoId}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplateProduct">
+            <Grid Width="258" Height="89">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="64" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Name="printType_icon" Margin="0" Stretch="Fill" Source="{Binding ProductIcon}" />
+                <TextBlock Name="Description" Grid.Column="1" Margin="5,4.587,0,4.587" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Text="{Binding ProductName}" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="195" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" MinHeight="41" />
+            </Grid.RowDefinitions>
+            <StackPanel  Name="bgContainer" Margin="0,0,-272,-474.132" Grid.RowSpan="3">
+                <Viewbox  Name="vb2" MinWidth="500" MinHeight="500">
+                    <StackPanel  Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <!--<Image  Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />-->
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bgChange_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <!--<StackPanel  Name="FooterredLine" Margin="0" Grid.Row="2" Height="17" VerticalAlignment="Bottom">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPane--><!--l.Background>
+            </StackPanel>-->
+            <Image Source="/PhotoSW;component/images/scroll-shadow.png" Stretch="Fill" Margin="81,0,81,4" Height="23" VerticalAlignment="Bottom" />
+            <Image Margin="81,1,81,0" Source="/PhotoSW;component/images/scroll-shadow-up.png" Stretch="Fill" Grid.Row="2" Height="23" VerticalAlignment="Top" />
+            <ScrollViewer Grid.Row="1" Margin="0,28,0,28.5" Template="{DynamicResource ScrollViewerControlTemplateOrder}">
+                <DataGrid  Name="dgOrder" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,0" Height="Auto" ColumnWidth="*" 
+                           CanUserAddRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" Grid.Row="1" 
+                            RowBackground="#696969" AlternatingRowBackground="#696969" 
+                           SelectionMode="Single" AreRowDetailsFrozen="True" BorderThickness="0,0,0,3"                                 
+                           Background="#FF332E32" 
+                           HeadersVisibility="Column" GridLinesVisibility="Vertical" RowHeight="125" 
+                           FontSize="18.667" Foreground="#FF434343" VerticalAlignment="Top" VerticalGridLinesBrush="#FFBCBCBC" 
+                           ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="{x:Null}">
+                    <!--ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" 
+                           Style="{DynamicResource DigiDataGridStyle}"
+                           CellStyle="{DynamicResource DigiDataGridCellStyle}"
+                    ItemsPanel="{DynamicResource DigiItemsPanelTemplate}" -->
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#808080" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="Padding" Value="10,3,10,3"/>
+                            <Setter Property="BorderBrush" Value="Maroon"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                    <Setter Property="Foreground" Value="#696969"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>                              
+                        <DataGridTemplateColumn Header="Product" Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" MinWidth="125">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" MinHeight="69.72" />
+                                                <RowDefinition Height="25" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" Height="Auto" VerticalAlignment="Stretch" Grid.RowSpan="1">
+                                                <Image Name="ProductParent" Margin="5,0" Visibility="Collapsed" Source="/PhotoSW;component/images/child.png" Stretch="Uniform" Height="31.333" VerticalAlignment="Top" HorizontalAlignment="Center" Width="33.356" />
+                                                <Image Name="ProductImage" Margin="0" Source="/PhotoSW;component/images/Defaultimg.png" Stretch="Uniform" Height="100.92" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                            </StackPanel>
+                                            <TextBlock Name="txtProductType" Margin="2,0" Foreground="#FFFFFFFF" TextWrapping="Wrap" HorizontalAlignment="Stretch" TextBlock.FontSize="16" TextBlock.FontWeight="Normal" Grid.ColumnSpan="1" Width="Auto" Height="25" VerticalAlignment="Bottom" TextBlock.TextAlignment="Center" Grid.Row="1" />
+                                        </Grid>
+                                        <Button Name="btnProductType"  Height="Auto" Width="Auto" Margin="0" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" Style="{DynamicResource DigiButtonStyleBrowseProduct}" Content="Browse..." Foreground="#FF000000" Grid.ColumnSpan="1" Opacity="0"
+                                                Click="btnProductType_Click">
+                                            <Button.Background>
+                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                    <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                                    <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                                    <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                                    <GradientStop Color="#F7CDCDCD" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Button.Background>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Quantity" IsReadOnly="True" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" Height="Auto" MinHeight="125">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="75" />
+                                            <ColumnDefinition Width="56.333" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Name="TotalQuantity" Foreground="#FFFFFFFF" Grid.Column="0" Margin="0" TextWrapping="Wrap" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Row="0" />
+                                        <Grid Grid.Column="1" Margin="0.5,0,0,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*" />
+                                                <RowDefinition Height="0.5*" />
+                                            </Grid.RowDefinitions>
+                                            <Button Name="btnQtyUp"  Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Margin="0,2,0,1" VerticalAlignment="Stretch" Grid.Column="0" FontFamily="Tunga" FontWeight="Bold" FontSize="26.667" IsEnabled="{Binding CommandVisible}"
+                                                    Click="btnQtyUp_Click">
+                                                <Path Data="M23.5,19L7.5,35 39,35z" Fill="#FFFF0000" HorizontalAlignment="Center" Margin="0" Stretch="Fill" Width="35" VerticalAlignment="Center" Height="35" Stroke="{x:Null}" />
+                                            </Button>
+                                            <Button Name="btnQtyDown"  Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" Grid.Row="1" FontFamily="Wingdings 3" FontSize="26.667" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Margin="0,1,0,2" IsEnabled="{Binding CommandVisible}"
+                                                    Click="btnQtyDown_Click">
+                                                <Button.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1" ScaleX="1" />
+                                                        <SkewTransform AngleY="0" AngleX="0" />
+                                                        <RotateTransform Angle="0" />
+                                                        <TranslateTransform />
+                                                    </TransformGroup>
+                                                </Button.RenderTransform>
+                                                <Path Data="M23.5,19L7.5,35 39,35z" Fill="#FFFF0000" HorizontalAlignment="Center" Margin="0" Stretch="Fill" Width="35" VerticalAlignment="Center" Height="35" Stroke="{x:Null}" />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Images" MinWidth="400">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="Auto" Width="Auto">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="142" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" MinHeight="100" />
+                                            <RowDefinition Height="25" />
+                                        </Grid.RowDefinitions>
+                                        <Button Name="btnSelectImage" Foreground="#FFFFFFFF" Height="Auto" Width="76" Style="{DynamicResource DigiButtonStyleBrowseProduct}" Grid.RowSpan="2" Grid.ColumnSpan="1" Grid.Column="1" Margin="0" Content="Browse..." Click="btnSelectImage_Click"/>
+                                        <Button Name="btnAddSemiPrinted" Foreground="#FFFFFFFF" Visibility="Collapsed" Content="Add Printed Images" Style="{DynamicResource DigiBtnAddMore}" Grid.RowSpan="2" Grid.ColumnSpan="1" Grid.Column="1" Margin="0,0,0,0" />
+                                        <ListBox Name="lstPrintImage" Grid.RowSpan="1" Margin="5,0" MinWidth="325" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource DigiListBoxItemStyle}" ItemsPanel="{DynamicResource DigiSelectedImageItemsPanelTemplate}" Background="{x:Null}" BorderBrush="{x:Null}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" MinHeight="24.827" />
+                                                            <RowDefinition Height="25.087" />
+                                                        </Grid.RowDefinitions>
+                                                        <Image Name="printType_icon" Margin="2,0" Stretch="Uniform" Panel.ZIndex="1" Width="100" Height="75" Grid.RowSpan="1" Source="{Binding FilePath}" />
+                                                        <Image Name="vidPlay" Source="/PhotoSW;component/images/play_trans.png" Height="50" Width="50" Panel.ZIndex="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding PlayVisible}" />
+                                                        <Image Name="imgProcessed" Source="/PhotoSW;component/images/processed.png" Panel.ZIndex="3" Grid.RowSpan="2" Grid.Row="0" Width="22" Height="22" Margin="0,0,0,15" ToolTip="Processed Video" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="{Binding ProcessedVisible}" />
+                                                        <TextBlock Name="SelectedProductType_ID" Grid.Column="0" Margin="0" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="13.667" Grid.Row="1" Text="{Binding ProductName}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Name="TotalImageSelected" Foreground="#FFFFFFFF" Grid.Column="0" Margin="2,2,0,2" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="16" TextBlock.FontWeight="Normal" Height="Auto" Grid.Row="1" />
+                                        <Button Grid.RowSpan="1" Margin="5,0" Height="150" MinWidth="325" Opacity="0" Visibility="Collapsed" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Quantity" Width="150" Visibility="Collapsed">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" Height="Auto" MinHeight="125">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="75" />
+                                            <ColumnDefinition Width="56.333" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Name="NetQuantity" Foreground="#FFFFFFFF" Grid.Column="0" Margin="0" TextWrapping="Wrap" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Grid.Row="0" />
+                                        <Grid Grid.Column="1" Margin="0.5,0,0,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*" />
+                                                <RowDefinition Height="0.5*" />
+                                            </Grid.RowDefinitions>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Actions" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btndelete"  Height="80" Width="80" Style="{DynamicResource DigiGridDelButtonStyle}" Tag="{Binding ItemNumber}" Click="btndelete_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+            <StackPanel Margin="17.96,0,0,10" Orientation="Horizontal" Height="103.733" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="Auto">
+                <Button  Name="btnExit" Foreground="#FFFFFFFF" Content="Exit" Style="{DynamicResource DigiButtonStyleExit}" Width="87" Click="btnExit_Click" />
+                <Button  Name="btnAddMore" Content="Add More " Width="117.703" Style="{DynamicResource DigiBtnAddMore}" Foreground="#FFFFFFFF" Margin="10,0,0,0" Click="btnAddMore_Click" />
+                <Button  Name="btnAddSemiPrinted" Content="Add Printed Images" Width="141.703" Foreground="#FFFFFFFF" Style="{DynamicResource DigiBtnAddMore}" Margin="10,0,0,0" Click="btnAddSemiPrinted_Click" />
+            </StackPanel>
+            <Border  Name="BdrAmounttobePaid" HorizontalAlignment="Center" Margin="0,0,0,40" VerticalAlignment="Bottom" Background="#FFDD0000" Padding="5" Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="amount" TextWrapping="Wrap" Text="Amount to be paid: " TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                    <TextBlock  Name="TxtAmounttobePaid" TextWrapping="Wrap" Text="0.00" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" />
+                </StackPanel>
+            </Border>
+            <!--<Button  Name="btnNextsimg" Content="Next" Cursor="Hand" Style="{DynamicResource DigiNextBtnStyle}" Margin="0,0,20,25" HorizontalAlignment="Right" Width="122" VerticalAlignment="Bottom" Height="61" Click="btnNextsimg_Click"/>-->
+            <Button  Name="btnNextsimg" Content="Next" Cursor="Hand" Foreground="#FFFFFFFF" FontSize="30" Style="{DynamicResource ButtonStyleBgRed}" Margin="0,0,20,25" HorizontalAlignment="Right" Width="122" VerticalAlignment="Bottom" Height="61" Click="btnNextsimg_Click"/>
+
+        </Grid>
+        <pt:ctrProductType  x:Name="CtrlProductType" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <Canvas  Name="SelectedtImages" />
+        
+        <pt:SelectedImageslist  x:Name="CtrlSelectedImageslist" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <pt:SelectedAlbumlist  x:Name="CtrlSelectedAlbumlist" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <pt:SelectedImagesQrCode  x:Name="CtrlSelectedQrCode" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <pt:ImportSpecProductImages  x:Name="CtrlImportSpecProductImages" Grid.RowSpan="1" Margin="0,-150,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <scl:SelectedCalenderList  x:Name="CtrlSelectedCalenderList" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+        <pt:SelectedProcessedVideoslist  x:Name="CtrlSelectedProcessedVideoslist" Grid.RowSpan="1" Margin="0,0,0,0" Visibility="Collapsed" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="1" />
+    </Grid>
+</Window>

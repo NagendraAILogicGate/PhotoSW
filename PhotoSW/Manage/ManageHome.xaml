@@ -1,0 +1,488 @@
+﻿<Window x:Class="PhotoSW.Manage.ManageHome" Title="Manage"
+        WindowState="Maximized" WindowStyle="None" Height="Auto" Width="Auto" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:cb="clr-namespace:PhotoSW.PSControls"
+        >
+    <!--xmlns:cb="clr-namespace:DigiPhoto;assembly=DigiPhoto"-->
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition />
+                <RowDefinition Height="17" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Margin="0,0,-272,-452.132" Grid.RowSpan="3">
+                <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                    <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <!--<StackPanel Name="FooterredLine" Margin="0" Grid.Row="2" Height="17" VerticalAlignment="Bottom">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>-->
+            <Viewbox Grid.Row="1">
+                <Border Name="brdMain" BorderBrush="#FFFF0000" Background="#606060"  VerticalAlignment="Top"
+                        HorizontalAlignment="Center" BorderThickness="0" CornerRadius="0" Margin="0,0,0,0">
+                    <Grid Name="manage" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" MinHeight="18" />
+                            <RowDefinition Height="18.5" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnManageSubstores" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/manage-site.png" />
+                                </Button>-->
+                                <Button Name="btnManageSubstores" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-site.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Foreground="White">
+                  <Run Text="Manage Site" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnLocations" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/manage-location.png" />
+                                </Button>-->
+                                <Button Name="btnLocations" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-location.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="11" Text="Manage Locations" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnConfig" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90">
+                                    <Image Source="/PhotoSW;component/images/configuration.png" />
+                                </Button>-->
+                                <Button Name="btnConfig" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/configuration.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Configuration" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+
+                                <Button Name="btnUsrMgmt" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/user-manage.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="User Management" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+
+                                <Button Name="btncashbox" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/cash-box.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Grid.Row="0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="CashBox" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+
+                                <Button Name="btnManageCamera" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-camara.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Manage Camera" />
+                                </TextBlock>
+                            </StackPanel>
+                            <!--<StackPanel Orientation="Vertical">
+
+                                <Button Name="btnManageProduct" Margin="25,20,25,0"  HorizontalAlignment="Center" Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-product.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Manage Product" />
+                                </TextBlock>
+                            </StackPanel>-->
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <StackPanel Orientation="Vertical">
+
+                                <Button Name="btnPrntMgr" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-printer.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Language="en-in" Text="Manage Printers" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <Button Name="btnSystemprinterqueue" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/system-printer-queue.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Language="en-in" Text="System Printer Queue" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnFinancialReport" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/financial-report.png" />
+                                </Button>-->
+                                <Button Name="btnFinancialReport" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/financial-report.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Financial Report" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnRefund" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/refund.png" />
+                                </Button>-->
+                                <Button Name="btnRefund" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/refund.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Refund" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnHealthChkup" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90">
+                                    <Image Source="/PhotoSW;component/images/health-checkup.png" />
+                                </Button>-->
+                                <Button Name="btnHealthChkup" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/health-checkup.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Health Checkup" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnRemapPrinters" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/remap-printers.png" />
+                                </Button>-->
+                                <Button Name="btnRemapPrinters" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/remap-printers.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Remap Printers" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnShutDown" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/shut-down.png" />
+                                </Button>-->
+                                <Button Name="btnShutDown" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/shut-down.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Shutdown" />
+                                </TextBlock>
+                            </StackPanel>
+                            <!--New Added-->
+                            <StackPanel Orientation="Vertical">
+
+                                <Button Name="btnManageProduct" Margin="25,20,25,0"  HorizontalAlignment="Center" Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-product.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Manage Product" />
+                                </TextBlock>
+                            </StackPanel>
+                            <!--New Added-->
+                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2">
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnMinimizeApp" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/minimize.png" />
+                                </Button>-->
+                                <Button Name="btnMinimizeApp" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/minimize.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Minimize" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnCleargroup" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/clear-group.png" />
+                                </Button>-->
+                                <Button Name="btnCleargroup" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/clear-group.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Clear Groups" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnPrinterQueue" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" Width="90" Height="90" VerticalAlignment="Center" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/order-printer-queue.png" />
+                                </Button>-->
+                                <Button Name="btnPrinterQueue" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/order-printer-queue.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="11" Margin="0,0,0,3.5" VerticalAlignment="Bottom">
+                  <Run Text="Order Printer Queue" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" >
+
+                                <Button Name="btnReceiptReprint" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/reprint-receipt.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Reprint Receipt" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <!--<Button Name="btnBurnOrders" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" Width="90" Height="90" VerticalAlignment="Center" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/burn-orders.png" />
+                                </Button>-->
+                                <Button Name="btnBurnOrders" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/burn-orders.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="11" Margin="0,0,0,3.5" VerticalAlignment="Bottom">
+                  <Run Text="Burn Orders" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnsynstatus" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" Width="90" Height="90" VerticalAlignment="Center" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/sync-status.png" />
+                                </Button>-->
+                                <Button Name="btnsynstatus" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/sync-status.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <TextBlock HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="11" Margin="0,0,0,3.5" VerticalAlignment="Bottom">
+                  <Run Text="Sync Status" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnCardType" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" Width="90" Height="90" VerticalAlignment="Center" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/card-type.png" />
+                                </Button>-->
+                                <Button Name="btnCardType"  Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/card-type.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock HorizontalAlignment="Center" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="11" Margin="0,0,0,3.5" VerticalAlignment="Bottom">
+                  <Run Text="Card Type" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnManageDevice" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/manage-device.png" />
+                                </Button>-->
+                                <Button Name="btnManageDevice" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-device.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="Manage Device" />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="3">
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnRFIDMatch" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/RFID-Match.png" />
+                                </Button>-->
+                                <Button Name="btnRFIDMatch" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/RFID-Match.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11">
+                  <Run Text="RFID Match" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnHelp" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90">
+                                    <Image Source="/PhotoSW;component/images/help.png" />
+                                </Button>-->
+                                <Button Name="btnHelp" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/help.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Help" />
+                            </StackPanel>
+                            <!--<StackPanel Orientation="Vertical" >
+                            
+                                <Button Name="btnReceiptReprint" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/reprint-receipt.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Reprint Receipt" />
+                            </StackPanel>-->
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnEmailStatus" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/email-status.png" />
+                                </Button>-->
+                                <Button Name="btnEmailStatus"  Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/email-status.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Email Status" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnCurrencyExchange" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90">
+                                    <Image Source="/PhotoSW;component/images/manage-currency.png" />
+                                </Button>-->
+                                <Button Name="btnCurrencyExchange" Margin="25,20,25,0"  HorizontalAlignment="Center"  Style="{DynamicResource ButtonStyleEnter}" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/manage-currency.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Manage Currency" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <!--<Button Name="btnUpldMasterData" Background="#00FFFFFF" Margin="25,20,25,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" Click="Button_Click">
+                                    <Image Source="/PhotoSW;component/images/import-master-data.png" />
+                                </Button>-->
+                                <Button Name="btnUpldMasterData" Margin="25,20,25,0"  Style="{DynamicResource ButtonStyleEnter}"   HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"  Click="Button_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Image Source="/PhotoSW;component/images/import-master-data.png" Stretch="Fill"></Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Bold" TextBlock.FontSize="11" Text="Import Master Data" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Button Name="btnBack" Grid.Row="3" Grid.Column="4" Margin="0,10,30,0" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Padding="6 2"  Content="Back" Style="{DynamicResource ButtonStyleEnter}" Foreground="#FFFFFFFF" Grid.RowSpan="3"
+                    FontSize="18.667" FontWeight="SemiBold" Click="Button_Click" />
+                        <!--126,13.972,-26.333,-53.474"<Button Name="btnBack" Background="#00FFFFFF" Grid.Row="4" Margin="0,4,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="127" Height="53" Style="{DynamicResource ButtonStyleRed}" FontSize="18.667" Foreground="#FFFFFFFF"
+                                Content="Back" FontWeight="Bold" Grid.Column="4" Grid.RowSpan="3" />-->
+                        <Button Name="btnEnableTaskbar" Background="#00FFFFFF" Grid.Row="2" Margin="20" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="100" Visibility="Collapsed" Click="Button_Click">
+                            <Image Source="/PhotoSW;component/images/ManageStores.png" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </Viewbox>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 20 10 0">
+            <TextBlock TextBlock.FontWeight="Bold" Foreground="Red" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Logged in as:" />
+            </TextBlock>
+            <Button Name="btnUserName" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0">
+                <TextBlock Name="txbUserName"   Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16"/>
+            </Button>
+            <TextBlock Margin="10 0 0 0" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="|" />
+            </TextBlock>
+            <TextBlock Name="txbStoreName" TextBlock.FontWeight="Bold" Margin="10 0 0 0"  Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16">
+        <Run Text="Store A" />
+            </TextBlock>
+            <Button Name="btnLogout" Margin="10 0 0 0" Style="{StaticResource HyperlinkLikeButton}" Padding="20 0" Click="Button_Click">
+                <TextBlock Text="Logout" Foreground="White" FontFamily="Bodoni MT Condensed" FontSize="16" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect Direction="330" Color="Red" Opacity="1.5" BlurRadius="2" ShadowDepth="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </StackPanel>
+        <Grid Name="mycontrol" Visibility="Hidden">
+            <cb:CashBoxes />
+        </Grid>
+    </Grid>
+</Window>
