@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CtrlExistCodePopup" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Grid Margin="0" DataContext="{Binding ElementName=root}">
+        <Border Background="#90000000" Visibility="{Binding Visibility}">
+            <Border BorderThickness="10,30,10,10" VerticalAlignment="Top" Margin="0,0,0,0" Width="400" Height="250" HorizontalAlignment="Center" Background="#FFFFFFFF">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFCC0708" Offset="0.017" />
+                        <GradientStop Color="#FFA00101" Offset="0.091" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid Margin="5,-25,5,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="35" Margin="0,-24,-23,0" Height="36.001" VerticalAlignment="Top">
+                        <Image Source="/PhotoSW;component/images/close-btn.png" />
+                    </Button>
+                    <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" Margin="0,0,0,14.04" HorizontalAlignment="Left">
+            <Run Language="en-in" Text="Confirm" />
+                    </TextBlock>
+                    <Grid Margin="0" Grid.Row="1" MaxWidth="600">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock  Name="MessageTextBlock" Grid.Row="0" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" TextWrapping="Wrap" Margin="5" Text="{Binding Message}" />
+                        <StackPanel  Name="RadioStack" HorizontalAlignment="Center" Margin="0,10" Orientation="Horizontal" Grid.Row="1">
+                            <Viewbox Stretch="Fill" Width="60" Height="60" VerticalAlignment="Bottom">
+                                <RadioButton Name="rdbAddimg" IsChecked="True" Content="Overite" GroupName="A1" FontWeight="Bold" FontSize="13.333" Width="12.8" />
+                            </Viewbox>
+                            <TextBlock TextWrapping="Wrap" Text="Add in existing" VerticalAlignment="Center" TextBlock.FontSize="16" Margin="0,0,5,0" />
+                            <Viewbox Stretch="Fill" Width="60" Height="60" VerticalAlignment="Center">
+                                <RadioButton Name="rdbOverwriteimg" Content="" GroupName="A1" FontWeight="Bold" FontSize="13.333" Width="12.8" />
+                            </Viewbox>
+                            <TextBlock TextWrapping="Wrap" Text="Overwrite" VerticalAlignment="Center" TextBlock.FontSize="16" Margin="0,0,5,0" />
+                        </StackPanel>
+                        <StackPanel Name="StackSave" Orientation="Horizontal" Margin="0,2,0,0" Height="40" Grid.Row="2" HorizontalAlignment="Center">
+                            <Button Name="SaveButton" Width="81" Style="{StaticResource ButtonStylesubmit}" Margin="0,0,10,0" HorizontalAlignment="Left" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Save" Height="34.323" FontSize="16" />
+                            <Button Name="btnClear" Width="81" Style="{DynamicResource ButtonStyleRed}" Margin="10,0,0,0" HorizontalAlignment="Right" Foreground="#FFFFFFFF" Content="Close" Height="34.323" FontSize="16" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

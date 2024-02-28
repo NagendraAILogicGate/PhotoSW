@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CtrlOpenCloseForm" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
+    <Grid Background="#AC000000">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10" Background="#696969" BorderBrush="#FF505050" BorderThickness="2" Width="1000" Height="650" Visibility="{Binding Visibility}">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Name="grdOpening" Width="150" Height="180" Grid.Row="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="../images/grey_frame.png" />
+                    </Grid.Background>
+                    <Button Name="btnOpen" Style="{StaticResource ButtonStyleAlpha2}" VerticalAlignment="Top" Margin="15,20,15,0" Click="btnOpen_Click">
+                        <Image Source="../images/open_icon4.png" Width="130" />
+                    </Button>
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,21" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold">
+            <Run Text="Opening Form" />
+                    </TextBlock>
+                </Grid>
+                <Grid Name="grdClosing" Width="150" Grid.Row="1" Height="180">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="../images/grey_frame.png" />
+                    </Grid.Background>
+                    <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" VerticalAlignment="Top" Margin="15,20,15,0" Click="btnClose_Click">
+                        <Image Source="../images/close_file4.png" Width="130" />
+                    </Button>
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" TextBlock.Foreground="#FFFFFFFF" Margin="0,0,0,21" TextBlock.FontWeight="Bold">
+            <Run Text="Closing Form" />
+                    </TextBlock>
+                </Grid>
+                <StackPanel Name="msg" Margin="5,0,0,3" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Height="84.5" VerticalAlignment="Top">
+                    <TextBlock Name="txtMsg" TextBlock.FontSize="15" TextBlock.FontWeight="Bold" />
+                </StackPanel>
+                <Button Name="btnShowhdeForm" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="42" Margin="0,-10,-10,0" Height="45" VerticalAlignment="Top" Click="btnShowhdeForm_Click">
+                    <Image Source="/PhotoSW;component/images/icon_cross.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CashPayment" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="#AC000000">
+        <Border HorizontalAlignment="Center" Height="500" MaxHeight="600" VerticalAlignment="Center" Width="600" CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="95" />
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Amount:" Margin="12,12,0,255" HorizontalAlignment="Left" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" Grid.ColumnSpan="2" />
+                <TextBox Name="txtAmountEntered" IsReadOnly="True" Margin="88,12,12,255" TextWrapping="Wrap" TabIndex="0" Style="{DynamicResource DigiTextBoxStyle}" Grid.Column="1" Text="{Binding TotalDiscountAmount, StringFormat={}{0:n2}}" TextChanged="txtAmountEntered_TextChanged" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                <ListBox Name="lstCurrency" Margin="15,74,20,49" Grid.ColumnSpan="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <RadioButton Name="rdoSelect" GroupName="ptype" Style="{DynamicResource DigiRadioButtonStyleAlpha}" Grid.RowSpan="1" Height="Auto" Tag="{Binding DG_Currency_pkey}" />
+                                <TextBlock Name="CurrencyName" Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" TextBlock.FontSize="18.667" TextBlock.FontWeight="Bold" Text="{Binding DG_Currency_Symbol}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Name="SPSubmitCancel" Margin="5,0,0,2.929" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Height="84.5" VerticalAlignment="Bottom">
+                    <Button Name="btnSubmit" Content="Submit" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" FontWeight="Bold" Margin="0,12.042" Width="150" Click="btnSubmit_Click" />
+                    <Button Name="btnSubmitCancel" Content="Cancel" Margin="10,9.966,0,9.966" Style="{DynamicResource ButtonStyleRed}" FontSize="26.667" FontWeight="Bold" Foreground="#FFFFFFFF" Width="150" Click="btnSubmitCancel_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="42.333" Margin="0,-28.02,-15.334,0" Height="61.687" Click="btnClose_Click">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

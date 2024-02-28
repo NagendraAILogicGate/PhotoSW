@@ -1,0 +1,247 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CtrlOperationalStatistics" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="#AC000000">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2" Width="1000" Height="700" Visibility="{Binding Visibility}">
+            <Grid Margin="10,0,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Margin="5,5,5,5" HorizontalAlignment="Left" ShowGridLines="True" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="43.904" />
+                            <RowDefinition Height="33.904" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.403" />
+                            <RowDefinition Height="43.904" />
+                            <RowDefinition Height="130.904" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190.042" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Margin="2" Grid.Row="0" Width="Auto" BorderThickness="0">
+                            <TextBox Name="txtHeader" FontSize="20" FontWeight="Bold" BorderThickness="0" TextWrapping="NoWrap" IsEnabled="False" Width="auto" />
+                        </Border>
+                        <Border Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Margin="2" Grid.Row="1" Width="Auto" BorderThickness="0">
+                            <TextBox Name="txtSubHeader" FontSize="18" FontWeight="Bold" BorderThickness="0" TextWrapping="NoWrap" IsEnabled="False" Width="auto" />
+                        </Border>
+                        <TextBlock Grid.Column="0" TextWrapping="NoWrap" Grid.Row="2" Text="Attendance:" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="180" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="2" Width="Auto" BorderThickness="1" BorderBrush="#FF800404">
+                            <TextBox Name="txtAttendance" TextWrapping="Wrap" MaxLength="9" Width="260" FontSize="15" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" GotFocus="txtAttendance_GotFocus" PreviewTextInput="txtAmountEntered_PreviewTextInput" />
+                        </Border>
+                        <TextBlock Grid.Column="2" TextWrapping="NoWrap" Text="Labour Hour:" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="150" TextBlock.TextAlignment="Right" Padding="10,5" Margin="3,1,0,3" HorizontalAlignment="Right" Grid.Row="2" />
+                        <Border Grid.Column="3" Margin="2" Grid.Row="2" Width="Auto" BorderThickness="1" BorderBrush="#FF800404" Grid.ColumnSpan="2">
+                            <TextBox Name="txtLabourHour" TextWrapping="Wrap" MaxLength="10" FontSize="15" Width="260" p9:DecimalProductPrice.IsNumericOnly="True" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" GotFocus="txtLabourHour_GotFocus" 
+                                     xmlns:p9="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper" />
+                        </Border>
+                        <TextBlock Grid.Column="0" Text="No. Of Captures:" TextWrapping="Wrap" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="200" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" Grid.Row="3" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="3" Width="Auto" BorderBrush="#FF800404" BorderThickness="1">
+                            <TextBox Name="txtNoOfCapture" IsEnabled="False" MaxLength="15" TextWrapping="NoWrap" FontSize="15" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" GotFocus="txtNoOfCapture_GotFocus" PreviewTextInput="txtAmountEntered_PreviewTextInput" />
+                        </Border>
+                        <TextBlock Grid.Column="2" Text="No. Of Previews:" TextWrapping="Wrap" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="200" TextBlock.TextAlignment="Right" Padding="10,5" Margin="2,2,0,2" HorizontalAlignment="Left" Grid.Row="3" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="3" Margin="2" Grid.Row="3" Width="Auto" BorderBrush="#FF800404" BorderThickness="1" Grid.ColumnSpan="2">
+                            <TextBox Name="txtNoOfPreviews" IsEnabled="False" MaxLength="15" TextWrapping="NoWrap" FontSize="15" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" PreviewTextInput="txtAmountEntered_PreviewTextInput" />
+                        </Border>
+                        <TextBlock Grid.Column="0" Text="No Of Image Sold:" TextWrapping="Wrap" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="200" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" Grid.Row="4" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="4" Width="Auto" BorderBrush="#FF800404" BorderThickness="1">
+                            <TextBox Name="txtNoOfImageSold" IsEnabled="False" MaxLength="15" TextWrapping="NoWrap" FontSize="15" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" PreviewTextInput="txtAmountEntered_PreviewTextInput" />
+                        </Border>
+                        <TextBlock Grid.Column="0" Text="Comment:" TextWrapping="Wrap" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="200" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" Grid.Row="5" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Grid.ColumnSpan="4" Margin="2" Grid.Row="5" Width="Auto" BorderBrush="#FF800404" BorderThickness="1">
+                            <TextBox Name="txtComment" AcceptsReturn="True" MaxLength="60" TextWrapping="Wrap" Width="auto" Height="140" FontSize="15" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" GotFocus="txtComment_GotFocus" />
+                        </Border>
+                    </Grid>
+                </Grid>
+                <StackPanel Name="SPSubmitCancel" Margin="416,0,179,0" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Height="74" VerticalAlignment="Top" Width="381">
+                    <Button Name="btnback" Content="Back" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" Height="50" FontWeight="Bold" Width="150" Click="btnback_Click" />
+                    <Button Name="btnSubmit" Content="Submit" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" Height="50" FontWeight="Bold" Width="150" Margin="0,7" Click="btnSubmit_Click" />
+                </StackPanel>
+                <Border Name="KeyBorder" Grid.Row="2" Visibility="Hidden" Height="230" Margin="5,0,0,0" VerticalAlignment="Bottom" Style="{DynamicResource DigiBorderStyleKeyboard}">
+                    <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="5" Background="#FFFFEBEB">
+                        <Grid Margin="10,10,-1,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.689*" />
+                                <ColumnDefinition Width="2" />
+                                <ColumnDefinition Width="0.311*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                </Grid.RowDefinitions>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="q" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="w" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="e" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="r" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="t" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF0C0B0B" />
+                                    <Button Content="y" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="u" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="i" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="o" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="p" Margin="1,-12,1,2" Grid.Column="9" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Name="Delete" Content="Back" Margin="1,-12,-1,2" Grid.Column="10" Foreground="#FF040404" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="33,10,10,10" Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="a" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="s" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="d" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="f" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="g" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF0C0B0B" />
+                                    <Button Content="h" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="j" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="k" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="l" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="ENTER" Margin="1,-12,0,2" Grid.Column="9" Foreground="#FF000000" Grid.ColumnSpan="2" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="10" Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="$" Margin="-1,-12,1,2" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="z" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="x" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="c" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="v" Margin="1,-12,1,2" Grid.Column="4" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="b" Margin="1,-12,1,2" Grid.Column="5" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="n" Margin="1,-12,1,2" Grid.Column="6" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="m" Margin="1,-12,1,2" Grid.Column="7" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="#" Margin="1,-12,1,2" Grid.Column="8" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="@" Margin="1,-12,1,2" Grid.Column="9" Foreground="#FF000000" Click="btn_Click" />
+                                    <Button Content="*" Margin="1,-12,1,2" Grid.Column="10" Foreground="#FF000000" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="10" Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="_" Margin="-3,-12,14.061,2" Foreground="#FF000000" Grid.Column="9" Click="btn_Click" />
+                                    <Button Content="SPACE" Margin="-3,-12,5,2" Grid.ColumnSpan="9" Click="btn_Click" />
+                                    <Button Content="CLOSE" Margin="-12,-12,1,2" Grid.Column="10" Foreground="#FF000000" Click="btn_Click" />
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="2" Margin="0,0,15,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*" />
+                                </Grid.RowDefinitions>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="7" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="8" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="9" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="/" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="10" Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="4" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="5" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="6" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="*" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="10" Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="1" Margin="-1,-12,1,2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="2" Margin="1,-12,1,2" Grid.Column="1" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="3" Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="-" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                </Grid>
+                                <Grid Margin="10" Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                        <ColumnDefinition Width="0.09*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="0" Margin="-1,-12,2,2" Foreground="#FF0C0B0B" Grid.ColumnSpan="2" Click="btn_Click" />
+                                    <Button Content="." Margin="1,-12,1,2" Grid.Column="2" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                    <Button Content="+" Margin="1,-12,1,2" Grid.Column="3" Foreground="#FF0C0B0B" Click="btn_Click" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+                <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="42.333" Margin="0,-15,0,0" Height="75.187" VerticalAlignment="Top" Click="btnClose_Click">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.Statistics" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid Height=" 300">
+    <Border CornerRadius="5" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2">
+      <Grid Height=" 300" Width=" 350">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="50" />
+          <RowDefinition Height="50" />
+          <RowDefinition Height="50" />
+          <RowDefinition Height="50" />
+          <RowDefinition Height="50" />
+          <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="250" />
+          <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text=" Total Order " Grid.Row=" 1" Grid.Column="0" Margin=" 10,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize=" 15" />
+        <TextBlock Name="txtTotalOrderCount" Grid.Row=" 1" Grid.Column="1" />
+        <TextBlock Text=" Success Order " Grid.Row=" 2" Grid.Column="0" Margin=" 10,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize=" 15" />
+        <TextBlock Name="txtSucessOrder" Grid.Row=" 2" Grid.Column="1" />
+        <TextBlock Text=" Image Uploaded  " Grid.Row=" 3" Grid.Column="0" Margin=" 10,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize=" 15" />
+        <TextBlock Name="txtTotalImageUploaded" Grid.Row=" 3" Grid.Column="1" TextBlock.Foreground="#FF000000" />
+        <TextBlock Text=" Image Failed " Grid.Row=" 4" Grid.Column="0" Margin=" 10,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize=" 15" />
+        <TextBlock  Name="txtTotalImageFailed" Grid.Row=" 4" Grid.Column="1" />
+      </Grid>
+    </Border>
+    <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" Grid.ColumnSpan=" 2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="42.333" Margin="0,-28.02,-10,0" Height="61.687">
+      <Image Source="/PhotoSW;component/images/close-btn.png" />
+    </Button>
+  </Grid>
+</UserControl>

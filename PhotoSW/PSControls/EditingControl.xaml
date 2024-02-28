@@ -1,0 +1,1101 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.EditingControl" Height="Auto" Width="Auto" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:utbc="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper"
+              xmlns:jr="clr-namespace:PhotoSW.PSControls"
+               xmlns:local="clr-namespace:PhotoSW.ViewModels">
+    <UserControl.Resources>
+        <utbc:UriToBitmapConverter x:Key="Imageconverter" />
+        <Storyboard x:Key="editPanelStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DigiPanbase">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="middlePanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="EtdBtnPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="157" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-0.664" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <DataTemplate x:Key="SolidColorTemplate" DataType="{x:Type SolidColorBrush}">
+            <DockPanel Margin="1">
+                <Border Width="15" Height="15" DockPanel.Dock="Left" Background="{Binding}" />
+            </DockPanel>
+        </DataTemplate>
+        <Style x:Key="RedGlowItemContainer10" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="IconBorder" Background="#FFD3D3D3" CornerRadius="8" BorderThickness="3" Margin="9,2,9,2" Width="123">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="IconBorder">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFFB0202" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                    <Setter.Value>
+                                        <OuterGlowBitmapEffect GlowColor="Red" GlowSize="5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RedGlowItemContainer" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="IconBorder" Background="#FFD3D3D3" CornerRadius="8" BorderThickness="3" Margin="8,4,8,4">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="IconBorder">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFFB0202" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                    <Setter.Value>
+                                        <OuterGlowBitmapEffect GlowColor="Red" GlowSize="5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RedGlowItemContainerPH" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="IconBorder" Background="#FFD3D3D3" CornerRadius="8" BorderThickness="3" Margin="8,4,8,4">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="IconBorder">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFFB0202" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                    <Setter.Value>
+                                        <OuterGlowBitmapEffect GlowColor="Red" GlowSize="5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="SolidColorTemplatePH" DataType="{x:Type SolidColorBrush}">
+            <DockPanel Margin="1">
+                <Border Width="15" Height="15" DockPanel.Dock="Left" Background="{Binding}" />
+            </DockPanel>
+        </DataTemplate>
+        <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemsControl.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate x:Name="mytemplate">
+                        <Grid Margin="0" Width="Auto" Height="95">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" MinHeight="15.98" />
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="1" Width="Auto" Height="Auto" Margin="0,0,0,0" Grid.RowSpan="2" BorderBrush="{x:Null}" Background="{x:Null}" />
+                            <Button  Margin="2,2,-1.632,1" Style="{StaticResource ButtonStyleAlpha2}" Width="Auto" Height="Auto" CommandParameter="{Binding Name}" Tag="{Binding FilePath}">
+                                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding FilePath, Converter={StaticResource Imageconverter}}" />
+                            </Button>
+                            <TextBlock Margin="0" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Background="#00FFFFFF" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        </Style>
+        <Style x:Key="lstEditingControl" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemsControl.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate x:Name="mytemplate">
+                        <Grid Margin="0" Width="Auto" Height="95">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" MinHeight="15.98" />
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="1" Width="Auto" Height="Auto" Margin="0,0,0,0" Grid.RowSpan="2" BorderBrush="{x:Null}" Background="{x:Null}" />
+                            <Button  Margin="2,2,-1.632,1" Style="{StaticResource ButtonStyleAlpha2}" Width="Auto" Height="Auto" CommandParameter="{Binding Title}" Tag="{Binding ImagePath}">
+                                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ImagePath, Converter={StaticResource Imageconverter}}" />
+                            </Button>
+                            <TextBlock Margin="0" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Title}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Background="#00FFFFFF" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        </Style>
+        <DataTemplate x:Key="{DataTemplateKey {x:Type local:RectangleViewModel}}" DataType="{x:Type local:RectangleViewModel}" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="radioButtonList" TargetType="{x:Type ListBox}">
+                <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                <Setter Property="Control.BorderThickness" Value="0" />
+                <Setter Property="ItemsControl.ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="FrameworkElement.Margin" Value="2" />
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border Background="#00FFFFFF">
+                                            <RadioButton Focusable="False" IsHitTestVisible="False" IsChecked="{TemplateBinding ListBoxItem.IsSelected}">
+                                                <ContentPresenter />
+                                            </RadioButton>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35.252" />
+                <RowDefinition />
+                <RowDefinition Height="17" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="bgContainer" Margin="0,0,-272,-452.132" Grid.RowSpan="3">
+                <Button Name="btnVisualPrint" Content="Print" Visibility="Collapsed" />
+                <Viewbox Name="vb2" MinWidth="500" MinHeight="500">
+                    <StackPanel Name="bg_withlogo1" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                        <Image Name="bg1" Source="/PhotoSW;component/images/bg_new.png" />
+                    </StackPanel>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel Name="FooterredLine" Margin="0" Grid.Row="2" Height="17" VerticalAlignment="Bottom">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,42,42" />
+                </StackPanel.Background>
+            </StackPanel>
+            <Grid Name="ContentContainer" Margin="0" Grid.Row="1" Grid.RowSpan="2" SnapsToDevicePixels="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Name="IMGFrame" Margin="0" Grid.RowSpan="2" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Grid Name="img" Margin="8,5,8,98">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" MinHeight="145" />
+                            <RowDefinition Height="2" />
+                        </Grid.RowDefinitions>
+                        <Grid Name="CanBgParent" Margin="0" Grid.RowSpan="2" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Opacity="0">
+                                <Grid Name="GrdSize" SnapsToDevicePixels="True">
+                                    <Image Name="widthimg" Stretch="Uniform" ClipToBounds="True" Margin="0" SnapsToDevicePixels="True" />
+                                </Grid>
+                            </ScrollViewer>
+                            <Grid Name="grdpreview" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center">
+                                <ScrollViewer Name="GrdRotateCropParent" Visibility="Collapsed" Padding="0" BorderThickness="0" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                    <Grid Name="GrdZomout" ClipToBounds="True" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                        <Grid Name="GrdFlip">
+                                            <Grid Name="GrdRotate" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" SnapsToDevicePixels="False">
+                                                <Grid Name="GrdCrop">
+                                                    <Image Name="imgRotateCrop" Stretch="Uniform" ClipToBounds="True" Margin="0" SnapsToDevicePixels="False" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" UseLayoutRounding="False" />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </ScrollViewer>
+                                <Border BorderThickness="2" BorderBrush="#FFFF0000">
+                                    <Grid Name="grdZoomCanvas" Visibility="Visible">
+                                        <Grid Name="forWdht" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
+                                            <Grid Name="canbackgroundold" ClipToBounds="True" KeyDown="MyInkCanvas_KeyDown" MouseWheel="canbackgroundold_MouseWheel">
+                                                <utbc:DragCanvas Name="dragCanvas" Background="#00FFFFFF" ClipToBounds="True" SnapsToDevicePixels="True">
+                                                    <Grid Name="imageundoGrid" />
+                                                    <Grid Name="canbackgroundParent" Visibility="Collapsed">
+                                                        <Grid Name="canbackground" Visibility="Collapsed">
+                                                            <Canvas Name="canbackgroundGridCanvas" Background="#00FFFFFF" VerticalAlignment="Top">
+                                                                <Grid Name="canbackground1">
+                                                                    <Grid Name="canbackgroundRotate">
+                                                                        <Grid Name="BrightnessGreen" Effect="{Binding Effect, ElementName=GrdBrightness}">
+                                                                            <Grid Name="GrdHueShiftGreen" Effect="{Binding Effect, ElementName=GrdHueShift}">
+                                                                                <Grid Name="GrdGreyScaleGreen" Effect="{Binding Effect, ElementName=GrdGreyScale}">
+                                                                                    <Grid Name="GrdInvertGreen" Effect="{Binding Effect, ElementName=GrdInvert}">
+                                                                                        <Grid Name="GrdSharpenGreen" Effect="{Binding Effect, ElementName=GrdSharpen}">
+                                                                                            <Grid Name="GrdSketchGraniteGreen" Effect="{Binding Effect, ElementName=GrdSketchGranite}">
+                                                                                                <Grid Name="GrdEmbossGreen" Effect="{Binding Effect, ElementName=GrdEmboss}">
+                                                                                                    <Grid Name="GrdcolorfilterGreen" Effect="{Binding Effect, ElementName=Grdcolorfilter}">
+                                                                                                        <Grid Name="GrdSepiaGreen" Effect="{Binding Effect, ElementName=GrdSepia}">
+                                                                                                            <Grid Name="GrdUnderWaterGreen" Effect="{Binding Effect, ElementName=GrdUnderWater}">
+                                                                                                                <Grid Name="GrdcartoonizeGreen" Effect="{Binding Effect, ElementName=Grdcartoonize}">
+                                                                                                                    <Grid Name="GrdRedEyeFirstGreen" Effect="{Binding Effect, ElementName=GrdRedEyeFirst}">
+                                                                                                                        <Grid Name="GrdRedEyeSecondGreen" Effect="{Binding Effect, ElementName=GrdRedEyeSecond}">
+                                                                                                                            <Grid Name="GrdRedEyeMultipleGreen" Effect="{Binding Effect, ElementName=GrdRedEyeMultiple}">
+                                                                                                                                <Grid Name="GrdRedEyeMultiple1Green" Effect="{Binding Effect, ElementName=GrdRedEyeMultiple1}">
+                                                                                                                                    <Image Name="mainImageundo" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="False" RenderOptions.EdgeMode="Aliased" ClipToBounds="True" />
+                                                                                                                                </Grid>
+                                                                                                                            </Grid>
+                                                                                                                        </Grid>
+                                                                                                                    </Grid>
+                                                                                                                </Grid>
+                                                                                                            </Grid>
+                                                                                                        </Grid>
+                                                                                                    </Grid>
+                                                                                                </Grid>
+                                                                                            </Grid>
+                                                                                        </Grid>
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Canvas>
+                                                        </Grid>
+                                                    </Grid>
+                                                    <Grid Name="Opacitymsk" ClipToBounds="False" Margin="0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" LayoutUpdated="GrdBrightness_LayoutUpdated">
+                                                        <Grid Name="GrdBrightness" ClipToBounds="False" Margin="0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                            <Grid Name="GrdHueShift">
+                                                                <Grid Name="GrdGreyScale">
+                                                                    <Grid Name="GrdInvert">
+                                                                        <Grid Name="GrdSharpen">
+                                                                            <Grid Name="GrdSketchGranite">
+                                                                                <Grid Name="GrdEmboss">
+                                                                                    <Grid Name="Grdcolorfilter">
+                                                                                        <Grid Name="GrdSepia">
+                                                                                            <Grid Name="GrdUnderWater">
+                                                                                                <Grid Name="Grdcartoonize">
+                                                                                                    <Grid Name="GrdGreenScreenDefault3" ClipToBounds="False" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                                                                        <Grid Name="GrdGreenScreenDefault">
+                                                                                                            <Border Name="opacitymaskmycan">
+                                                                                                                <Border Name="MyInkCanvasParent">
+                                                                                                                    <InkCanvas Name="MyInkCanvas" HorizontalAlignment="Center" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Background="#00FFFFFF" VerticalAlignment="Center" Margin="0,0,0,0" Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}" MouseEnter="MyInkCanvas_MouseEnter">
+                                                                                                                        <InkCanvas.DefaultDrawingAttributes>
+                                                                                                                            <DrawingAttributes StylusTipTransform="Identity" x:Name="attribute" Width="10" Height="10" Color="#00FF00" FitToCurve="False" />
+                                                                                                                        </InkCanvas.DefaultDrawingAttributes>
+                                                                                                                        <Grid Name="GrdRedEyeFirst">
+                                                                                                                            <Grid Name="GrdRedEyeSecond">
+                                                                                                                                <Grid Name="GrdRedEyeMultiple">
+                                                                                                                                    <Grid Name="GrdRedEyeMultiple1">
+                                                                                                                                        <Image Name="mainImage" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="False" RenderOptions.EdgeMode="Aliased" ClipToBounds="True" Margin="0" MouseLeftButtonDown="mainImage_MouseLeftButtonDown" MouseMove="mainImage_MouseMove_1" />
+                                                                                                                                    </Grid>
+                                                                                                                                </Grid>
+                                                                                                                            </Grid>
+                                                                                                                        </Grid>
+                                                                                                                    </InkCanvas>
+                                                                                                                </Border>
+                                                                                                            </Border>
+                                                                                                        </Grid>
+                                                                                                        <Rectangle Name="squre" Visibility="Collapsed" Stroke="#FFFF0000" Fill="#FF00FF00" Width="5" Height="5" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True" />
+                                                                                                    </Grid>
+                                                                                                </Grid>
+                                                                                            </Grid>
+                                                                                        </Grid>
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                    <Grid Name="frm" />
+                                                </utbc:DragCanvas>
+                                                <Canvas Name="dragSelectionCanvas">
+                                                    <Border Name="dragSelectionBorder" Visibility="Collapsed" BorderThickness="1,1,1,1">
+                                                        <Border.BorderBrush>
+                                                            <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                                                <DrawingBrush.Drawing>
+                                                                    <DrawingGroup>
+                                                                        <GeometryDrawing Brush="#FF000000">
+                                                                            <GeometryDrawing.Geometry>
+                                                                                <GeometryGroup>
+                                                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                                                </GeometryGroup>
+                                                                            </GeometryDrawing.Geometry>
+                                                                        </GeometryDrawing>
+                                                                    </DrawingGroup>
+                                                                </DrawingBrush.Drawing>
+                                                            </DrawingBrush>
+                                                        </Border.BorderBrush>
+                                                    </Border>
+                                                </Canvas>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Height="{Binding ActualHeight, ElementName=forWdht, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=forWdht, Mode=OneWay}">
+                                            <Ellipse Name="ellipse" Visibility="Collapsed" Stroke="#FFFF0000" Fill="#60FFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" MouseLeftButtonDown="ellipse_MouseLeftButtonDown" />
+                                        </Grid>
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Height="{Binding ActualHeight, ElementName=forWdht, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=forWdht, Mode=OneWay}">
+                                            <Rectangle Name="greenEraser" Visibility="Collapsed" Stroke="#FFFF0000" Fill="#60FFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="10" Height="10" />
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <Canvas Name="tempcanvas" Visibility="Hidden">
+                                <Canvas.Background>
+                                    <ImageBrush />
+                                </Canvas.Background>
+                            </Canvas>
+                        </Grid>
+                        <Button Height="33" Width="88" Padding="5" HorizontalAlignment="Left" Margin="6,468.224,0,161.024" Content="Add Text" Visibility="Collapsed" Click="Button_Click" />
+                    </Grid>
+                    <Grid Name="GrdEffects" Margin="30,1,25,5" Grid.Column="0" VerticalAlignment="Bottom" Height="114" IsVisibleChanged="GrdEffects_IsVisibleChanged">
+                        <Border Name="BorderPanel">
+                            <Rectangle Stroke="#FF000000">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Border>
+                        <ListBox Name="lstFrame" Visibility="Collapsed" BorderThickness="0" Background="#00FFFFFF" ScrollViewer.HorizontalScrollBarVisibility="Auto" Padding="-30,2,0,2" Template="{DynamicResource DigiListBoxControlTemplate}" ItemContainerStyle="{DynamicResource RedGlowItemContainerPH}" IsVisibleChanged="lstBackground_IsVisibleChanged" />
+                        <ListBox Name="lstBackground" Visibility="Collapsed" BorderThickness="0" Background="#00FFFFFF" ScrollViewer.HorizontalScrollBarVisibility="Auto" Padding="-30,2,0,2" Template="{DynamicResource DigiListBoxControlTemplate}" ItemContainerStyle="{DynamicResource RedGlowItemContainerPH}" IsVisibleChanged="lstBackground_IsVisibleChanged" />
+                        <ListBox Name="lstGraphics" Visibility="Collapsed" BorderThickness="0" Background="#00FFFFFF" ScrollViewer.HorizontalScrollBarVisibility="Auto" Padding="-30,2,0,2" Template="{DynamicResource DigiListBoxControlTemplate}" ItemContainerStyle="{DynamicResource RedGlowItemContainerPH}" IsVisibleChanged="lstBackground_IsVisibleChanged" />
+                        <ListBox Name="lstStrip" Panel.ZIndex="0" Visibility="Collapsed" Margin="5,0,0,0" BorderThickness="0" Background="#00FFFFFF" ScrollViewer.HorizontalScrollBarVisibility="Visible" Padding="5,5,5,5" Template="{DynamicResource DigiListBoxControlTemplate10}" ItemContainerStyle="{DynamicResource RedGlowItemContainer10}" Style="{StaticResource lstEditingControl}" IsVisibleChanged="lstStrip_VisibleChanged" />
+                        <Canvas>
+                            <Button Name="btnPreviousimg" Panel.ZIndex="3" Width="30" Height="140" Margin="0,10,0,0" Cursor="Hand" BorderThickness="0" Opacity="0" />
+                            <Button Name="btnNextsimg" Panel.ZIndex="2" Cursor="Hand" Width="30" Margin="550,10,0,0" Height="140" BorderThickness="0" Opacity="0" />
+                        </Canvas>
+                        <Button Name="btnClose" Content="X Close" HorizontalAlignment="Right" Width="100.709" Margin="0,-20.172,-53.176,0" Style="{DynamicResource ButtonStyleCancel}" Foreground="#FF000000" FontWeight="Bold" Height="52.2" VerticalAlignment="Top" Grid.Row="1" Click="btnClose_Click" />
+                    </Grid>
+                    <jr:JRotate x:Name="jrotate" AngleChanged="jangleAltitudeSelector1_AngleChanged" MouseWheel="jrotate_MouseWheel" Visibility="Hidden" />
+                </Grid>
+                <Grid Name="ColorEffectsIMG" Margin="2,2,25,2" Grid.Row="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="0.50*" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="0.50*" />
+                    </Grid.RowDefinitions>
+                    <Border Background="#FF262326" BorderBrush="#FF000000" BorderThickness="1" Margin="0" HorizontalAlignment="Center" Width="{Binding ActualWidth, ElementName=imgcurrent, Mode=OneWay}">
+                        <TextBlock Height="15.96" HorizontalAlignment="Center" VerticalAlignment="Top" TextBlock.Foreground="#FFFFFFFF" Margin="10,0,0,0" TextBlock.FontWeight="Bold">
+              <Run Text="Current Image" />
+                        </TextBlock>
+                    </Border>
+                    <Border Background="#FF262326" BorderBrush="#FF4A474A" BorderThickness="1" Margin="0" Grid.Row="2" HorizontalAlignment="Center" Width="{Binding ActualWidth, ElementName=imgoriginal, Mode=OneWay}">
+                        <TextBlock HorizontalAlignment="Center" TextBlock.Foreground="#FFFFFFFF" Margin="10,0,0,0" TextBlock.FontWeight="Bold">
+              <Run Text="Original Image" />
+                        </TextBlock>
+                    </Border>
+                    <Grid Name="maingrid" Grid.Row="1">
+                        <Grid Name="Grdbright">
+                            <Grid Name="Grdcont">
+                                <Image Name="imgcurrent" Margin="5" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Name="EtdBtnPanel" Margin="-23.083,70,-16,16.367" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="39.083" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border Name="DigiArrow" HorizontalAlignment="Right" Height="109" Margin="0" VerticalAlignment="Center" />
+                    <Border Name="DigiPanbase" Grid.Column="1" Margin="-2.664,0,0,0">
+                        <Rectangle Stroke="#FF000000">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                    <GradientStop Color="#FF3D373C" Offset="1" />
+                                    <GradientStop Color="#FF151416" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Border>
+                    <Viewbox Name="middlePanel" Grid.Column="1" Margin="15" HorizontalAlignment="Left">
+                        <Grid Name="GrdBtns" Height="742" Width="310">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="5" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Name="GrdMainBtns" Margin="0,18,0,-1.431">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5" Grid.Row="1">
+                                    <StackPanel Margin="0">
+                                        <Button Name="btnCrop" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Crop" HorizontalAlignment="Center" Click="btnCrop_Click">
+                                            <Image Source="/PhotoSW;component/images/crop.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="96.7666666666667">
+                      <Run Text="Crop" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="0">
+                                        <Button Name="btnAddgraphics" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Graphics" HorizontalAlignment="Center" Click="btnAddgraphics_Click">
+                                            <Image Source="/PhotoSW;component/images/graphic.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="85.7666666666667">
+                      <Run Text="Graphics" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,0" Height="106" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                        <Button Name="btnColorEffects" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Color Adjust" IsEnabled="True" HorizontalAlignment="Center" Click="btnColorEffects_Click">
+                                            <Image Source="/PhotoSW;component/images/colour_adjust.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Luminosity" TextBlock.FontSize="18.667" Width="105" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,5">
+                                    <StackPanel Margin="5,0,0,0">
+                                        <Button Name="btnColorEffectsfilters" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Effects" IsEnabled="True" HorizontalAlignment="Center" Click="btnColorEffectsfilters_Click">
+                                            <Image Source="/PhotoSW;component/images/clour_effect.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Effects" TextBlock.FontSize="18.667" Width="85.7666666666667" />
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,0">
+                                        <Button Name="btnrestoremainimg" Style="{DynamicResource DigiRestoreBtnStyle}" ToolTip="Restore" IsEnabled="True" Cursor="Hand" HorizontalAlignment="Center" Click="btnrestoremainimg_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Restore" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="20,0,0,0" Grid.Row="4">
+                                        <Button Name="btnRevert" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" ToolTip="Revert" Cursor="Hand" Click="btnRevert_Click">
+                                            <Image Source="/PhotoSW;component/images/restore.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Revert" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="3">
+                                    <StackPanel Margin="0">
+                                        <RepeatButton Delay="1" Width="78" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="83" Cursor="Hand" ToolTip="Zoom-In" Background="{x:Null}" Click="ZoomInButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                                            <Image Source="/PhotoSW;component/images/zoom-in-icon.png" />
+                                        </RepeatButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="96.7666666666667">
+                      <Run Language="en-in" Text="Zoom-In" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <RepeatButton Delay="1" Margin="10,0,0,0" Width="78" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="83" Cursor="Hand" ToolTip="Zoom-Out" Background="{x:Null}" Click="ZoomOutButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                                            <Image Source="/PhotoSW;component/images/zoom-out-icon.png" />
+                                        </RepeatButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="96.7666666666667">
+                      <Run Language="en-in" Text="Zoom-Out" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="0">
+                                        <Button Name="btnMoveImage" HorizontalAlignment="Left" Margin="15,0,0,0" Style="{DynamicResource ButtonStyleAlpha}" Width="78" VerticalAlignment="Top" Height="83" ToolTip="Enable/Disable Move" Cursor="Hand" Click="btnMoveImage_Click">
+                                            <Image Source="/PhotoSW;component/images/move.png" Stretch="uniform" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="96.7666666666667">
+                      <Run Language="en-in" Text="Move" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="4">
+                                    <StackPanel Margin="0">
+                                        <Button Name="btnThumbnails" Style="{StaticResource DigiButtonStyleThumbnail}" Margin="10,0,0,0" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Images" FontSize="18.667" Width="85" Cursor="Hand" ToolTip="Show/Hide Strip" Click="btnThumbnails_Click" />
+                                    </StackPanel>
+                                    <StackPanel Margin="5" Grid.Row="3">
+                                        <Button Name="btnSaveBack" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Cursor="Hand" ToolTip="Save/Back" Click="btnSaveBack_Click">
+                                            <Image Source="/PhotoSW;component/images/photoID_icon.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Save/Back" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="5">
+                                        <StackPanel Margin="5,0,0,0">
+                                            <Button Name="btnExit" Style="{StaticResource DigiButtonStyleExit}" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Exit" FontSize="18.667" Width="85" Cursor="Hand" ToolTip="Exit Editing Control" Click="btnExit_Click" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Name="CropBtns" Margin="8,0,8,-160" Orientation="Vertical" Grid.Row="5" VerticalAlignment="Bottom" Height="143" Visibility="Collapsed">
+                                    <TextBlock TextWrapping="Wrap" Text="Available Crop Sizes" TextBlock.Foreground="#FFDAFF00" TextBlock.FontWeight="Bold" TextBlock.FontSize="24" Height="33" VerticalAlignment="Bottom" />
+                                    <StackPanel Height="96" Margin="0,7,0,0" Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Width="82">
+                                            <Button Style="{DynamicResource ButtonStyleAlpha2}" Height="65">
+                                                <Image Source="/PhotoSW;component/images/select.png" />
+                                            </Button>
+                                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="6 * 8" TextBlock.FontSize="18.667" Margin="0.117,0,-3.883,0" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Width="82" Margin="5,0,0,0">
+                                            <Button Style="{DynamicResource ButtonStyleAlpha2}" Height="65">
+                                                <Image Source="/PhotoSW;component/images/select.png" />
+                                            </Button>
+                                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="8 * 10" TextBlock.FontSize="18.667" Margin="0.117,0,-3.883,0" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Width="82" Margin="5,0,0,0">
+                                            <Button Style="{DynamicResource ButtonStyleAlpha2}" Height="65">
+                                                <Image Source="/PhotoSW;component/images/select.png" />
+                                            </Button>
+                                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="6 * 8" TextBlock.FontSize="18.667" Margin="0.117,0,-3.883,0" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="GrdsubMain" Margin="0,8,0,0" Grid.Row="2" Visibility="Hidden">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                    <Canvas Name="imgCanvasMagnifier" Width="250" Height="175" Margin="0,0,0,0" ClipToBounds="True">
+                                        <Image Name="imgMagnifier" Margin="2">
+                                            <Image.RenderTransform>
+                                                <TransformGroup x:Name="imgMagnifierTransformGroup">
+                                                    <ScaleTransform x:Name="imgMagnifierScaleTransform" />
+                                                    <TranslateTransform x:Name="imgMagnifierTranslateTransform" />
+                                                </TransformGroup>
+                                            </Image.RenderTransform>
+                                            <Image.LayoutTransform>
+                                                <RotateTransform x:Name="imgMagnifierRotateTransform" />
+                                            </Image.LayoutTransform>
+                                        </Image>
+                                    </Canvas>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="GrdsubCrop" Grid.RowSpan="3" Visibility="Collapsed">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button Content="Close" Height="102.287" Margin="-105.855,-102.287,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleCancel}" HorizontalAlignment="Left" Width="129.99" FontSize="21.333" FontWeight="Bold" Click="CancelButton_Click" />
+                                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="0">
+                                    <StackPanel Margin="10 0 0 -8">
+                                        <Button Name="btnrotate" ToolTip="Rotate" Style="{DynamicResource ButtonStyleAlpha}" Click="btnRotateclick_Click">
+                                            <Image Source="/PhotoSW;component/images/rotate.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Rotate" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10 0 0 8">
+                                        <Button Name="btnantirotate" ToolTip="Rotate" Style="{DynamicResource ButtonStyleAlpha}" Click="btnantirotate_Click">
+                                            <Image Source="/PhotoSW;component/images/anti-rotate.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Rotate" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10 0 0 8">
+                                        <Button Name="btnflip" Style="{DynamicResource ButtonStyleAlpha}" ToolTip="Flip" Click="btnflip_Click">
+                                            <Image Source="/PhotoSW;component/images/flip.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Flip" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                                    <StackPanel Margin="10,0,0,-8">
+                                        <Button Name="btnselect8By11" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 8 * 10" Click="btnselectEightByEleven_Click">
+                                            <Image Source="/PhotoSW;component/images/select.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="8 * 10" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="btnselect" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 6 * 8" Click="btnselect_Click">
+                                            <Image Source="/PhotoSW;component/images/select.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="6 * 8" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="btnselected" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 3 * 3" Click="btnSelectCrop3by3_Click">
+                                            <Image Source="/PhotoSW;component/images/select.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="3 * 3" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="2">
+                                    <StackPanel Margin="10,0,0,-8">
+                                        <Button Name="btnSelectCrop4by6" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 4 * 6" Click="btnSelectCrop4by6_Click">
+                                            <Image Source="/PhotoSW;component/images/select.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="4 * 6" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,0">
+                                        <Button Name="btnSelectCrop5by7" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 5 * 7" Click="btnSelectCrop5by7_Click">
+                                            <Image Source="/PhotoSW;component/images/select.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="5 * 7" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Margin="10,0,0,16" Grid.Row="3" Orientation="Horizontal">
+                                    <StackPanel Margin="10,0,0,19.129">
+                                        <Button Name="btnSelectReverse" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Reverse" IsEnabled="False" Click="btnSelectReverse_Click">
+                                            <Image Source="/PhotoSW;component/images/rotateN.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Reverse" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,16">
+                                        <RepeatButton Name="btnenlargeplus" Delay="1" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" ToolTip="Enlarge/Reduce">
+                                            <Image Source="/PhotoSW;component/images/enlarge.png" />
+                                        </RepeatButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Enlarge " />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,16">
+                                        <RepeatButton Name="btnenlargeminus" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" ToolTip="Enlarge/Reduce" Click="btnenlargeminus_Click">
+                                            <Image Source="/PhotoSW;component/images/reduce.png" />
+                                        </RepeatButton>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Language="en-in" Text="Reduce" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="4" HorizontalAlignment="Left" Height="53" VerticalAlignment="Bottom">
+                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                        <Button Name="OkButton" Style="{StaticResource ButtonStylesubmit}" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Ok" FontSize="18.667" Click="OkButton_Click" />
+                                        <Button Name="CancelButton" Style="{StaticResource ButtonStyleRed}" Margin="10,2,2,2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Cancel" FontSize="18.667" Click="CancelButton_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="GrdsubColoreffects" Grid.RowSpan="5" Visibility="Hidden">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" MinHeight="108.576" />
+                                    <RowDefinition Height="Auto" MinHeight="132.47" />
+                                    <RowDefinition Height="Auto" MinHeight="171.39" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <StackPanel Margin="10,0,0,0" Cursor="Hand" VerticalAlignment="Center">
+                                        <Button Name="BrightnessPlus" ToolTip="Add Brightness" Height="50" Style="{DynamicResource ButtonStylebrightness}" Width="50" Content="+" FontWeight="Bold" FontSize="48" Click="BrightnessPlus_Click" />
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,0" Cursor="Hand" VerticalAlignment="Center" Width="93">
+                                        <Button Name="Brigtness" ToolTip="Enlarge/Reduce Brightness" Height="80.061" Style="{DynamicResource ButtonStyleAlpha}" Width="79.222" FontWeight="Bold" FontSize="48">
+                                            <Image Height="80" Source="/PhotoSW;component/images/Brigtness-new.png" Stretch="Fill" Width="77" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Language="en-in" Text="Brightness" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,0" Cursor="Hand" VerticalAlignment="Center">
+                                        <Button Name="BrightnessMinus" ToolTip="Reduce Brightness" Height="50" Style="{DynamicResource ButtonStylebrightnessminus}" Width="50" Content="-" FontWeight="Bold" FontSize="48" Click="BrightnessMinus_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Center">
+                                    <StackPanel Margin="10,0,0,0" Cursor="Hand" VerticalAlignment="Center" Width="50">
+                                        <Button Name="ContrastPlus" ToolTip="Add Contrast" Height="50" Style="{DynamicResource ButtonStylebrightness}" Width="50" Content="+" FontWeight="Bold" FontSize="48" Click="ContrastPlus_Click" />
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,0" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Width="93">
+                                        <Button Name="ContrastMinus1" ToolTip="Enlarge/Reduce Contrast" Height="80.061" Style="{DynamicResource ButtonStyleAlpha}" Width="83.415" FontWeight="Bold" FontSize="48" Click="ContrastMinus_Click">
+                                            <Image Height="80" Source="/PhotoSW;component/images/contrast-new.png" Stretch="Fill" Width="77" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Language="en-in" Text="Contrast" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,0" Cursor="Hand" VerticalAlignment="Center">
+                                        <Button Name="ContrastMinus" ToolTip="Reduce Contrast" Height="50" Style="{DynamicResource ButtonStylebrightnessminus}" Width="50" Content="-" FontWeight="Bold" FontSize="48" Click="ContrastMinus_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Height="108.152" VerticalAlignment="Top" Margin="85,10,0,0">
+                                    <StackPanel Margin="0,0,0,8">
+                                        <Button Name="btnRestoreBrightCont" ToolTip="Restore" Style="{DynamicResource DigiRestoreBtnStyle}" Cursor="Hand" Click="btnRestoreBrightCont_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Restore" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Margin="25,0,0,-1.493" Grid.Row="2" Height="46.712" VerticalAlignment="Bottom">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Name="OkButtoncolor" Style="{StaticResource ButtonStylesubmit}" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Ok" FontSize="18.667" Width="120.096" Click="OkButtoncolor_Click" />
+                                        <Button Name="CancelButtoncolor" Style="{StaticResource ButtonStyleRed}" Margin="5,2,2,2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Cancel" FontSize="18.667" Width="119.678" Click="CancelButtoncolor_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Content="Close" Height="102.287" Margin="-105.855,-102.287,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleCancel}" HorizontalAlignment="Left" Width="129.99" FontSize="21.333" FontWeight="Bold" Click="CancelButtoncolor_Click" />
+                                <StackPanel Margin="5,8,5,-0.001" Orientation="Vertical" Grid.Row="3">
+                                    <TextBlock Margin="8,0,8,10" TextWrapping="Wrap" Text="Original Image" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" TextBlock.Foreground="#FFFFFFFF" VerticalAlignment="Bottom" />
+                                    <Image Name="imgoriginal" Height="290.288" />
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="GrdsubEffects" VerticalAlignment="Top" Height="724.566" Grid.RowSpan="3" Margin="-8.166,0,-33.755,0" Visibility="Hidden">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2">
+                                    <StackPanel Margin="0 0 0 8">
+                                        <Button Name="btnSharpen" ToolTip="Sharpen" Style="{DynamicResource DigiSharpenBtn}" Cursor="Hand" Click="btnSharpen_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Sharpen" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,0" HorizontalAlignment="Center" Height="104.83" VerticalAlignment="Top">
+                                        <Button Name="btnGreyScale" ToolTip="Black &amp; White" Style="{DynamicResource DigiGrayScaleBtn}" Cursor="Hand" HorizontalAlignment="Center" Click="btnGreyScale_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="113">
+                      <Run Language="en-in" Text="B&amp;W" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,8" Visibility="Collapsed">
+                                        <Button Name="btnInvert" ToolTip="Invert" Style="{DynamicResource DigiInvertBtn}" Cursor="Hand" Click="btnInvert_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Invert" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="Cartoonize" ToolTip="Cartoonize" Style="{DynamicResource ButtonStyleCartoonize}" Cursor="Hand" Click="Cartoonize_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Cartoon" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2" Grid.Row="1">
+                                    <StackPanel Margin="0,0,0,8" Width="92">
+                                        <Button Name="btnSepia" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Sepia" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77" Click="btnSepia_Click">
+                                            <Image Source="/PhotoSW;component/images/Digi-Sepia.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Sepia" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8" Visibility="Collapsed">
+                                        <Button Name="btnEmboss" ToolTip="Emboss" Style="{DynamicResource digiEmbossbtn}" Cursor="Hand" Click="btnEmboss_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Emboss" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="btnUnderWater" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Under Water" IsEnabled="True" Click="btnUnderWater_Click">
+                                            <Image Source="/PhotoSW;component/images/underwater.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Under Water" TextBlock.FontSize="18.667" Width="113" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="btnDefogger" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Defogger" IsEnabled="True" Click="btnDefogger_Click">
+                                            <Image Source="/PhotoSW;component/images/defogger.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Defogger" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2" Grid.Row="2" />
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2" Grid.Row="4">
+                                    <StackPanel Margin="0 0 0 8" Visibility="Collapsed">
+                                        <Button Name="btnHue" ToolTip="Hue Shit" Style="{DynamicResource ButtonStyleHue}" Cursor="Hand" Click="btnHue_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Hue Shift" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,8">
+                                        <Button Name="btnundocoloreffects" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Undo" Width="92" Height="80" Click="btnundocoloreffects_Click">
+                                            <Image Source="/PhotoSW;component/images/restore.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                      <Run Text="Undo" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,8">
+                                        <Button Name="btnEdgeDetect" Style="{DynamicResource DigiedgeDetectBtn}" ToolTip="Sketch Granite" Cursor="Hand" HorizontalAlignment="Center" Click="btnEdgeDetect_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Sketch " TextBlock.FontSize="18.667" Width="113" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,8" Width="109.646">
+                                        <Button Name="btnDigiMagic" Style="{DynamicResource ButtonStyleDigiMagic}" ToolTip="Digi Magic" Cursor="Hand" HorizontalAlignment="Center" Width="77" Click="btnDigiMagic_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="DigiMagic" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2" Grid.Row="5" />
+                                <StackPanel Orientation="Horizontal" Margin="0,0,20,2" Grid.Row="5">
+                                    <StackPanel Margin="5,0,0,8">
+                                        <Button Name="btnRestore" ToolTip="Restore" Style="{DynamicResource DigiRestoreBtnStyle}" Cursor="Hand" Click="btnRestore_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Restore" TextBlock.FontSize="18.667" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,5" Grid.Row="6" HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Name="OkButtoncoloreffect" Style="{StaticResource ButtonStylesubmit}" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Ok" FontSize="18.667" Click="OkButtoncoloreffect_Click" />
+                                        <Button Name="CancelButtoncoloreffect" Style="{StaticResource ButtonStyleRed}" Margin="10,2,2,2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Cancel" FontSize="18.667" Click="CancelButtoncoloreffect_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Content="Close" Height="102.287" Margin="-105.855,-102.287,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleCancel}" HorizontalAlignment="Left" Width="129.99" FontSize="21.333" FontWeight="Bold" Click="CancelButtoncoloreffect_Click" />
+                            </Grid>
+                            <Grid Name="GrdSubGraphics" Visibility="Hidden">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                                        <GradientStop Color="#FF3D373C" Offset="1" />
+                                        <GradientStop Color="#FF151416" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" MinHeight="10" />
+                                    <RowDefinition Height="110.830409356725" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="0.998*" />
+                                    <RowDefinition Height="0.002*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,10,0,0">
+                                    <StackPanel Margin="0,0,0,8">
+                                        <Button Name="btnGraphicsText" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Text" HorizontalAlignment="Center" Click="Button_Click">
+                                            <Image Source="/PhotoSW;component/images/text.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="105.946666666667" Text="Text" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10 0 0 8">
+                                        <Button Name="btnBorder" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Border" Click="btnframe_Click">
+                                            <Image Source="/PhotoSW;component/images/border.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Border" />
+                                    </StackPanel>
+                                    <StackPanel Margin="15,0,0,8">
+                                        <Button Name="btngraphics" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Graphics" Click="btngraphics_Click">
+                                            <Image Source="/PhotoSW;component/images/graphic.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Graphics" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.RowSpan="2">
+                                    <StackPanel Margin="15 0 0 8">
+                                        <Button Name="btndelete" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Delete" Click="btndelete_Click">
+                                            <Image Source="/PhotoSW;component/images/delete.png" />
+                                        </Button>
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Delete " />
+                                    </StackPanel>
+                                    <StackPanel Margin="25,0,0,8">
+                                        <Button Name="btnRestoreGraphics" Style="{DynamicResource DigiRestoreBtnStyle}" ToolTip="Restore" Cursor="Hand" Click="btnRestoreGraphics_Click" />
+                                        <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Restore " />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Margin="0 0 0 8" Grid.Row="7" Orientation="Horizontal" />
+                                <Border BorderThickness="0 1 0 0" BorderBrush="#FFA7A7A7" Grid.Row="6" Margin="0,0,0,2" Height="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <Border BorderThickness="0 1 0 0" BorderBrush="#FFA7A7A7" Grid.Row="7" Height="3" VerticalAlignment="Top" Margin="0,13,0,0" />
+                                <Border BorderThickness="0 1 0 0" BorderBrush="#FFA7A7A7" Grid.Row="7" Margin="0,153,0,0" Height="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <Border BorderThickness="0 1 0 0" BorderBrush="#FFA7A7A7" Grid.Row="7" Margin="0,128,0,0" Height="3" VerticalAlignment="Top" />
+                                <Grid Margin="15,9,0,0" Grid.Row="7" HorizontalAlignment="Left" Height="135" VerticalAlignment="Top" Visibility="Collapsed">
+                                    <Ellipse Stroke="#FFE6F9E0" HorizontalAlignment="Left" Width="131.33" Height="131.33" VerticalAlignment="Top">
+                                        <Ellipse.Fill>
+                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                                <GradientStop Color="#FFCDCDCD" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <RepeatButton Name="btnleft" Margin="6.018,42.918,0,0" Padding="5" Height="37.254" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39.512" Click="btnleft_Click">
+                                        <Image Source="/PhotoSW;component/images/left1.png" Stretch="Fill" />
+                                    </RepeatButton>
+                                    <RepeatButton Name="btnright" Margin="0,42.918,5.266,0" Padding="5" Height="37.254" VerticalAlignment="Top" HorizontalAlignment="Right" Width="39.512" Click="btnright_Click">
+                                        <Image Source="/PhotoSW;component/images/right.png" Stretch="Fill" />
+                                    </RepeatButton>
+                                    <RepeatButton Name="btndown" Margin="46.642,83.007,0,8.811" Padding="5" HorizontalAlignment="Left" Width="39.512" Click="btndown_Click">
+                                        <Image Source="/PhotoSW;component/images/down.png" Stretch="Fill" />
+                                    </RepeatButton>
+                                    <RepeatButton Name="btnup" Margin="46.642,5.266,0,0" Padding="5" Height="39.513" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39.513" Click="btnup_Click">
+                                        <Image Source="/PhotoSW;component/images/up1.png" Stretch="Fill" />
+                                    </RepeatButton>
+                                </Grid>
+                                <StackPanel Name="spZoomlabel" Margin="15,7,0,0" Grid.Row="7" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left" Width="128" Height="32">
+                                    <Label Name="lblzoomplus" Margin="0,1,0,-1" Width="128" Foreground="#FFFFFFFF" FontSize="18.667" FontWeight="Bold" />
+                                </StackPanel>
+                                <StackPanel Name="spZoompanel" Margin="5,41,0,0" Grid.Row="7" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <RepeatButton Delay="1" Width="78" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="83" Cursor="Hand" ToolTip="Zoom In Button" Background="{x:Null}" Click="ZoomInButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                                        <Image Source="/PhotoSW;component/images/zoom-in-icon.png" />
+                                    </RepeatButton>
+                                    <RepeatButton Delay="1" Margin="15,0,0,0" Width="78" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="83" Cursor="Hand" ToolTip="Zoom Out Button" Background="{x:Null}" Click="ZoomOutButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                                        <Image Source="/PhotoSW;component/images/zoom-out-icon.png" />
+                                    </RepeatButton>
+                                </StackPanel>
+                                <StackPanel Name="spRotatepanel" Margin="5,35,0,0" Grid.Row="7" VerticalAlignment="Top" Orientation="Horizontal" Height="81" Background="#FF282528" HorizontalAlignment="Left" Width="177" Visibility="Collapsed">
+                                    <RepeatButton Name="btnRotateInButton" Delay="1" Width="78" BorderThickness="0" Margin="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Background="{x:Null}" Click="RotateInButton_Click" MouseWheel="RepeatButton_MouseWheel_2">
+                                        <Image Source="/PhotoSW;component/images/anti-rotate.png" />
+                                    </RepeatButton>
+                                    <RepeatButton Name="btnAntiRotate" Delay="1" Margin="17,0,0,0" Width="75.485" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Background="{x:Null}" Click="AntiRotateButton_Click" MouseWheel="RepeatButton_MouseWheel_2">
+                                        <Image Source="/PhotoSW;component/images/rotate.png" Height="78.159" />
+                                    </RepeatButton>
+                                </StackPanel>
+                                <Button Name="btnrotateGraphics" ToolTip="Rotate" Style="{DynamicResource ButtonStyleDisableCross}" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="7" Height="83" Margin="0,42,33,0" Width="78" Click="btnrotateGraphics_Click">
+                                    <Image Source="/PhotoSW;component/images/rotate.png" />
+                                </Button>
+                                <jr:AngleRotate x:Name="angleRotate1" AngleChanged="angleAltitudeSelector1_AngleChanged" Grid.Row="7" HorizontalAlignment="Right" Margin="0,7,17,0" Width="132" Height="137" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                                    <jr:AngleRotate.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </jr:AngleRotate.RenderTransform>
+                                </jr:AngleRotate>
+                                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Text Content" HorizontalAlignment="Left" Margin="15,134,0,0" Grid.Row="7" VerticalAlignment="Top" />
+                                <TextBox Name="txtContent" Grid.Row="7" Margin="15,157,15,0" FontSize="30" VerticalAlignment="Top" TextChanged="txtContent_TextChanged" LostFocus="txtContent_LostFocus" />
+                                <ComboBox Name="cmbFont" Grid.Row="7" Margin="15,209,15,0" SelectedIndex="0" FontSize="30" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectionChanged="cmbFont_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock TextBlock.FontFamily="{Binding .}" Text="{Binding Source}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <ComboBox Name="CmbFontSize" SelectedIndex="1" Grid.Row="7" Margin="15,256,15,0" Text="Font Size" FontSize="30" VerticalAlignment="Top" SelectionChanged="CmbFontSize_SelectionChanged" />
+                                <ComboBox Name="CmbColor" Grid.Row="7" Margin="15,308,15,0" ItemTemplate="{StaticResource SolidColorTemplate}" SelectedIndex="0" FontSize="30" Height="45" VerticalAlignment="Top" SelectionChanged="CmbColor_SelectionChanged">
+                                    <SolidColorBrush Color="DarkRed" x:Name="DarkRed" />
+                                    <SolidColorBrush Color="Black" x:Name="Black" />
+                                    <SolidColorBrush Color="White" x:Name="White" />
+                                    <SolidColorBrush Color="Red" x:Name="Red" />
+                                    <SolidColorBrush Color="OrangeRed" x:Name="OrangeRed" />
+                                    <SolidColorBrush Color="Orange" x:Name="Orange" />
+                                    <SolidColorBrush Color="Green" x:Name="Green" />
+                                    <SolidColorBrush Color="Blue" x:Name="Blue" />
+                                    <SolidColorBrush Color="AliceBlue" x:Name="AliceBlue" />
+                                    <SolidColorBrush Color="Cyan" x:Name="Cyan" />
+                                    <SolidColorBrush Color="Magenta" x:Name="Magenta" />
+                                    <SolidColorBrush Color="Yellow" x:Name="Yellow" />
+                                    <SolidColorBrush Color="Pink" x:Name="Pink" />
+                                    <SolidColorBrush Color="Purple" x:Name="Purple" />
+                                    <SolidColorBrush Color="Brown" x:Name="Brown" />
+                                </ComboBox>
+                                <Border BorderThickness="0 1 0 0" BorderBrush="#FFA7A7A7" Grid.Row="7" Margin="0,358,0,0" Height="3" VerticalAlignment="Top" />
+                                <ComboBox Name="CmbProductType" Grid.Row="7" Margin="15,364,15,0" Visibility="Collapsed" Height="40" DisplayMemberPath="Key" SelectedValuePath="Value" Style="{DynamicResource DigiComboBoxStle}" FontSize="30" VerticalAlignment="Top" SelectionChanged="CmbProductType_SelectionChanged" />
+                                <Button Content="Close" Height="102" Margin="-106,-102,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleCancel}" HorizontalAlignment="Left" Width="130" FontSize="21.333" FontWeight="Bold" Click="CancelButton_Click" />
+                                <StackPanel Name="sppanelFrontBack" Margin="7,1,8,-9" Grid.Row="6" Orientation="Horizontal" Visibility="Visible">
+                                    <Button Name="btnBringToFront" Content="To Front" Width="91" BorderThickness="0" Margin="0" Foreground="#FFFFFFFF" Style="{DynamicResource DigiBtnAddMore}" FontSize="18.667" Cursor="Hand" ToolTip="Bring To Front" Click="BringToFront_Click" />
+                                    <Button Name="btnSendToBack" Content="To Back" Margin="14,0,0,0" Width="85" BorderThickness="0" Foreground="#FFFFFFFF" Style="{DynamicResource DigiBtnAddMore}" FontSize="18.667" Cursor="Hand" ToolTip="Send To Back" Click="SendToBack_Click" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+        </Grid>
+        <StackPanel Margin="250,10,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <TextBlock Name="txtMainImage" HorizontalAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" Height="25" />
+        </StackPanel>
+        <Image Name="imgMainPrint" Margin="0" />
+        <Grid Name="GrdPrint" Margin="0" Visibility="Collapsed">
+            <Grid Margin="0">
+                <Border Background="#90000000" Visibility="{Binding Visibility}">
+                    <Border BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/PhotoSW;component/images/login-bg.png" />
+                        </Border.Background>
+                        <Grid Margin="15" Width="330" Height="160">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35" />
+                                <RowDefinition Height="113" />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Button Name="btnClose1" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="97" Margin="0,-88.345,-82,0" Height="141.346" Click="btnClose1_Click">
+                                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                                </Button>
+                                <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.FontSize="12" Grid.ColumnSpan="2">
+                  <Run Language="en-in" Text="Print Image" />
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.AcquiredFrames" 
+             
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
+    <Grid Name="LayoutRoot" Background="#50000000" Margin="0">
+        <Grid Name="MainPanel" Width="700" Height="600" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="256" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="8">
+                    <Viewbox Name="vb1" MinWidth="500" MinHeight="500">
+                        <StackPanel Name="bg_withlogo" ClipToBounds="True" HorizontalAlignment="Stretch" UseLayoutRounding="False">
+                            <Image Name="bg" Source="/PhotoSW;component/images/bg.png" />
+                        </StackPanel>
+                    </Viewbox>
+                </StackPanel>
+                <TextBlock Margin="0,0,5,0" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Photographer Name :" />
+                </TextBlock>
+                <ComboBox Name="CmbPhotographerNo" SelectedValuePath="Value" DisplayMemberPath="Key" Grid.Column="1" Margin="5,5,8,5" Grid.Row="2" Style="{DynamicResource DigiComboBoxStle}" SelectionChanged="CmbPhotographerNo_SelectionChanged" />
+                <TextBlock Margin="0,0,5,0" Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Starting No :" />
+                </TextBlock>
+                <TextBox Name="tbStartingNo" Grid.Column="1" Margin="5,5,8,5" Grid.Row="3" TextWrapping="Wrap" Style="{DynamicResource DigiTextBoxStyle}" />
+                <TextBlock Margin="0,0,5,0" Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Location :" />
+                </TextBlock>
+                <ComboBox Name="CmbLocation" SelectedValuePath="Value" DisplayMemberPath="Key" Grid.Column="1" Margin="5,5,8,5" Grid.Row="4" Style="{DynamicResource DigiComboBoxStle}" />
+                <TextBlock Name="Lastimageno" Margin="15,0,74,0" Grid.Row="5" TextWrapping="Wrap" TextBlock.FontSize="24" TextBlock.FontWeight="Bold" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="60.962" Visibility="Collapsed">
+          <Run Language="en-in" />
+                </TextBlock>
+                <ProgressBar Name="DownloadProgress" Grid.Row="6" Grid.ColumnSpan="2" Margin="15,20,15,20" />
+                <StackPanel Margin="0" Orientation="Horizontal" Grid.Row="7" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Left">
+                    <Button Name="btnDownload" Content="Download" VerticalAlignment="Bottom" Height="60" HorizontalAlignment="Center" Width="149" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="24" FontWeight="Bold" Click="btnDownload_Click" />
+                    <Button Name="btnBack" Content="Back" VerticalAlignment="Bottom" Height="60" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="24" FontWeight="Bold" Width="149" Margin="10,0,0,0" Click="btnBack_Click" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

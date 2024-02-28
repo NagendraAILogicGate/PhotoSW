@@ -1,0 +1,396 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.AddEditSpecPrintProfile" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:dc="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper"
+  >
+  <!--xmlns:dc="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper" 
+  xmlns:dic="clr-namespace:DigiPhoto;assembly=DigiPhoto,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null"-->
+  <UserControl.Resources>
+    <DataTemplate x:Key="SolidColorTemplate" DataType="{x:Type SolidColorBrush}">
+      <DockPanel Margin="1">
+        <Border Width="35" Height="35" DockPanel.Dock="Left" Background="{Binding}" />
+      </DockPanel>
+    </DataTemplate>
+    <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+      <Setter Property="Control.Background" Value="#00FFFFFF" />
+      <Setter Property="Control.HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+      <Setter Property="Control.VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+      <Setter Property="Control.Padding" Value="2,0,0,0" />
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ListBoxItem}">
+            <Border Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Padding="{TemplateBinding Control.Padding}" SnapsToDevicePixels="True" Margin="5">
+              <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Property="Border.Background" />
+                <Setter Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" Property="Control.Foreground" />
+              </Trigger>
+              <MultiTrigger>
+                <MultiTrigger.Conditions>
+                  <Condition Property="ListBoxItem.IsSelected" Value="True" />
+                  <Condition Property="Selector.IsSelectionActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Property="Border.Background" />
+                <Setter Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Property="Control.Foreground" />
+              </MultiTrigger>
+              <Trigger Property="UIElement.IsEnabled" Value="False">
+                <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Property="Control.Foreground" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <ControlTemplate x:Key="ListBoxControlTemplate" TargetType="{x:Type ListBox}">
+      <Border Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Padding="1" SnapsToDevicePixels="True">
+        <ScrollViewer Focusable="False" Padding="{TemplateBinding Control.Padding}">
+          <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" HorizontalAlignment="Center" />
+        </ScrollViewer>
+      </Border>
+      <ControlTemplate.Triggers>
+        <Trigger Property="UIElement.IsEnabled" Value="False">
+          <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Property="Border.Background" />
+        </Trigger>
+        <Trigger Property="ItemsControl.IsGrouping" Value="True">
+          <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        </Trigger>
+      </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+      <Setter Property="ItemsControl.ItemTemplate">
+        <Setter.Value>
+          <DataTemplate x:Name="mytemplate">
+            <Grid Margin="0" Width="100" Height="110">
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" MinHeight="23.98" />
+              </Grid.RowDefinitions>
+              <Border BorderThickness="1" BorderBrush="#FF000000" Width="Auto" Height="Auto" Margin="0,0,-3.632,0" Grid.RowSpan="2" Background="{x:Null}" />
+              <Button  Margin="2,2,-1.632,1" Style="{StaticResource ButtonStyleAlpha2}" Width="Auto" Height="Auto" CommandParameter="{Binding Name}" Tag="{Binding FilePath}">
+                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding FilePath, Converter={StaticResource Imageconverter}, IsAsync=True}" />
+              </Button>
+              <TextBlock Margin="0" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Photoname}" />
+            </Grid>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemsControl.ItemsPanel">
+        <Setter.Value>
+          <ItemsPanelTemplate>
+            <WrapPanel Orientation="Vertical" Background="#00FFFFFF" Width="675" Height="375" Margin="5" />
+          </ItemsPanelTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+    </Style>
+  </UserControl.Resources>
+  <Grid Margin="2,2,2,2">
+    <Border BorderBrush="#FFFF0000" BorderThickness="2px" Margin="5,5,5,5">
+      <ScrollViewer>
+        <Grid Name="grdSpecProf" Background="#FFF5F5F5" ScrollViewer.VerticalScrollBarVisibility="Visible">
+          <Border BorderBrush="#FFFF0000" BorderThickness="0" Margin="0,0,0,30">
+            <Grid FlowDirection="LeftToRight">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="50" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="54" />
+                <RowDefinition Height="55.481" />
+                <RowDefinition Height="62.741" />
+                <RowDefinition Height="59.644" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="0.459*" />
+                <ColumnDefinition Width="0.541*" />
+                <ColumnDefinition Width="314" />
+              </Grid.ColumnDefinitions>
+              <StackPanel Name="spZoompanel" Visibility="Visible" Grid.Column="2" Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,0,-15,0">
+                <StackPanel Orientation="Vertical" Width="84.667" Margin="5,0,0,0">
+                  <TextBlock TextWrapping="Wrap">
+                    <Run Language="en-in" Text="Rotate Angle" />
+                  </TextBlock>
+                  <StackPanel Orientation="Horizontal" Height="58.734">
+                    <TextBox Name="txtAngle" Margin="5,5,0,5" Width="32.667" Text="0" TextChanged="txtAngle_TextChanged" />
+                    <StackPanel Margin="3,0,0,0" VerticalAlignment="Center" Width="43.333">
+                      <RepeatButton Name="cmdUp" Delay="1" Margin="0,0,0,-0.001" Content="˄" Click="cmdUp_Click" />
+                      <RepeatButton Name="cmdDown" Delay="1" Margin="0,0,0,-0.001" Content="˅" Click="cmdDown_Click" />
+                    </StackPanel>
+                  </StackPanel>
+                </StackPanel>
+                <RepeatButton Delay="1" Width="50" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="50" Margin="10,15,0,0" Background="{x:Null}" Click="ZoomInButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                  <Image Source="../images/zoom-in-icon.png" Width="50" Height="50" />
+                </RepeatButton>
+                <RepeatButton Delay="1" Margin="7,15,0,0" Width="50" BorderThickness="0" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" Height="50" Background="{x:Null}" Click="ZoomOutButton_Click" MouseWheel="RepeatButton_MouseWheel">
+                  <Image Source="../images/zoom-out-icon.png" />
+                </RepeatButton>
+              </StackPanel>
+              <StackPanel Margin="0,7.367,211.5,0" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="0">
+                <Button Name="btnHighPreview" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Center" Width="50" Height="50" Click="btnPreviewAutoCorrect_Click">
+                  <Image Source="/DigiPhoto;component/images/previewPhoto_icon.png" />
+                </Button>
+                <TextBlock Name="txbPreview" TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333">
+                  <Run Text="Preview" />
+                  <Run Language="en-in" />
+                </TextBlock>
+              </StackPanel>
+              <StackPanel Margin="0,0,67.5,-0.002" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button Name="btngraphics1" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Graphics" Width="50" Height="50" Click="btnGraphics_Click">
+                  <Image Source="/DigiPhoto;component/images/graphic.png" />
+                </Button>
+                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333" Text="Graphics" />
+              </StackPanel>
+              <StackPanel Margin="0,0,130.5,-0.038" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Name="btngraphics2" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Browse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Click="btnFileOpen_Click">
+                  <Image Source="/DigiPhoto;component/images/BrowseProduct.png" />
+                </Button>
+                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333" Text="Add Image" />
+              </StackPanel>
+              <StackPanel Margin="0,0,5,-0.006" HorizontalAlignment="Right" Width="50" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom">
+                <Button Name="btndelete" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Delete" Click="btndelete_Click_1">
+                  <Image Source="/DigiPhoto;component/images/delete.png" />
+                </Button>
+                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333" Text="Delete " />
+              </StackPanel>
+              <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Vertical" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="0">
+                <StackPanel Margin="5,0,0,10" Orientation="Horizontal" HorizontalAlignment="Left">
+                  <TextBlock HorizontalAlignment="Right" Height="25" TextWrapping="Wrap">
+                    <Run Language="en-in" Text="Product Type" />
+                  </TextBlock>
+                  <ListBox Name="lstboxProductTypes" Width="auto" Height="180" Margin="5,5,5,0" FontSize="18.667" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemContainerStyle="{x:Null}" Style="{x:Null}">
+                    <ListBox.ItemTemplate>
+                      <DataTemplate>
+                        <WrapPanel Orientation="Vertical">
+                          <Viewbox Height="28" HorizontalAlignment="Left" Margin="5,4.057">
+                            <CheckBox FontWeight="Bold" IsChecked="{Binding IsChecked}" Tag="{Binding DG_Orders_ProductType_pkey}" Content="{Binding DG_Orders_ProductType_Name}" />
+                          </Viewbox>
+                        </WrapPanel>
+                      </DataTemplate>
+                    </ListBox.ItemTemplate>
+                  </ListBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Horizontal" VerticalAlignment="Center">
+                  <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30">
+                    <CheckBox Name="chkbrightness" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Unchecked="chkBorder_Unchecked" Checked="chkBorder_Checked" />
+                  </Viewbox>
+                  <TextBlock Height="25" TextWrapping="Wrap" Text="Brightness value" />
+                  <TextBox Name="txtbrightness" Margin="5" Text="0" Style="{DynamicResource DigiTextBoxStyle}" FontSize="18.667" Width="120" Height="40" />
+                </StackPanel>
+                <StackPanel Margin="5,5,0,5" Orientation="Horizontal">
+                  <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30" HorizontalAlignment="Left">
+                    <CheckBox Name="chkcontrast" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Height="14.63" Width="17" Unchecked="chkBorder_Unchecked" Checked="chkBorder_Checked" />
+                  </Viewbox>
+                  <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="Contrast value" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                  <TextBox Name="txtcontrast" Margin="5" Text="1" Style="{DynamicResource DigiTextBoxStyle}" FontSize="18.667" Width="120" Height="40" />
+                </StackPanel>
+              </StackPanel>
+              <Grid Name="grdsize" Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Grid.ColumnSpan="2" Margin="10,5,5,5">
+                <Image Name="mainImagesize" Source="/DigiPhoto;component/images/125412626.jpg" Stretch="Uniform" ClipToBounds="True" />
+              </Grid>
+              <Grid Name="canbackground" Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" ClipToBounds="True" Margin="10,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="{Binding ActualWidth, ElementName=grdsize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=grdsize, Mode=OneWay}">
+                <Grid.Background>
+                  <ImageBrush />
+                </Grid.Background>
+                <Viewbox Name="ZoomBox" HorizontalAlignment="Center" VerticalAlignment="Top">
+                  <Grid>
+                    <Image Name="mainImage_Size" Source="/DigiPhoto;component/images/125412626.jpg" ClipToBounds="True" Margin="0" Opacity="0" MouseLeftButtonUp="mainImage_Size_MouseLeftButtonUp" />
+                    <dc:DragCanvas Name="dragCanvas" AllowDragOutOfView="True" ClipToBounds="False" AllowDragging="True">
+                      <Grid Name="GrdBrightness" Margin="0">
+                        <Grid Name="GrdContrast">
+                          <Grid Name="GrdHueShift">
+                            <Grid Name="GrdGreyScale">
+                              <Grid Name="GrdInvert">
+                                <Grid Name="GrdSharpen">
+                                  <Grid Name="GrdSketchGranite">
+                                    <Grid Name="GrdEmboss">
+                                      <Grid Name="Grdcolorfilter">
+                                        <Grid Name="Grdcartoonize" MouseWheel="GrdBrightn_MouseWheel">
+                                          <Image Name="mainImage" Source="/DigiPhoto;component/images/125412626.jpg" ClipToBounds="True" Margin="0" MouseLeftButtonUp="mainImage_MouseLeftButtonUp" />
+                                        </Grid>
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid Name="frm" ZIndex="10" Margin="0" />
+                    </dc:DragCanvas>
+                  </Grid>
+                </Viewbox>
+              </Grid>
+              <Border BorderBrush="#FF8F8F8F" BorderThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#FFE2E2E2" CornerRadius="5" Grid.Row="3" Margin="0,0,0,-5" />
+              <StackPanel Margin="5,0,0,10" Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Left">
+                <Viewbox Margin="0" VerticalAlignment="Center" Height="30" Stretch="Fill" Visibility="Visible">
+                  <CheckBox Name="chkBorder" Content="" HorizontalContentAlignment="Right" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Unchecked="chkBorder_Unchecked" Checked="chkBorder_Checked" />
+                </Viewbox>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" TextBlock.FontSize="16">
+                  <Run Language="en-in" Text="Border" />
+                </TextBlock>
+              </StackPanel>
+              <ComboBox Name="cmbVerticalBorder" Grid.Column="1" DisplayMemberPath="Value" SelectedValuePath="Key" Margin="5,5,5,0" Style="{DynamicResource DigiComboBoxStle}" Height="50" VerticalAlignment="Top" FontSize="18.667" Grid.Row="3" />
+              <StackPanel Margin="0,0,10,10" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3" HorizontalAlignment="Right">
+                <Viewbox Margin="0" VerticalAlignment="Center" Height="30" Stretch="Fill" Visibility="Collapsed">
+                  <CheckBox Name="chkBorder2" Content="" HorizontalContentAlignment="Right" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Unchecked="chkBorder_Unchecked" Checked="chkBorder_Checked" />
+                </Viewbox>
+                <TextBlock HorizontalAlignment="Right" Height="25" TextWrapping="Wrap">
+                  <Run Language="en-in" Text="Vertical" />
+                </TextBlock>
+              </StackPanel>
+              <StackPanel Margin="0,0,10,10" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Right">
+                <TextBlock HorizontalAlignment="Right" Height="25" TextWrapping="Wrap">
+                  <Run Language="en-in" Text="Horizontal" />
+                </TextBlock>
+              </StackPanel>
+              <ComboBox Name="cmbborder" Grid.Column="1" DisplayMemberPath="Value" SelectedValuePath="Key" Margin="5,5,5,0" Style="{DynamicResource DigiComboBoxStle}" Height="50" VerticalAlignment="Top" FontSize="18.667" Grid.Row="4" />
+              <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="5">
+                <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30">
+                  <CheckBox Name="chkCrop" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Checked="chkCrop_Checked" Unchecked="chkCrop_Unchecked" />
+                </Viewbox>
+                <TextBlock Height="25" TextWrapping="Wrap" Text="Crop Active" />
+              </StackPanel>
+              <StackPanel Margin="5,10,0,0" Grid.Row="5" Grid.Column="1">
+                <Button Name="btnCropEdit" Style="{StaticResource ButtonStyleAlpha}" HorizontalAlignment="Left" Width="50" Height="50" IsEnabled="False" Click="btnCropEdit_Click">
+                  <Image Source="/DigiPhoto;component/images/crop.png" />
+                </Button>
+                <TextBlock Name="txbCrop" TextBlock.TextAlignment="Left" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333">
+                  <Run Text="Crop Edit" />
+                  <Run Language="en-in" />
+                </TextBlock>
+              </StackPanel>
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Grid.Row="6" VerticalAlignment="Center" Visibility="Collapsed">
+                <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30" HorizontalAlignment="Left">
+                  <CheckBox Name="chklogo" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Height="14.63" Width="17" Unchecked="chkBorder_Unchecked" />
+                </Viewbox>
+                <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="Use Logo" HorizontalAlignment="Left" VerticalAlignment="Center" />
+              </StackPanel>
+              <ComboBox Name="cmblogo" Grid.Column="1" Grid.Row="6" DisplayMemberPath="Key" SelectedValuePath="Value" Margin="5,8,5,0" Style="{DynamicResource DigiComboBoxStle}" Height="47" VerticalAlignment="Top" FontSize="18.667" Visibility="Collapsed" />
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Grid.Row="7" VerticalAlignment="Center" Grid.Column="0">
+                <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="Chroma " HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <ComboBox Name="cmbChromaClr" SelectedIndex="0" Visibility="Visible" SelectedValuePath="Content" Margin="0,0,0,0" Style="{DynamicResource DigiComboBoxStle}" Width="140" Height="40" VerticalAlignment="Top" FontSize="18.667" SelectionChanged="cmbChromaClr_SelectionChanged">
+                  <ComboBoxItem>--Select--</ComboBoxItem>
+                  <ComboBoxItem>Green</ComboBoxItem>
+                  <ComboBoxItem>Red</ComboBoxItem>
+                  <ComboBoxItem>Blue</ComboBoxItem>
+                  <ComboBoxItem>Gray</ComboBoxItem>
+                </ComboBox>
+              </StackPanel>
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Grid.Row="7" VerticalAlignment="Center" Grid.Column="1">
+                <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="ColorCode " HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox Name="txtColorCode" Visibility="Visible" MaxLength="7" Margin="0,0,0,0" Width="120" Height="40" VerticalAlignment="Top" FontSize="18.667" />
+              </StackPanel>
+              <StackPanel Margin="15,0,0,0" Orientation="Horizontal" Grid.Row="7" VerticalAlignment="Center" Grid.Column="2" Grid.ColumnSpan="2">
+                <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="Tolerance " HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox Name="txtChromaTol" Visibility="Visible" MaxLength="5" Margin="0,0,0,0" Width="120" Height="40" VerticalAlignment="Top" FontSize="18.667" KeyUp="txtChromaTol_KeyUp" />
+                <TextBlock Name="txbTolRange" Height="25" Margin="0" TextWrapping="Wrap" Text="*Ranges from 0 to 2" TextBlock.Foreground="#FFFF0000" HorizontalAlignment="Left" VerticalAlignment="Center" />
+              </StackPanel>
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Visibility="Visible" VerticalAlignment="Top" Grid.Row="8">
+                <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30" HorizontalAlignment="Left">
+                  <CheckBox Name="chkBG" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Height="14.63" Width="17" Unchecked="chkBorder_Unchecked" Checked="chkBorder_Checked" />
+                </Viewbox>
+                <TextBlock Height="25" Margin="0" TextWrapping="Wrap" Text="Use Background" HorizontalAlignment="Left" VerticalAlignment="Center" />
+              </StackPanel>
+              <ComboBox Name="cmbBG" Grid.Column="1" Grid.Row="8" DisplayMemberPath="Key" Visibility="Visible" SelectedValuePath="Value" Margin="5,0,0,0" Style="{DynamicResource DigiComboBoxStle}" Height="50" VerticalAlignment="Top" FontSize="18.667" Grid.RowSpan="2" SelectionChanged="cmbBG_SelectionChanged" />
+              <StackPanel Margin="0,0,0,0" Grid.Row="8" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Button Name="btnChroma" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Apply Chroma" IsEnabled="False" Width="40" Height="40" Click="btnChroma_Click">
+                  <Image Source="/DigiPhoto;component/images/chroma.png" />
+                </Button>
+                <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FF000000" TextBlock.FontSize="13.333" Text="Apply Chroma" />
+              </StackPanel>
+              <StackPanel Grid.Row="8" Grid.RowSpan="2" Grid.Column="2" Width="160" HorizontalAlignment="Right">
+                <Image Name="imgBackImage" Margin="10,0,5,0" />
+              </StackPanel>
+              <GroupBox Header="Text Logo" FontSize="16" FontWeight="Bold" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4" Width="Auto" Margin="0,5,0,0" HorizontalAlignment="Left">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <StackPanel Name="stkTextLogo" Orientation="Vertical" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                      <Button Name="btnAddTextLogo" Content="Add Text" FontWeight="Normal" Width="100" Height="40" Margin="5" Click="btnAddTextLogo_Click" />
+                      <TextBox Name="txtContent" Text="Enter text..." FontWeight="Normal" MaxLength="200" Width="400" Height="40" FontSize="28" Margin="5" PreviewTextInput="txtContent_PreviewTextInput" DataObject.Pasting="PastingHandler" TextChanged="txtContent_TextChanged" GotFocus="txtContent_GotFocus" LostFocus="txtContent_LostFocus" />
+                      <ComboBox Name="cmbFont" Width="120" Height="40" Margin="5" FontWeight="Normal" SelectedIndex="0" FontSize="32" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectionChanged="cmbFont_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                          <DataTemplate>
+                            <TextBlock TextBlock.FontFamily="{Binding .}" Text="{Binding Source}" />
+                          </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                      </ComboBox>
+                      <ComboBox Name="CmbFontSize" Width="80" Height="40" Margin="5" Text="Font Size" SelectedIndex="0" FontSize="28" VerticalAlignment="Top" SelectionChanged="CmbFontSize_SelectionChanged" />
+                      <ComboBox Name="CmbColor" Width="70" Height="40" Margin="5" ItemTemplate="{StaticResource SolidColorTemplate}" SelectedIndex="0" FontSize="32" VerticalAlignment="Top" SelectionChanged="CmbColor_SelectionChanged">
+                        <SolidColorBrush Color="DarkRed" x:Name="DarkRed" />
+                        <SolidColorBrush Color="Black" x:Name="Black" />
+                        <SolidColorBrush Color="White" x:Name="White" />
+                        <SolidColorBrush Color="Red" x:Name="Red" />
+                        <SolidColorBrush Color="OrangeRed" x:Name="OrangeRed" />
+                        <SolidColorBrush Color="Orange" x:Name="Orange" />
+                        <SolidColorBrush Color="Green" x:Name="Green" />
+                        <SolidColorBrush Color="Blue" x:Name="Blue" />
+                        <SolidColorBrush Color="AliceBlue" x:Name="AliceBlue" />
+                        <SolidColorBrush Color="Cyan" x:Name="Cyan" />
+                        <SolidColorBrush Color="Magenta" x:Name="Magenta" />
+                        <SolidColorBrush Color="Yellow" x:Name="Yellow" />
+                        <SolidColorBrush Color="Pink" x:Name="Pink" />
+                        <SolidColorBrush Color="Purple" x:Name="Purple" />
+                        <SolidColorBrush Color="Brown" x:Name="Brown" />
+                      </ComboBox>
+                      <Button Name="btnDeleteTextLogo" Content="Delete Text" FontWeight="Normal" Width="100" Height="40" Margin="5" Click="btnDeleteTextLogo_Click" />
+                    </StackPanel>
+                  </StackPanel>
+                  <DataGrid Name="grdTextField" Grid.Row="1" Margin="8" RowHeight="30" Padding="5" HorizontalContentAlignment="Left" Style="{DynamicResource DigiDataGridStyleTextField}" Height="140" CanUserAddRows="False" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" BorderThickness="0,0,0,3" HeadersVisibility="Column" GridLinesVisibility="None" FontSize="18.667" Foreground="#FF434343" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionChanged="grdTextField_SelectionChanged">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Width="Auto" Header="Text Name" IsReadOnly="True" Binding="{Binding Name}" />
+                      <DataGridTextColumn Width="Auto" Header="Font Family" IsReadOnly="True" Binding="{Binding FontFamily}" />
+                      <DataGridTextColumn Width="Auto" Header="Font Size" IsReadOnly="True" Binding="{Binding FontSize}" />
+                      <DataGridTextColumn Width="Auto" Header="Font Color" IsReadOnly="True" Binding="{Binding FontColor}" />
+                    </DataGrid.Columns>
+                  </DataGrid>
+                </Grid>
+              </GroupBox>
+              <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="11">
+                <Viewbox Margin="0" Stretch="Fill" VerticalAlignment="Center" Height="30">
+                  <CheckBox Name="chkPrintActive" IsChecked="True" Content="" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Checked="chkPrintActive_Checked" />
+                </Viewbox>
+                <TextBlock Height="25" TextWrapping="Wrap" Text="Printing Active" />
+              </StackPanel>
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Grid.Row="11" VerticalAlignment="Center" Grid.Column="1">
+                <Viewbox Margin="0" VerticalAlignment="Center" Height="30" Stretch="Fill">
+                  <CheckBox Name="chkEnableSOrder" Content="" HorizontalContentAlignment="Right" FlowDirection="LeftToRight" Foreground="#FF000000" FontSize="11" Checked="chkEnableSOrder_Checked" />
+                </Viewbox>
+                <TextBlock HorizontalAlignment="Right" Height="25" TextWrapping="Wrap" Text="With Image Editing " Margin="0,2.5,0,0" VerticalAlignment="Top" />
+              </StackPanel>
+              <StackPanel Grid.Column="3" Margin="0,0,8,-3" Orientation="Horizontal" Grid.Row="11" Height="59.83" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button Name="btnSaveAutoCorrect" Margin="0,0,0,10" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18.667" Content="Save" Width="127" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" Height="53" IsDefault="{Binding IsSelected, ElementName=TabSemiOrder}" Click="btnSaveAutoCorrect_Click" />
+                <Button Name="btnBackAutoCorrect" Margin="0,0,0,10" Width="127" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18.667" Content="Back" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" Height="53" Click="btnBack_Click" />
+              </StackPanel>
+            </Grid>
+          </Border>
+        </Grid>
+      </ScrollViewer>
+    </Border>
+    <Grid Name="GrdPrint" Margin="0" Visibility="Collapsed">
+      <Grid Margin="0">
+        <Border Background="#99000000" Visibility="{Binding Visibility}">
+          <Border HorizontalAlignment="Center" Height="400" Margin="0,0,8,0" VerticalAlignment="Center" Width="700" Background="#FFFFFFFF" CornerRadius="5" BorderThickness="2" BorderBrush="#FF353535">
+            <Grid Margin="0">
+              <ListBox Name="lstGraphics" Visibility="Visible" BorderThickness="0" Background="#00FFFFFF" Padding="10" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemContainerStyle="{DynamicResource ListBoxItemStyle}" HorizontalAlignment="Center" Height="410" Margin="0" VerticalAlignment="Center" Width="710" Template="{StaticResource ListBoxControlTemplate}" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" />
+              <Button Content="Close" HorizontalAlignment="Right" Height="51" Margin="0,-30.5,-25,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource ButtonStyleCancel}" Click="Button_Click" />
+            </Grid>
+          </Border>
+        </Border>
+      </Grid>
+    </Grid>
+    <!--<dic:DynamicImgCrop x:Name="ucDynamicImgCrop" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
+  </Grid>
+</UserControl>

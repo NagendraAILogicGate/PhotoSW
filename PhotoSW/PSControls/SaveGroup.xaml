@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.SaveGroup" Name="UserControl" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="0" DataContext="{Binding ElementName=root}">
+        <Border Background="#90000000" Visibility="{Binding Visibility}">
+            <Border BorderThickness="10,30,10,10" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#FFFFFFFF">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFCC0708" Offset="0.017" />
+                        <GradientStop Color="#FFA00101" Offset="0.091" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid Margin="5,-25,5,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button  Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="35" Margin="0,-24,-23,0" Height="36.001" VerticalAlignment="Top">
+                        <Image Source="/PhotoSW;component/images/close-btn.png" />
+                    </Button>
+                    <TextBlock TextBlock.Foreground="#FFFFFFFF" TextBlock.FontWeight="Bold" TextBlock.FontSize="16" Margin="0,0,0,14.04" HorizontalAlignment="Left">
+            <Run Language="en-in" Text="Save Group" />
+                    </TextBlock>
+                    <Grid Margin="0" Grid.Row="1" MaxWidth="600">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="40" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="10,5" HorizontalAlignment="Center">
+                            <Button  Name="btnAdd" Width="81" Style="{StaticResource ButtonStylesubmit}" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Add" Height="34.323" FontSize="16" />
+                        </StackPanel>
+                        <StackPanel  Name="RadioStack" HorizontalAlignment="Center" Margin="0,10" Orientation="Horizontal" Grid.Row="2" Visibility="Collapsed">
+                            <Viewbox Stretch="Fill" Width="60" Height="60" VerticalAlignment="Bottom">
+                                <RadioButton  Name="rdbAddimg" IsChecked="True" Content="" GroupName="A1" FontWeight="Bold" FontSize="13.333" Width="12.8" />
+                            </Viewbox>
+                            <TextBlock TextWrapping="Wrap" Text="Add Images to group" VerticalAlignment="Center" TextBlock.FontSize="16" Margin="0,0,5,0" />
+                            <Viewbox Stretch="Fill" Width="60" Height="60" VerticalAlignment="Bottom">
+                                <RadioButton  Name="rdbOverwriteimg" Content="" GroupName="A1" FontWeight="Bold" FontSize="13.333" Width="12.8" />
+                            </Viewbox>
+                            <TextBlock TextWrapping="Wrap" Text="Overwrite" VerticalAlignment="Center" TextBlock.FontSize="16" Margin="0,0,5,0" />
+                        </StackPanel>
+                        <Grid  Name="GrdDetails" Margin="1" Grid.Row="1" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="123" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock  Name="tbErrorMsg" TextBlock.Foreground="#FFFF0000" TextBlock.FontWeight="Bold" Margin="5,5,0,5" Grid.ColumnSpan="2" Grid.Row="1" TextBlock.FontSize="16">
+                <Run Language="en-in" Text="This group name already exists!" />
+                            </TextBlock>
+                            <TextBlock  Name="tbGroupName" Margin="5,5,2,5" VerticalAlignment="Center" TextBlock.FontSize="16">
+                <Run Language="en-in" Text="Enter Group Name :" />
+                            </TextBlock>
+                            <TextBox  Name="txtGroupName" Padding="3" BorderBrush="#FF000000" BorderThickness="1" VerticalAlignment="Bottom" Margin="2,5,3,5" Grid.Column="1" FontSize="16" MinWidth="300" />
+                            <ComboBox  Name="cmbSubStoreName" SelectedValue="1" DisplayMemberPath="Key" SelectedValuePath="Value" VerticalAlignment="Bottom" Margin="2,5,3,5" Grid.Column="1" Grid.Row="2" FontSize="16" MinWidth="300" />
+                            <TextBlock  Name="tbSubstore" Margin="5,5,2,5" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" TextBlock.FontSize="16">
+                <Run Language="en-in" Text="Enter Substore Name :" />
+                            </TextBlock>
+                        </Grid>
+                        <StackPanel Name="StackSave" Orientation="Horizontal" Margin="130,2,0,5.677" Grid.Row="3" HorizontalAlignment="Center" Width="300" Visibility="Collapsed">
+                            <Button Name="SaveButton" Width="81" Style="{StaticResource ButtonStylesubmit}" HorizontalAlignment="Left" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Save" Height="34.323" FontSize="16" />
+                            <Button Name="btnClear" Width="81" Style="{DynamicResource ButtonStyleRed}" HorizontalAlignment="Right" Foreground="#FFFFFFFF" Content="Clear" Height="34.323" FontSize="16" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

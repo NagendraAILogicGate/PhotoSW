@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.Discount" 
+             
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid Background="#AC000000">
+        <Border HorizontalAlignment="Center" Height="500" MaxHeight="600" VerticalAlignment="Center" Width="600" CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="95" />
+                </Grid.RowDefinitions>
+                <DataGrid Name="dgDiscount" RowBackground="#00FFFFFF" AlternatingRowBackground="#FFFFFFFF" 
+                          Margin="20" AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="*" 
+                          CanUserAddRows="False" CanUserSortColumns="False" CanUserResizeColumns="True"
+                          BorderThickness="0,0,0,3" Style="{DynamicResource DigiDataGridStyle}"
+                          RowStyle="{DynamicResource DigiDataGridRowStyle}"
+                          ColumnHeaderStyle="{DynamicResource DigiDataGridColumnHeaderStyle}" 
+                          CellStyle="{DynamicResource DigiDataGridCellStyle}"
+                          Background="#FF332E32" HeadersVisibility="Column" GridLinesVisibility="None"
+                          RowHeight="60" FontSize="18.667" Foreground="#FF434343" BorderBrush="{x:Null}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn FontWeight="Bold" Width="*" IsReadOnly="True" Header="Discount Type" 
+                                            Binding="{Binding DiscountName}" />
+                        <DataGridTemplateColumn Header="Discount" Width="160">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid MinWidth="160">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <!--p13:PopupKeyboard.Placement="Bottom" 
+                                                 p13:PopupKeyboard.HorizontalOffset="20" 
+                                                 p13:PopupKeyboard.Height="400" 
+                                                 p13:PopupKeyboard.Width="300" 
+                                                 p13:PopupKeyboard.IsEnabled="True" 
+                                                 
+                                                 Background="{x:Null}" 
+                                                 p13:PopupKeyboard.PlacementTarget="{Binding ElementName=TxtAmount}" 
+                                               
+                                                 xmlns:p13="clr-namespace:PhotoSW.PSControls"-->
+
+                                        <TextBox Name="txtquantity" Margin="5" TextWrapping="Wrap" TabIndex="0"
+                                                 Style="{DynamicResource DigiTextBoxStyle}" Text="{Binding DiscountAmount}"
+                                                 FontSize="20" 
+                                                 FontWeight="Bold" Foreground="#FF000000" 
+                                                 Padding="5,5,10,5" 
+                                                 BorderThickness="0" Height="37" Grid.Column="1" 
+                                                
+                                                 />
+                                      
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Name="SPSubmitCancel" Margin="5,0,0,2.929" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Height="84.5" VerticalAlignment="Bottom">
+                    <Button Name="btnSubmit" Content="Submit" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" FontWeight="Bold" Margin="0,12.042" Width="150" />
+                    <Button Name="btnSubmitCancel" Content="Reset" Margin="10,9.966,0,9.966" Style="{DynamicResource ButtonStyleRed}" FontSize="26.667" FontWeight="Bold" Foreground="#FFFFFFFF" Width="150">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="42.333" Margin="0,-28.02,-15.334,0" Height="61.687">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

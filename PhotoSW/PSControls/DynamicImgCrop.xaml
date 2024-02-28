@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.DynamicImgCrop" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:dc="clr-namespace:PhotoSW.Common">
+    <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="#FFFF0000" BorderThickness="2px">
+        <Viewbox>
+            <Grid Background="#FFFFFFFF">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="630" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="624" />
+                    <ColumnDefinition Width="360" />
+                </Grid.ColumnDefinitions>
+                <Grid Name="IMGFrame" Margin="5,5,5,5" Grid.Column="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Grid Name="img" Margin="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Name="CanBgParent" Margin="0" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Opacity="0">
+                                <Grid Name="GrdSize" SnapsToDevicePixels="True">
+                                    <Image Name="widthimg" Stretch="Uniform" ClipToBounds="True" Margin="0" SnapsToDevicePixels="True" />
+                                </Grid>
+                            </ScrollViewer>
+                            <Grid Name="grdpreview" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center">
+                                <ScrollViewer Name="GrdRotateCropParent" Visibility="Collapsed" Padding="0" BorderThickness="0" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                    <Grid Name="GrdZomout" ClipToBounds="True" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                        <Grid Name="GrdFlip">
+                                            <Grid Name="GrdRotate" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" SnapsToDevicePixels="False">
+                                                <Grid Name="GrdCrop">
+                                                    <Image Name="imgRotateCrop" Stretch="Uniform" ClipToBounds="True" Margin="0" SnapsToDevicePixels="False" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" UseLayoutRounding="False" />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </ScrollViewer>
+                                <Grid Name="grdZoomCanvas" Visibility="Visible">
+                                    <Grid Name="forWdht" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
+                                        <Grid Name="canbackgroundold" ClipToBounds="True">
+                                            <!--<dc:DragCanvas Name="dragCanvas" Background="#00FFFFFF" ClipToBounds="True" SnapsToDevicePixels="True">
+                                                <Grid Name="imageundoGrid" />
+                                                <Grid Name="canbackgroundParent" Visibility="Collapsed">
+                                                    <Grid Name="canbackground" Visibility="Collapsed">
+                                                        <Canvas Name="canbackgroundGridCanvas" Background="#00FFFFFF" VerticalAlignment="Top">
+                                                            <Image Name="mainImageundo" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="False" RenderOptions.EdgeMode="Aliased" ClipToBounds="True" />
+                                                        </Canvas>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Name="Opacitymsk" ClipToBounds="False" Margin="0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" LayoutUpdated="GrdBrightness_LayoutUpdated">
+                                                    <Grid Name="GrdBrightness" ClipToBounds="False" Margin="0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                        <Border Name="MyInkCanvasParent">
+                                                            <InkCanvas Name="MyInkCanvas" HorizontalAlignment="Center" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Background="#00FFFFFF" VerticalAlignment="Center" Margin="0,0,0,0" Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
+                                                                <InkCanvas.CacheMode>
+                                                                    <BitmapCache EnableClearType="False" RenderAtScale="1" SnapsToDevicePixels="False" />
+                                                                </InkCanvas.CacheMode>
+                                                                <Image Name="mainImage" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="False" RenderOptions.EdgeMode="Aliased" ClipToBounds="True" Margin="0" />
+                                                            </InkCanvas>
+                                                        </Border>
+                                                    </Grid>
+                                                </Grid>
+                                            </dc:DragCanvas>-->
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Name="GrdsubCrop" Grid.Column="1">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="1.801,0.498" MappingMode="RelativeToBoundingBox" StartPoint="-0.801,0.502">
+                            <GradientStop Color="#FF3D373C" Offset="1" />
+                            <GradientStop Color="#FF151416" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="8,8,0,2">
+                        <TextBlock Margin="0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF">
+              <Run Text="Orientation" />
+              <Run Language="en-in" Text=" " />
+              <Run Text=": " />
+                        </TextBlock>
+                        <StackPanel>
+                            <ComboBox Name="cmbImgOrientation" SelectedValuePath="Content" SelectedIndex="0" Margin="8,0" Height="55" Style="{DynamicResource DigiComboBoxStle}" Width="200" VerticalAlignment="Top" FontSize="18.667" IsEditable="False">
+                                <ComboBoxItem>Horizontal</ComboBoxItem>
+                                <ComboBoxItem>Vertical</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,8,0,2" Grid.Row="1">
+                        <TextBox Name="txtImgPath" Width="240" Height="35" FontSize="18.667" />
+                        <Button Name="BrowseButton" Style="{StaticResource ButtonStylesubmit}" Width="80" Margin="2" Padding="10px 2px" Foreground="#FFFFFFFF" Content="Browse" FontSize="18.667" Click="BrowseButton_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,8,0,2" Grid.Row="2" Visibility="Collapsed">
+                        <StackPanel Margin="0 0 0 8">
+                            <Button Name="btnrotate" ToolTip="Rotate" Style="{DynamicResource ButtonStyleDisableCross}" HorizontalAlignment="Center" Click="btnRotateclick_Click">
+                                <Image Source="/PhotoSW;component/images/rotate.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Height="24.83" Width="85.7666666666667">
+                <Run Text="Rotate" />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="8 0 0 8">
+                            <Button Name="btnantirotate" ToolTip="Rotate" Style="{DynamicResource ButtonStyleDisableCross}" HorizontalAlignment="Center" Click="btnantirotate_Click">
+                                <Image Height="80" Source="/PhotoSW;component/images/anti-rotate.png" Stretch="Fill" Width="77" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Width="96.7666666666667">
+                <Run Text="Rotate" />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="8 0 0 8">
+                            <Button Name="btnflip" Style="{DynamicResource ButtonStyleDisableCross}" ToolTip="Flip" Click="btnflip_Click">
+                                <Image Source="/PhotoSW;component/images/flip.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                <Run Text="Flip" />
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,8,0,2" Grid.Row="3">
+                        <StackPanel Margin="8,0,0,8">
+                            <Button Name="btnselect8By10" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 8 * 10" Click="btnSelectCrop8By10_Click">
+                                <Image Source="/PhotoSW;component/images/select.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="8 * 10" TextBlock.FontSize="18.667" />
+                        </StackPanel>
+                        <StackPanel Margin="16,0,0,8">
+                            <Button Name="btnselect6By8" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 6 * 8" Click="btnSelectCrop6By8_Click">
+                                <Image Source="/PhotoSW;component/images/select.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="6 * 8" TextBlock.FontSize="18.667" />
+                        </StackPanel>
+                        <StackPanel Margin="16,0,0,8">
+                            <Button Name="btnSelect4by6" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 4 * 6" Click="btnSelectCrop4by6_Click">
+                                <Image Source="/PhotoSW;component/images/select.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="4 * 6" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,8,0,2" Grid.Row="4">
+                        <StackPanel Margin="8,0,0,8">
+                            <Button Name="btnselect3By3" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 3 * 3" Click="btnSelectCrop3By3_Click">
+                                <Image Source="/PhotoSW;component/images/select.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="3 * 3" TextBlock.FontSize="18.667" />
+                        </StackPanel>
+                        <StackPanel Margin="16,0,0,8">
+                            <Button Name="btnselect5By7" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Select 5 * 7" Click="btnSelectCrop5By7_Click">
+                                <Image Source="/PhotoSW;component/images/select.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="5 * 7" TextBlock.FontSize="18.667" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="20.061,0,0,16" Grid.Row="5" Orientation="Horizontal">
+                        <StackPanel Margin="0,0,0,19.129">
+                            <Button Name="btnSelectReverse" Style="{StaticResource ButtonStyleAlpha}" ToolTip="Reverse" IsEnabled="False" Click="btnSelectReverse_Click">
+                                <Image Source="/PhotoSW;component/images/rotateN.png" />
+                            </Button>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" Text="Reverse" TextBlock.FontSize="18.667" />
+                        </StackPanel>
+                        <StackPanel Margin="10,0,0,16">
+                            <RepeatButton Name="btnenlargeplus" Delay="1" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" ToolTip="Enlarge/Reduce" IsEnabled="False" Click="btnenlargeplus_Click">
+                                <Image Source="/PhotoSW;component/images/Enlarge.png" />
+                            </RepeatButton>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667" Text="Enlarge " />
+                        </StackPanel>
+                        <StackPanel Margin="10,0,0,16">
+                            <RepeatButton Name="btnenlargeminus" Style="{DynamicResource DigiRepeatButtonStyleAlpha}" ToolTip="Enlarge/Reduce" IsEnabled="False" Click="btnenlargeminus_Click">
+                                <Image Source="/PhotoSW;component/images/reduce.png" />
+                            </RepeatButton>
+                            <TextBlock TextBlock.TextAlignment="Center" TextBlock.FontWeight="Bold" TextBlock.Foreground="#FFFFFFFF" TextBlock.FontSize="18.667">
+                <Run Language="en-in" Text="Reduce" />
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,0,0,-49.715" Grid.Row="6" HorizontalAlignment="Center" Height="53" VerticalAlignment="Bottom">
+                        <Button Name="OkButton" Style="{StaticResource ButtonStylesubmit}" Margin="2" Padding="5px 2px" Width="100" Foreground="#FFFFFFFF" Content="Ok" FontSize="18.667" Click="OkButton_Click" />
+                        <Button Name="CancelButton" Style="{StaticResource ButtonStyleRed}" Margin="5,2,2,2" Padding="5px 2px" Width="108" Foreground="#FFFFFFFF" Content="Close" FontSize="18.667" Click="CancelButton_Click" />
+                        <Button Name="ResetButton" Style="{StaticResource ButtonStyleRed}" Margin="5,2,2,2" Padding="5px 2px" Width="108" Foreground="#FFFFFFFF" Content="Reset" FontSize="18.667" Click="ResetButton_Click" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </Border>
+</UserControl>

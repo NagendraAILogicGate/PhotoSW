@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="PhotoSW.Calender.SelectedCalenderList" 
+            
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:scie="clr-namespace:PhotoSW.Calender"
+             >
+    <!--xmlns:scie="clr-namespace:PhotoSW.Calender;assembly=PhotoSW,Version=6.2.0.1,Culture=neutral,PublicKeyToken=null"-->
+    <Grid>
+        <Grid.Resources>
+            <BitmapImage x:Key="DefaultImage" UriSource="pack://application:,,,/PhotoSW;component/images/16blocks_red.png" />
+            <Style x:Key="RedGlowItemContainer" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border Name="IconBorder" Background="#00FFFFFF" CornerRadius="8" BorderThickness="1" Margin="0,0">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="SelectionStates">
+                                        <VisualState x:Name="Unselected" />
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="IconBorder">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFB0202" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedUnfocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                    <Setter TargetName="IconBorder" Property="UIElement.BitmapEffect">
+                                        <Setter.Value>
+                                            <OuterGlowBitmapEffect GlowColor="Red" GlowSize="5" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="10" BorderBrush="#FF505050" BorderThickness="1" Margin="3">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="0.5" />
+            </Border.Effect>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="10" BorderBrush="#FF505050" BorderThickness="1" Margin="3">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.8">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="White" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid x:Name="maingrd">
+                <Grid Name="grdMainView">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="140" />
+                        <RowDefinition />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+                    <ListBox Name="lstSelectedImage" Grid.Row="0" ItemContainerStyle="{StaticResource RedGlowItemContainer}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Margin="20,10,20,1" HorizontalContentAlignment="Center" Template="{DynamicResource ListBoxControlTemplategeneral}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" MinWidth="77" Margin="10,0" MaxWidth="Infinity" Width="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="85" />
+                                        <RowDefinition Height="25" />
+                                    </Grid.RowDefinitions>
+                                    <Rectangle Margin="-17,0,-16,-3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="#FF000000" StrokeThickness="0" />
+                                    <Image Name="printType_icon" Margin="0" Stretch="Uniform" Grid.RowSpan="1" VerticalAlignment="Stretch" Grid.Row="0">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{Binding FilePath}" />
+                                        </Image.Source>
+                                    </Image>
+                                    <TextBlock Name="SelectedProductType_ID" Grid.Column="0" Margin="0,3" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="14" TextBlock.FontWeight="Normal" Width="Auto" Height="Auto" Grid.Row="1" TextBlock.TextAlignment="Center" TextBlock.Foreground="#FF000000" Text="{Binding Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="220" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Name="ThumbPreview" Grid.Column="0" Height="Auto" Grid.Row="0" Width="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <ListBox Name="lstCalenderGrid" Grid.Row="0" Margin="10,0,10,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemsSource="{Binding Path=ItemTemplateCalenderSelected.ItemTemplateDetailList}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="4" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Name="imgCalenderHolderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowDrop="True" Background="#FFFFFFFF">
+                                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF777777" BorderThickness="1" CornerRadius="5" Margin="5">
+                                                <Border.Effect>
+                                                    <DropShadowEffect BlurRadius="5" ShadowDepth="0.5" />
+                                                </Border.Effect>
+                                            </Border>
+                                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="3" BorderThickness="0.8" Margin="5" BorderBrush="#FF777777">
+                                                <Grid Margin="3">
+                                                    <Image Name="imgCalenderHolder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" UseLayoutRounding="True" Stretch="Uniform" />
+                                                </Grid>
+                                            </Border>
+                                            <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Padding="5" Margin="1,5,30,5" CornerRadius="5" Background="#7FFFFFFF">
+                                                <TextBlock TextBlock.Foreground="#FF000000" Text="{Binding Path=FileName}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="2" RenderingBias="Quality" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                        <ListBox Name="lstCalenderList" Grid.Column="1" Margin="0,0,10,0" HorizontalContentAlignment="Center" ItemsSource="{Binding Path=ItemTemplateCalender}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Border BorderBrush="#FF777777" BorderThickness="1" CornerRadius="5" Margin="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="5" ShadowDepth="0.5" />
+                                            </Border.Effect>
+                                        </Border>
+                                        <Border CornerRadius="3" BorderThickness="0.8" Margin="5" BorderBrush="#FF777777">
+                                            <Grid Margin="3">
+                                                <Image Height="100" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" UseLayoutRounding="True" Stretch="Uniform" Source="{Binding Path=ThumbnailImageFullPath, TargetNullValue={StaticResource DefaultImage}}" />
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Grid>
+                <StackPanel Name="SPSubmitCancel" Grid.Row="2" Margin="2,0,0,2.929" Orientation="Horizontal" HorizontalAlignment="Center" Height="75" VerticalAlignment="Bottom" Click="btnAuto_Click">
+                    <Button Name="btnAuto" Content="Auto" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26" FontWeight="Bold" Margin="0,2,0,10" Width="150" HorizontalAlignment="Center" Click="btnRandom_Click" />
+                    <Button Name="btnRandom" Content="Random" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26" FontWeight="Bold" Margin="0,2,0,10" Width="150" HorizontalAlignment="Center" Click="btnSubmit_Click" />
+                    <Rectangle Margin="40,10" Stroke="#7F000000" />
+                    <Button Name="btnSubmit" Content="Submit" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26" FontWeight="Bold" Margin="0,2,0,10" Width="150" HorizontalAlignment="Center" Click="btnSubmitCancel_Click" />
+                    <Button Name="btnSubmitCancel" Content="Reset" Margin="10,2,0,10" Style="{DynamicResource ButtonStyleRed}" FontSize="26.667" FontWeight="Bold" Foreground="#FFFFFFFF" Width="150">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Button Name="btnClose" Grid.Row="0" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="70" Margin="5,8,10,0" Height="61.687">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+        <StackPanel Name="stkEditControl">
+            <scie:SelectedCalenderImageEdit x:ConnectionId="17" x:Name="ctrlSelectedCalenderImageEdit" Width="650" Visibility="Collapsed" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.SelectedImageslist" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:utbc="clr-namespace:DigiPhoto.Common;assembly=FrameworkHelper"
+               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             >
+    <UserControl.Resources>
+        <utbc:UriToBitmapConverter x:Key="Imageconverter" />
+        <utbc:BooleanToVisibilityConverter x:Key="BoolConverter" />
+        <Style x:Key="CheckBoxStyleimgDownloader" TargetType="{x:Type CheckBox}">
+            <Setter Property="Control.Background" Value="#FF448DCA" />
+            <Setter Property="Control.Foreground" Value="#FF000000" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Control.VerticalContentAlignment" Value="Top" />
+            <Setter Property="Control.Padding" Value="4,1,0,0" />
+            <Setter Property="Control.BorderThickness" Value="1" />
+            <Setter Property="Control.BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0" />
+                        <GradientStop Color="#FF8399A9" Offset="0.375" />
+                        <GradientStop Color="#FF718597" Offset="0.375" />
+                        <GradientStop Color="#FF617584" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0" />
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To=".55" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CheckIcon">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused" />
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="Valid" />
+                                    <VisualState x:Name="InvalidUnfocused" />
+                                    <VisualState x:Name="InvalidFocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Background="#00999919">
+                                <Path Name="CheckIcon" Stretch="Fill" Fill="#FFFF0000" Data="F1M966.002,669.046C968.721,666.325 1010.77,625.944 1010.77,625.944 1013.43,623.291 1012.63,620.605 1011.14,619.114L1001.18,609.161C999.691,607.664 997.003,606.875 994.354,609.518 994.354,609.518 968.921,634.957 966.191,637.679 963.472,634.957 953.863,625.336 953.863,625.336 951.209,622.681 948.524,623.482 947.036,624.968L937.075,634.929C935.583,636.424 934.787,639.102 937.442,641.76 937.442,641.76 947.054,651.372 949.775,654.096" HorizontalAlignment="Right" Height="20.666" Margin="0,-13.107,.326,0" VerticalAlignment="Bottom" Width="28" Opacity="0" StrokeThickness="0" />
+                            </Grid>
+                            <ContentPresenter Name="contentPresenter" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" Content="{TemplateBinding ContentControl.Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+                            <Rectangle Fill="#029C3131" Margin="1.5,0,0,0" StrokeThickness="0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#AC000000">
+        <Viewbox>
+            <Border HorizontalAlignment="Center" Height="550" MaxHeight="600" VerticalAlignment="Center" Width="550" CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2" Margin="0,15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="95" />
+                    </Grid.RowDefinitions>
+                    <ListBox Name="lstSelectedImage" ItemsPanel="{DynamicResource DigiItemsPanelTemplateProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0" Margin="20,20,20,63" HorizontalContentAlignment="Center" Template="{DynamicResource ListBoxControlTemplategeneral}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" MinWidth="77" Margin="10,0" MaxWidth="Infinity" Width="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32" />
+                                        <RowDefinition Height="100" />
+                                        <RowDefinition Height="32" />
+                                    </Grid.RowDefinitions>
+                                    <Rectangle Fill="#FFFFFFFF" Margin="-17,0,-16,-3" Grid.Row="0" Grid.RowSpan="3" Stroke="#FF000000" StrokeThickness="0" />
+                                    <xctk:IntegerUpDown Name="NoCopies" Height="30" Width="100" Increment="1" Minimum="1" DefaultValue="1" Visibility="{Binding ToShownoCopy, Converter={StaticResource BoolConverter}, Mode=TwoWay}" Value="{Binding updownCount}" />
+                                    <Image Name="printType_icon" Margin="0" Stretch="Uniform" Grid.RowSpan="1" VerticalAlignment="Stretch" Grid.Row="1" Source="{Binding FilePath}" />
+                                    <CheckBox Name="ChkSelected"  Tag="" Height="Auto" Margin="0" VerticalAlignment="Stretch" Style="{DynamicResource CheckBoxStyleimgDownloader}" Grid.RowSpan="1" Grid.Row="1" IsChecked="{Binding IsItemSelected}" Uid="{Binding PhotoId}" />
+                                    <TextBlock Name="SelectedProductType_ID" Grid.Column="0" Margin="0,5" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.FontSize="16" TextBlock.FontWeight="Normal" Width="Auto" Height="Auto" Grid.Row="2" TextBlock.TextAlignment="Center" TextBlock.Foreground="#FF000000" Text="{Binding Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Canvas Name="SPSelectAll" Margin="-200,0,0,90" Grid.Row="1" HorizontalAlignment="Center" Height="40.5" Width="300" VerticalAlignment="Bottom">
+                        <TextBlock Name="tbenablegroup" Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="18.667" VerticalAlignment="Center" Text="Select All :" TextBlock.Foreground="#FF000000" />
+                        <Viewbox Grid.Row="1" Grid.Column="1" Margin="100,5,0,0" Height="30" HorizontalAlignment="Left" Width="30" VerticalAlignment="Center">
+                            <CheckBox Name="chkSelectAll" Click="chkSelectAll_Click" />
+                        </Viewbox>
+                        <TextBlock Name="txbImages" Margin="390,5,0,0" HorizontalAlignment="Right" TextBlock.FontWeight="Bold" TextBlock.FontSize="15.667" VerticalAlignment="Center" TextBlock.Foreground="#FF000000" />
+                    </Canvas>
+                    <StackPanel Name="SPSubmitCancel" Margin="5,0,0,2.929" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Height="84.5" VerticalAlignment="Bottom">
+                        <Button Name="btnSubmit" Content="Submit" HorizontalAlignment="Center" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" FontWeight="Bold" Margin="0,12" Width="150" Click="btnSubmit_Click" />
+                        <Button Name="btnSubmitCancel" Content="Reset" Visibility="Collapsed" Margin="10,9.966,0,9.966" Style="{DynamicResource ButtonStyleRed}" FontSize="26.667" FontWeight="Bold" Foreground="#FFFFFFFF" Width="150" Click="btnSubmitCancel_Click">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                    <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                    <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                    <GradientStop Color="White" Offset="1" />
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="42.333" Margin="0,-28.02,-15.334,0" Height="61.687" Click="btnClose_Click">
+                        <Image Source="/DigiPhoto;component/images/close-btn.png" />
+                    </Button>
+                </Grid>
+            </Border>
+        </Viewbox>
+    </Grid>
+</UserControl>

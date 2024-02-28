@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CtrlOpeningForm" 
+             
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <!--Loaded="UserControl_Loaded"-->
+    <Grid Background="#AC000000">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FFFF0000" BorderThickness="2" Width="1000" Height="700" Visibility="{Binding Visibility}">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Margin="5,21.5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.693" />
+                            <RowDefinition Height="46.693" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="360.042" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="NoWrap" Grid.Column="0" Grid.Row="0" Text="Opening Form for:" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="320" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Width="250" HorizontalAlignment="Center" Margin="2" Grid.Row="0" BorderThickness="0">
+                            <!--<DatePicker Name="MonthlyCalendar" 
+                                        SelectedDate="{x:Static sys:DateTime.Today}" FirstDayOfWeek="Monday" IsTodayHighlighted="True">
+                                <DatePicker.Resources>
+                                    <Style x:Key="{x:Type DatePickerTextBox}" TargetType="{x:Type DatePickerTextBox}">
+                                        <Setter Property="TextBoxBase.IsReadOnly" Value="True" />
+                                        <Setter Property="Control.FontSize" Value="22" />
+                                        <Setter Property="Control.FontWeight" Value="Bold" />
+                                        <Setter Property="Control.Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <TextBox Name="PART_TextBox" Text="{Binding Path=SelectedDate, StringFormat=dd-MMM-yyyy, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>-->
+                            
+                        </Border>
+                        <TextBlock TextWrapping="NoWrap" Grid.Column="0" Grid.Row="1" Text="6X8 Printer Starting Number:" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="320" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="1" Width="Auto" BorderThickness="1" BorderBrush="#FF800404">
+                            <TextBox Name="txt6X8StarNumber" TextWrapping="NoWrap" Width="250" FontSize="20" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" MaxLength="10" 
+                                     p9:RFIDPopupKeyboard.Placement="Bottom" 
+                                     p9:RFIDPopupKeyboard.HorizontalOffset="780" 
+                                     p9:RFIDPopupKeyboard.VerticalOffset="150" 
+                                     p9:RFIDPopupKeyboard.Height="300"
+                                     p9:RFIDPopupKeyboard.Width="200" 
+                                     p9:RFIDPopupKeyboard.IsEnabled="True"
+                                     p9:RFIDPopupKeyboard.PlacementTarget="{Binding ElementName=txtCardNumber}" 
+                                     GotFocus="txt6X8StarNumber_GotFocus" 
+                                     PreviewKeyDown="txt6X8StarNumber_PreviewKeyDown" 
+                                     PreviewTextInput="txtAmountEntered_PreviewTextInput" 
+                                     xmlns:p9="clr-namespace:PhotoSW.PSControls" />
+                        </Border>
+                        <TextBlock TextWrapping="NoWrap" Grid.Column="0" Grid.Row="2" Text="6X8 Printer Starting Number(Auto):" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="360" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="2" Width="Auto" BorderThickness="1" BorderBrush="#FF800404">
+                            <TextBox Name="txt6X8AutoStarNumber" IsEnabled="False" TextWrapping="NoWrap" Width="250" FontSize="20" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" MaxLength="10" />
+                        </Border>
+                        <TextBlock TextWrapping="NoWrap" Text="8X10 Printer Starting Number:" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="320" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" Grid.Row="3" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="3" Width="Auto" BorderThickness="1" BorderBrush="#FF800404">
+                            <TextBox Name="txt8X10StarNumber" TextWrapping="Wrap" FontSize="20" MaxLength="10" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" 
+                                     p9:RFIDPopupKeyboard.Placement="Bottom" 
+                                     p9:RFIDPopupKeyboard.HorizontalOffset="780"
+                                     p9:RFIDPopupKeyboard.VerticalOffset="242" 
+                                     p9:RFIDPopupKeyboard.Height="300" 
+                                     p9:RFIDPopupKeyboard.Width="200" 
+                                     p9:RFIDPopupKeyboard.IsEnabled="True" 
+                                     p9:RFIDPopupKeyboard.PlacementTarget="{Binding ElementName=txtCardNumber}" 
+                                     GotFocus="txt8X10StarNumber_GotFocus" 
+                                     PreviewKeyDown="txt8X10StarNumber_PreviewKeyDown"
+                                     PreviewTextInput="txtAmountEntered_PreviewTextInput" 
+                                     xmlns:p9="clr-namespace:PhotoSW.PSControls" />
+                        </Border>
+                        <TextBlock TextWrapping="NoWrap" Text="8X10 Printer Starting Number(Auto):" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="360" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0,2,2,2" HorizontalAlignment="Right" Grid.Row="4" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="4" Width="Auto" BorderThickness="1" BorderBrush="#FF800404">
+                            <TextBox Name="txt8X10AutoStarNumber" IsEnabled="False" TextWrapping="Wrap" FontSize="20" MaxLength="10" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5" />
+                        </Border>
+                        <TextBlock Text="Poster Printer Starting Number:" TextWrapping="Wrap" Grid.Row="5" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Width="350" TextBlock.TextAlignment="Right" Padding="10,5" Margin="0" HorizontalAlignment="Right" PreviewTextInput="txtAmountEntered_PreviewTextInput" DataObject.Pasting="PastingHandler" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="5" Width="Auto" BorderBrush="#FF800404" BorderThickness="1">
+                            <TextBox Name="txtPosterStarNumber" TextWrapping="NoWrap" FontSize="20" MaxLength="10" FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" Padding="10,5"
+                                     p9:RFIDPopupKeyboard.Placement="Bottom" 
+                                     p9:RFIDPopupKeyboard.HorizontalOffset="780" 
+                                     p9:RFIDPopupKeyboard.VerticalOffset="333" 
+                                     p9:RFIDPopupKeyboard.Height="300" 
+                                     p9:RFIDPopupKeyboard.Width="200" 
+                                     p9:RFIDPopupKeyboard.IsEnabled="True" 
+                                     p9:RFIDPopupKeyboard.PlacementTarget="{Binding ElementName=txtCardNumber}" 
+                                     GotFocus="txtPosterStarNumber_GotFocus" 
+                                     PreviewKeyDown="txtPosterStarNumber_PreviewKeyDown" 
+                                     PreviewTextInput="txtAmountEntered_PreviewTextInput" 
+                                     xmlns:p9="clr-namespace:PhotoSW.PSControls" />
+                        </Border>
+                        <TextBlock Text="Cash Float Amount:" TextWrapping="Wrap" Grid.Row="6" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" TextBlock.TextAlignment="Right" Padding="10,5" Margin="2" HorizontalAlignment="Right" />
+                        <Border Grid.Column="1" Margin="2" Grid.Row="6" Width="Auto" BorderBrush="#FF800404" BorderThickness="1">
+                            <TextBox Name="txtCashFloat" 
+                                     p9:DecimalProductPrice.IsNumericOnly="True" 
+                                     TextWrapping="NoWrap" FontSize="20" MaxLength="10" 
+                                     FontWeight="Bold" TextAlignment="Left" Foreground="#FF000000" 
+                                     Padding="10,5" p10:RFIDPopupKeyboard.Placement="Bottom" 
+                                     p10:RFIDPopupKeyboard.HorizontalOffset="780" 
+                                     p10:RFIDPopupKeyboard.VerticalOffset="380" 
+                                     p10:RFIDPopupKeyboard.Height="300" 
+                                     p10:RFIDPopupKeyboard.Width="200" 
+                                     p10:RFIDPopupKeyboard.IsEnabled="True" 
+                                     p10:RFIDPopupKeyboard.PlacementTarget="{Binding ElementName=txtCardNumber}" 
+                                     PreviewKeyDown="txtCashFloat_PreviewKeyDown" GotFocus="txtCashFloat_GotFocus" 
+                                     xmlns:p10="clr-namespace:PhotoSW.PSControls" 
+                                     xmlns:p9="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper" />
+                        </Border>
+                    </Grid>
+                </Grid>
+                <StackPanel Name="SPSubmitCancel" Margin="5,0,0,3" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Height="84.5" VerticalAlignment="Top">
+                    <Button Name="btnSubmit" Content="Submit" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" Height="50" FontWeight="Bold" Width="150" Click="btnSubmit_Click" />
+                    <Button Name="btnSubmitCancel" Content="Reset" Height="50" Style="{DynamicResource ButtonStyleRed}" FontSize="26.667" FontWeight="Bold" Foreground="#FFFFFFFF" Width="150" Click="btnSubmitCancel_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0" />
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="42" Margin="0,0,0,0" Height="45" VerticalAlignment="Top" Click="btnClose_Click">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

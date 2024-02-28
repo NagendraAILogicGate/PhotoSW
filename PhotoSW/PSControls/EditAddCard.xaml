@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.EditAddCard" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Name="LayoutRoot" Background="#50000000" Margin="0">
+        <Grid Name="MainPanel" Width="800" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="256" />
+                    <ColumnDefinition Width="439*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                    <RowDefinition Height="70" />
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.RowSpan="12">
+                    <Viewbox Name="vb1" MinWidth="500" MinHeight="500">
+                        <StackPanel Name="bg_withlogo" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" UseLayoutRounding="False" Margin="5,15,3,5">
+                            <Image Name="bg" Source="/PhotoSW;component/images/bg_new.png" />
+                        </StackPanel>
+                    </Viewbox>
+                </StackPanel>
+                <TextBlock Margin="0,10,5,10" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Card Type Name :" />
+                </TextBlock>
+                <TextBox Name="txtName" Grid.Column="1" Margin="5,5,3,5" Grid.Row="2" TextWrapping="Wrap" Style="{DynamicResource DigiTextBoxStyle}" />
+                <TextBlock Margin="0,10,5,10" Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Card Series Starting Digits :" />
+                </TextBlock>
+                <TextBox Name="txtCardIdentificationDigit" MaxLength="16" Grid.Column="1" Margin="5,5,3,5" Grid.Row="3" TextWrapping="Wrap" Style="{DynamicResource DigiTextBoxStyle}" />
+                <TextBlock Margin="0,10,5,10" Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Card Format Type :" />
+                </TextBlock>
+                <ComboBox Name="cmbCardFormatType" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedIndex="0" Grid.Column="1" Margin="5,5,3,5" Grid.Row="4" Style="{DynamicResource DigiComboBoxStle}" />
+                <TextBlock Margin="0,10,5,10" Grid.Row="5" TextWrapping="Wrap" HorizontalAlignment="Right" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Max Images Allowed :" />
+                </TextBlock>
+                <TextBox Name="txtMaxImage" Grid.Column="1" Margin="5,5,3,5" Grid.Row="5" TextWrapping="Wrap" Style="{DynamicResource DigiTextBoxStyle}" p6:ProductPrice.IsNumericOnly="True" xmlns:p6="clr-namespace:PhotoSW.Common;assembly=FrameworkHelper" />
+                <TextBlock Margin="0,10,5,10" Grid.Row="6" TextWrapping="Wrap" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <Run Language="en-in" Text="Card Description :" />
+                </TextBlock>
+                <TextBox Name="txtCardDesc" Grid.Column="1" Margin="5,5,3,5" FontSize="20" FontWeight="Bold" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="6" TextWrapping="Wrap" />
+                <StackPanel Name="CheckBoxWaterMark" Orientation="Horizontal" Grid.Row="7" Grid.Column="1" Margin="4,4,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                    <Viewbox Name="WaterMark_Copy" Height="35" HorizontalAlignment="Left" Width="200" Visibility="Visible">
+                        <CheckBox Name="chkIsWaterMark" FontWeight="Bold" Content="Is WaterMark" Checked="chkIsWaterMark_Checked" Unchecked="chkIsWaterMark_Unchecked" />
+                    </Viewbox>
+                </StackPanel>
+                <StackPanel Name="CheckBox" Orientation="Horizontal" Grid.Row="8" Grid.Column="1" Margin="4,4,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                    <Viewbox Name="package_Copy" Height="35" HorizontalAlignment="Left" Width="200" Visibility="Visible">
+                        <CheckBox Name="chkIsActive" FontWeight="Bold" Content="Is Active" IsChecked="True" />
+                    </Viewbox>
+                </StackPanel>
+                <Viewbox Height="35" Margin="5,0,0,0" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="1" Width="200" Visibility="Visible">
+                    <CheckBox Name="chkIsPrePaid" FontWeight="Bold" Content="Is Prepaid" Checked="chkIsPrePaid_Checked" />
+                </Viewbox>
+                <StackPanel Name="stkPackage" Visibility="Collapsed" Grid.Row="10" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <TextBlock Margin="130,10,4,9" Grid.Row="6" TextWrapping="Wrap" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Run Language="en-in" Text="Package Name :" />
+                    </TextBlock>
+                    <ComboBox Name="cmbPackage" Width="430" Grid.Column="1" Margin="5,5,3,5" Grid.Row="9" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedIndex="0" Style="{DynamicResource DigiComboBoxStle}" />
+                </StackPanel>
+                <StackPanel Margin="0" Orientation="Horizontal" Grid.Row="11" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left">
+                    <Button Name="btnDownload" Content="Save" VerticalAlignment="Bottom" Height="60" Width="149" HorizontalAlignment="Center" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="24" FontWeight="Bold" Click="btnSave_Click" />
+                </StackPanel>
+            </Grid>
+            <Button Name="btnClose" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="42" Margin="0,-350,-22,295" Click="btnClose_Click">
+                <Image Source="/PhotoSW;component/images/close-btn.png" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

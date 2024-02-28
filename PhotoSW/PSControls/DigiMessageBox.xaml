@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.DigiMessageBox" 
+              Background="#808080"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid DataContext="{Binding ElementName=root}">
+        <Border Height="350" Width="400" Visibility="{Binding Visibility}">
+            <Border BorderBrush="#FF000000" BorderThickness="1" Background="#696969" CornerRadius="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="270" Width="400">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
+                </Border.BitmapEffect>
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock  Name="MessageTextBlock" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" TextWrapping="Wrap" Margin="5" Text="{Binding Message}" />
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Height="40">
+                        <Button  Name="btnOk" Content="Yes" HorizontalAlignment="Center" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="16" FontWeight="Bold" Margin="0" Width="100" Click="btnOk_Click"/>
+                        <Button  Name="btnCancel" Content="No" HorizontalAlignment="Center" Style="{DynamicResource ButtonStyleRed}" Foreground="#FFFFFFFF" FontSize="16" FontWeight="Bold" Margin="10,0,0,0" Width="100" Click="btnCancel_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

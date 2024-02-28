@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PhotoSW.PSControls.CtrlOfflineClosingForm" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="#AC000000">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="10" Background="#FFFFFFFF" BorderBrush="#FF505050" BorderThickness="2" Width="800" Height="200" Visibility="{Binding Visibility}">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Name="grdOpening" Width="auto" Height="180" Grid.Row="0">
+                    <StackPanel  Name="msg" Margin="0,20,0,3" Orientation="Horizontal" HorizontalAlignment="Center" Height="60.5" VerticalAlignment="Top">
+                        <TextBlock  Name="txtMsg" TextWrapping="Wrap" TextBlock.FontSize="15" Width="700" Text="Currently you seems to be offline, so you need to download Offline data file.Please click on the download button to download offline data file." TextBlock.FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel  Name="SPAdd" Orientation="Horizontal" HorizontalAlignment="Center" Height="180" VerticalAlignment="Top">
+                        <Button  Name="btnDownload" Content="Download" Style="{DynamicResource ButtonStylesubmit}" Foreground="#FFFFFFFF" FontSize="26.667" Height="60" FontWeight="Bold" Width="200" Margin="0,45,0,2" />
+                    </StackPanel>
+                </Grid>
+                <Button  Name="btnShowhdeForm" Style="{StaticResource ButtonStyleAlpha2}" HorizontalAlignment="Right" Width="42" Margin="0,0,0,0" Height="45" VerticalAlignment="Top">
+                    <Image Source="/PhotoSW;component/images/close-btn.png" />
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
