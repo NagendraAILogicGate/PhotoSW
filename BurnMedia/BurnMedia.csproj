@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5394021D-C5EF-498B-94CC-E271AEEB7F62}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BurnMedia</RootNamespace>
+    <AssemblyName>BurnMedia</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BootOptions.cs" />
+    <Compile Include="BootOptionsClass.cs" />
+    <Compile Include="BurnData.cs" />
+    <Compile Include="BURN_MEDIA_TASK.cs" />
+    <Compile Include="DDiscFormat2DataEvents.cs" />
+    <Compile Include="DDiscFormat2EraseEvents.cs" />
+    <Compile Include="DDiscFormat2RawCDEvents.cs" />
+    <Compile Include="DDiscFormat2TrackAtOnceEvents.cs" />
+    <Compile Include="DDiscMaster2Events.cs" />
+    <Compile Include="DFileSystemImageEvents.cs" />
+    <Compile Include="DFileSystemImageImportEvents.cs" />
+    <Compile Include="DFileSystemImageImport_Event.cs" />
+    <Compile Include="DFileSystemImageImport_EventHandler.cs" />
+    <Compile Include="DFileSystemImageImport_EventProvider.cs" />
+    <Compile Include="DFileSystemImageImport_SinkHelper.cs" />
+    <Compile Include="DFileSystemImage_Event.cs" />
+    <Compile Include="DFileSystemImage_EventHandler.cs" />
+    <Compile Include="DFileSystemImage_EventProvider.cs" />
+    <Compile Include="DFileSystemImage_SinkHelper.cs" />
+    <Compile Include="DiscFormat2Data_Event.cs" />
+    <Compile Include="DiscFormat2Data_EventHandler.cs" />
+    <Compile Include="DiscFormat2Data_EventProvider.cs" />
+    <Compile Include="DiscFormat2Data_SinkHelper.cs" />
+    <Compile Include="DiscFormat2Erase_Event.cs" />
+    <Compile Include="DiscFormat2Erase_EventHandler.cs" />
+    <Compile Include="DiscFormat2Erase_EventProvider.cs" />
+    <Compile Include="DiscFormat2Erase_SinkHelper.cs" />
+    <Compile Include="DiscFormat2RawCD_Event.cs" />
+    <Compile Include="DiscFormat2RawCD_EventHandler.cs" />
+    <Compile Include="DiscFormat2RawCD_EventProvider.cs" />
+    <Compile Include="DiscFormat2RawCD_SinkHelper.cs" />
+    <Compile Include="DiscFormat2TrackAtOnce_Event.cs" />
+    <Compile Include="DiscFormat2TrackAtOnce_EventHandler.cs" />
+    <Compile Include="DiscFormat2TrackAtOnce_EventProvider.cs" />
+    <Compile Include="DiscFormat2TrackAtOnce_SinkHelper.cs" />
+    <Compile Include="DiscMaster2_Event.cs" />
+    <Compile Include="DiscMaster2_EventProvider.cs" />
+    <Compile Include="DiscMaster2_NotifyDeviceAddedEventHandler.cs" />
+    <Compile Include="DiscMaster2_NotifyDeviceRemovedEventHandler.cs" />
+    <Compile Include="DiscMaster2_SinkHelper.cs" />
+    <Compile Include="DWriteEngine2Events.cs" />
+    <Compile Include="DWriteEngine2_Event.cs" />
+    <Compile Include="DWriteEngine2_EventHandler.cs" />
+    <Compile Include="DWriteEngine2_EventProvider.cs" />
+    <Compile Include="DWriteEngine2_SinkHelper.cs" />
+    <Compile Include="EmulationType.cs" />
+    <Compile Include="EnumFsiItems.cs" />
+    <Compile Include="EnumFsiItemsClass.cs" />
+    <Compile Include="EnumProgressItems.cs" />
+    <Compile Include="EnumProgressItemsClass.cs" />
+    <Compile Include="FileSystemImageResult.cs" />
+    <Compile Include="FileSystemImageResultClass.cs" />
+    <Compile Include="FsiDirectoryItem.cs" />
+    <Compile Include="FsiDirectoryItemClass.cs" />
+    <Compile Include="FsiFileItem.cs" />
+    <Compile Include="FsiFileItemClass.cs" />
+    <Compile Include="FsiFileSystems.cs" />
+    <Compile Include="FsiItemType.cs" />
+    <Compile Include="FsiNamedStreams.cs" />
+    <Compile Include="FsiNamedStreamsClass.cs" />
+    <Compile Include="FsiStream.cs" />
+    <Compile Include="FsiStreamClass.cs" />
+    <Compile Include="IBootOptions.cs" />
+    <Compile Include="IBurnVerification.cs" />
+    <Compile Include="IDiscFormat2.cs" />
+    <Compile Include="IDiscFormat2Data.cs" />
+    <Compile Include="IDiscFormat2DataEventArgs.cs" />
+    <Compile Include="IDiscFormat2Erase.cs" />
+    <Compile Include="IDiscFormat2RawCD.cs" />
+    <Compile Include="IDiscFormat2RawCDEventArgs.cs" />
+    <Compile Include="IDiscFormat2TrackAtOnce.cs" />
+    <Compile Include="IDiscFormat2TrackAtOnceEventArgs.cs" />
+    <Compile Include="IDiscMaster2.cs" />
+    <Compile Include="IDiscRecorder2.cs" />
+    <Compile Include="IDiscRecorder2Ex.cs" />
+    <Compile Include="IEnumFsiItems.cs" />
+    <Compile Include="IEnumProgressItems.cs" />
+    <Compile Include="IFileSystemImage.cs" />
+    <Compile Include="IFileSystemImage2.cs" />
+    <Compile Include="IFileSystemImage3.cs" />
+    <Compile Include="IFileSystemImageResult.cs" />
+    <Compile Include="IFsiDirectoryItem.cs" />
+    <Compile Include="IFsiDirectoryItem2.cs" />
+    <Compile Include="IFsiFileItem.cs" />
+    <Compile Include="IFsiFileItem2.cs" />
+    <Compile Include="IFsiItem.cs" />
+    <Compile Include="IFsiNamedStreams.cs" />
+    <Compile Include="IIsoImageManager.cs" />
+    <Compile Include="IMAPI_BURN_VERIFICATION_LEVEL.cs" />
+    <Compile Include="IMAPI_CD_SECTOR_TYPE.cs" />
+    <Compile Include="IMAPI_CD_TRACK_DIGITAL_COPY_SETTING.cs" />
+    <Compile Include="IMAPI_FEATURE_PAGE_TYPE.cs" />
+    <Compile Include="IMAPI_FORMAT2_DATA_MEDIA_STATE.cs" />
+    <Compile Include="IMAPI_FORMAT2_DATA_WRITE_ACTION.cs" />
+    <Compile Include="IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE.cs" />
+    <Compile Include="IMAPI_FORMAT2_RAW_CD_WRITE_ACTION.cs" />
+    <Compile Include="IMAPI_FORMAT2_TAO_WRITE_ACTION.cs" />
+    <Compile Include="IMAPI_MEDIA_PHYSICAL_TYPE.cs" />
+    <Compile Include="IMAPI_MEDIA_WRITE_PROTECT_STATE.cs" />
+    <Compile Include="IMAPI_MODE_PAGE_REQUEST_TYPE.cs" />
+    <Compile Include="IMAPI_MODE_PAGE_TYPE.cs" />
+    <Compile Include="IMAPI_PROFILE_TYPE.cs" />
+    <Compile Include="IMAPI_READ_TRACK_ADDRESS_TYPE.cs" />
+    <Compile Include="IMultisession.cs" />
+    <Compile Include="IMultisessionSequential.cs" />
+    <Compile Include="IProgressItem.cs" />
+    <Compile Include="IProgressItems.cs" />
+    <Compile Include="IRawCDImageCreator.cs" />
+    <Compile Include="IRawCDImageTrackInfo.cs" />
+    <Compile Include="IWriteEngine2.cs" />
+    <Compile Include="IWriteEngine2EventArgs.cs" />
+    <Compile Include="IWriteSpeedDescriptor.cs" />
+    <Compile Include="MsftDiscFormat2Data.cs" />
+    <Compile Include="MsftDiscFormat2DataClass.cs" />
+    <Compile Include="MsftDiscFormat2Erase.cs" />
+    <Compile Include="MsftDiscFormat2EraseClass.cs" />
+    <Compile Include="MsftDiscFormat2RawCD.cs" />
+    <Compile Include="MsftDiscFormat2RawCDClass.cs" />
+    <Compile Include="MsftDiscFormat2TrackAtOnce.cs" />
+    <Compile Include="MsftDiscFormat2TrackAtOnceClass.cs" />
+    <Compile Include="MsftDiscMaster2.cs" />
+    <Compile Include="MsftDiscMaster2Class.cs" />
+    <Compile Include="MsftDiscRecorder2.cs" />
+    <Compile Include="MsftDiscRecorder2Class.cs" />
+    <Compile Include="MsftFileSystemImage.cs" />
+    <Compile Include="MsftFileSystemImageClass.cs" />
+    <Compile Include="MsftIsoImageManager.cs" />
+    <Compile Include="MsftIsoImageManagerClass.cs" />
+    <Compile Include="MsftMultisessionSequential.cs" />
+    <Compile Include="MsftMultisessionSequentialClass.cs" />
+    <Compile Include="MsftRawCDImageCreator.cs" />
+    <Compile Include="MsftRawCDImageCreatorClass.cs" />
+    <Compile Include="MsftWriteEngine2.cs" />
+    <Compile Include="MsftWriteEngine2Class.cs" />
+    <Compile Include="MsftWriteSpeedDescriptor.cs" />
+    <Compile Include="MsftWriteSpeedDescriptorClass.cs" />
+    <Compile Include="PlatformId.cs" />
+    <Compile Include="ProgressItem.cs" />
+    <Compile Include="ProgressItemClass.cs" />
+    <Compile Include="ProgressItems.cs" />
+    <Compile Include="ProgressItemsClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SHFILEINFO.cs" />
+    <Compile Include="tagCONNECTDATA.cs" />
+    <Compile Include="tagSTATSTG.cs" />
+    <Compile Include="_FILETIME.cs" />
+    <Compile Include="_LARGE_INTEGER.cs" />
+    <Compile Include="_ULARGE_INTEGER.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

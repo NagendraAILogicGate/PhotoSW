@@ -1,0 +1,51 @@
+E:\09-Oct-2017_DigiPhoto\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+E:\09-Oct-2017_DigiPhoto\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+E:\09-Oct-2017_DigiPhoto\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+E:\09-Oct-2017_DigiPhoto\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb
+E:\09-Oct-2017_DigiPhoto\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+F:\jayendra\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+F:\jayendra\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+F:\jayendra\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+F:\jayendra\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+F:\jayendra\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb
+E:\raju2711\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+E:\raju2711\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+E:\raju2711\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+E:\raju2711\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+E:\raju2711\PhotoSW_14Nov_2017\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb
+F:\jayendra\dec\29Dec_PhotoSW\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+F:\jayendra\dec\29Dec_PhotoSW\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+F:\jayendra\dec\29Dec_PhotoSW\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+F:\jayendra\dec\29Dec_PhotoSW\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb
+F:\jayendra\feb\Latest5feb_PhotoSW\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+F:\jayendra\feb\Latest5feb_PhotoSW\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+F:\jayendra\feb\Latest5feb_PhotoSW\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+F:\jayendra\feb\Latest5feb_PhotoSW\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+F:\jayendra\feb\Latest5feb_PhotoSW\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb
+F:\PhotoSW_19Sep\BurnMedia\bin\Debug\BurnMedia.dll
+F:\PhotoSW_19Sep\BurnMedia\bin\Debug\BurnMedia.pdb
+F:\PhotoSW_19Sep\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+F:\PhotoSW_19Sep\BurnMedia\obj\Debug\BurnMedia.dll
+F:\PhotoSW_19Sep\BurnMedia\obj\Debug\BurnMedia.pdb
+D:\Jayendra\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.dll
+D:\Jayendra\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.pdb
+D:\Jayendra\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+D:\Jayendra\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.dll
+D:\Jayendra\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.pdb
+E:\PhotoSW_backup_26_Mar_2020\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.dll
+E:\PhotoSW_backup_26_Mar_2020\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.pdb
+E:\PhotoSW_backup_26_Mar_2020\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+E:\PhotoSW_backup_26_Mar_2020\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.dll
+E:\PhotoSW_backup_26_Mar_2020\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.pdb
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.dll
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.pdb
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csprojResolveAssemblyReference.cache
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csproj.CoreCompileInputs.cache
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.dll
+D:\DotNet Project\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.pdb
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.dll
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\bin\Debug\BurnMedia.pdb
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csproj.AssemblyReference.cache
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csproj.CoreCompileInputs.cache
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.dll
+C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.pdb
