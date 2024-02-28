@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FrameworkHelper</RootNamespace>
     <AssemblyName>FrameworkHelper</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -213,7 +214,48 @@
     <Compile Include="PhotoSW\SelectedSubStores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Baracoda.Cameleon.PC.Common.dll" />
+    <Content Include="bin\Debug\Baracoda.Cameleon.PC.Modularity.dll" />
+    <Content Include="bin\Debug\Baracoda.Cameleon.PC.Readers.dll" />
+    <Content Include="bin\Debug\DigiPhoto.DataLayer.dll" />
+    <Content Include="bin\Debug\DigiPhoto.IMIX.Business.dll" />
+    <Content Include="bin\Debug\DigiPhoto.UtilityRepository.dll" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\ErrorHandler.dll" />
+    <Content Include="bin\Debug\FrameworkHelper.dll" />
+    <Content Include="bin\Debug\FrameworkHelper.pdb" />
+    <Content Include="bin\Debug\Interop.MCHROMAKEYLib.dll" />
+    <Content Include="bin\Debug\Interop.MCOLORSLib.dll" />
+    <Content Include="bin\Debug\Interop.MLPROXYLib.dll" />
+    <Content Include="bin\Debug\Interop.MPLATFORMLib.dll" />
+    <Content Include="bin\Debug\Ionic.Zip.dll" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\MControls.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.Management.Sdk.Sfc.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.Smo.dll" />
+    <Content Include="bin\Debug\Microsoft.SqlServer.SmoExtended.dll" />
+    <Content Include="bin\Debug\PhotoSW.CF.DataLayer.dll" />
+    <Content Include="bin\Debug\PhotoSW.CF.DataLayer.pdb" />
+    <Content Include="bin\Debug\PhotoSW.DataLayer.dll" />
+    <Content Include="bin\Debug\PhotoSW.DataLayer.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Business.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Business.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.pdb" />
+    <Content Include="bin\Debug\SQLite.CodeFirst.dll" />
+    <Content Include="bin\Debug\System.Data.SQLite.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\PhotoSW.CF.DataLayer.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

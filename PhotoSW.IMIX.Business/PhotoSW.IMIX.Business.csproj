@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PhotoSW.IMIX.Business</RootNamespace>
     <AssemblyName>PhotoSW.IMIX.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -111,6 +111,33 @@
     <Compile Include="UserBusiness.cs" />
     <Compile Include="ValueTypeBusiness.cs" />
     <Compile Include="VideoSceneBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Digiphoto.Cache.dll" />
+    <Content Include="bin\Debug\DigiPhoto.UtilityRepository.dll" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\ErrorHandler.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\PhotoSW.Cache.dll" />
+    <Content Include="bin\Debug\PhotoSW.Cache.pdb" />
+    <Content Include="bin\Debug\PhotoSW.CF.DataLayer.dll" />
+    <Content Include="bin\Debug\PhotoSW.CF.DataLayer.pdb" />
+    <Content Include="bin\Debug\PhotoSW.DataLayer.dll" />
+    <Content Include="bin\Debug\PhotoSW.DataLayer.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Business.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Business.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.pdb" />
+    <Content Include="bin\Debug\SQLite.CodeFirst.dll" />
+    <Content Include="bin\Debug\System.Data.SQLite.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\PhotoSW.CF.DataLayer.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

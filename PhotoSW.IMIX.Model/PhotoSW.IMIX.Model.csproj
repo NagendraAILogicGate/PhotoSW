@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8ACEB663-22BE-439C-AA6A-4221A90FDECB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoSW.IMIX.Model</RootNamespace>
+    <AssemblyName>PhotoSW.IMIX.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityInfo.cs" />
+    <Compile Include="AlreadyrefundInfo.cs" />
+    <Compile Include="ArchivedPhotoInfo.cs" />
+    <Compile Include="AssociatedPrintersInfo.cs" />
+    <Compile Include="AudioTemplateInfo.cs" />
+    <Compile Include="BackGroundInfo.cs" />
+    <Compile Include="BackupHistory.cs" />
+    <Compile Include="BaseDataModel.cs" />
+    <Compile Include="BillFormatInfo.cs" />
+    <Compile Include="BorderInfo.cs" />
+    <Compile Include="BurnImagesInfo.cs" />
+    <Compile Include="BurnOrderInfo.cs" />
+    <Compile Include="CalenderViewOperationType.cs" />
+    <Compile Include="CameraDeviceAssociationInfo.cs" />
+    <Compile Include="CameraInfo.cs" />
+    <Compile Include="CashBoxInfo.cs" />
+    <Compile Include="CGConfigSettings.cs" />
+    <Compile Include="CharacterInfo.cs" />
+    <Compile Include="CheckedItems.cs" />
+    <Compile Include="ChromaKeyTemplateInfo.cs" />
+    <Compile Include="ConfigInfo.cs" />
+    <Compile Include="ConfigurationInfo.cs" />
+    <Compile Include="CurrencyExchangeinfo.cs" />
+    <Compile Include="CurrencyInfo.cs" />
+    <Compile Include="DeviceInfo.cs" />
+    <Compile Include="DG_PhotoGroupInfo.cs" />
+    <Compile Include="DiscountTypeInfo.cs" />
+    <Compile Include="DownloadFileInfo.cs" />
+    <Compile Include="EmailDetailInfo.cs" />
+    <Compile Include="EMailInfo.cs" />
+    <Compile Include="EmailSettingsInfo.cs" />
+    <Compile Include="EmailStatusInfo.cs" />
+    <Compile Include="ExportServiceLog.cs" />
+    <Compile Include="FilePhotoInfo.cs" />
+    <Compile Include="FinancialAuditTrail_Result.cs" />
+    <Compile Include="FindCommandParameters.cs" />
+    <Compile Include="FolderStructureInfo.cs" />
+    <Compile Include="GeneralBackgroundInfo.cs" />
+    <Compile Include="GetLocationPerformance_Result.cs" />
+    <Compile Include="GetPhotgrapherPerformance_Result.cs" />
+    <Compile Include="GetPrintedProduct_Result.cs" />
+    <Compile Include="GetServiceStatus.cs" />
+    <Compile Include="GraphicsInfo.cs" />
+    <Compile Include="GroupDetails.cs" />
+    <Compile Include="GroupInfo.cs" />
+    <Compile Include="GumRide.cs" />
+    <Compile Include="ImageCardTypeInfo.cs" />
+    <Compile Include="iMIXConfigurationInfo.cs" />
+    <Compile Include="iMixConfigurationLocationInfo.cs" />
+    <Compile Include="iMixConfigurationLocationInfoList.cs" />
+    <Compile Include="iMixImageAssociationInfo.cs" />
+    <Compile Include="iMixImageCardTypeInfo.cs" />
+    <Compile Include="ImixPOSDetail.cs" />
+    <Compile Include="iMIXStoreConfigurationInfo.cs" />
+    <Compile Include="InventoryConsumables.cs" />
+    <Compile Include="ItemTemplateDetailModel.cs" />
+    <Compile Include="ItemTemplateMasterModel.cs" />
+    <Compile Include="ItemTemplatePrintOrderModel.cs" />
+    <Compile Include="LinetItemsDetails.cs" />
+    <Compile Include="LocationInfo.cs" />
+    <Compile Include="MappedPos.cs" />
+    <Compile Include="ModratePhotoInfo.cs" />
+    <Compile Include="OperationalAudit_Result.cs" />
+    <Compile Include="OperatorPerformanceReport_Result.cs" />
+    <Compile Include="OrderDetailedDiscount_Get_Result.cs" />
+    <Compile Include="OrderDetailInfo.cs" />
+    <Compile Include="OrderDetails.cs" />
+    <Compile Include="OrderDetailsViewInfo.cs" />
+    <Compile Include="OrderInfo.cs" />
+    <Compile Include="OrderReceiptReprintInfo.cs" />
+    <Compile Include="PackageDetailsInfo.cs" />
+    <Compile Include="PackageDetailsViewInfo.cs" />
+    <Compile Include="PaymentSummaryInfo.cs" />
+    <Compile Include="PermisiionList.cs" />
+    <Compile Include="PermissionInfo.cs" />
+    <Compile Include="PermissionRoleInfo.cs" />
+    <Compile Include="PhotoCaptureInfo.cs" />
+    <Compile Include="PhotoDetail.cs" />
+    <Compile Include="PhotographerRFIDAssociationInfo.cs" />
+    <Compile Include="PhotoGraphersInfo.cs" />
+    <Compile Include="PhotoInfo.cs" />
+    <Compile Include="PreSoldAutoOnlineOrderInfo.cs" />
+    <Compile Include="Printer6850.cs" />
+    <Compile Include="Printer8810.cs" />
+    <Compile Include="PrinterDetails.cs" />
+    <Compile Include="PrinterDetailsInfo.cs" />
+    <Compile Include="PrinterJobInfo.cs" />
+    <Compile Include="PrinterQueueDetailsInfo.cs" />
+    <Compile Include="PrinterQueueforPrint.cs" />
+    <Compile Include="PrinterQueueInfo.cs" />
+    <Compile Include="PrinterTypeInfo.cs" />
+    <Compile Include="PrintLogInfo.cs" />
+    <Compile Include="PrintSummaryDetail.cs" />
+    <Compile Include="PrintSummary_Result.cs" />
+    <Compile Include="ProcessedVideoDetailsInfo.cs" />
+    <Compile Include="ProcessedVideoInfo.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductPriceInfo.cs" />
+    <Compile Include="ProductSummary_Result.cs" />
+    <Compile Include="ProductTypeInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RateDetailInfo.cs" />
+    <Compile Include="RefundDetailInfo.cs" />
+    <Compile Include="RefundInfo.cs" />
+    <Compile Include="ReportConfigurationDetails.cs" />
+    <Compile Include="ReportParams.cs" />
+    <Compile Include="ReportTypeDetails.cs" />
+    <Compile Include="RFIDField.cs" />
+    <Compile Include="RfidFlushHistotyInfo.cs" />
+    <Compile Include="RFIDImageAssociationInfo.cs" />
+    <Compile Include="RfidInfo.cs" />
+    <Compile Include="RFIDPhotoDetails.cs" />
+    <Compile Include="RFIDTagInfo.cs" />
+    <Compile Include="RideCameraSettingInfo.cs" />
+    <Compile Include="RoleInfo.cs" />
+    <Compile Include="SageInfo.cs" />
+    <Compile Include="SageInfoClosing.cs" />
+    <Compile Include="SageInfoWestage.cs" />
+    <Compile Include="SageOpenClose.cs" />
+    <Compile Include="SceneInfo.cs" />
+    <Compile Include="SearchDetailInfo.cs" />
+    <Compile Include="SemiOrderSettings.cs" />
+    <Compile Include="SemiOrderSettingsInfo.cs" />
+    <Compile Include="SemiOrderSettingsList.cs" />
+    <Compile Include="SeperatorTagInfo.cs" />
+    <Compile Include="ServiceEmailContent.cs" />
+    <Compile Include="ServicePosInfo.cs" />
+    <Compile Include="ServicePOSMapping.cs" />
+    <Compile Include="ServiceRunningHistory.cs" />
+    <Compile Include="ServicesInfo.cs" />
+    <Compile Include="ServicesStatus.cs" />
+    <Compile Include="SiteCodeDetail.cs" />
+    <Compile Include="SliderInfo.cs" />
+    <Compile Include="SpecProfileProductMappingInfo.cs" />
+    <Compile Include="StockShot.cs" />
+    <Compile Include="StoreInfo.cs" />
+    <Compile Include="SubStore.cs" />
+    <Compile Include="SubStoreLocationInfo.cs" />
+    <Compile Include="SubStoresInfo.cs" />
+    <Compile Include="SvcRunningInfo.cs" />
+    <Compile Include="SyncStatusInfo.cs" />
+    <Compile Include="SyncTriggerStatusInfo.cs" />
+    <Compile Include="TableBaseInfo.cs" />
+    <Compile Include="TaxDetailInfo.cs" />
+    <Compile Include="TransDetail.cs" />
+    <Compile Include="TripCamFeaturesInfo.cs" />
+    <Compile Include="TripCamInfo.cs" />
+    <Compile Include="TripCamPOSMappingInfo.cs" />
+    <Compile Include="TripCamSettingInfo.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="UsersInfo.cs" />
+    <Compile Include="ValueTypeInfo.cs" />
+    <Compile Include="VenueTaxValueModel.cs" />
+    <Compile Include="VersionHistoryInfo.cs" />
+    <Compile Include="VideoBackgroundInfo.cs" />
+    <Compile Include="VideoConfigProfiles.cs" />
+    <Compile Include="VideoObjectFileMapping.cs" />
+    <Compile Include="VideoOverlay.cs" />
+    <Compile Include="VideoProducts.cs" />
+    <Compile Include="VideoScene.cs" />
+    <Compile Include="VideoSceneObject.cs" />
+    <Compile Include="VideoSceneViewModel.cs" />
+    <Compile Include="VideoTemplateInfo.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="vw_GetActivityReports.cs" />
+    <Compile Include="vw_TakingReport.cs" />
+    <Compile Include="Watchersetting.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

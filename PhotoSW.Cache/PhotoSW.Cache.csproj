@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PhotoSW.Cache</RootNamespace>
     <AssemblyName>PhotoSW.Cache</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PhotoSW.IMIX.DataAccess">
-      <HintPath>..\..\..\PhotoSW_10oct-2017\PhotoSW.IMIX.Business\PhotoSW.IMIX.Business\PhotoSW.IMIX.DataAccess\bin\Debug\PhotoSW.IMIX.DataAccess.dll</HintPath>
+      <HintPath>..\PhotoSW.IMIX.DataAccess\bin\Debug\PhotoSW.IMIX.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="PhotoSW.IMIX.Model">
-      <HintPath>..\..\..\PhotoSW_10oct-2017\PhotoSW.IMIX.Business\PhotoSW.IMIX.Business\PhotoSW.IMIX.Model\bin\Debug\PhotoSW.IMIX.Model.dll</HintPath>
+      <HintPath>..\PhotoSW.IMIX.Model\bin\Debug\PhotoSW.IMIX.Model.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -79,7 +79,18 @@
     <Compile Include="Repository\ICacheRepository.cs" />
     <Compile Include="SqlDepandencyCache\SqlDepandencyCache.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\DigiPhoto.UtilityRepository.dll" />
+    <Content Include="bin\Debug\PhotoSW.Cache.dll" />
+    <Content Include="bin\Debug\PhotoSW.Cache.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.DataAccess.pdb" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.dll" />
+    <Content Include="bin\Debug\PhotoSW.IMIX.Model.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

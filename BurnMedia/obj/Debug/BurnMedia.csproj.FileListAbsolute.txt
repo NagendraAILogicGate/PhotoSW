@@ -49,3 +49,9 @@ C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csproj.Assem
 C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.csproj.CoreCompileInputs.cache
 C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.dll
 C:\Workspace\PraveenSir\PhotoSW\trunk\BurnMedia\obj\Debug\BurnMedia.pdb
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\bin\Debug\BurnMedia.dll
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\bin\Debug\BurnMedia.pdb
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csproj.AssemblyReference.cache
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\obj\Debug\BurnMedia.csproj.CoreCompileInputs.cache
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\obj\Debug\BurnMedia.dll
+D:\Work\Praveen_khare_sir\NagendraAILogicGate\PhotoSW\BurnMedia\obj\Debug\BurnMedia.pdb

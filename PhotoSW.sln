@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW", "PhotoSW\PhotoSW.csproj", "{75592A8D-8683-423B-922D-36AE4D7DB5CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnMedia", "BurnMedia\BurnMedia.csproj", "{5394021D-C5EF-498B-94CC-E271AEEB7F62}"
@@ -9,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.DataLayer", "PhotoS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.IMIX.DataAccess", "PhotoSW.IMIX.DataAccess\PhotoSW.IMIX.DataAccess.csproj", "{D37E9635-8994-4B8D-96F5-7C06925358E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.IMIX.Model", "PhotoSW.IMIX.Model\PhotoSW.IMIX.Model.csproj", "{8ACEB663-22BE-439C-AA6A-4221A90FDECB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.IMIX.Business", "PhotoSW.IMIX.Business\PhotoSW.IMIX.Business.csproj", "{722E71E0-1FB9-435A-8D2D-81EB3293CB73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.CF.DataLayer", "PhotoSW.CF.DataLayer\PhotoSW.CF.DataLayer.csproj", "{159B28C4-A62A-471A-BA5D-8D29EFF9BE34}"
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.Cache", "PhotoSW.Cache\PhotoSW.Cache.csproj", "{24D33F4C-2178-4588-A756-CA6D82516F77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkHelper", "FrameworkHelper\FrameworkHelper.csproj", "{7849F0FD-2659-4A2A-8348-972685F6EA4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSW.IMIX.Model", "PhotoSW.IMIX.Model\PhotoSW.IMIX.Model.csproj", "{8ACEB663-22BE-439C-AA6A-4221A90FDECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,6 @@ Global
 		{D37E9635-8994-4B8D-96F5-7C06925358E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D37E9635-8994-4B8D-96F5-7C06925358E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D37E9635-8994-4B8D-96F5-7C06925358E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{722E71E0-1FB9-435A-8D2D-81EB3293CB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{722E71E0-1FB9-435A-8D2D-81EB3293CB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{722E71E0-1FB9-435A-8D2D-81EB3293CB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,8 +59,15 @@ Global
 		{7849F0FD-2659-4A2A-8348-972685F6EA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7849F0FD-2659-4A2A-8348-972685F6EA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7849F0FD-2659-4A2A-8348-972685F6EA4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACEB663-22BE-439C-AA6A-4221A90FDECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6E869BE-E78E-4430-8EA2-07E93DADF525}
 	EndGlobalSection
 EndGlobal

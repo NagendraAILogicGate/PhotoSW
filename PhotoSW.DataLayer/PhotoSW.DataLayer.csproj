@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PhotoSW.DataLayer</RootNamespace>
     <AssemblyName>PhotoSW.DataLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -187,6 +187,13 @@
     <Compile Include="SettingStatus.cs" />
     <Compile Include="TripCamFeatures.cs" />
     <Compile Include="VideoFlipModes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\PhotoSW.DataLayer.dll" />
+    <Content Include="bin\Debug\PhotoSW.DataLayer.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
