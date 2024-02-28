@@ -1,0 +1,859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{159B28C4-A62A-471A-BA5D-8D29EFF9BE34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoSW.CF.DataLayer</RootNamespace>
+    <AssemblyName>PhotoSW.CF.DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.CodeFirst, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\SQLite.CodeFirst.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BAL\baActivityInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baAlreadyRefundInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baArchivedPhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baAssociatedImageInfo.cs" />
+    <Compile Include="BAL\baAssociatedPrintersInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baAudioTemplateInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baBackGroundInfo.cs" />
+    <Compile Include="BAL\baBackupHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baBillFormatInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baBorderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baBurnImagesInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baBurnOrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCameraDeviceAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCameraInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCashBoxInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCGConfigSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCharacterInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCheckedItems.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baChromaKeyTemplateInfo.cs" />
+    <Compile Include="BAL\baConfigInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baCurrencyInfo.cs" />
+    <Compile Include="BAL\baDeviceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baDiscountTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baDownloadFileInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baEmailDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baEMailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baEmailSettingsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baEmailStatusInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baExportServiceLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baFilePhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baFinancialAuditTrail_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baFindCommandParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baFolderStructureInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGeneralBackgroundInfo.cs" />
+    <Compile Include="BAL\baGetLocationPerformance_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGetPhotgrapherPerformance_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGetPrintedProduct_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGetServiceStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGraphicsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGroupDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGroupInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baGumRide.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baImageCardTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMIXConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMixConfigurationLocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMixConfigurationLocationInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMixImageAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMixImageCardTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baImixPOSDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baiMIXStoreConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baInventoryConsumables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baItemTemplateDetailModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baItemTemplateMasterModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baItemTemplatePrintOrderModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baLocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baMappedPos.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baModratePhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOperationalAudit_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOperatorPerformanceReport_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderDetailedDiscount_Get_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderDetailsViewInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baOrderReceiptReprintInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPackageDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPackageDetailsViewInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPaymentSummaryInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPermisiionList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPermissionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPermissionRoleInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoCaptureInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoGrapherInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotographerRFIDAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoGraphersInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoGroupInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPreSoldAutoOnlineOrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrinterDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrinterDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrinterQueueDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrinterTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrintLogInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrintSummaryDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baPrintSummary_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baProcessedVideoDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baProduct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baProductPriceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baProductSummary_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baProductTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRateDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRefundDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRefundInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baReportParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRFIDField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRfidFlushHistotyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRFIDImageAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRfidInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRFIDPhotoDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRFIDTagInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baRoleInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSageInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSageInfoClosing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSageInfoWestage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSageOpenClose.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSceneInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSemiOrderSetting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSemiOrderSettingsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSemiOrderSettingsList.cs" />
+    <Compile Include="BAL\baSeperatorTagInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baServiceEmailContent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baServicePosInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baServicePOSMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baServiceRunningHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baServicesInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSiteCodeDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSliderInfo.cs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSpecProfileProductMappingInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baStockShot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baStoreInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSubStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSubStoreLocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSubStoresInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSvcRunningInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSyncStatusInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baSyncTriggerStatusInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baTableBaseInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baTaxDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baTripCamInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baTripCamSettingInfo.cs" />
+    <Compile Include="BAL\baUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baUserInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baUsersInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BAL\baValueTypeInfo.cs" />
+    <Compile Include="BAL\baVenueTaxValueModel.cs" />
+    <Compile Include="BAL\baVersionHistoryInfo.cs" />
+    <Compile Include="BAL\baVideoBackgroundInfo.cs" />
+    <Compile Include="BAL\baVideoConfigProfiles.cs" />
+    <Compile Include="BAL\baVideoObjectFileMapping.cs" />
+    <Compile Include="BAL\baVideoOverlay.cs" />
+    <Compile Include="BAL\baVideoProducts.cs" />
+    <Compile Include="BAL\baVideoScene.cs" />
+    <Compile Include="BAL\baVideoSceneObject.cs" />
+    <Compile Include="BAL\baVW_GetActivityReports.cs" />
+    <Compile Include="BAL\baVW_TakingReport.cs" />
+    <Compile Include="BAL\baWatchersetting.cs" />
+    <Compile Include="CF_Common\Common.cs" />
+    <Compile Include="Entity\ActivityInfo.cs" />
+    <Compile Include="Entity\AlreadyrefundInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ArchivedPhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\AssociatedImageInfo.cs" />
+    <Compile Include="Entity\AssociatedPrintersInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\AudioTemplateInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\BackGroundInfo.cs" />
+    <Compile Include="Entity\BackupHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\BillFormatInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\BorderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\BurnImagesInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\BurnOrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CameraDeviceAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CameraInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CashBoxInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CGConfigSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CharacterInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CheckedItems.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ChromaKeyTemplateInfo.cs" />
+    <Compile Include="Entity\ConfigInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CurrencyExchangeinfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\CurrencyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\DeviceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\DiscountTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\DownloadFileInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\EmailDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\EMailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\EmailSettingsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\EmailStatusInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ExportServiceLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\FilePhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\FinancialAuditTrail_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\FindCommandParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\FolderStructureInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GeneralBackgroundInfo.cs" />
+    <Compile Include="Entity\GetLocationPerformance_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GetPhotgrapherPerformance_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GetPrintedProduct_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GetServiceStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GraphicsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GroupDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GroupInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\GumRide.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ImageCardTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMIXConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMixConfigurationLocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMixConfigurationLocationInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMixImageAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMixImageCardTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ImixPOSDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\iMIXStoreConfigurationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\InventoryConsumables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ItemTemplateDetailModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ItemTemplateMasterModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ItemTemplatePrintOrderModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\LinetItemsDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\LocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\MappedPos.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ModratePhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OperationalAudit_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OperatorPerformanceReport_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderDetailedDiscount_Get_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderDetailsViewInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\OrderReceiptReprintInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PackageDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PackageDetailsViewInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PaymentSummaryInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PermisiionList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PermissionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PermissionRoleInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotoCaptureInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotoDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotographerRFIDAssociationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotoGraphersInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotoGroupInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PhotoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PreSoldAutoOnlineOrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\Printer6850.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\Printer8810.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterJobInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterQueueDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterQueueforPrint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterQueueInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrinterTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrintLogInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrintSummaryDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\PrintSummary_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ProcessedVideoDetailsInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ProcessedVideoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\Product.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ProductPriceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ProductSummary_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ProductTypeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\RateDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\RefundDetailInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\RefundInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\ReportParams.cs" />
+    <Compile Include="Entity\RFIDField.cs" />
+    <Compile Include="Entity\RfidFlushHistotyInfo.cs" />
+    <Compile Include="Entity\RFIDImageAssociationInfo.cs" />
+    <Compile Include="Entity\RfidInfo.cs" />
+    <Compile Include="Entity\RFIDPhotoDetails.cs" />
+    <Compile Include="Entity\RFIDTagInfo.cs" />
+    <Compile Include="Entity\RideCameraSettingInfo.cs" />
+    <Compile Include="Entity\RoleInfo.cs" />
+    <Compile Include="Entity\SageInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SageInfoClosing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SageInfoWestage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SageOpenClose.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SceneInfo.cs" />
+    <Compile Include="Entity\SearchDetailInfo.cs" />
+    <Compile Include="Entity\SemiOrderSettings.cs" />
+    <Compile Include="Entity\SemiOrderSettingsInfo.cs" />
+    <Compile Include="Entity\SemiOrderSettingsList.cs" />
+    <Compile Include="Entity\SeperatorTagInfo.cs" />
+    <Compile Include="Entity\ServiceEmailContent.cs" />
+    <Compile Include="Entity\ServicePosInfo.cs" />
+    <Compile Include="Entity\ServicePOSMapping.cs" />
+    <Compile Include="Entity\ServiceRunningHistory.cs" />
+    <Compile Include="Entity\ServicesInfo.cs" />
+    <Compile Include="Entity\ServicesStatus.cs" />
+    <Compile Include="Entity\SiteCodeDetail.cs" />
+    <Compile Include="Entity\SliderInfo.cs" />
+    <Compile Include="Entity\SpecProfileProductMappingInfo.cs" />
+    <Compile Include="Entity\StockShot.cs" />
+    <Compile Include="Entity\StoreInfo.cs" />
+    <Compile Include="Entity\SubStore.cs" />
+    <Compile Include="Entity\SubStoreLocationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SubStoresInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SvcRunningInfo.cs" />
+    <Compile Include="Entity\SyncStatusInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity\SyncTriggerStatusInfo.cs" />
+    <Compile Include="Entity\TableBaseInfo.cs" />
+    <Compile Include="Entity\TaxDetailInfo.cs" />
+    <Compile Include="Entity\TransDetail.cs" />
+    <Compile Include="Entity\TripCamInfo.cs" />
+    <Compile Include="Entity\TripCamSettingInfo.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Entity\UserInfo.cs" />
+    <Compile Include="Entity\UsersInfo.cs" />
+    <Compile Include="Entity\ValueTypeInfo.cs" />
+    <Compile Include="Entity\VenueTaxValueModel.cs" />
+    <Compile Include="Entity\VersionHistoryInfo.cs" />
+    <Compile Include="Entity\VideoBackgroundInfo.cs" />
+    <Compile Include="Entity\VideoConfigProfiles.cs" />
+    <Compile Include="Entity\VideoObjectFileMapping.cs" />
+    <Compile Include="Entity\VideoOverlay.cs" />
+    <Compile Include="Entity\VideoProducts.cs" />
+    <Compile Include="Entity\VideoScene.cs" />
+    <Compile Include="Entity\VideoSceneObject.cs" />
+    <Compile Include="Entity\vw_GetActivityReports.cs" />
+    <Compile Include="Entity\vw_TakingReport.cs" />
+    <Compile Include="Entity\Watchersetting.cs" />
+    <Compile Include="PhotoSWEntities.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

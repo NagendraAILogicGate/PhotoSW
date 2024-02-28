@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{722E71E0-1FB9-435A-8D2D-81EB3293CB73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoSW.IMIX.Business</RootNamespace>
+    <AssemblyName>PhotoSW.IMIX.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ErrorHandler, Version=6.2.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ErrorHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.Cache">
+      <HintPath>..\PhotoSW.Cache\bin\Debug\PhotoSW.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.CF.DataLayer">
+      <HintPath>..\PhotoSW.CF.DataLayer\bin\Debug\PhotoSW.CF.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.DataLayer">
+      <HintPath>..\PhotoSW.DataLayer\bin\Debug\PhotoSW.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.DataAccess">
+      <HintPath>..\PhotoSW.IMIX.DataAccess\bin\Debug\PhotoSW.IMIX.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotoSW.IMIX.Model">
+      <HintPath>..\PhotoSW.IMIX.Model\bin\Debug\PhotoSW.IMIX.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityBusiness.cs" />
+    <Compile Include="AssociateImageBusiness.cs" />
+    <Compile Include="BackgroundBusiness.cs" />
+    <Compile Include="BaseBusiness.cs" />
+    <Compile Include="BorderBusiness.cs" />
+    <Compile Include="CalenderBusiness.cs" />
+    <Compile Include="CameraBusiness.cs" />
+    <Compile Include="CardBusiness.cs" />
+    <Compile Include="CashBoxBusiness.cs" />
+    <Compile Include="CharacterBusiness.cs" />
+    <Compile Include="CommonBusiness.cs" />
+    <Compile Include="ConfigBusiness.cs" />
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="CurrencyBusiness.cs" />
+    <Compile Include="CurrencyExchangeBussiness.cs" />
+    <Compile Include="CustomBusineses.cs" />
+    <Compile Include="DeviceManager.cs" />
+    <Compile Include="DiscountBusiness.cs" />
+    <Compile Include="EmailBusniess.cs" />
+    <Compile Include="GraphicsBusiness.cs" />
+    <Compile Include="LocationBusniess.cs" />
+    <Compile Include="OrderBusiness.cs" />
+    <Compile Include="PackageBusniess.cs" />
+    <Compile Include="PhotoBusiness.cs" />
+    <Compile Include="PrinterBusniess.cs" />
+    <Compile Include="PrinterTypeBusiness.cs" />
+    <Compile Include="ProcessedVideoBusiness.cs" />
+    <Compile Include="ProductBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RefundBusiness.cs" />
+    <Compile Include="ReportBusiness.cs" />
+    <Compile Include="RfidBusiness.cs" />
+    <Compile Include="RolePermissionsBusniess.cs" />
+    <Compile Include="SageBusiness.cs" />
+    <Compile Include="SceneBusiness.cs" />
+    <Compile Include="SearchCriteriaInfo.cs" />
+    <Compile Include="SemiOrderBusiness.cs" />
+    <Compile Include="ServicePosInfoBusiness.cs" />
+    <Compile Include="SoftwareHealthCheckBusiness.cs" />
+    <Compile Include="StoreSubStoreDataBusniess.cs" />
+    <Compile Include="SyncStatusBusiness.cs" />
+    <Compile Include="TaxBusiness.cs" />
+    <Compile Include="TestPhotoFrame.cs" />
+    <Compile Include="TripCamBusiness.cs" />
+    <Compile Include="UserBusiness.cs" />
+    <Compile Include="ValueTypeBusiness.cs" />
+    <Compile Include="VideoSceneBusiness.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

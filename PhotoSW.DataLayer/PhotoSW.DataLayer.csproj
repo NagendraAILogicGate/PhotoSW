@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2BA36081-85D5-40B7-A1B5-8A2546133E69}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoSW.DataLayer</RootNamespace>
+    <AssemblyName>PhotoSW.DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationObjectEnum.cs" />
+    <Compile Include="BackupErrorMessage.cs" />
+    <Compile Include="BarcodeTypes.cs" />
+    <Compile Include="BurnOrderInfo.cs" />
+    <Compile Include="CardTypeInfo.cs" />
+    <Compile Include="ConfigParams.cs" />
+    <Compile Include="ControlledObject.cs" />
+    <Compile Include="Digibackup.cs" />
+    <Compile Include="ImgInfoPostScanList.cs" />
+    <Compile Include="IsProductPrintType.cs" />
+    <Compile Include="Model\ArchivedPhotos.cs" />
+    <Compile Include="Model\BackupHistory.cs" />
+    <Compile Include="Model\ChangeTracking.cs" />
+    <Compile Include="Model\ClientApplicationVersions.cs" />
+    <Compile Include="Model\ErrorLog.cs" />
+    <Compile Include="Model\FinancialAuditTrail_Result.cs" />
+    <Compile Include="Model\GenerateBill_Result.cs" />
+    <Compile Include="Model\GetConnectionStatus_Result.cs" />
+    <Compile Include="Model\GetImagesBYQRCode_Result.cs" />
+    <Compile Include="Model\GetLastGeneratedNumber_Result.cs" />
+    <Compile Include="Model\GetLocationPerformance_Result.cs" />
+    <Compile Include="Model\GetLocationSubstoreWise_Result.cs" />
+    <Compile Include="Model\GetOrderQuantity.cs" />
+    <Compile Include="Model\GetPhotgrapherPerformance_Result.cs" />
+    <Compile Include="Model\GetPhotoDataByPage_Result.cs" />
+    <Compile Include="Model\GetPhotoToUpload_Result.cs" />
+    <Compile Include="Model\GetPrintedProduct_Result.cs" />
+    <Compile Include="Model\GetPrinterQueueDetailsByOrderNo_Result.cs" />
+    <Compile Include="Model\GetPrinterQueueDetails_Result.cs" />
+    <Compile Include="Model\GetRefundedItems_Result.cs" />
+    <Compile Include="Model\GetServerDateTime.cs" />
+    <Compile Include="Model\iIMIXConfigurationMaster.cs" />
+    <Compile Include="Model\iMixCardRule.cs" />
+    <Compile Include="Model\iMIXConfigurationValue.cs" />
+    <Compile Include="Model\iMixImageAssociation.cs" />
+    <Compile Include="Model\iMIXImageAssociationRule.cs" />
+    <Compile Include="Model\iMixImageCardType.cs" />
+    <Compile Include="Model\OperationalAudit_Result.cs" />
+    <Compile Include="Model\OperatorPerformanceReport_Result.cs" />
+    <Compile Include="Model\OrderDetailedDiscount_Get_Result.cs" />
+    <Compile Include="Model\OrderDetailedSyncStaus_Result.cs" />
+    <Compile Include="Model\PhotoAlbumPrintOrder.cs" />
+    <Compile Include="Model\PrintSummary_Result.cs" />
+    <Compile Include="Model\ProductSummary_Result.cs" />
+    <Compile Include="Model\PS_Location.cs" />
+    <Compile Include="Model\PS_AssociatedPrinters.cs" />
+    <Compile Include="Model\PS_Actions_Type.cs" />
+    <Compile Include="Model\PS_Activity.cs" />
+    <Compile Include="Model\PS_Albums.cs" />
+    <Compile Include="Model\PS_Albums_Photos.cs" />
+    <Compile Include="Model\PS_ApplicationSettings.cs" />
+    <Compile Include="Model\PS_BackGround.cs" />
+    <Compile Include="Model\PS_Bill_Format.cs" />
+    <Compile Include="Model\PS_Borders.cs" />
+    <Compile Include="Model\PS_CameraDetails.cs" />
+    <Compile Include="Model\PS_CashBox.cs" />
+    <Compile Include="Model\PS_ColorCodes.cs" />
+    <Compile Include="Model\PS_Configuration.cs" />
+    <Compile Include="Model\PS_Currency.cs" />
+    <Compile Include="Model\PS_Emails.cs" />
+    <Compile Include="Model\PS_EmailSettings.cs" />
+    <Compile Include="Model\PS_Graphics.cs" />
+    <Compile Include="Model\PS_Moderate_Photos.cs" />
+    <Compile Include="Model\PS_Orders.cs" />
+    <Compile Include="Model\PS_Orders_Details.cs" />
+    <Compile Include="Model\PS_Orders_DiscountType.cs" />
+    <Compile Include="Model\PS_Orders_ProductType.cs" />
+    <Compile Include="Model\PS_PackageDetails.cs" />
+    <Compile Include="Model\PS_Permissions.cs" />
+    <Compile Include="Model\PS_Permission_Role.cs" />
+    <Compile Include="Model\PS_PhotoGroup.cs" />
+    <Compile Include="Model\PS_PhotoNumberConfiguration.cs" />
+    <Compile Include="Model\PS_Photos.cs" />
+    <Compile Include="Model\PS_Photos_Changes.cs" />
+    <Compile Include="Model\PS_Photo_Effects.cs" />
+    <Compile Include="Model\PS_Preview_Counter.cs" />
+    <Compile Include="Model\PS_PrinterQueue.cs" />
+    <Compile Include="Model\PS_Printers.cs" />
+    <Compile Include="Model\PS_PrintLog.cs" />
+    <Compile Include="Model\PS_Product_Pricing.cs" />
+    <Compile Include="Model\PS_ReceiptPrinter.cs" />
+    <Compile Include="Model\PS_Refund.cs" />
+    <Compile Include="Model\PS_RefundDetails.cs" />
+    <Compile Include="Model\PS_RideCameraConfiguration.cs" />
+    <Compile Include="Model\PS_SemiOrder_Settings.cs" />
+    <Compile Include="Model\PS_Services.cs" />
+    <Compile Include="Model\PS_Store.cs" />
+    <Compile Include="Model\PS_SubProducts.cs" />
+    <Compile Include="Model\PS_SubStores.cs" />
+    <Compile Include="Model\PS_SubStore_Locations.cs" />
+    <Compile Include="Model\PS_SyncStatus.cs" />
+    <Compile Include="Model\PS_Users.cs" />
+    <Compile Include="Model\PS_User_Roles.cs" />
+    <Compile Include="Model\PS_VersionHistory.cs" />
+    <Compile Include="Model\SetDataToCentralServer_Result.cs" />
+    <Compile Include="Model\sp_GetActivityReport.cs" />
+    <Compile Include="Model\tblPhotoDetail.cs" />
+    <Compile Include="Model\tblprinter.cs" />
+    <Compile Include="Model\uspCheckUpdates_Result.cs" />
+    <Compile Include="Model\ValueType.cs" />
+    <Compile Include="Model\ValueTypeGroup.cs" />
+    <Compile Include="Model\vw_GetActivityReports.cs" />
+    <Compile Include="Model\vw_GetAllTable.cs" />
+    <Compile Include="Model\vw_GetBorderDetails.cs" />
+    <Compile Include="Model\vw_GetCameraDetails.cs" />
+    <Compile Include="Model\vw_GetConfigdata.cs" />
+    <Compile Include="Model\vw_GetFilteredPrinterQueue.cs" />
+    <Compile Include="Model\vw_GetFilteredPrinterQueueForPrint.cs" />
+    <Compile Include="Model\vw_GetGroupedImages.cs" />
+    <Compile Include="Model\vw_GetListAvailableLocations.cs" />
+    <Compile Include="Model\vw_GetOrderDetails.cs" />
+    <Compile Include="Model\vw_GetOrderDetailsforRefund.cs" />
+    <Compile Include="Model\vw_GetPackageDetails.cs" />
+    <Compile Include="Model\vw_GetPhotoEffects.cs" />
+    <Compile Include="Model\vw_GetPhotographer.cs" />
+    <Compile Include="Model\vw_GetPhotoList.cs" />
+    <Compile Include="Model\vw_GetPrintDetails.cs" />
+    <Compile Include="Model\vw_GetPrinterDetails.cs" />
+    <Compile Include="Model\vw_GetPrinterQueue.cs" />
+    <Compile Include="Model\vw_GetPrinterQueueforPrint.cs" />
+    <Compile Include="Model\vw_GetProductNameforOrder.cs" />
+    <Compile Include="Model\vw_GetProductTypeData.cs" />
+    <Compile Include="Model\vw_GetRecordsForArchive.cs" />
+    <Compile Include="Model\vw_GetRideCamera.cs" />
+    <Compile Include="Model\vw_GetSubStoreData.cs" />
+    <Compile Include="Model\vw_GetSubStoreLocations.cs" />
+    <Compile Include="Model\vw_GetUserDetails.cs" />
+    <Compile Include="Model\vw_OrderBurnedItems.cs" />
+    <Compile Include="Model\vw_ProductPrinters.cs" />
+    <Compile Include="Model\vw_TakingReport.cs" />
+    <Compile Include="PaymentMode.cs" />
+    <Compile Include="PhotoPrintPosition.cs" />
+    <Compile Include="PhotoPrintPositionDic.cs" />
+    <Compile Include="PreScanWatcher.cs" />
+    <Compile Include="PrinterStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportTypes.cs" />
+    <Compile Include="RFIDAssociationType.cs" />
+    <Compile Include="RfidFlushType.cs" />
+    <Compile Include="ScanType.cs" />
+    <Compile Include="SettingStatus.cs" />
+    <Compile Include="TripCamFeatures.cs" />
+    <Compile Include="VideoFlipModes.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
