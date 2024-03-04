@@ -44,6 +44,7 @@ using System.Windows.Media.Effects;
 using Gif.Components;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PhotoSW.Views
 {
@@ -10644,72 +10645,84 @@ namespace PhotoSW.Views
             this.GrdEffects.Visibility = Visibility.Collapsed;
         }
 
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //this.PopupButton.IsChecked = true;
-            this.CmbProductType.Visibility = Visibility.Collapsed;
-            this.elementForContextMenu = null;
-            this.jrotate.Visibility = Visibility.Hidden;
-            TextBox textBox = new TextBox();
-            textBox.ContextMenu = this.dragCanvas.ContextMenu;
-
-            //textBox.Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.
-            //    ConvertFromString(this.CmbColor.SelectedValue.ToString()));
-
-            textBox.Foreground = this.txtContent.Foreground;
-
-            textBox.Background = new SolidColorBrush(Colors.Transparent);
-            textBox.FontWeight = FontWeights.Bold;
-            if (string.IsNullOrEmpty(this.CmbFontSize.Text))
-                this.CmbFontSize.Text = "20.0";
-            //jayendra
-            // textBox.FontSize = Convert.ToDouble(this.CmbFontSize.Text);//20.0;
-            if (this.CmbFontSize.Text != "11")
+            string str = this.txtContent.ToString();
+            if (str != "")
             {
-                textBox.FontSize = Convert.ToDouble(this.CmbFontSize.Text);//20.0;
-            }
-            else
-            {
-                textBox.FontSize = txtContent.FontSize;
-            }
-            ///////// 
-            // this.CmbFontSize.SelectedIndex = 6;
-            // this.cmbFont.SelectedIndex = 0;
-            do
-            {
-                //   this.CmbColor.SelectedIndex = 0;
-                textBox.FontFamily = (System.Windows.Media.FontFamily)new FontFamilyConverter().ConvertFromString(cmbFont.Text);//"Arial");
-                //textBox.Text = "Enter Text...";
-                //textBox.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
-                //textBox.Uid = "txtblock";
-                //textBox.BorderBrush = null;
+                this.CmbProductType.Visibility = Visibility.Collapsed;
+                this.elementForContextMenu = null;
+                this.jrotate.Visibility = Visibility.Hidden;
+                TextBox textBox = new TextBox();
+                textBox.ContextMenu = this.dragCanvas.ContextMenu;
+                
+                //this.Content = "Add";
+                //textBox.Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.
+                //    ConvertFromString(this.CmbColor.SelectedValue.ToString()));
 
-                textBox.Text = this.txtContent.Text;
-                textBox.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
-                textBox.Uid = this.txtContent.Uid;
-                textBox.BorderBrush = null;
+                textBox.Foreground = this.txtContent.Foreground;
 
-                textBox.Style = (Style)base.FindResource("SearchIDTB");
+                textBox.Background = new SolidColorBrush(Colors.Transparent);
+                textBox.FontWeight = FontWeights.Bold;
+                if (string.IsNullOrEmpty(this.CmbFontSize.Text))
+                    this.CmbFontSize.Text = "20.0";
+                //jayendra
+                // textBox.FontSize = Convert.ToDouble(this.CmbFontSize.Text);//20.0;
+                if (this.CmbFontSize.Text != "11")
+                {
+                    textBox.FontSize = Convert.ToDouble(this.CmbFontSize.Text);//20.0;
+                }
+                else
+                {
+                    textBox.FontSize = txtContent.FontSize;
+                }
+                ///////// 
+                // this.CmbFontSize.SelectedIndex = 6;
+                // this.cmbFont.SelectedIndex = 0;
+                do
+                {
+                    //   this.CmbColor.SelectedIndex = 0;
+                    textBox.FontFamily = (System.Windows.Media.FontFamily)new FontFamilyConverter().ConvertFromString(cmbFont.Text);//"Arial");
+                     //textBox.Text = "Enter Text...";
+                     //textBox.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+                     //textBox.Uid = "txtblock";
+                     //textBox.BorderBrush = null;
+
+                    textBox.Text = this.txtContent.Text;
+                    textBox.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+                    textBox.Uid = this.txtContent.Uid;
+                    textBox.BorderBrush = null;
+
+                    textBox.Style = (Style)base.FindResource("SearchIDTB");
+                }
+                while (false);
+                RotateTransform renderTransform = new RotateTransform();
+                textBox.RenderTransform = renderTransform;
+                textBox.MouseLeftButtonUp += new MouseButtonEventHandler(this.SelectObject);
+                textBox.LostFocus += new RoutedEventHandler(this.txtContent_LostFocus);
+                textBox.GotFocus += new RoutedEventHandler(this.txtContent_GotFocus);
+                textBox.TextChanged += new TextChangedEventHandler(this.txtTest_TextChanged);
+                //this.txtContent.Text = textBox.Text;
+                lstBox.Add(textBox);
+                this.dragCanvas.Children.Add(textBox);
+
+                Canvas.SetLeft(textBox, this.GrdBrightness.ActualWidth / 2.0);
+                Canvas.SetTop(textBox, this.GrdBrightness.ActualHeight / 2.0);
+                Panel.SetZIndex(textBox, 4);
+                this.txtContent.Focus();
+                VisualStateManager.GoToState(this.btnGraphicsText, "Checked", true);
+                VisualStateManager.GoToState(this.btnAddgraphics, "Checked", true);
+                this.graphicsTextBoxCount++;
+                this.GrdEffects.Visibility = Visibility.Collapsed;
+                this.txtContent.Text = "";
             }
-            while (false);
-            RotateTransform renderTransform = new RotateTransform();
-            textBox.RenderTransform = renderTransform;
-            textBox.MouseLeftButtonUp += new MouseButtonEventHandler(this.SelectObject);
-            textBox.LostFocus += new RoutedEventHandler(this.txtContent_LostFocus);
-            textBox.GotFocus += new RoutedEventHandler(this.txtContent_GotFocus);
-            textBox.TextChanged += new TextChangedEventHandler(this.txtTest_TextChanged);
-            //this.txtContent.Text = textBox.Text;
-            lstBox.Add(textBox);
-            this.dragCanvas.Children.Add(textBox);
+            //else
+            //{
+            //    this.txtContent.Text = null;
+            //}
 
-            Canvas.SetLeft(textBox, this.GrdBrightness.ActualWidth / 2.0);
-            Canvas.SetTop(textBox, this.GrdBrightness.ActualHeight / 2.0);
-            Panel.SetZIndex(textBox, 4);
-            this.txtContent.Focus();
-            VisualStateManager.GoToState(this.btnGraphicsText, "Checked", true);
-            VisualStateManager.GoToState(this.btnAddgraphics, "Checked", true);
-            this.graphicsTextBoxCount++;
-            this.GrdEffects.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_BlockErase(object sender, RoutedEventArgs e)
@@ -15953,20 +15966,28 @@ namespace PhotoSW.Views
 
                                 if (this.forWdht.Height > this.forWdht.Width)
                                 {
-                                    if(num2>1)
+                                    if (num2 > 1)
                                     {
                                         this.forWdht.Width = this.forWdht.Height * num2;
                                     }
                                     else
                                     {
-                                        this.forWdht.Width = this.forWdht.Height;
+                                        if(this.forWdht.Height > 1000)
+                                        {
+                                            this.forWdht.Width = this.forWdht.Height;
+                                        }
+                                        else
+                                        {
+                                            this.forWdht.Width = 1400;
+                                        }
+                                        
                                     }
-                                    
+
                                 }
                                 else
                                 {
                                     this.forWdht.Height = this.forWdht.Width * num2;
-                                }
+                               }
 
                             }
                             this.forWdht.InvalidateArrange();
@@ -15974,6 +15995,7 @@ namespace PhotoSW.Views
                             this.forWdht.InvalidateVisual();
                             this.imageundoGrid.Height = this.forWdht.Height;
                             this.imageundoGrid.Width = this.forWdht.Width;
+                           
                             this.imageundoGrid.InvalidateArrange();
                             this.imageundoGrid.InvalidateMeasure();
                         IL_1905:
@@ -16211,7 +16233,7 @@ namespace PhotoSW.Views
             }
             finally
             {
-                DragCanvas.SetCanBeDragged(this.mainImage, true);
+                DragCanvas.SetCanBeDragged(this.mainImage, false);
                 DragCanvas.SetCanBeDragged(this.GrdBrightness, true);
                 DragCanvas.SetCanBeDragged(this.Opacitymsk, true);
                 this.dragCanvas.IsEnabled = true;
@@ -23800,8 +23822,8 @@ namespace PhotoSW.Views
                     rectangle.Stroke = new SolidColorBrush(Colors.Orange);
                     this.shapeToRemove = rectangle;
                     ////// this.mainImage.Focus();
-                    // this.mainImageundo.Focus();
-                    this.mainImage.Focus();
+                    this.mainImageundo.Focus();
+                    //this.mainImage.Focus();
 
                     shapeToRemove.MouseMove += new MouseEventHandler(this.mainImage_MouseMove_2);
                     
@@ -23828,8 +23850,8 @@ namespace PhotoSW.Views
             }
             finally
             {
-                this.mainImage.Focus();
-                //this.mainImageundo.Focus();
+                //this.mainImage.Focus();
+                this.mainImageundo.Focus();
                 this.MyInkCanvas.Cursor = Cursors.Cross;
             }
 

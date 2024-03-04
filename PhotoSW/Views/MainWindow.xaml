@@ -2233,7 +2233,7 @@
 
 
                 <!--End-->
-                <StackPanel Margin="-500,0,0,110" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" RenderTransformOrigin="0.581,0.577" VerticalAlignment="Bottom" Grid.Column="1">
+                <StackPanel Margin="-1400,0,0,110" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" RenderTransformOrigin="0.581,0.577" VerticalAlignment="Bottom" Grid.Column="1">
                     <Button Name="btnPrintToGroup" Width="33" Height="33" Style="{DynamicResource DigiframeButtonStyle}" Click="btnPrintToGroup_Click">
                         <Image Source="/PhotoSW;component/images/print-icon.png" />
                     </Button>
@@ -3110,7 +3110,8 @@
                         <Button Content="Close" Foreground="#FFFFFF" Height="102" Grid.Row="8"  Margin="40,-100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleBgRed}" HorizontalAlignment="Left" Width="100" FontSize="21.333" FontWeight="Bold" Click="SendToBack_Click" />
                         <!--<Button Content="Close" Foreground="#FFFFFF" Height="102" Grid.Row="6"  Margin="40,-20,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleBgRed}" HorizontalAlignment="Left" Width="100" FontSize="21.333" FontWeight="Bold" Click="CancelButton_Click" /> (jayendra)-->
                         <Button Content="Ok"   Foreground="#FFFFFF" Height="102" Grid.Row="8"  Margin="150,-100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonStyleBgRed}" HorizontalAlignment="Left" Width="100" FontSize="21.333" FontWeight="Bold" Click="Button_Click" />
-
+                       
+                       
                         <StackPanel Name="sppanelFrontBack" Margin="7,1,8,-9" Grid.Row="6" Orientation="Horizontal" Visibility="Visible">
                             <!--<Button Name="btnBringToFront" Content="To Front" Width="91" BorderThickness="0" Margin="0" Foreground="#FFFFFFFF" Style="{DynamicResource DigiBtnAddMore}" FontSize="18.667" Click="BringToFront_Click" />
                                                 <Button Name="btnSendToBack" Content="To Back" Margin="14,0,0,0" Width="85" BorderThickness="0" Foreground="#FFFFFFFF" Style="{DynamicResource DigiBtnAddMore}" FontSize="18.667" Click="SendToBack_Click" />

@@ -212,7 +212,7 @@
             </Grid>
 
 
-            <Grid Name="GrdAddGroup" Visibility="Hidden" Grid.Row="1" Margin="30,0,0,50" Background="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" >
+            <Grid Name="GrdAddGroup" Visibility="Hidden" Grid.Row="1" Margin="30,0,0,50" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left" >
                 <Grid.RowDefinitions>
                     <!--Visibility="Hidden"-->
                     <!--<RowDefinition Height="*"></RowDefinition>-->
