@@ -172,7 +172,7 @@
                 </StackPanel.Background>
             </StackPanel>-->
 
-           
+
 
             <Grid Name="GrdBarCode" Visibility="Hidden" Grid.Row="1" Margin="30,0,0,350" Background="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" >
                 <Grid.RowDefinitions><!--Visibility="Hidden"-->
@@ -210,8 +210,63 @@
                 </StackPanel>
                                       
             </Grid>
-           
-             <Grid Name="MainGrd" Grid.Row="1">
+
+
+            <Grid Name="GrdAddGroup" Visibility="Hidden" Grid.Row="1" Margin="30,0,0,50" Background="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <Grid.RowDefinitions>
+                    <!--Visibility="Hidden"-->
+                    <!--<RowDefinition Height="*"></RowDefinition>-->
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Name="spunlockedImages" Orientation="Horizontal" Margin="0,6,40,0" HorizontalAlignment="Right">
+                <StackPanel Margin="0,0,0,0" VerticalAlignment="Bottom">
+                    <!--<Button Name="btnImageAddToGroup" CommandParameter="Add to group" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnImageAddToGroup_Click">-->
+                    <Border  Background="#696969" CornerRadius="3" BorderThickness="1" Width="42" Height="44" Margin="2">
+                        <Button Name="btnImageAddToGroup"  Style="{StaticResource ButtonStyleAlpha}" CommandParameter="Add to group"  Width="36" Height="38" Click="btnImageAddToGroup_Click">
+                            <Image Name="ImgAddToGroup" Source="/PhotoSW;component/images/view-group.png" />
+                        </Button>
+                    </Border>
+                    <TextBlock TextBlock.FontWeight="Black" Foreground="White" TextBlock.FontSize="11" Margin="0,3,0,0">
+                        <Run Text="Add to Group" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Margin="20 0 0 0">
+                    <!--<Button Name="btnPrintGroup" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnPrintGroup_Click">-->
+                    <Border  Background="#696969" CornerRadius="3" BorderThickness="1" Width="42" Height="44" Margin="4">
+
+                        <Button Style="{StaticResource ButtonStyleAlpha}" Name="btnPrintGroup"   Width="38" Height="40"  Click="btnPrintGroup_Click">
+                            <Image Name="imgprintgroup" Source="/PhotoSW;component/images/print-icon.png" />
+                        </Button>
+                    </Border>
+                    <TextBlock HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
+                        <Run Text="Print" />
+                    </TextBlock>
+                </StackPanel>
+
+                    <StackPanel Name="splockedImages" Orientation="Horizontal" Margin="0,6,0,0" HorizontalAlignment="Right">
+                        <StackPanel Margin="0,9.37,10,0" VerticalAlignment="Bottom">
+                            <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="42" Height="44" Margin="6">
+                                <Button Name="btnUnloack" ToolTip="Unlock Image" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnUnlock_Click">
+                                    <Image Source="/PhotoSW;component/images/Unlock.png" />
+                                </Button>
+                            </Border>
+                            <TextBlock TextBlock.FontWeight="Black" Foreground="White" TextBlock.FontSize="11" Margin="0,3,0,0">
+                                <Run Text="Unlock Image" />
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+        
+            <Grid Name="MainGrd" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="120"></RowDefinition>
@@ -232,9 +287,8 @@
                         <ColumnDefinition Width="Auto" MinWidth="152" MaxWidth="152" />
                     </Grid.ColumnDefinitions>-->
                 <Grid>
-                    <!--<Border Name="GrdBarcodescanner" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderThickness="2" BorderBrush="Maroon" Background="#80808080" Padding="10" Width="auto" Height="150">--><!--Width="708.5" Height="450"-->
-
-                    <Grid Name="GrdBarcodescanner" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="0" Width="auto" Height="auto" Background="Transparent">
+                   
+                    <!--<Grid Name="GrdBarcodescanner" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="0" Width="auto" Height="auto" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -248,11 +302,18 @@
                         <Canvas Name="mainCanvas"  Grid.Column="0"  Grid.Row="1" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" Width="auto" Height="auto">
 
                         </Canvas>
-                    </Grid>
-                    <!--</Border>-->
+                    </Grid>-->
+                    
                 </Grid>
 
                 <!--</Grid>-->
+
+                <Grid x:Name="txtchange">
+                    <Image Name="mainFrame" Stretch="Fill" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" 
+                        Height="{Binding ActualHeight, ElementName=imgmain, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=imgmain, Mode=OneWay}" />
+                    <TextBlock Name="txtMainImage" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                        Margin="0,0,0,10" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="20" />
+                </Grid>
 
                 <Grid Name="ContentContainer" Margin="0,-30,0,0" Grid.Row="0">
                     <Grid.RowDefinitions>
@@ -297,81 +358,21 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid Name="IMGFrame" Visibility="Collapsed" Margin="5,0,-50,0" Grid.RowSpan="2">
+                    <Grid Name="IMGFrame" Visibility="Collapsed" Margin="5,0,50,0" Grid.RowSpan="10">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="75" />
                         </Grid.RowDefinitions>
                         <Grid Name="img" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                       
                             <Grid Name="GrdSharpen" Margin="250,0,0,0">
                                 <Border Name="picoriginal" BorderThickness="2" BorderBrush="Red" ClipToBounds="True" Margin="0,0,0,0">
                                     <Image Name="imgmain" Stretch="Uniform" Margin="0" Source="{Binding FullName, Converter={StaticResource Imageconverter}}" />
                                 </Border>
                             </Grid>
-                            <Image Name="mainFrame" Stretch="Fill" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" 
-                                   Height="{Binding ActualHeight, ElementName=imgmain, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=imgmain, Mode=OneWay}" />
-                            <TextBlock Name="txtMainImage" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                                       Margin="0,0,0,-30" TextBlock.FontWeight="Bold" Foreground="White" TextBlock.FontSize="20" />
+                            
                         </Grid>
-                        <Grid Name="vidoriginal" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,0,0" Background="#FFEEEFEF">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="500" />
-                                <RowDefinition Height="40" />
-                            </Grid.RowDefinitions>
-                            <Grid Name="gdMediaPlayer" Height="500" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" />
-                            <Grid Grid.Row="1">
-                                <TextBlock Name="txtMainVideo" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" TextBlock.FontWeight="Bold" TextBlock.FontSize="20" />
-                            </Grid>
-                        </Grid>
-                        <Grid Name="frameBtns" Margin="0,0,56,0" Grid.Row="1" >
-                            <!--<StackPanel Name="spaddtoalbumnunlockedImages" HorizontalAlignment="Left" Margin="0,6,0,0"  Visibility="Collapsed">
-                                <Border  Background="#696969" CornerRadius="3" BorderThickness="1" Width="42" Height="44" Margin="4">
-                                    <Button  Style="{StaticResource ButtonStyleAlpha}" Width="38" Height="40">
-                                    <Image Source="/PhotoSW;component/images/add-to-album.png" />
-                                </Button>
-                                </Border>
-                                <TextBlock TextBlock.FontWeight="Black" Foreground="White" TextBlock.FontSize="11" Margin="0,3,0,0">
-                  <Run Text="Add to Album" />
-                                </TextBlock>
-                            </StackPanel>-->
-                            <StackPanel Name="spunlockedImages" Orientation="Horizontal" Margin="0,6,40,0" HorizontalAlignment="Right">
-                                <StackPanel Margin="0,0,0,0" VerticalAlignment="Bottom">
-                                    <!--<Button Name="btnImageAddToGroup" CommandParameter="Add to group" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnImageAddToGroup_Click">-->
-                                    <Border  Background="#696969" CornerRadius="3" BorderThickness="1" Width="42" Height="44" Margin="2">
-                                        <Button Name="btnImageAddToGroup"  Style="{StaticResource ButtonStyleAlpha}" CommandParameter="Add to group"  Width="36" Height="38" Click="btnImageAddToGroup_Click">
-                                        <Image Name="ImgAddToGroup" Source="/PhotoSW;component/images/view-group.png" />
-                                    </Button>
-                                    </Border>
-                                    <TextBlock TextBlock.FontWeight="Black" Foreground="White" TextBlock.FontSize="11" Margin="0,3,0,0">
-                    <Run Text="Add to Group1122" />
-                                    </TextBlock>
-                                </StackPanel>
-                                <StackPanel VerticalAlignment="Bottom" Margin="20 0 0 0">
-                                    <!--<Button Name="btnPrintGroup" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnPrintGroup_Click">-->
-                                    <Border  Background="#696969" CornerRadius="3" BorderThickness="1" Width="42" Height="44" Margin="4">
-
-                                        <Button Style="{StaticResource ButtonStyleAlpha}" Name="btnPrintGroup"   Width="38" Height="40"  Click="btnPrintGroup_Click">
-                                            <Image Name="imgprintgroup" Source="/PhotoSW;component/images/print-icon.png" />
-                                        </Button>
-                                    </Border>
-                                    <TextBlock HorizontalAlignment="Center" Foreground="White" TextBlock.FontWeight="Black" TextBlock.FontSize="11" Margin="0,3,0,0">
-                    <Run Text="Print" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel Name="splockedImages" Orientation="Horizontal" Margin="0,6,0,0" HorizontalAlignment="Right">
-                                <StackPanel Margin="0,9.37,10,0" VerticalAlignment="Bottom">
-                                    <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="42" Height="44" Margin="6">
-                                        <Button Name="btnUnloack" ToolTip="Unlock Image" Width="40" Height="42" Style="{DynamicResource DigiframeButtonStyle}" Click="btnUnlock_Click">
-                                        <Image Source="/PhotoSW;component/images/Unlock.png" />
-                                    </Button>
-                                    </Border>
-                                    <TextBlock TextBlock.FontWeight="Black" Foreground="White" TextBlock.FontSize="11" Margin="0,3,0,0">
-                    <Run Text="Unlock Image" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
+                       
                     </Grid>
                 </Grid>
                 <Grid Name="RightPanel" Grid.Row="1"  Grid.ColumnSpan="3">

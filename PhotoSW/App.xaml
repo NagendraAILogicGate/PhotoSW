@@ -174,7 +174,7 @@
                             <ToggleButton Name="ToggleButton" Grid.Column="2"
                 ClickMode="Press" Focusable="False"
                 IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+                />
 
                             <ContentPresenter Name="ContentSite" Margin="5, 3, 23, 3" IsHitTestVisible="False"
                               HorizontalAlignment="Left" VerticalAlignment="Center"                              
@@ -202,7 +202,7 @@
                     MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
                                     <Border Name="DropDownBorder" Background="#606060" Margin="0, 1, 0, 0"
                         CornerRadius="0" BorderThickness="1,1,1,1" 
-                        BorderBrush="{StaticResource ComboBoxNormalBorderBrush}"/>
+                        />
                                     <ScrollViewer Margin="4" SnapsToDevicePixels="True">
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
                                     </ScrollViewer>
@@ -213,9 +213,9 @@
                             <Trigger Property="ItemsControl.HasItems" Value="False">
                                 <Setter Property="FrameworkElement.MinHeight" TargetName="DropDownBorder" Value="95"/>
                             </Trigger>
-                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <!--<Trigger Property="UIElement.IsEnabled" Value="False">
                                 <Setter Property="TextElement.Foreground" Value="{StaticResource ComboBoxDisabledForegroundBrush}"/>
-                            </Trigger>
+                            </Trigger>-->
                             <Trigger Property="ItemsControl.IsGrouping" Value="True">
                                 <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
                             </Trigger>
@@ -655,9 +655,9 @@
         </Style>
 
         <Style x:Key="DigiKeyCloseButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <!--<Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
             <Setter Property="Control.Background" Value="{StaticResource ButtonNormalBackground}" />
-            <Setter Property="Control.BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="Control.BorderBrush" Value="{StaticResource ButtonNormalBorder}" />-->
             <Setter Property="Control.BorderThickness" Value="0" />
             <Setter Property="Control.Foreground" Value="#FFFFFFFF" />
             <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
@@ -3265,7 +3265,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Viewbox Margin="0" Stretch="Uniform">
-                                <CalendarItem Name="PART_CalendarItem" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Style="{DynamicResource DigiSearchCalendarItemStyle}" Height="Auto" Margin="0" Width="Auto" FontSize="64" />
+                                <!--<CalendarItem Name="PART_CalendarItem" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Style="{DynamicResource DigiSearchCalendarItemStyle}" Height="Auto" Margin="0" Width="Auto" FontSize="64" />-->
                             </Viewbox>
                         </Grid>
                     </ControlTemplate>
@@ -3300,21 +3300,21 @@
                     <ControlTemplate TargetType="{x:Type Calendar}">
                         <Grid Name="PART_Root" HorizontalAlignment="Stretch" Height="Auto" MinWidth="650" MinHeight="450">
                             <Viewbox Stretch="Fill">
-                                <CalendarItem Name="PART_CalendarItem" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Style="{DynamicResource DigisearchCalendarItemStyle}" Height="167.997" Margin="0" Width="310.453" />
+                                <!--<CalendarItem Name="PART_CalendarItem" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Style="{DynamicResource DigisearchCalendarItemStyle}" Height="167.997" Margin="0" Width="310.453" />-->
                             </Viewbox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="DigisearchCalendarItemStyle" TargetType="{x:Type CalendarItem}">
+        <!--<Style x:Key="DigisearchCalendarItemStyle" TargetType="{x:Type CalendarItem}">
             <Setter Property="FrameworkElement.Margin" Value="0,3,0,3" />
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CalendarItem}">
                         <ControlTemplate.Resources>
                             <DataTemplate>
-                                <!--<x:StaticExtension.Key>CalendarItem.DayTitleTemplateResourceKey</x:StaticExtension.Key>-->
+                                --><!--<x:StaticExtension.Key>CalendarItem.DayTitleTemplateResourceKey</x:StaticExtension.Key>--><!--
                                 <TextBlock TextBlock.Foreground="#FF333333" TextBlock.FontWeight="Bold" TextBlock.FontSize="15" TextBlock.FontFamily="Verdana" HorizontalAlignment="Center" Margin="10,10,10,10" VerticalAlignment="Center" Text="{Binding}" />
                             </DataTemplate>
                         </ControlTemplate.Resources>
@@ -3477,7 +3477,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
         <Style x:Key="searchCalendarItemGridStyle" TargetType="{x:Type Grid}" />
         <Style x:Key="ButtonStyleRotatePic" TargetType="{x:Type Button}">
             <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />

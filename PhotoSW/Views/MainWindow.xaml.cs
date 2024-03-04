@@ -15950,14 +15950,24 @@ namespace PhotoSW.Views
                                 {
                                     num2 = bitmapImage3.Height / bitmapImage3.Width;
                                 }
+
                                 if (this.forWdht.Height > this.forWdht.Width)
                                 {
-                                    this.forWdht.Width = this.forWdht.Height * num2;
+                                    if(num2>1)
+                                    {
+                                        this.forWdht.Width = this.forWdht.Height * num2;
+                                    }
+                                    else
+                                    {
+                                        this.forWdht.Width = this.forWdht.Height;
+                                    }
+                                    
                                 }
                                 else
                                 {
                                     this.forWdht.Height = this.forWdht.Width * num2;
                                 }
+
                             }
                             this.forWdht.InvalidateArrange();
                             this.forWdht.InvalidateMeasure();
@@ -16201,6 +16211,11 @@ namespace PhotoSW.Views
             }
             finally
             {
+                DragCanvas.SetCanBeDragged(this.mainImage, true);
+                DragCanvas.SetCanBeDragged(this.GrdBrightness, true);
+                DragCanvas.SetCanBeDragged(this.Opacitymsk, true);
+                this.dragCanvas.IsEnabled = true;
+                this.dragCanvas.AllowDragging = true;
                 MemoryManagement.FlushMemory();
             }
         }
@@ -23785,7 +23800,8 @@ namespace PhotoSW.Views
                     rectangle.Stroke = new SolidColorBrush(Colors.Orange);
                     this.shapeToRemove = rectangle;
                     ////// this.mainImage.Focus();
-                    this.mainImageundo.Focus();
+                    // this.mainImageundo.Focus();
+                    this.mainImage.Focus();
 
                     shapeToRemove.MouseMove += new MouseEventHandler(this.mainImage_MouseMove_2);
                     
@@ -23812,8 +23828,8 @@ namespace PhotoSW.Views
             }
             finally
             {
-                // this.mainImage.Focus();
-                this.mainImageundo.Focus();
+                this.mainImage.Focus();
+                //this.mainImageundo.Focus();
                 this.MyInkCanvas.Cursor = Cursors.Cross;
             }
 
@@ -28075,7 +28091,10 @@ namespace PhotoSW.Views
                                 bitmapImage.StreamSource = memoryStream;
                                 bitmapImage.EndInit();
                                 this.mainImageundo.Source = bitmapImage;
+
                                 this.widthimg.Source = bitmapImage;
+                                //this.widthimg.Width = this.widthimg.Source.Width * 2;
+                                //this.widthimg.Height = this.widthimg.Source.Height * 2;
                                 CroppingAdorner.s_dpiX = bitmapImage.DpiX;
                                 CroppingAdorner.s_dpiY = bitmapImage.DpiY;
                                 this.imgRotateCrop.Source = bitmapImage;

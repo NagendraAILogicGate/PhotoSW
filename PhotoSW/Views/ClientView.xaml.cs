@@ -789,7 +789,7 @@ namespace PhotoSW.Views
             }
            // }
         IL_11F:
-            this.mPreviewControl.SetControlledObject(searchResult.gdMediaPlayer);
+            //this.mPreviewControl.SetControlledObject(searchResult.gdMediaPlayer);
         IL_131:
             searchResult.lstImages.SelectedItem = myitem;
             if (myitem != null && !string.IsNullOrEmpty(myitem.Name))

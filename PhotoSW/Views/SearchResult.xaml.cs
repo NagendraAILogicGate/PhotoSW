@@ -225,7 +225,7 @@ namespace PhotoSW.Views
 				{
 					do
 					{
-						this.gdMediaPlayer.Visibility = Visibility.Visible;
+						//this.gdMediaPlayer.Visibility = Visibility.Visible;
 					}
 					while (7 == 0);
 					if (!false)
@@ -239,7 +239,7 @@ namespace PhotoSW.Views
 		private void AddUserControlAssociateImage()
 		{
         this.uctlAssociateImage = new AssociateImage();
-        this.gdMediaPlayer.Visibility = Visibility.Collapsed;
+        //this.gdMediaPlayer.Visibility = Visibility.Collapsed;
         this.uctlAssociateImage.ExecuteParentMethod += new EventHandler(this.ShowMediaPlayer);
         do
             {
@@ -1919,9 +1919,10 @@ namespace PhotoSW.Views
 				{
                     string strPath=((System.Windows.Controls.Button)sender).Tag.ToString();
                     curItem = RobotImageLoader.GroupImages.Where(t => t.FilePath == strPath).FirstOrDefault<LstMyItems>();
-              
+					if (curItem == null)
+						return;
 
-                if(curItem.MediaType != 1)
+                if (curItem.MediaType != 1)
                     {
                     if(curItem.MediaType == 2)
                         {
@@ -2008,7 +2009,7 @@ namespace PhotoSW.Views
 						}
 						this.btnEdit.IsEnabled = false;
 						this.img.Visibility = Visibility.Hidden;
-						this.vidoriginal.Visibility = Visibility.Visible;
+						//this.vidoriginal.Visibility = Visibility.Visible;
 						string fileName = curItem.FileName;
 						if (!string.IsNullOrEmpty(fileName))
 						{
@@ -2028,7 +2029,7 @@ namespace PhotoSW.Views
 							}
 						}
 						this.MediaPlay();
-						this.txtMainVideo.Text = curItem.Name;
+						//this.txtMainVideo.Text = curItem.Name;
 						IL_332:
 						if (this.lstImages.SelectedItem != curItem)
 						{
@@ -2083,7 +2084,7 @@ namespace PhotoSW.Views
 						IL_303:
 						this.btnEdit.IsEnabled = true;
 						this.img.Visibility = Visibility.Visible;
-						this.vidoriginal.Visibility = Visibility.Hidden;
+						//this.vidoriginal.Visibility = Visibility.Hidden;
 						this.MediaStop();
 						goto IL_332;
 					}
@@ -3994,6 +3995,7 @@ namespace PhotoSW.Views
 		{
 			this.MediaStop();            
             this.GrdBarCode.Visibility = Visibility.Hidden;
+            this.GrdAddGroup.Visibility = Visibility.Hidden;
             PhotoSW.CF.DataLayer.BAL.baPhotoInfo photoInfo = new PhotoSW.CF.DataLayer.BAL.baPhotoInfo();
 
             this.continueCalculating = false;
@@ -4373,7 +4375,8 @@ namespace PhotoSW.Views
 				if (RobotImageLoader.robotImages.Count > 0)
 				{
                     this.GrdBarCode.Visibility = Visibility.Hidden;
-					RobotImageLoader.IsPreview9or16active = false;
+                    this.GrdAddGroup.Visibility = Visibility.Visible;
+                    RobotImageLoader.IsPreview9or16active = false;
 					if (this.scrollIndexWithoutPreview == 9)
 					{
 						ConfigBusiness configBusiness = new ConfigBusiness();
@@ -4515,7 +4518,7 @@ namespace PhotoSW.Views
 						if (lstMyItems2.MediaType == 2 || lstMyItems2.MediaType == 3)
 						{
 							this.img.Visibility = Visibility.Hidden;
-							this.vidoriginal.Visibility = Visibility.Visible;
+							//this.vidoriginal.Visibility = Visibility.Visible;
 							string fileName = lstMyItems2.FileName;
 							if (!string.IsNullOrEmpty(fileName))
 							{
@@ -4538,12 +4541,12 @@ namespace PhotoSW.Views
 							{
 								this.MediaPlay();
 							}), new object[0]);
-							this.txtMainVideo.Text = lstMyItems2.Name;
+							//this.txtMainVideo.Text = lstMyItems2.Name;
 						}
 						else
 						{
 							this.img.Visibility = Visibility.Visible;
-							this.vidoriginal.Visibility = Visibility.Hidden;
+							//this.vidoriginal.Visibility = Visibility.Hidden;
 							this.MediaStop();
 						}
 						this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
@@ -4645,7 +4648,7 @@ namespace PhotoSW.Views
            
             if(barcode != "" && !string.IsNullOrEmpty(barcode) && keygen != "")
                 {
-                this.GrdBarcodescanner.Visibility = Visibility.Visible;
+                //this.GrdBarcodescanner.Visibility = Visibility.Visible;
                 this.ContentContainer.Visibility = Visibility.Collapsed;
                 Barcodes bb = new Barcodes();
                 bb.BarcodeType = Barcodes.BarcodeEnum.Code39;
@@ -4703,7 +4706,7 @@ namespace PhotoSW.Views
                         rect.Width = thickWidth;
                         currentPos += thickWidth;
                         }
-                    mainCanvas.Children.Add(rect);
+                    //mainCanvas.Children.Add(rect);
 
 
                     }
@@ -4718,7 +4721,7 @@ namespace PhotoSW.Views
                 tb.Arrange(rx);
                 Canvas.SetLeft(tb, (currentPos - tb.ActualWidth) / 2);
                 Canvas.SetTop(tb, currentTop + 205);
-                mainCanvas.Children.Add(tb);
+                //mainCanvas.Children.Add(tb);
                 }
             else
                 {
@@ -4729,7 +4732,7 @@ namespace PhotoSW.Views
         private void btnBarCodeGenerate_Click( object sender, RoutedEventArgs e )
             {
             RenderTargetBitmap bmp = new RenderTargetBitmap(currentWidth, 300, 100.0, 100.0, PixelFormats.Default);
-            bmp.Render(mainCanvas);
+            //bmp.Render(mainCanvas);
 
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bmp));
@@ -4745,7 +4748,7 @@ namespace PhotoSW.Views
             AssociateImageBusiness AssociateImageBusiness = new AssociateImageBusiness();
             AssociateImageBusiness.SetAssociatedImage(barcode, keygen, QRCode , currentPhotoName);
 
-            this.GrdBarcodescanner.Visibility = Visibility.Collapsed;
+            //this.GrdBarcodescanner.Visibility = Visibility.Collapsed;
             this.ContentContainer.Visibility = Visibility.Visible;
             }
 
@@ -6836,21 +6839,22 @@ namespace PhotoSW.Views
 				goto IL_159;
 				IL_B6:
 				Visual visual;
-				if (this.vidoriginal.Visibility == Visibility.Visible)
-				{
-					if (false)
-					{
-						goto IL_127;
-					}
-					visual = this.vidoriginal;
-				}
-				else
-				{
-					visual = this.img;
-				}
+				//if (this.vidoriginal.Visibility == Visibility.Visible)
+				//{
+				//	if (false)
+				//	{
+				//		goto IL_127;
+				//	}
+				//	//visual = this.vidoriginal;
+				//}
+				//else
+				//{
+				//	visual = this.img;
+				//}
 				if (RobotImageLoader.GroupImages.Count != 0)
 				{
-					if (this.IMGFrame.Visibility == Visibility.Visible)
+                    visual = this.img;
+                    if (this.IMGFrame.Visibility == Visibility.Visible)
 					{
 						if (6 != 0)
 						{
@@ -6868,7 +6872,8 @@ namespace PhotoSW.Views
 				}
 				else
 				{
-					compiledBitmapImage = new VisualBrush(visual);
+                    visual = this.img;
+                    compiledBitmapImage = new VisualBrush(visual);
 					this.CompileEffectChanged(compiledBitmapImage, -1);
 				}
 				IL_127:
@@ -7018,7 +7023,7 @@ namespace PhotoSW.Views
             this.clientWin.stkPrevNext.Visibility = Visibility.Visible;
             this.clientWin.stkPrint.Visibility = Visibility.Visible;
             this.clientWin.btnMinimize.Visibility = Visibility.Visible;
-            this.clientWin.mPreviewControl.SetControlledObject(this.gdMediaPlayer);
+            //this.clientWin.mPreviewControl.SetControlledObject(this.gdMediaPlayer);
 			LstMyItems selectedItem = (LstMyItems)this.lstImages.SelectedItem;
 			LstMyItems lstMyItems = (from o in RobotImageLoader.GroupImages
 			orderby o.PhotoId descending
@@ -7451,9 +7456,10 @@ namespace PhotoSW.Views
 						{
 							this.CurrentBitmapImage = CommonUtility.GetImageFromPath(myItems.BigThumbnailPath);
                             this.imgmain.Source = this.CurrentBitmapImage;
-							this.picoriginal.Width = this.Width/2; // this.CurrentBitmapImage.Width + 200;
-                            this.picoriginal.Height = this.Height/2; //this.CurrentBitmapImage.Height + 200;
-                        }
+							this.picoriginal.Width = this.Width/2 ; 
+							this.picoriginal.Height = this.Height /2 + 130 ; 
+
+						}
 						if (((LstMyItems)this.lstImages.SelectedItem).FrameBrdr != null)
 						{
 							this.mainFrame.Source = new BitmapImage(new Uri(((LstMyItems)this.lstImages.SelectedItem).FrameBrdr));
@@ -7461,6 +7467,7 @@ namespace PhotoSW.Views
 						else
 						{
 							this.mainFrame.Source = null;
+
 						}
 					}
 					IL_58C:
@@ -7483,12 +7490,12 @@ namespace PhotoSW.Views
                     {
                         this.btnEdit.IsEnabled = true;
                         this.img.Visibility = Visibility.Visible;
-                        this.vidoriginal.Visibility = Visibility.Hidden;
+                        //this.vidoriginal.Visibility = Visibility.Hidden;
                         goto IL_735;
                     }
 					this.btnEdit.IsEnabled = false;
 					this.img.Visibility = Visibility.Hidden;
-					this.vidoriginal.Visibility = Visibility.Visible;
+					//this.vidoriginal.Visibility = Visibility.Visible;
 					if (false)
 					{
 						goto IL_3EF;
@@ -7523,7 +7530,7 @@ namespace PhotoSW.Views
 					{
 						this.MediaPlay();
 					}), new object[0]);
-					this.txtMainVideo.Text = lstMyItems3.Name;
+					//this.txtMainVideo.Text = lstMyItems3.Name;
 					IL_709:
 					IL_735:
 					bool? isChecked = this.btnchkpreview.IsChecked;
@@ -7641,7 +7648,7 @@ namespace PhotoSW.Views
                             if(!flag)
                                 {
                                 this.imageInfo.IsVideo = true;
-                                this.gdMediaPlayer.Visibility = Visibility.Collapsed;
+                                //this.gdMediaPlayer.Visibility = Visibility.Collapsed;
                                 goto IL_E1;
                                 }
                             this.imageInfo.IsVideo = false;
@@ -9222,6 +9229,7 @@ namespace PhotoSW.Views
 		{
 			this.vwGroup.Text = "View Group";
             this.GrdBarCode.Visibility = Visibility.Visible;
+            this.GrdAddGroup.Visibility = Visibility.Hidden;
             this.imgQRCodeSearch.Source = new BitmapImage(new Uri("/images/QRCodeSearch_act.png", UriKind.Relative));
             //this.OpenAssociateWindow();
         }
@@ -9507,7 +9515,7 @@ namespace PhotoSW.Views
 				}
 				continue;
 				IL_33:
-				this.gdMediaPlayer.Children.Clear();
+				//this.gdMediaPlayer.Children.Clear();
                 flag = false; //(this.clientWin == null);
 				if (!false)
 				{
@@ -9545,19 +9553,19 @@ namespace PhotoSW.Views
 			}
 			IL_20:
 			//this.mplayer = new MLMediaPlayer(SearchResult.vsMediaFileName, "Search", true);
-			FrameworkElement expr_37 = this.gdMediaPlayer;
-			if (3 != 0)
-			{
-				expr_37.BeginInit();
-			}
-			if (5 == 0)
-			{
-				goto IL_20;
-			}
+			//FrameworkElement expr_37 = this.gdMediaPlayer;
+			//if (3 != 0)
+			//{
+			//	expr_37.BeginInit();
+			//}
+			//if (5 == 0)
+			//{
+			//	goto IL_20;
+			//}
 			//this.gdMediaPlayer.Children.Add(this.mplayer);
 			if (!false)
 			{
-				this.gdMediaPlayer.EndInit();
+				//this.gdMediaPlayer.EndInit();
 				return;
 			}
 			goto IL_20;
@@ -9954,7 +9962,7 @@ namespace PhotoSW.Views
 				if (arg_71_0 != arg_71_1)
 				{
 					//this.imageInfo.IsVideo = true;
-					this.gdMediaPlayer.Visibility = Visibility.Collapsed;
+					//this.gdMediaPlayer.Visibility = Visibility.Collapsed;
 				}
 				else
 				{
@@ -10439,11 +10447,11 @@ namespace PhotoSW.Views
 			{
 				goto IL_25;
 			}
-			UIElement expr_06 = this.gdMediaPlayer;
+			//UIElement expr_06 = this.gdMediaPlayer;
 			Visibility expr_0B = Visibility.Visible;
 			if (!false)
 			{
-				expr_06.Visibility = expr_0B;
+				//expr_06.Visibility = expr_0B;
 			}
 			if (5 != 0)
 			{
@@ -10735,7 +10743,7 @@ namespace PhotoSW.Views
 				fileName = Path.Combine(lstMyItems.HotFolderPath, "ProcessedVideos", lstMyItems.CreatedOn.ToString("yyyyMMdd"), lstMyItems.FileName);
 				IL_17E:
                 //this.mExtractor = new MLFrameExtractor(fileName, "FrameExtractionPreview", true, lstMyItems.MediaType, lstMyItems.HotFolderPath, lstMyItems.Name, subStoreName, photographerId, text);
-                this.gdMediaPlayer.Visibility = Visibility.Collapsed;
+                //this.gdMediaPlayer.Visibility = Visibility.Collapsed;
                 //do
                 //{
                 //    this.mExtractor.ExecuteParentMethod += new EventHandler(this.ShowMediaPlayer);
