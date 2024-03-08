@@ -43,9 +43,9 @@ namespace PhotoSW.Views
 
         private string _controlOn;
 
-       
 
-       // private bool _contentLoaded;
+
+        // private bool _contentLoaded;
 
         public Login()
         {
@@ -55,59 +55,65 @@ namespace PhotoSW.Views
             if (!Directory.Exists(System.AppDomain.CurrentDomain.BaseDirectory + "db\\"))
                 Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + "db\\");
             PhotoSW.CF.DataLayer.CF_Common.Common.MargeLocalDB();
-           // base.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Login.ClearCacheDelegate(this.clearCache));
+            // base.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Login.ClearCacheDelegate(this.clearCache));
             RobotImageLoader.GetConfigData();
             RobotImageLoader.Is9ImgViewActive = true;
             this.tbDigiVersion.Text = "Version: PhotoSW " + this.CurrentRegistryVersion();
             this.btnLogin.IsDefault = true;
-            }
-        private void local ()
+            var vals = System.Configuration.ConfigurationManager.AppSettings.GetValues("Env");
+            if (vals.Contains("dev"))
             {
+                this.txtUserName.Text = "Test05";
+                this.txtPassword.Password = "123456";
+            }
+        }
+        private void local()
+        {
             ClientView clientView = null;
-            foreach(Window window in System.Windows.Application.Current.Windows)
+            foreach (Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.Title == "ClientView")
                 {
-                if(window.Title == "ClientView")
-                    {
                     clientView = (ClientView)window;
-                    }
                 }
-            if(clientView != null)
-                {
+            }
+            if (clientView != null)
+            {
                 clientView.WindowStartupLocation = WindowStartupLocation.Manual;
                 clientView.DefaultView = true;
                 clientView.ChildImage = new System.Windows.Media.Imaging.BitmapImage(new Uri("/images/all_frames_new.png", UriKind.Relative));
-                }
+            }
             else
-                {
+            {
                 clientView = new ClientView();
                 clientView.WindowStartupLocation = WindowStartupLocation.Manual;
                 clientView.DefaultView = true;
                 clientView.ChildImage = new System.Windows.Media.Imaging.BitmapImage(new Uri("/images/all_frames_new.png", UriKind.Relative));
-                }
+            }
             System.Windows.Forms.Screen[] allScreens = System.Windows.Forms.Screen.AllScreens;
-            if(allScreens.Length > 1)
+            if (allScreens.Length > 1)
+            {
+                if (allScreens[0].Primary)
                 {
-                if(allScreens[0].Primary)
-                    {
                     System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.AllScreens[1];
                     System.Drawing.Rectangle workingArea = screen.WorkingArea;
                     clientView.Top = (double)workingArea.Top;
                     clientView.Left = (double)workingArea.Left;
                     clientView.Show();
-                    }
+                }
                 else
-                    {
+                {
                     System.Drawing.Rectangle workingArea = allScreens[0].WorkingArea;
                     clientView.Top = (double)workingArea.Top;
                     clientView.Left = (double)workingArea.Left;
                     clientView.Show();
-                    }
-                }
-            else
-                {
-                clientView.Show();
                 }
             }
+            else
+            {
+                clientView.Show();
+            }
+        }
         private void clearCache()
         {
             try
@@ -228,41 +234,41 @@ namespace PhotoSW.Views
         }
         private UsersInfo GetUsersInfoDetails(baUser user)
         {
-            UsersInfo usersinfo=new UsersInfo();
+            UsersInfo usersinfo = new UsersInfo();
 
-          // usersinfo.CountryCode =user.CountryCode;
+            // usersinfo.CountryCode =user.CountryCode;
 
 
-           usersinfo.DG_Location_ID =user.Location_ID;
+            usersinfo.DG_Location_ID = user.Location_ID;
             //////
-           usersinfo.DG_Location_Name = "bhopal";
-           usersinfo.DG_Location_pkey = 11;
-           usersinfo.DG_Store_ID = 1;
-           usersinfo.DG_Store_Name = "Bhopal";
-           usersinfo.DG_Substore_ID = 3;
-           usersinfo.DG_User_CreatedDate = DateTime.Now;
+            usersinfo.DG_Location_Name = "bhopal";
+            usersinfo.DG_Location_pkey = 11;
+            usersinfo.DG_Store_ID = 1;
+            usersinfo.DG_Store_Name = "Bhopal";
+            usersinfo.DG_Substore_ID = 3;
+            usersinfo.DG_User_CreatedDate = DateTime.Now;
 
             /////
-           usersinfo.DG_User_Email =user.User_Email;
-           usersinfo.DG_User_First_Name =user.User_First_Name;
-           usersinfo.DG_User_Last_Name =user.User_Last_Name;
-           usersinfo.DG_User_Name =user.User_Name;
-           usersinfo.DG_User_Password =user.User_Password;
-           usersinfo.DG_User_PhoneNo =user.User_PhoneNo;
-           usersinfo.DG_User_pkey =user.User_pkey;
-           usersinfo.DG_User_Role = "Admin";////user.User_Role;
-           usersinfo.DG_User_Roles_Id =user.User_Roles_Id;
-           usersinfo.DG_User_Status =user.User_Status;
+            usersinfo.DG_User_Email = user.User_Email;
+            usersinfo.DG_User_First_Name = user.User_First_Name;
+            usersinfo.DG_User_Last_Name = user.User_Last_Name;
+            usersinfo.DG_User_Name = user.User_Name;
+            usersinfo.DG_User_Password = user.User_Password;
+            usersinfo.DG_User_PhoneNo = user.User_PhoneNo;
+            usersinfo.DG_User_pkey = user.User_pkey;
+            usersinfo.DG_User_Role = "Admin";////user.User_Role;
+            usersinfo.DG_User_Roles_Id = user.User_Roles_Id;
+            usersinfo.DG_User_Status = user.User_Status;
             ///////////////
-           usersinfo.IsSynced = true; //user.IsSynced;
-           usersinfo.ServerHotFolderPath = "";// user.ServerHotFolderPath;
-           usersinfo.StatusName = "";// user.StatusName;
-           usersinfo.StoreCode = "001";//user.StoreCode;
-            /////////////
-           usersinfo.SyncCode =user.SyncCode;
-           usersinfo.UserFullName = user.User_First_Name + " " + user.User_Last_Name;
-           usersinfo.UserName = user.User_Name;
-           return usersinfo;
+            usersinfo.IsSynced = true; //user.IsSynced;
+            usersinfo.ServerHotFolderPath = "";// user.ServerHotFolderPath;
+            usersinfo.StatusName = "";// user.StatusName;
+            usersinfo.StoreCode = "001";//user.StoreCode;
+                                        /////////////
+            usersinfo.SyncCode = user.SyncCode;
+            usersinfo.UserFullName = user.User_First_Name + " " + user.User_Last_Name;
+            usersinfo.UserName = user.User_Name;
+            return usersinfo;
         }
         private void UserLogin()
         {
@@ -276,7 +282,7 @@ namespace PhotoSW.Views
                     //UsersInfo userDetails = this._userBusiness.GetUserDetails(this.txtUserName.Text, PhotoSW.ViewModels. CryptorEngine.Encrypt(this.txtPassword.Password, true));
                     this._user = new baUser();
                     baUser user = baUser.GetUserDetails(this.txtUserName.Text, this.txtPassword.Password);//PhotoSW.ViewModels.CryptorEngine.Encrypt(this.txtPassword.Password, true));
-                    UsersInfo userDetails =   user != null ? GetUsersInfoDetails(user):null;
+                    UsersInfo userDetails = user != null ? GetUsersInfoDetails(user) : null;
                     flag = (user == null);
                     if (flag)
                     {
@@ -285,7 +291,7 @@ namespace PhotoSW.Views
                         goto IL_18C;
                     }
                     ///////
-                    LoginUser.StoreName =  userDetails.DG_Store_Name;
+                    LoginUser.StoreName = userDetails.DG_Store_Name;
                     int arg_1AE_0;
                     int arg_93_0;
                     int expr_79 = arg_93_0 = (arg_1AE_0 = userDetails.DG_User_pkey);
@@ -307,7 +313,7 @@ namespace PhotoSW.Views
                     {
                         goto IL_87;
                     }
-                    int arg_A8_0 =  userDetails.DG_Store_ID;
+                    int arg_A8_0 = userDetails.DG_Store_ID;
                     if (6 == 0)
                     {
                         goto IL_18C;
@@ -315,8 +321,8 @@ namespace PhotoSW.Views
                     LoginUser.StoreId = arg_A8_0;
                     LoginUser.UserName = (userDetails.DG_User_First_Name + " " + userDetails.DG_User_Last_Name).Trim();
                     LoginUser.Storecode = userDetails.StoreCode;
-                    LoginUser.countrycode =  userDetails.CountryCode;
-                    LoginUser.ServerHotFolderPath =  userDetails.ServerHotFolderPath;
+                    LoginUser.countrycode = userDetails.CountryCode;
+                    LoginUser.ServerHotFolderPath = userDetails.ServerHotFolderPath;
                     if (4 == 0)
                     {
                         goto IL_1B0;
@@ -324,8 +330,8 @@ namespace PhotoSW.Views
                     this.ReadSubStore();
                     Home home = new Home();
                     home.Show();
-                    //AuditLog.AddUserLog(userDetails.DG_User_pkey, 38, "Logged in ");
-                    //AuditLog.AddUserLog(11, 38, "Logged in ");
+                //AuditLog.AddUserLog(userDetails.DG_User_pkey, 38, "Logged in ");
+                //AuditLog.AddUserLog(11, 38, "Logged in ");
                 IL_11F:
                     try
                     {
@@ -483,8 +489,8 @@ namespace PhotoSW.Views
                     goto IL_18;
                 }
 
-               
-                }
+
+            }
             catch (Exception serviceException)
             {
                 string message;
@@ -522,7 +528,7 @@ namespace PhotoSW.Views
                 }
                 if (text == "CLOSE")
                 {
-                  //  goto IL_A7;
+                    //  goto IL_A7;
                 }
                 if (!(text == "Back"))
                 {
@@ -627,9 +633,9 @@ namespace PhotoSW.Views
         IL_80:
             this.txtUserName.Text = this.txtUserName.Text + " ";
             return;
-      //  IL_A7:
+            //  IL_A7:
 
-           // this.KeyBorder.Visibility = Visibility.Collapsed;
+            // this.KeyBorder.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -641,13 +647,13 @@ namespace PhotoSW.Views
 
         private void txtUserName_GotFocus(object sender, RoutedEventArgs e)
         {
-         //   this.KeyBorder.Visibility = Visibility.Visible;
+            //   this.KeyBorder.Visibility = Visibility.Visible;
             this._controlOn = "UserName";
         }
 
         private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
         {
-           // this.KeyBorder.Visibility = Visibility.Visible;
+            // this.KeyBorder.Visibility = Visibility.Visible;
             this._controlOn = "Password";
         }
 
@@ -729,7 +735,7 @@ namespace PhotoSW.Views
                         iMIXConfigurationInfo = new IMIX.Model.iMIXConfigurationInfo();
 
                     arg_95_0 = (string.IsNullOrEmpty(iMIXConfigurationInfo.ConfigurationValue) ? 1 : 0);
-                   // goto IL_94;
+                    // goto IL_94;
                 }
                 goto IL_17E;
             IL_EF:
@@ -809,9 +815,9 @@ namespace PhotoSW.Views
                         {
                             string text = PhotoSW.CryptorEngine.Decrypt(cipherString, true);
                             LoginUser.SubStoreId = Convert.ToInt32(text.Split(new char[]
-							{
-								','
-							})[0]);
+                            {
+                                ','
+                            })[0]);
                         }
                     }
                     while (false);
@@ -854,7 +860,7 @@ namespace PhotoSW.Views
             }
             this.IsCapsOn = !this.IsCapsOn;
         IL_1B:
-         //   this.ToggleKey();
+            //   this.ToggleKey();
             if (8 == 0)
             {
                 goto IL_07;

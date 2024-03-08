@@ -29,7 +29,7 @@ namespace PhotoSW.IMIX.Business
             try
             {
                 // PhotoInfo //DG_Photos_RFID
-                return baPhotoInfo.GetPhotoInfoData().Where(p => p.PS_Photos_RFID == Photono && p.PS_Photos_UserID == PhotographerID).FirstOrDefault().Id > 0 ? true : false;
+                return baPhotoInfo.GetPhotoInfoData().Where(p => p.PS_Photos_RFID == Photono && p.PS_Photos_UserID == PhotographerID).FirstOrDefault()?.Id > 0 ? true : false;
             }
             catch
             {

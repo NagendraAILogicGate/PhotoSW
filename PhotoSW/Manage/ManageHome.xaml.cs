@@ -542,25 +542,25 @@ namespace PhotoSW.Manage
                                         }
                                     clientView.GroupView = false;
                                     clientView.DefaultView = false;
-                                    if(!(this._MktImgPath == "") && this._mktImgTime != 0)
-                                        {
-                                        clientView.instructionVideo.Visibility = Visibility.Visible;
-                                        clientView.instructionVideo.Play();
-                                        }
-                                    else
-                                        {
-                                        clientView.imgDefault.Visibility = Visibility.Visible;
-                                        }
-                                    clientView.testR.Fill = null;
+                                    //if(!(this._MktImgPath == "") && this._mktImgTime != 0)
+                                    //    {
+                                    //    clientView.instructionVideo.Visibility = Visibility.Visible;
+                                    //    clientView.instructionVideo.Play();
+                                    //    }
+                                    //else
+                                    //    {
+                                    //    clientView.imgDefault.Visibility = Visibility.Visible;
+                                    //    }
+                                   // clientView.testR.Fill = null;
                                     clientView.DefaultView = true;
-                                    if(clientView.instructionVideo.Visibility == Visibility.Visible)
-                                        {
-                                        clientView.instructionVideo.Play();
-                                        }
-                                    else
-                                        {
-                                        clientView.instructionVideo.Pause();
-                                        }
+                                    //if(clientView.instructionVideo.Visibility == Visibility.Visible)
+                                    //    {
+                                    //    clientView.instructionVideo.Play();
+                                    //    }
+                                    //else
+                                    //    {
+                                    //    clientView.instructionVideo.Pause();
+                                    //    }
                                     Home home = new Home();
                                     home.Show();
                                     base.Close();

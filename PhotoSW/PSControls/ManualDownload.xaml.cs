@@ -456,7 +456,7 @@ namespace PhotoSW.PSControls
                             if (6 != 0)
                             {
                             }
-                            this._parent.IsEnabled = true;
+                            //this._parent.IsEnabled = true;
                             if (6 != 0)
                             {
                                 break;

@@ -165,15 +165,7 @@
                     </StackPanel>
                 </Viewbox>
             </StackPanel>
-            <!--<StackPanel Name="FooterredLine" Margin="0" Grid.Row="2">
-                <StackPanel.Background>
-                    <ImageBrush ImageSource="/PhotoSW;component/images/footer-bg.png" TileMode="Tile" ViewportUnits="Absolute"
-                                Viewport="0,0,42,42" />
-                </StackPanel.Background>
-            </StackPanel>-->
-
-
-
+         
             <Grid Name="GrdBarCode" Visibility="Hidden" Grid.Row="1" Margin="30,0,0,350" Background="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" >
                 <Grid.RowDefinitions><!--Visibility="Hidden"-->
                     <!--<RowDefinition Height="*"></RowDefinition>-->
@@ -358,6 +350,7 @@
                             </Grid>
                         </Grid>
                     </Grid>
+                  
                     <Grid Name="IMGFrame" Visibility="Collapsed" Margin="5,0,50,0" Grid.RowSpan="10">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -595,7 +588,7 @@
                                     </TextBlock>                                
                             </StackPanel>
 
-                            <StackPanel Margin="15" Grid.Row="0" Grid.Column="12">
+                            <StackPanel Margin="15" Grid.Row="0" Grid.Column="12" Visibility="Collapsed">
                                 <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="130"  Height="130" Margin="6">
                                     <Button Grid.Column="2"   Name="btnNextButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" Click="btnScrollDown_Click">
                                         <Image Source="/PhotoSW;component/images/grd_next.png" />
@@ -607,7 +600,7 @@
                             </StackPanel>
 
                             
-                            <StackPanel Margin="15" Grid.Row="0" Grid.Column="0">
+                            <StackPanel Margin="15" Grid.Row="0" Grid.Column="0" Visibility="Collapsed">
                                 <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="130"  Height="130" Margin="6">
                                     <Button Grid.Column="0"  Name="btnPrevButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" Click="btnScrollUp_Click">
                                         <Image Source="/PhotoSW;component/images/grd_prev.png" />
@@ -821,7 +814,7 @@
             </Grid>
             <Button Name="btnHome" Style="{DynamicResource TransparentImage}" IsDefault="False" Margin="30,5,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="30" Background="Transparent" BorderBrush="Transparent" Width="135"    Click="btnHome_Click">
                 <ContentControl>
-                    <Image Stretch="Fill" Source="/PhotoSW;component/images/home.png" />
+                    <!--<Image Stretch="Fill" Source="/PhotoSW;component/images/home.png" />-->
                 </ContentControl>
             </Button>
 

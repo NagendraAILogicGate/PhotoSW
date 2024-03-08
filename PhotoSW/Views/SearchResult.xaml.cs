@@ -38,6 +38,7 @@ using Facebook;
 using System.Management;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PhotoSW.Views
 {
@@ -713,7 +714,8 @@ namespace PhotoSW.Views
 		{
 			int num = RobotImageLoader.robotImages.Count;
 			LstMyItems expr_2A9 = new LstMyItems();
-			LstMyItems lstMyItems;
+		
+            LstMyItems lstMyItems;
 			if (true)
 			{
 				lstMyItems = expr_2A9;
@@ -732,7 +734,8 @@ namespace PhotoSW.Views
 					goto IL_271;
 				}
 				this.lstImages.Items.Add(lstMyItems);
-				int arg_B7_0;
+                
+                int arg_B7_0;
 				bool arg_15E_0 = ((this.pagename == "Saveback") ? (arg_B7_0 = 0) : (arg_B7_0 = ((!(this.pagename == "Placeback")) ? 1 : 0))) != 0;
 				IL_B0:
 				if (8 == 0)
@@ -1175,8 +1178,8 @@ namespace PhotoSW.Views
 			this.btnPrintGroup.Click -= new RoutedEventHandler(this.btnPrintGroup_Click);
 			this.btnSearchPhoto.Click -= new RoutedEventHandler(this.btnSearchPhoto_Click);
             this.btnFaceBook.Click -= new RoutedEventHandler(this.FaceBook_Click);
-            //this.btnWithoutPreview.Click -= new RoutedEventHandler(this.btnWithoutPreview_Click);
-            this.btnWithPreviewActive.Click -= new RoutedEventHandler(this.btnWithPreviewActive_Click);
+			//this.btnWithoutPreview.Click -= new RoutedEventHandler(this.btnWithoutPreview_Click);
+			this.btnWithPreviewActive.Click -= new RoutedEventHandler(this.btnWithPreviewActive_Click);
 			this.btnWithoutPreview9.Click -= new RoutedEventHandler(this.btnWithoutPreview9_Click);
 			this.btnViewGroup.Click -= new RoutedEventHandler(this.btnWithPreviewActive_Click);
 			this.btnViewGroup.Click -= new RoutedEventHandler(this.btnViewGroup_Click);
@@ -1463,17 +1466,17 @@ namespace PhotoSW.Views
 				
 				if (!arg_125_0)
 				{
-					clientView.instructionVideo.Visibility = Visibility.Visible;
+				//	clientView.instructionVideo.Visibility = Visibility.Visible;
 					goto IL_137;
 				}
-				clientView.imgDefault.Visibility = Visibility.Visible;
+			//	clientView.imgDefault.Visibility = Visibility.Visible;
 				IL_15B:
 				if (false)
 				{
 					continue;
 				}
-                clientView.testR.Fill = null;
-                clientView.DefaultView = true;
+				//clientView.testR.Fill = null;
+				clientView.DefaultView = true;
                 bool flag = false; //clientView.instructionVideo.Visibility != Visibility.Visible;
 				if (!flag)
 				{
@@ -1481,11 +1484,11 @@ namespace PhotoSW.Views
 					{
 						goto IL_137;
 					}
-				clientView.instructionVideo.Play();
+				//clientView.instructionVideo.Play();
 				}
 				else
 				{
-					clientView.instructionVideo.Pause();
+					//clientView.instructionVideo.Pause();
 				}
 				this.CompileEffectChanged(null, -2);
 				home = new Home();
@@ -1495,7 +1498,7 @@ namespace PhotoSW.Views
 				}
 				goto IL_E3;
 				IL_137:
-				clientView.instructionVideo.Play();
+				///clientView.instructionVideo.Play();
 				if (true)
 				{
 					goto IL_15B;
@@ -1900,6 +1903,7 @@ namespace PhotoSW.Views
             //}
             //c__DisplayClass.sender = sender;
 			//c__DisplayClass.4__this = this;
+
 			this.MediaStop();
 			Grid.SetColumnSpan(this.thumbPreview, 1);
 			Grid.SetColumn(this.thumbPreview, 1);
@@ -2234,7 +2238,7 @@ namespace PhotoSW.Views
 				}
 				IL_E2:
 				IL_145:
-                clientView.SetEffect();
+              //  clientView.SetEffect();
 				Screen[] allScreens = Screen.AllScreens;
 				arg_156_0 = allScreens.Length;
 				IL_155:
@@ -2480,7 +2484,7 @@ namespace PhotoSW.Views
             }
 
 
-        private void btnEditGifAnimation_Click ( object sender, RoutedEventArgs e )
+        private void btnEditGifAnimation_Click( object sender, RoutedEventArgs e )
             {
             this.MediaStop();
             do
@@ -3169,8 +3173,8 @@ namespace PhotoSW.Views
 					}
 					if (!arg_124_0)
 					{
-                    clientView.instructionVideo.Visibility = Visibility.Visible;
-                    clientView.instructionVideo.Play();
+                    //clientView.instructionVideo.Visibility = Visibility.Visible;
+                    //clientView.instructionVideo.Play();
 						if (!true)
 						{
 							goto IL_26A;
@@ -3178,18 +3182,18 @@ namespace PhotoSW.Views
 					}
 					else
 					{
-                    clientView.imgDefault.Visibility = Visibility.Visible;
+                  //  clientView.imgDefault.Visibility = Visibility.Visible;
                     }
-                    clientView.testR.Fill = null;
-                    clientView.DefaultView = true;
-                    if(clientView.instructionVideo.Visibility == Visibility.Visible)
-                        {
-                        clientView.instructionVideo.Play();
-                        }
-                    else
-                        {
-                        clientView.instructionVideo.Pause();
-                        }
+					//clientView.testR.Fill = null;
+					clientView.DefaultView = true;
+                    //if(clientView.instructionVideo.Visibility == Visibility.Visible)
+                    //    {
+                    //    clientView.instructionVideo.Play();
+                    //    }
+                    //else
+                    //    {
+                    //    clientView.instructionVideo.Pause();
+                    //    }
 					IL_1A2:
 					Window window2 = null;
 					enumerator = System.Windows.Application.Current.Windows.GetEnumerator();
@@ -6418,17 +6422,18 @@ namespace PhotoSW.Views
                         clientView = new ClientView();
                         clientView.WindowStartupLocation = WindowStartupLocation.Manual;
                         }
-                    clientView.imgNext.Visibility = Visibility.Collapsed;
-                    clientView.imgNext.Source = null;
+                    //clientView.imgNext.Visibility = Visibility.Collapsed;
+                    //clientView.imgNext.Source = null;
                     int expr_1CA;
                     do
                         {
-                        clientView.txtMainImage.Visibility = Visibility.Collapsed;
-                        clientView.stkPrint.Visibility = Visibility.Collapsed;
-                        clientView.btnMinimize.Visibility = Visibility.Collapsed;
-                        clientView.stkPrevNext.Visibility = Visibility.Collapsed;
-                        clientView.testR.Visibility = Visibility.Visible;
-                        clientView.GroupView = false;
+						// clientView.txtMainImage.Visibility = Visibility.Collapsed;
+						// clientView.stkPrint.Visibility = Visibility.Collapsed;
+						//clientView.btnMinimize.Visibility = Visibility.Collapsed;
+						//clientView.stkPrevNext.Visibility = Visibility.Collapsed;
+						//clientView.testR.Visibility = Visibility.Visible;
+
+						clientView.GroupView = false;
                         clientView.DefaultView = false;
                         bool arg_125_0 = compiledBitmapImage == null;
                         while(arg_125_0)
@@ -6444,22 +6449,27 @@ namespace PhotoSW.Views
                                 goto Block_10;
                                 }
                             }
-                        clientView.testR.Fill = null;
-                        compiledBitmapImage.Stretch = Stretch.Uniform;
+					//	clientView.testR.Fill = null;
+						compiledBitmapImage.Stretch = Stretch.Uniform;
                         if(8 == 0)
                             {
                             goto IL_1AB;
                             }
                         }
                     while(false);
-                    clientView.imgDefault.Visibility = Visibility.Collapsed;
-                    clientView.instructionVideo.Visibility = Visibility.Collapsed;
-                    clientView.instructionVideo.Pause();
-                    clientView.testR.Fill = compiledBitmapImage;
-                    if(clientView.mPreviewControl.m_pPreview != null)
-                        {
-                        clientView.mPreviewControl.m_pPreview.PreviewEnable("", 1, 1);
-                        }
+                    //clientView.imgDefault.Visibility = Visibility.Collapsed;
+                    //clientView.instructionVideo.Visibility = Visibility.Collapsed;
+                    //clientView.instructionVideo.Pause();
+
+
+					//clientView.testR.Fill = compiledBitmapImage;
+				
+
+                    //if (clientView.mPreviewControl.m_pPreview != null)
+                    //    {
+                    //    clientView.mPreviewControl.m_pPreview.PreviewEnable("", 1, 1);
+                    //    }
+
                     IL_1AB:
                     goto IL_21C;
                     Block_10:
@@ -6468,17 +6478,17 @@ namespace PhotoSW.Views
                     IL_1DA:
                     arg_1DC_0 = true;
                     IL_1DB:
-                    if(!arg_1DC_0)
-                        {
-                        clientView.instructionVideo.Visibility = Visibility.Visible;
-                        clientView.instructionVideo.Play();
-                        }
-                    else
-                        {
-                        clientView.imgDefault.Visibility = Visibility.Visible;
-                        }
-                    clientView.testR.Fill = null;
-                    IL_21C:
+     //               if(!arg_1DC_0)
+     //                   {
+     //                   clientView.instructionVideo.Visibility = Visibility.Visible;
+     //                   clientView.instructionVideo.Play();
+     //                   }
+     //               else
+     //                   {
+     //                   clientView.imgDefault.Visibility = Visibility.Visible;
+     //                   }
+					//clientView.testR.Fill = null;
+				IL_21C:
                     bool arg_22B_0 = false;//clientView.instructionVideo.Visibility == Visibility.Visible;
                     bool expr_22F;
                     do
@@ -6487,14 +6497,16 @@ namespace PhotoSW.Views
                         expr_22F = (arg_22B_0 = flag);
                         }
                     while(4 == 0);
-                    if(!expr_22F)
-                        {
-                        clientView.instructionVideo.Play();
-                        }
-                    else
-                        {
-                        clientView.instructionVideo.Pause();
-                        }
+
+                    //if(!expr_22F)
+                    //    {
+                    //    clientView.instructionVideo.Play();
+                    //    }
+                    //else
+                    //    {
+                    //    clientView.instructionVideo.Pause();
+                    //    }
+
                     Screen[] allScreens = Screen.AllScreens;
                     if(allScreens.Length > 1)
                         {
@@ -7005,25 +7017,25 @@ namespace PhotoSW.Views
                 {
                 //this.clientWin.btnPrevButton.Visibility = Visibility.Collapsed;
                 //this.clientWin.btnNextButton.Visibility = Visibility.Collapsed;
-                this.clientWin.btnMinimize.Visibility = Visibility.Collapsed;
-                this.clientWin.stkPrint.Visibility = Visibility.Collapsed;
+                //this.clientWin.btnMinimize.Visibility = Visibility.Collapsed;
+               // this.clientWin.stkPrint.Visibility = Visibility.Collapsed;
 				transformGroup = new TransformGroup();
 				transformGroup.Children.Add(new RotateTransform(0.0));
 				this.ContentContainer.RenderTransform = transformGroup;
-                if(this.clientWin != null)
-                    {
-                    this.clientWin.img12.RenderTransform = transformGroup;
-                    }
+                //if(this.clientWin != null)
+                //    {
+                //    this.clientWin.img12.RenderTransform = transformGroup;
+                //    }
 				return;
 			}
 			IL_191:
-            this.clientWin.imgNext.Visibility = Visibility.Visible;
-            this.clientWin.testR.Fill = null;
-            this.clientWin.testR.Visibility = Visibility.Collapsed;
-            this.clientWin.stkPrevNext.Visibility = Visibility.Visible;
-            this.clientWin.stkPrint.Visibility = Visibility.Visible;
-            this.clientWin.btnMinimize.Visibility = Visibility.Visible;
-            //this.clientWin.mPreviewControl.SetControlledObject(this.gdMediaPlayer);
+			// this.clientWin.imgNext.Visibility = Visibility.Visible;
+			//this.clientWin.testR.Fill = null;
+			//this.clientWin.testR.Visibility = Visibility.Collapsed;
+			//this.clientWin.stkPrevNext.Visibility = Visibility.Visible;
+			// this.clientWin.stkPrint.Visibility = Visibility.Visible;
+			//this.clientWin.btnMinimize.Visibility = Visibility.Visible;
+			//this.clientWin.mPreviewControl.SetControlledObject(this.gdMediaPlayer);
 			LstMyItems selectedItem = (LstMyItems)this.lstImages.SelectedItem;
 			LstMyItems lstMyItems = (from o in RobotImageLoader.GroupImages
 			orderby o.PhotoId descending
@@ -7035,16 +7047,16 @@ namespace PhotoSW.Views
 			}
 			if (selectedItem != null)
 			{
-            this.clientWin.LoadImage(selectedItem);
+          //  this.clientWin.LoadImage(selectedItem);
 				if ((from o in RobotImageLoader.PrintImages
 				where o.PhotoId == selectedItem.PhotoId
                      select o).FirstOrDefault<LstMyItems>() != null)
                     {
-                    this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+                  //  this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                     }
                 else
                     {
-                    this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+                   // this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                     }
 				this.txtMainImage.Text = selectedItem.Name;
 				this.lstImages.SelectedItem = selectedItem;
@@ -7052,7 +7064,7 @@ namespace PhotoSW.Views
             }
             else
                 {
-                this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+              //  this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                 }
 			IL_392:
 			this.AngleValue += 720;
@@ -7067,8 +7079,8 @@ namespace PhotoSW.Views
 			}
 			TransformGroup transformGroup2 = new TransformGroup();
 			transformGroup2.Children.Add(new RotateTransform((double)this.AngleValue));
-            transformGroup2.Children.Add(new TranslateTransform(this.clientWin.img12.ActualWidth, this.clientWin.img12.ActualHeight));
-            this.clientWin.img12.LayoutTransform = transformGroup2;
+            //transformGroup2.Children.Add(new TranslateTransform(this.clientWin.img12.ActualWidth, this.clientWin.img12.ActualHeight));
+            //this.clientWin.img12.LayoutTransform = transformGroup2;
             if(this.clientWin != null)
                 {
                 this.clientWin.WindowState = WindowState.Maximized;
@@ -7378,7 +7390,7 @@ namespace PhotoSW.Views
 						this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
 						if (this.isSingleScreenPreview)
 						{
-							this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+							//this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
 						}
 					}
 					else
@@ -7386,7 +7398,7 @@ namespace PhotoSW.Views
 						this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
 						if (this.isSingleScreenPreview)
 						{
-							this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+						//	this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
 						}
 					}
 					int currentImageId = this._currentImageId;
@@ -7586,7 +7598,8 @@ namespace PhotoSW.Views
 			}
 			finally
 			{
-			}
+                
+            }
 		}
 
 		private void Window_Unloaded(object sender, RoutedEventArgs e)
@@ -9530,8 +9543,8 @@ namespace PhotoSW.Views
 				return;
 			}
 			//IL_4F:
-            if(this.clientWin!=null)
-            this.clientWin.StopMediaPlay();
+          //  if(this.clientWin!=null)
+          //  this.clientWin.StopMediaPlay();
 		}
 
 		private void MediaPlay()
