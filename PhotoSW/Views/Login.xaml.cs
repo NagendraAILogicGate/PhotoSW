@@ -61,7 +61,7 @@ namespace PhotoSW.Views
             this.tbDigiVersion.Text = "Version: PhotoSW " + this.CurrentRegistryVersion();
             this.btnLogin.IsDefault = true;
             var vals = System.Configuration.ConfigurationManager.AppSettings.GetValues("Env");
-            if (vals.Contains("dev"))
+            if (vals !=null && vals.Contains("dev"))
             {
                 this.txtUserName.Text = "Test05";
                 this.txtPassword.Password = "123456";
