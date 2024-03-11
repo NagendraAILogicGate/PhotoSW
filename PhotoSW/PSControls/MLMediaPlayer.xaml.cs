@@ -378,6 +378,7 @@ namespace PhotoSW.PSControls
                         }
                         eMState eMState;
                         double num;
+                        if(this.mFile !=null)
                         this.mFile.FileStateGet(out eMState, out num);
                     }
                 }
