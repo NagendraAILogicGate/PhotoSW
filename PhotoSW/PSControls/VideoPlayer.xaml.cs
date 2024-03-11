@@ -382,7 +382,7 @@ namespace PhotoSW.PSControls
         IL_F4:
             if (this.clientWin != null)
             {
-                this.clientWin.StopMediaPlay();
+               // this.clientWin.StopMediaPlay();
             }
         }
 

@@ -719,7 +719,26 @@ namespace PhotoSW.Views
 										{
 											this.txtQRCode.Text = string.Empty;
 										}
-										this.txtgroupname.Text = "";
+
+                                        ClientView clientView = null;
+                                        foreach (Window window in System.Windows.Application.Current.Windows)
+                                        {
+                                            if (window.Title == "ClientView")
+                                            {
+                                                clientView = (ClientView)window;
+                                            }
+                                        }
+                                        if (clientView != null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            clientView = new ClientView();
+                                        }
+                                        clientView.LoadWindow();
+
+                                        this.txtgroupname.Text = "";
 										base.Hide();
 									}
 								}
@@ -1011,8 +1030,7 @@ namespace PhotoSW.Views
                                 RobotImageLoader.IsZeroSearchNeeded = true;
                                 RobotImageLoader.currentCount = 0;
                             }
-                            
-                            
+                                                        
 
                             SearchResult searchResult = null;
 							foreach (Window window in Application.Current.Windows)
@@ -1041,7 +1059,27 @@ namespace PhotoSW.Views
 							{
 								this.txtQRCode.Text = string.Empty;
 							}
-							base.Hide();
+
+                            ClientView clientView = null;
+
+                            foreach (Window window in System.Windows.Application.Current.Windows)
+                            {
+                                if (window.Title == "ClientView")
+                                {
+                                    clientView = (ClientView)window;
+                                }
+                            }
+                            if (clientView != null)
+                            {
+
+                            }
+                            else
+                            {
+                                clientView = new ClientView();
+
+                            }
+                            clientView.LoadWindow();
+                            base.Hide();
 						}
 						goto IL_EA1;
 						IL_8AD:

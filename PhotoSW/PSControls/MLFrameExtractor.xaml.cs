@@ -262,7 +262,7 @@ namespace PhotoSW.PSControls
                 goto IL_88;
             }
         IL_6B:
-            this.clientWin.mPreviewControl.m_pPreview.PreviewFullScreen("", 0, -1);
+            //this.clientWin.mPreviewControl.m_pPreview.PreviewFullScreen("", 0, -1);
         IL_88:
             Marshal.ReleaseComObject(pmframe);
         }
@@ -394,10 +394,10 @@ namespace PhotoSW.PSControls
                             {
                                 this.LoadClientViewObject();
                             }
-                            if (this.clientWin != null)
-                            {
-                                this.clientWin.PlayVideoOnClient(type, this.mFile, new int?(Convert.ToInt32(this.RFID)));
-                            }
+                            //if (this.clientWin != null)
+                            //{
+                            //    this.clientWin.PlayVideoOnClient(type, this.mFile, new int?(Convert.ToInt32(this.RFID)));
+                            //}
                         }
                     }
                 }
@@ -479,7 +479,7 @@ namespace PhotoSW.PSControls
                     {
                         goto IL_25;
                     }
-                    this.clientWin.StopMediaPlay(new bool?(true));
+                   // this.clientWin.StopMediaPlay(new bool?(true));
                 }
                 if (false)
                 {
@@ -695,7 +695,7 @@ namespace PhotoSW.PSControls
                 {
                     break;
                 }
-                this.clientWin.mPreviewControl.m_pPreview.PreviewFullScreen("", 1, -1);
+                //this.clientWin.mPreviewControl.m_pPreview.PreviewFullScreen("", 1, -1);
                 if (!false)
                 {
                     break;
