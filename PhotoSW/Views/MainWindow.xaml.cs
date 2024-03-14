@@ -4626,7 +4626,7 @@ namespace PhotoSW.Views
         IL_77:
             if (!flag)
             {
-                this.CompleteRestore();
+                //this.CompleteRestore();
             }
         IL_85:
             goto IL_A9;
@@ -37348,19 +37348,25 @@ namespace PhotoSW.Views
         private void btnBottomBackGround_Click(object sender, RoutedEventArgs e)
         {
             this.bottomImageClear();
-            bool test = (this.imageundoGrid.Visibility == Visibility.Visible);                          
+            bool test = (this.imageundoGrid.Visibility == Visibility.Visible);
+            bool check = (this.islstBackgroundVisible != false);
+
             try
             {
-                if (this.imageundoGrid.Background.Opacity != 0.0)
+                if (!check)
                 {
-                    this.imgBACKGROUND.Source = new BitmapImage(new Uri("/images/RedSquare.png", UriKind.Relative));
-                    this.imageundoGrid.Background.Opacity = 0.0;
+                    if (this.imageundoGrid.Background.Opacity != 0.0)
+                    {
+                        this.imgBACKGROUND.Source = new BitmapImage(new Uri("/images/RedSquare.png", UriKind.Relative));
+                        this.imageundoGrid.Background.Opacity = 0.0;
+                    }
+                    else
+                    {
+                        this.imgBACKGROUND.Source = new BitmapImage(new Uri("/images/whiteSquare.png", UriKind.Relative));
+                        this.imageundoGrid.Background.Opacity = 1.0;
+                    }
                 }
-                else
-                {
-                    this.imgBACKGROUND.Source = new BitmapImage(new Uri("/images/whiteSquare.png", UriKind.Relative));
-                    this.imageundoGrid.Background.Opacity = 1.0;
-                }
+                
             }
             catch (Exception ex)
             {

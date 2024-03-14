@@ -29,12 +29,17 @@ using PhotoSW.PSControls;
 using PhotoSW.Shader;
 using DigiPhoto.Utility.Repository.ValueType;
 using System.Windows.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Windows.Input;
 
 namespace PhotoSW.Views
 {
     public partial class ClientView : Window, IComponentConnector
     {
-        private Timer tmr;
+        private System.Windows.Forms.Timer tmr;
 
         private int mktImgcount = 0;
 
@@ -95,7 +100,7 @@ namespace PhotoSW.Views
         public long unlockImageId;
 
         public bool ismod;
-      
+
 
         private int _currentMediaType;
 
@@ -144,7 +149,7 @@ namespace PhotoSW.Views
         public MLMediaPlayer mplayer;
 
         private int searchType = 3;
-       
+
 
         private int currentWidth = 0;
 
@@ -196,7 +201,7 @@ namespace PhotoSW.Views
             set;
         }
 
-      
+
         public BitmapImage ChildImage
         {
             get;
@@ -214,7 +219,7 @@ namespace PhotoSW.Views
             get;
             set;
         }
-              
+
 
         public string ProductType
         {
@@ -224,8 +229,8 @@ namespace PhotoSW.Views
 
         public ClientView()
         {
-            this.InitializeComponent();
-            
+            this.InitializeComponent();           
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -249,7 +254,7 @@ namespace PhotoSW.Views
                         if (flag)
                         {
                             //this.thumbPreview.Visibility = Visibility.Visible;
-                          //  this.lstImages.Items.Clear();
+                            //  this.lstImages.Items.Clear();
                             using (List<LstMyItems>.Enumerator enumerator = RobotImageLoader.GroupImages.GetEnumerator())
                             {
                                 while (true)
@@ -260,7 +265,7 @@ namespace PhotoSW.Views
                                         break;
                                     }
                                     LstMyItems current = enumerator.Current;
-                                   // this.lstImages.Items.Add(current);
+                                    // this.lstImages.Items.Add(current);
                                 }
                             }
                             //this.imgMain1.Visibility = Visibility.Collapsed;
@@ -310,9 +315,9 @@ namespace PhotoSW.Views
                     IL_CA:
                         if (!arg_CA_0)
                         {
-                           // this.instructionVideo.Visibility = Visibility.Visible;
+                            // this.instructionVideo.Visibility = Visibility.Visible;
                             this.StartSaver();
-                          //  this.SetMediaSource(this.MktImgPath);
+                            //  this.SetMediaSource(this.MktImgPath);
                         }
                         else
                         {
@@ -331,7 +336,7 @@ namespace PhotoSW.Views
                         {
                             this.tmr.Stop();
                         }
-                       // this.instructionVideo.Visibility = Visibility.Collapsed;
+                        // this.instructionVideo.Visibility = Visibility.Collapsed;
                         if (6 != 0)
                         {
                         }
@@ -668,7 +673,7 @@ namespace PhotoSW.Views
                     goto IL_6A5;
                 }
             IL_408:
-                
+
                 if (!flag)
                 {
                     //this.vwGroup.Text = "View Group";
@@ -677,7 +682,7 @@ namespace PhotoSW.Views
                         goto IL_337;
                     }
                 }
-                //this.ViewGroup();
+            //this.ViewGroup();
             IL_6A5:
                 if (this.pagename == "Placeback")
                 {
@@ -743,7 +748,7 @@ namespace PhotoSW.Views
             {
                 if (!false)
                 {
-                    this.tmr = new Timer();
+                    this.tmr = new System.Windows.Forms.Timer();
                     goto IL_0D;
                 }
             IL_1D:
@@ -767,7 +772,7 @@ namespace PhotoSW.Views
 
         private void tmr_Tick(object sender, EventArgs e)
         {
-           // this.SetMediaSource(this.MktImgPath);
+            // this.SetMediaSource(this.MktImgPath);
         }
 
         private void GetMktImgInfo()
@@ -788,9 +793,9 @@ namespace PhotoSW.Views
                                 string cipherString = streamReader.ReadLine();
                                 string text = PhotoSW.CryptorEngine.Decrypt(cipherString, true);
                                 LoginUser.SubStoreId = Convert.ToInt32(text.Split(new char[]
-								{
-									','
-								})[0]);
+                                {
+                                    ','
+                                })[0]);
                             }
                             while (false);
                         }
@@ -802,10 +807,10 @@ namespace PhotoSW.Views
                             }
                         }
                         List<long> objList = new List<long>
-						{
-							24L,
-							25L
-						};
+                        {
+                            24L,
+                            25L
+                        };
                         ConfigBusiness configBusiness = new ConfigBusiness();
                         List<iMIXConfigurationInfo> list = (from o in configBusiness.GetNewConfigValues(LoginUser.SubStoreId)
                                                             where objList.Contains(o.IMIXConfigurationMasterId)
@@ -906,7 +911,7 @@ namespace PhotoSW.Views
                     {
                         arg_77_0 = 1;
                     }
-                   
+
                     while (true)
                     {
                         RobotImageLoader.IsLastPage = false;
@@ -1015,19 +1020,19 @@ namespace PhotoSW.Views
             }
             if (!expr_A4)
             {
-              //  this.chkSelectAll.IsChecked = new bool?(true);
+                //  this.chkSelectAll.IsChecked = new bool?(true);
                 if (8 != 0)
                 {
                     goto IL_70;
                 }
             }
-          //  this.chkSelectAll.IsChecked = new bool?(false);
+        //  this.chkSelectAll.IsChecked = new bool?(false);
         IL_70:
             if (4 == 0)
             {
                 goto IL_3F;
             }
-           // this.chkSelectAll.Visibility = Visibility.Visible;
+            // this.chkSelectAll.Visibility = Visibility.Visible;
         }
 
         private void LoadImagestoList()
@@ -1040,7 +1045,7 @@ namespace PhotoSW.Views
             {
                 lstMyItems = expr_2A9;
             }
-          //  this.txtSelectedImages.Foreground = new SolidColorBrush(Colors.White);
+            //  this.txtSelectedImages.Foreground = new SolidColorBrush(Colors.White);
             bool flag = this.num >= num;
             if (!flag)
             {
@@ -1055,7 +1060,7 @@ namespace PhotoSW.Views
                 }
                 this.lstImages.Items.Add(lstMyItems);
                 int arg_B7_0;
-              //  bool arg_15E_0 = ((this.pagename == "Saveback") ? (arg_B7_0 = 0) : (arg_B7_0 = ((!(this.pagename == "Placeback")) ? 1 : 0))) != 0;
+            //  bool arg_15E_0 = ((this.pagename == "Saveback") ? (arg_B7_0 = 0) : (arg_B7_0 = ((!(this.pagename == "Placeback")) ? 1 : 0))) != 0;
             IL_B0:
                 if (8 == 0)
                 {
@@ -1083,18 +1088,18 @@ namespace PhotoSW.Views
             IL_14B:
             IL_14C:
             IL_14D:
-              //  arg_15E_0 = (lstMyItems.Name == RobotImageLoader.RFID);
+            //  arg_15E_0 = (lstMyItems.Name == RobotImageLoader.RFID);
             IL_15D:
                 //if (!arg_15E_0)
                 //{
                 //    goto IL_1DA;
                 //}
-              //  bool expr_171 = (arg_B7_0 = ((arg_15E_0 = (this.lstImages.SelectedItem == null)) ? 1 : 0)) != 0;
+                //  bool expr_171 = (arg_B7_0 = ((arg_15E_0 = (this.lstImages.SelectedItem == null)) ? 1 : 0)) != 0;
                 if (false)
                 {
                     goto IL_B0;
                 }
-               // flag = !expr_171;
+                // flag = !expr_171;
             }
             else
             {
@@ -1247,7 +1252,7 @@ namespace PhotoSW.Views
                             {
                                 if (8 == 0)
                                 {
-                                  //  goto IL_A2E;
+                                    //  goto IL_A2E;
                                 }
                                 //this.ImgAddToGroup.Source = new BitmapImage(new Uri("/images/view-accept.png", UriKind.Relative));
                                 //this.btnImageAddToGroup.ToolTip = "Remove from group";
@@ -1353,7 +1358,7 @@ namespace PhotoSW.Views
                     this.lstImages.Items.Remove(list2.First<LstMyItems>());
                     if (this.lstImages.Items.Count == 0)
                     {
-                       // this.pagename = "";
+                        // this.pagename = "";
                     }
                     if (false)
                     {
@@ -1385,7 +1390,7 @@ namespace PhotoSW.Views
                         Grid.SetColumnSpan(this.thumbPreview, 2);
                         Grid.SetColumn(this.thumbPreview, 0);
                         this.thumbPreview.Margin = new Thickness(0.0);
-                      //  this.vwGroup.Text = "View Group";
+                        //  this.vwGroup.Text = "View Group";
                         this.flgGridWithoutPreview = true;
                         if ((string.Compare(RobotImageLoader.SearchCriteria, "PhotoId", true) == 0 || string.IsNullOrEmpty(RobotImageLoader.SearchCriteria)) && RobotImageLoader.RFID == "0")
                         {
@@ -1407,7 +1412,7 @@ namespace PhotoSW.Views
                     //this.btnPrevButton.Visibility = Visibility.Visible;
                     //this.btnNextButton.Visibility = Visibility.Visible;
                     ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Hidden);
-                  //  this.vwGroup.Text = "View Group";
+                    //  this.vwGroup.Text = "View Group";
                 }
             IL_616:
             IL_617:
@@ -1417,7 +1422,7 @@ namespace PhotoSW.Views
                 {
                     //goto IL_908;
                 }
-               
+
                 //if (this.vwGroup.Text == "View Group")
                 //{
                 //    //	this.SetMessageText("Grouped");
@@ -1443,7 +1448,7 @@ namespace PhotoSW.Views
                     listBoxItem.Focus();
                     this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
                 }
-           // IL_A2E:
+                // IL_A2E:
                 //if (this.vwGroup.Text == "View All")
                 //{
                 //    this.CheckForAllImgSelectToPrint();
@@ -1556,7 +1561,7 @@ namespace PhotoSW.Views
                     }
                     if (false)
                     {
-                       // goto IL_B8;
+                        // goto IL_B8;
                     }
                     arg_A3_0 = num;
                     arg_A3_1 = RobotImageLoader.GroupImages.Count;
@@ -1576,14 +1581,14 @@ namespace PhotoSW.Views
             while (6 == 0);
             if (!expr_126)
             {
-               // goto IL_B8;
+                // goto IL_B8;
             }
-           
+
             return;
         IL_AD:
             arg_120_0 = 1;
-        //goto IL_AE;
-       
+            //goto IL_AE;
+
         }
 
         private void FillImageList()
@@ -1657,55 +1662,55 @@ namespace PhotoSW.Views
                 System.Windows.Controls.Image image = (System.Windows.Controls.Image)button.Content;
                 //if (this.vwGroup.Text == "View Group" && this.pagename != "Saveback")
                 //{
-                    //RobotImageLoader.curItem = RobotImageLoader.robotImages.Where(delegate (LstMyItems t)
-                    //{
-                    //    if (false)
-                    //    {
-                    //        goto IL_24;
-                    //    }
-                    //    int arg_1A_0 = t.PhotoId;
-                    //    bool expr_1A;
-                    //    do
-                    //    {
-                    //    IL_07:
-                    //        expr_1A = ((arg_1A_0 = ((arg_1A_0 == (int)((System.Windows.Controls.Button)sender).CommandParameter) ? 1 : 0)) != 0);
-                    //    }
-                    //    while (7 == 0 || 8 == 0);
-                    //    bool flag = expr_1A;
-                    //IL_24:
-                    //    bool expr_43 = (arg_1A_0 = (flag ? 1 : 0)) != 0;
-                    //    if (!false)
-                    //    {
-                    //        return expr_43;
-                    //    }
-                    //    //goto IL_07;
-                    //}).First<LstMyItems>();
+                //RobotImageLoader.curItem = RobotImageLoader.robotImages.Where(delegate (LstMyItems t)
+                //{
+                //    if (false)
+                //    {
+                //        goto IL_24;
+                //    }
+                //    int arg_1A_0 = t.PhotoId;
+                //    bool expr_1A;
+                //    do
+                //    {
+                //    IL_07:
+                //        expr_1A = ((arg_1A_0 = ((arg_1A_0 == (int)((System.Windows.Controls.Button)sender).CommandParameter) ? 1 : 0)) != 0);
+                //    }
+                //    while (7 == 0 || 8 == 0);
+                //    bool flag = expr_1A;
+                //IL_24:
+                //    bool expr_43 = (arg_1A_0 = (flag ? 1 : 0)) != 0;
+                //    if (!false)
+                //    {
+                //        return expr_43;
+                //    }
+                //    //goto IL_07;
+                //}).First<LstMyItems>();
                 //}
                 //else
                 //{
-                    RobotImageLoader.curItem = RobotImageLoader.GroupImages.Where(delegate (LstMyItems t)
+                RobotImageLoader.curItem = RobotImageLoader.GroupImages.Where(delegate (LstMyItems t)
+                {
+                    if (false)
                     {
-                        if (false)
-                        {
-                            goto IL_24;
-                        }
-                        int arg_1A_0 = t.PhotoId;
-                        bool expr_1A;
-                        do
-                        {
-                        IL_07:
-                            expr_1A = ((arg_1A_0 = ((arg_1A_0 == (int)((System.Windows.Controls.Button)sender).CommandParameter) ? 1 : 0)) != 0);
-                        }
-                        while (7 == 0 || 8 == 0);
-                        bool flag = expr_1A;
-                    IL_24:
-                        bool expr_43 = (arg_1A_0 = (flag ? 1 : 0)) != 0;
-                        if (!false)
-                        {
-                            return expr_43;
-                        }
-                        // goto IL_07;
-                    }).First<LstMyItems>();
+                        goto IL_24;
+                    }
+                    int arg_1A_0 = t.PhotoId;
+                    bool expr_1A;
+                    do
+                    {
+                    IL_07:
+                        expr_1A = ((arg_1A_0 = ((arg_1A_0 == (int)((System.Windows.Controls.Button)sender).CommandParameter) ? 1 : 0)) != 0);
+                    }
+                    while (7 == 0 || 8 == 0);
+                    bool flag = expr_1A;
+                IL_24:
+                    bool expr_43 = (arg_1A_0 = (flag ? 1 : 0)) != 0;
+                    if (!false)
+                    {
+                        return expr_43;
+                    }
+                    // goto IL_07;
+                }).First<LstMyItems>();
                 //}
                 LstMyItems lstMyItems = RobotImageLoader.PrintImages.Where(delegate (LstMyItems t)
                 {
@@ -1746,18 +1751,18 @@ namespace PhotoSW.Views
                     RobotImageLoader.PrintImages.Add(lstMyItems2);
                     image.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                     RobotImageLoader.curItem.PrintGroup = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
-                   // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+                    // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                 }
                 else
                 {
-                  //  num = this.NextGroupSelectedIndex(this.lstImages.Items.IndexOf(lstMyItems));
+                    //  num = this.NextGroupSelectedIndex(this.lstImages.Items.IndexOf(lstMyItems));
                     RobotImageLoader.PrintImages.Remove(lstMyItems);
                     image.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                     RobotImageLoader.curItem.PrintGroup = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
-                  //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+                    //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                     if (this.lstImages.Items.Count == 0)
                     {
-                      //  this.pagename = "";
+                        //  this.pagename = "";
                     }
                     if (this.lstImages.Items.Count > 0)
                     {
@@ -1771,13 +1776,13 @@ namespace PhotoSW.Views
                     }
                     else
                     {
-                      //  this.continueCalculating = false;
-                     //   this.num = 0;
+                        //  this.continueCalculating = false;
+                        //   this.num = 0;
                         RobotImageLoader.currentCount = 0;
                         RobotImageLoader.IsZeroSearchNeeded = true;
                         RobotImageLoader.RFID = "0";
                         RobotImageLoader.LoadImages();
-                      //  this.LoadImages();
+                        //  this.LoadImages();
                         this.IMGFrame.Visibility = Visibility.Collapsed;
                         Grid.SetColumnSpan(this.thumbPreview, 2);
                         Grid.SetColumn(this.thumbPreview, 0);
@@ -1805,35 +1810,35 @@ namespace PhotoSW.Views
                 //}
                 //if (this.vwGroup.Text == "View Group" && this.pagename == "Saveback")
                 //{
-                    using (List<LstMyItems>.Enumerator enumerator = RobotImageLoader.GroupImages.GetEnumerator())
+                using (List<LstMyItems>.Enumerator enumerator = RobotImageLoader.GroupImages.GetEnumerator())
+                {
+                    while (enumerator.MoveNext())
+                    {
+                        LstMyItems itx = enumerator.Current;
+                        LstMyItems lstMyItems3 = (from xs in RobotImageLoader.PrintImages
+                                                  where xs.PhotoId == itx.PhotoId
+                                                  select xs).FirstOrDefault<LstMyItems>();
+                        if (lstMyItems3 == null)
+                        {
+                            RobotImageLoader.NotPrintedImages.Add(itx);
+                        }
+                    }
+                }
+                if (RobotImageLoader.NotPrintedImages.Count != 0)
+                {
+                    using (List<LstMyItems>.Enumerator enumerator = RobotImageLoader.NotPrintedImages.GetEnumerator())
                     {
                         while (enumerator.MoveNext())
                         {
-                            LstMyItems itx = enumerator.Current;
-                            LstMyItems lstMyItems3 = (from xs in RobotImageLoader.PrintImages
-                                                      where xs.PhotoId == itx.PhotoId
-                                                      select xs).FirstOrDefault<LstMyItems>();
-                            if (lstMyItems3 == null)
-                            {
-                                RobotImageLoader.NotPrintedImages.Add(itx);
-                            }
+                            LstMyItems ity = enumerator.Current;
+                            this.lstImages.Items.Remove(ity);
+                            LstMyItems lstMyItems4 = (from tg in RobotImageLoader.GroupImages
+                                                      where tg.PhotoId == ity.PhotoId
+                                                      select tg).FirstOrDefault<LstMyItems>();
+                            lstMyItems4.PrintGroup = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                         }
                     }
-                    if (RobotImageLoader.NotPrintedImages.Count != 0)
-                    {
-                        using (List<LstMyItems>.Enumerator enumerator = RobotImageLoader.NotPrintedImages.GetEnumerator())
-                        {
-                            while (enumerator.MoveNext())
-                            {
-                                LstMyItems ity = enumerator.Current;
-                                this.lstImages.Items.Remove(ity);
-                                LstMyItems lstMyItems4 = (from tg in RobotImageLoader.GroupImages
-                                                          where tg.PhotoId == ity.PhotoId
-                                                          select tg).FirstOrDefault<LstMyItems>();
-                                lstMyItems4.PrintGroup = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
-                            }
-                        }
-                    }
+                }
                 //    this.SetMessageText("EditPrintGrouped");
                 //    this.SPSelectAll.Visibility = Visibility.Hidden;
                 //}
@@ -1941,7 +1946,7 @@ namespace PhotoSW.Views
                 Func<LstMyItems, bool> predicate = expr_06;
             }
             try
-            {                  
+            {
                 this.MediaStop();
                 if (this.clientWin == null)
                 {
@@ -2043,7 +2048,7 @@ namespace PhotoSW.Views
                     LstMyItems lstMyItems5 = arg_312_0.Where(predicate).FirstOrDefault<LstMyItems>();
                     if (lstMyItems5 != null)
                     {
-                       // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+                        // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                         if (this.isSingleScreenPreview)
                         {
                             //this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
@@ -2051,7 +2056,7 @@ namespace PhotoSW.Views
                     }
                     else
                     {
-                      //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+                        //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                         if (this.isSingleScreenPreview)
                         {
                             //	this.clientWin.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
@@ -2156,12 +2161,12 @@ namespace PhotoSW.Views
                     }
                     if (arg_5BC_0)
                     {
-                       // this.btnEdit.IsEnabled = true;
+                        // this.btnEdit.IsEnabled = true;
                         this.img.Visibility = Visibility.Visible;
                         //this.vidoriginal.Visibility = Visibility.Hidden;
                         goto IL_735;
                     }
-                   // this.btnEdit.IsEnabled = false;
+                    // this.btnEdit.IsEnabled = false;
                     this.img.Visibility = Visibility.Hidden;
                     //this.vidoriginal.Visibility = Visibility.Visible;
                     if (false)
@@ -2174,8 +2179,8 @@ namespace PhotoSW.Views
                         goto IL_709;
                     }
                     arg_613_0 = lstMyItems3.MediaType;
-                    arg_613_1 = 2;               
-                   
+                    arg_613_1 = 2;
+
                     base.Dispatcher.Invoke(new Action(delegate
                     {
                         this.MediaPlay();
@@ -2183,9 +2188,9 @@ namespace PhotoSW.Views
                 //this.txtMainVideo.Text = lstMyItems3.Name;
                 IL_709:
                 IL_735:
-                 //   bool? isChecked = this.btnchkpreview.IsChecked;
+                    //   bool? isChecked = this.btnchkpreview.IsChecked;
                     int arg_75D_0 = 0;
-                   
+
                     if (arg_75D_0 != 0)
                     {
                         if (!false)
@@ -2209,11 +2214,11 @@ namespace PhotoSW.Views
                 IL_9DC:
                     if (lstMyItems.MediaType == 2 || lstMyItems.MediaType == 3)
                     {
-                      //  this.btnEdit.IsEnabled = false;
+                        //  this.btnEdit.IsEnabled = false;
                     }
                     else
                     {
-                       // this.btnEdit.IsEnabled = true;
+                        // this.btnEdit.IsEnabled = true;
                     }
                 IL_A1A:;
                 }
@@ -2248,7 +2253,7 @@ namespace PhotoSW.Views
                 this.MediaStop();
             }
         IL_20:
-           
+
             if (!false)
             {
                 //this.gdMediaPlayer.EndInit();
@@ -2261,14 +2266,14 @@ namespace PhotoSW.Views
         private void MainImage_Click(object sender, RoutedEventArgs e)
         {
 
-           // this.MediaStop();
+            // this.MediaStop();
             Grid.SetColumnSpan(this.thumbPreview, 1);
             Grid.SetColumn(this.thumbPreview, 1);
             this.thumbPreview.Margin = new Thickness(0.0, 0.0, -77.5, 8.0);
             ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Visible);
-           // this.imgwithPreview.Source = new BitmapImage(new Uri("/images/thumbnailview1_active.png", UriKind.Relative));
+            // this.imgwithPreview.Source = new BitmapImage(new Uri("/images/thumbnailview1_active.png", UriKind.Relative));
             //this.imgwithoutPreview.Source = new BitmapImage(new Uri("images/16blocks_black.png", UriKind.Relative));
-         //   this.imgwithoutPreview9.Source = new BitmapImage(new Uri("/images/9Blocks_black.png", UriKind.Relative));
+            //   this.imgwithoutPreview9.Source = new BitmapImage(new Uri("/images/9Blocks_black.png", UriKind.Relative));
             try
             {
                 this.IMGFrame.Visibility = Visibility.Visible;
@@ -2276,12 +2281,13 @@ namespace PhotoSW.Views
                 LstMyItems lstMyItems2;
                 int photoId;
                 LstMyItems curItem;
-                //if (!(this.vwGroup.Text == "View Group") || !(this.pagename != "Saveback"))
-                //{
+                 if (!(this.pagename != "Saveback")) //!(this.vwGroup.Text == "View Group") || 
+                {
                     string strPath = ((System.Windows.Controls.Button)sender).Tag.ToString();
+
                     curItem = RobotImageLoader.GroupImages.Where(t => t.FilePath == strPath).FirstOrDefault<LstMyItems>();
-                    if (curItem == null)
-                        return;
+
+                    if (curItem == null)return;
 
                     if (curItem.MediaType != 1)
                     {
@@ -2302,7 +2308,7 @@ namespace PhotoSW.Views
                             //   // SearchResult.vsMediaFileName = fileStream.Name;
                             //}
                         }
-                       // this.MediaPlay();
+                        // this.MediaPlay();
                     }
                     if (this.lstImages.SelectedItem != curItem)
                     {
@@ -2340,20 +2346,20 @@ namespace PhotoSW.Views
                             {
                                 goto IL_6A8;
                             }
-                           // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+                            // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                         }
                         else
                         {
-                           // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+                            // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
                         }
                         photoId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
-                       // this.unlockImageId = (long)photoId;
+                        // this.unlockImageId = (long)photoId;
                     }
                     goto IL_A3E;
 
-               // }
+                }
                 //SearchResult.c__DisplayClass41 CS$<>8__locals42;
-               
+
                 while (true)
                 {
                     int _PhotoId = Convert.ToInt32(((System.Windows.Controls.Button)sender).CommandParameter);
@@ -2370,7 +2376,7 @@ namespace PhotoSW.Views
                         {
                             goto IL_303;
                         }
-                       // this.btnEdit.IsEnabled = false;
+                        // this.btnEdit.IsEnabled = false;
                         this.img.Visibility = Visibility.Hidden;
                         //this.vidoriginal.Visibility = Visibility.Visible;
                         string fileName = curItem.FileName;
@@ -2391,7 +2397,7 @@ namespace PhotoSW.Views
                                 //}
                             }
                         }
-                      //  this.MediaPlay();
+                    //  this.MediaPlay();
                     //this.txtMainVideo.Text = curItem.Name;
                     IL_332:
                         if (this.lstImages.SelectedItem != curItem)
@@ -2438,25 +2444,25 @@ namespace PhotoSW.Views
                         {
                             break;
                         }
-                       // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+                        // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
                         if (2 != 0)
                         {
                             break;
                         }
                         continue;
                     IL_303:
-                       // this.btnEdit.IsEnabled = true;
+                        // this.btnEdit.IsEnabled = true;
                         this.img.Visibility = Visibility.Visible;
                         //this.vidoriginal.Visibility = Visibility.Hidden;
-                       // this.MediaStop();
+                        // this.MediaStop();
                         goto IL_332;
                     }
                     goto IL_534;
                 }
                 goto IL_52E;
             IL_510:
-                //this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
-              //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+            //this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
+            //  this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-group.png", UriKind.Relative));
             IL_52E:
                 goto IL_6CA;
             IL_534:
@@ -2487,10 +2493,10 @@ namespace PhotoSW.Views
                     goto IL_6A8;
                 }
             IL_669:
-               // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
+            // this.imgprintgroup.Source = new BitmapImage(new Uri("/images/print-accept.png", UriKind.Relative));
             IL_6A8:
                 photoId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
-               // this.unlockImageId = (long)photoId;
+            // this.unlockImageId = (long)photoId;
             IL_6CA:
             IL_A3E:
                 if (this.lstImages.Items.Count > 0 && this.lstImages.SelectedIndex == -1)
@@ -2501,7 +2507,7 @@ namespace PhotoSW.Views
                     this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
                     listBoxItem.Focus();
                 }
-              //  this.flgGridWithoutPreview = false;
+                //  this.flgGridWithoutPreview = false;
             }
             catch (Exception serviceException)
             {
@@ -2513,6 +2519,214 @@ namespace PhotoSW.Views
             }
         }
 
+        public async Task SelectClientView(int ID)
+        {            
+            Grid.SetColumnSpan(this.thumbPreview, 1);
+            Grid.SetColumn(this.thumbPreview, 1);
+            this.thumbPreview.Margin = new Thickness(0.0, 0.0, -77.5, 8.0);
+            ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Visible);
+            
+            try
+            {
+                this.IMGFrame.Visibility = Visibility.Visible;
+                LstMyItems lstMyItems;
+                LstMyItems lstMyItems2;
+                int photoId;
+                LstMyItems curItem;
+                if (!(this.pagename != "Saveback")) 
+                {                    
+                    string strPath = "";
+                    curItem = RobotImageLoader.GroupImages.Where(t => t.FilePath == strPath).FirstOrDefault<LstMyItems>();
+
+                    if (curItem == null) return;
+
+                    if (this.lstImages.SelectedItem != curItem)
+                    {
+                        this.lstImages.SelectedItem = curItem;
+                        ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                        listBoxItem.Focus();
+                        RobotImageLoader.UniquePhotoId = curItem.PhotoId;
+                        RobotImageLoader.PhotoId = curItem.Name.ToString();
+                    }
+                    else
+                    {
+                        this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+                        this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
+                        this._currentImage = ((LstMyItems)this.lstImages.SelectedItem).Name;
+                        this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+                        lstMyItems = (from t in RobotImageLoader.GroupImages
+                                      where t.PhotoId == this._currentImageId
+                                      select t).FirstOrDefault<LstMyItems>();
+                       
+                        lstMyItems2 = (from t in RobotImageLoader.PrintImages
+                                       where t.PhotoId == curItem.PhotoId
+                                       select t).FirstOrDefault<LstMyItems>();
+                        if (lstMyItems2 != null)
+                        {
+                            if (false)
+                            {
+                                goto IL_6A8;
+                            }
+                           
+                        }                      
+                        photoId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+                        
+                    }
+                    goto IL_A3E;
+
+                }
+               
+
+                while (true)
+                {                    
+                    int _PhotoId = ID;
+                    curItem = RobotImageLoader.robotImages.Where(t => t.PhotoId == _PhotoId).FirstOrDefault<LstMyItems>();
+
+                    if (curItem != null)
+                    {
+                        if (curItem.MediaType != 2 && curItem.MediaType != 3)
+                        {
+                            goto IL_303;
+                        }
+                        if (-1 == 0)
+                        {
+                            goto IL_303;
+                        }
+                        
+                        this.img.Visibility = Visibility.Hidden;                        
+                        string fileName = curItem.FileName;
+                        if (!string.IsNullOrEmpty(fileName))
+                        {
+                            
+                        }
+                    
+                    IL_332:
+                        if (this.lstImages.SelectedItem != curItem)
+                        {
+                            if (curItem != null)
+                            {
+                                this.lstImages.SelectedItem = curItem;
+                                RobotImageLoader.PhotoId = curItem.Name;
+                                ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                                listBoxItem.Focus();
+                                this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+                            }
+                        }
+                        if (this.lstImages.SelectedItem != null)
+                        {
+                            if (false)
+                            {
+                                goto IL_669;
+                            }
+                            this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+                            this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
+                        }
+                        lstMyItems = (from t in RobotImageLoader.GroupImages
+                                      where t.PhotoId == curItem.PhotoId
+                                      select t).FirstOrDefault<LstMyItems>();
+                        
+                        lstMyItems2 = (from t in RobotImageLoader.PrintImages
+                                       where t.PhotoId == curItem.PhotoId
+                                       select t).FirstOrDefault<LstMyItems>();
+                        if (lstMyItems2 == null)
+                        {
+                            goto IL_510;
+                        }
+                        if (false)
+                        {
+                            break;
+                        }
+                        
+                        if (2 != 0)
+                        {
+                            break;
+                        }
+                        continue;
+                    IL_303:
+                        
+                        this.img.Visibility = Visibility.Visible;
+                        
+                        goto IL_332;
+                    }
+                    goto IL_534;
+                }
+                goto IL_52E;
+            IL_510:
+            
+            IL_52E:
+                goto IL_6CA;
+            IL_534:
+                this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+                this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
+                this._currentImage = ((LstMyItems)this.lstImages.SelectedItem).Name;
+                this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+                lstMyItems = (from t in RobotImageLoader.GroupImages
+                              where t.PhotoId == this._currentImageId
+                              select t).FirstOrDefault<LstMyItems>();
+                
+                lstMyItems2 = (from t in RobotImageLoader.PrintImages
+                               where t.PhotoId == curItem.PhotoId
+                               select t).FirstOrDefault<LstMyItems>();
+                if (lstMyItems2 == null)
+                {
+                    
+                    goto IL_6A8;
+                }
+            IL_669:
+            
+            IL_6A8:
+                photoId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+         
+            IL_6CA:
+            IL_A3E:
+                if (this.lstImages.Items.Count > 0 && this.lstImages.SelectedIndex == -1)
+                {
+                    this.lstImages.SelectedIndex = 0;
+                    ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.Items[0]);
+                    this.lstImages.SelectedItem = listBoxItem;
+                    this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+                    listBoxItem.Focus();
+                }
+               
+            }
+            catch (Exception serviceException)
+            {
+                string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                ErrorHandler.ErrorHandler.LogFileWrite(message);
+            }
+            finally
+            {
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);                    
+                });
+            }
+        }
+
+        //public void SelectClientView(int ID)
+        //{
+        //    LstMyItems curItem;
+        //    int _PhotoId = ID;
+        //    curItem = RobotImageLoader.robotImages.Where(t => t.PhotoId == _PhotoId).FirstOrDefault<LstMyItems>();
+
+        //    if (curItem != null)
+        //    {
+        //        this.img.Visibility = Visibility.Visible;
+
+
+        //        if (this.lstImages.SelectedItem != curItem)
+        //        {
+        //            if (curItem != null)
+        //            {
+        //                this.lstImages.SelectedItem = curItem;
+        //                RobotImageLoader.PhotoId = curItem.Name;
+        //                ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+        //                listBoxItem.Focus();
+        //                this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+        //            }
+        //        }
+        //    }
+        //}
 
     }
 }

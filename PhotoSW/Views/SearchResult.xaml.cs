@@ -2043,7 +2043,9 @@ namespace PhotoSW.Views
 								RobotImageLoader.PhotoId = curItem.Name;
 								ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
 								listBoxItem.Focus();
-								this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+							    this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
+
+								//clientView.LoadWindow();
 							}
 						}
 						if (this.lstImages.SelectedItem != null)
@@ -2054,7 +2056,28 @@ namespace PhotoSW.Views
 							}
 							this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
 							this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
-						}
+
+
+                            ClientView clientView = null;
+
+                            foreach (Window window in System.Windows.Application.Current.Windows)
+                            {
+                                if (window.Title == "ClientView")
+                                {
+                                    clientView = (ClientView)window;
+                                }
+                            }
+                            if (clientView != null)
+                            {
+
+                            }
+                            else
+                            {
+                                clientView = new ClientView();
+
+                            }
+							clientView.SelectClientView(this._currentImageId);
+                        }
 						lstMyItems = (from t in RobotImageLoader.GroupImages
 						where t.PhotoId == curItem.PhotoId
 						select t).FirstOrDefault<LstMyItems>();
@@ -2143,6 +2166,7 @@ namespace PhotoSW.Views
 					listBoxItem.Focus();
 				}
 				this.flgGridWithoutPreview = false;
+
 			}
 			catch (Exception serviceException)
 			{
@@ -2853,7 +2877,7 @@ namespace PhotoSW.Views
         //////////////// //End ////////////////////////
         private void btnEdit_Click(object sender, RoutedEventArgs e)
 		{
-            this.MediaStop();
+           // this.MediaStop();
             do
             {
                 if (this.lstImages.SelectedItem != null)
@@ -5303,7 +5327,7 @@ namespace PhotoSW.Views
 		{
 			try
 			{
-				this.MediaStop();
+				//this.MediaStop();
 				this.btnEdit.IsEnabled = false;
 				long Photo_PKey = 0L;
 				bool flag = false;
@@ -7469,9 +7493,11 @@ namespace PhotoSW.Views
 							this.CurrentBitmapImage = CommonUtility.GetImageFromPath(myItems.BigThumbnailPath);
                             this.imgmain.Source = this.CurrentBitmapImage;
 							this.picoriginal.Width = this.Width/2 ; 
-							this.picoriginal.Height = this.Height /2 + 130 ; 
+							this.picoriginal.Height = this.Height /2 + 130 ;
 
-						}
+                            clientWin.SelectClientView(this._currentImageId);
+
+                        }
 						if (((LstMyItems)this.lstImages.SelectedItem).FrameBrdr != null)
 						{
 							this.mainFrame.Source = new BitmapImage(new Uri(((LstMyItems)this.lstImages.SelectedItem).FrameBrdr));

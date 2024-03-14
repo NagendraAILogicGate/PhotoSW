@@ -2296,7 +2296,7 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Margin="5,15,70,15"  Grid.Row="0" Grid.Column="0" Orientation="Vertical"  >
+                        <StackPanel Margin="5,15,70,15"  Grid.Row="0" Grid.Column="0" Orientation="Vertical" Visibility="Collapsed" >
                             <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="130"  Height="130" Margin="6">
 
                                 <Button Grid.Column="0"  Name="btnPrevButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" >
@@ -2417,7 +2417,7 @@
                             </TextBlock>
                         </StackPanel>
 
-                        <StackPanel Margin="50,15,15,15"  Grid.Row="0" Grid.Column="10" Orientation="Vertical"  >
+                        <StackPanel Margin="50,15,15,15"  Grid.Row="0" Grid.Column="10" Orientation="Vertical" Visibility="Collapsed" >
                             <Border  Background="#696969" CornerRadius="8" BorderThickness="1" Width="130"  Height="130" Margin="6">
 
                                 <Button Grid.Column="0"  Name="btnNextButton" Style="{StaticResource ButtonStyleAlpha}" Background="#FFFFFFFF" Foreground="#FFFFFFFF" IsEnabled="True" HorizontalAlignment="Center" >
