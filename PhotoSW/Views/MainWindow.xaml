@@ -369,10 +369,10 @@
                                         </Grid>
                                     </Grid>
                                 </ScrollViewer>
-                                <Border BorderThickness="2" Margin="0,0,0,0" BorderBrush="#FFFF0000">
+                                <Border BorderThickness="2" Width="800" Height="600" Margin="0,0,0,0" BorderBrush="#FFFF0000">
                                     <Grid Name="grdZoomCanvas" Visibility="Visible">
 
-                                        <Grid Name="forWdht" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
+                                        <Grid Name="forWdht"  Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">
                                             <Grid Name="canbackgroundold" ClipToBounds="True" KeyDown="MyInkCanvas_KeyDown" MouseWheel="canbackgroundold_MouseWheel">
 
                                                 <utbc:DragCanvas Name="dragCanvas" Background="#00FFFFFF" ClipToBounds="True" SnapsToDevicePixels="True">
@@ -422,7 +422,7 @@
                                                     </Grid>
                                                     <!--SnapsToDevicePixels="True" UseLayoutRounding="True"-->
 
-                                                    <Grid Name="Opacitymsk" ClipToBounds="False" Margin="0"  RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.EdgeMode="Aliased" LayoutUpdated="GrdBrightness_LayoutUpdated" ><!--LayoutUpdated="GrdBrightness_LayoutUpdated"-->
+                                                    <Grid Name="Opacitymsk"  ClipToBounds="False" Margin="0"  RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.EdgeMode="Aliased" LayoutUpdated="GrdBrightness_LayoutUpdated" ><!--LayoutUpdated="GrdBrightness_LayoutUpdated"-->
                                                         <!--LayoutUpdated="GrdBrightness_LayoutUpdated"-->
 
                                                         <Grid Name="GrdCollageImg">
@@ -982,8 +982,6 @@
                                                     <Grid Name="grdGumball" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Bottom" ZIndex="50">
                                                         <StackPanel Name="spGumball" Orientation="Vertical" Margin="0" ZIndex="100" HorizontalAlignment="Left" />
                                                     </Grid>
-                                                    
-                                                    
                                                     
                                                     
                                                     

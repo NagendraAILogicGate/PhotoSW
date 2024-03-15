@@ -440,7 +440,7 @@ namespace PhotoSW.PSControls
             //}
             return result;
         }
-
+        //
         private void HideHandlerDialog()
         {
             do
