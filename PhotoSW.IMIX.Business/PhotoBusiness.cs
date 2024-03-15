@@ -936,8 +936,11 @@ namespace PhotoSW.IMIX.Business
         {
             try
             {
+                if( photographerid != 0) { 
                 // PhotoInfo //DG_Photos_RFID
                 return baPhotoInfo.GetPhotoInfoDataById(photographerid).PS_Photos_RFID;
+                }
+                return "";
             }
             catch
             {
