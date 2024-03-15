@@ -15968,16 +15968,13 @@ namespace PhotoSW.Views
                                         else
                                         {
                                             this.forWdht.Width = 1400;
-                                        }
-                                        
+                                        }                                        
                                     }
-
                                 }
                                 else
                                 {
                                     this.forWdht.Height = this.forWdht.Width * num2;
-                               }
-
+                                }
                             }
                             this.forWdht.InvalidateArrange();
                             this.forWdht.InvalidateMeasure();
