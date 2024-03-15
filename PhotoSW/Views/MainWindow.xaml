@@ -369,7 +369,7 @@
                                         </Grid>
                                     </Grid>
                                 </ScrollViewer>
-                                <Border BorderThickness="2" Width="800" Height="600" Margin="0,0,0,0" BorderBrush="#FFFF0000">
+                                <Border BorderThickness="2" Width="780" Height="600" Margin="0,0,0,0" BorderBrush="#FFFF0000">
                                     <Grid Name="grdZoomCanvas" Visibility="Visible">
 
                                         <Grid Name="forWdht"  Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="{Binding ActualWidth, ElementName=GrdSize, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=GrdSize, Mode=OneWay}">

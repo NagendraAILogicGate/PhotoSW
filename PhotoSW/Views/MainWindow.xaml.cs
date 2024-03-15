@@ -28222,9 +28222,9 @@ namespace PhotoSW.Views
                 {
                     MemoryManagement.FlushMemory();
                     this.Zomout(true);
+                    this.ImageFixSize(true);
                     this.IsMoveEnabled = false;
                     this.MoveImageStartStop();
-
                 }
             }
         }
@@ -35025,6 +35025,121 @@ namespace PhotoSW.Views
                 }
             }
         }
+
+
+        public void ImageFixSize(bool orignal)
+        {
+            try
+            {
+                try
+                {
+                    bool arg_145_0;
+                    bool expr_12 = arg_145_0 = (this.widthimg.Source == null);
+                    if (false)
+                    {
+                        goto IL_145;
+                    }
+                    bool arg_13F_0;
+                    bool expr_1B = arg_13F_0 = !expr_12;
+                    double num;
+                    double num2;
+                    ScaleTransform scaleTransform;
+                    TransformGroup transformGroup;
+                    if (true)
+                    {
+                        if (!expr_1B)
+                        {
+                            return;
+                        }
+
+                        double width = this.widthimg.Source.Width;
+                        double height = this.widthimg.Source.Height;
+                        double arg_6C_0 = width;
+                        double arg_6C_1 = 800.0;
+                       
+                        do
+                        {
+                            num = arg_6C_0 / arg_6C_1;
+                            num2 = height / 700.0;
+                            num = 100.0 / num / 100.0;
+                            num2 = 100.0 / num2 / 100.0;
+                            if (this.frm.Children.Count != 1)
+                            {
+                                goto IL_12C;
+                            }
+
+                        }
+                        while (3 == 0);
+                        
+                        if (6 == 0)
+                        {
+                            goto IL_23D;
+                        }
+                    IL_12C:
+                        scaleTransform = new ScaleTransform();
+                        transformGroup = new TransformGroup();
+                        arg_13F_0 = (height > width);
+                    }
+                    bool arg_141_0 = !arg_13F_0;
+                IL_141:
+                    bool flag = arg_141_0;
+                    arg_145_0 = flag;
+                IL_145:
+
+                    if (!arg_145_0)
+                    {
+                        scaleTransform.ScaleX = num2 - 0.01;
+                        scaleTransform.ScaleY = num2 - 0.01;
+                    }
+                    else
+                    {
+                        scaleTransform.ScaleX = num - 0.01;
+                        scaleTransform.ScaleY = num - 0.01;
+                    }
+
+                    scaleTransform.CenterX = this.forWdht.ActualWidth / 2.0;
+                    scaleTransform.CenterY = this.forWdht.ActualHeight / 2.0;
+
+                    transformGroup.Children.Add(scaleTransform);
+                    bool expr_1EE = arg_141_0 = (this.GrdsubGreenScreen.Visibility == Visibility.Visible);
+                    if (false)
+                    {
+                        goto IL_141;
+                    }
+                    if (!expr_1EE)
+                    {
+                        this.GrdZomout.LayoutTransform = transformGroup;
+                        this.grdZoomCanvas.LayoutTransform = transformGroup;
+                        goto IL_334;
+                    }
+                    scaleTransform.CenterX = this.mainImage.ActualWidth / 2.0;
+                    scaleTransform.CenterY = this.mainImage.ActualHeight / 2.0;
+                IL_23D:
+                    this.GrdGreenScreenDefault3.RenderTransform = null;
+                    this.canbackground.RenderTransform = (this.MyInkCanvas.RenderTransform = transformGroup);
+                    this.MyInkCanvas.DefaultDrawingAttributes.StylusTipTransform = new Matrix(this._ZoomFactor, 0.0, 0.0, this._ZoomFactor, 0.0, 0.0);
+                }
+                catch (Exception serviceException)
+                {
+                    while (4 == 0)
+                    {
+                    }
+                    string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                    if (5 != 0)
+                    {
+                        ErrorHandler.ErrorHandler.LogFileWrite(message);
+                    }
+                }
+            IL_334:;
+            }
+            finally
+            {
+                while (false)
+                {
+                }
+            }
+        }
+
 
         public void Zomout(bool orignal)
         {
