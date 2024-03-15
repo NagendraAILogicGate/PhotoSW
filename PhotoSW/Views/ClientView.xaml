@@ -15,7 +15,7 @@
                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
 
                         <Border Name="IconBorder" Background="#4E4E4E" BorderThickness="1" Margin="15,0,10,15">
-                            <!--CornerRadius="18" -->
+                            <!--CornerRadius="18"-->
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="SelectionStates">
                                     <VisualState x:Name="Unselected" />
@@ -69,12 +69,13 @@
                             <!--<Image HorizontalAlignment="Stretch" Margin="15,-4.166,15,0" Grid.Row="1" Source="/PhotoSW;component/images/img-description.png" 
                                    Stretch="None" Width="60" Grid.RowSpan="1" Height="55.391" VerticalAlignment="Top" />--> 
                             <Border BorderBrush="#FF646464" BorderThickness="0"  Margin="2" Background="#4E4E4E">
-                                <!--CornerRadius="18"-->
+                                <!--CornerRadius="18" -->
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="10" Visibility="Collapsed">
                   <Run Text="Loading.." />
                                 </TextBlock>
                             </Border>
                             <!--Name="button"-->
+                            <!--VerticalAlignment="Top" />-->
                             <Button Name="button" Margin="2" Style="{StaticResource ButtonStyleAlpha2}" CommandParameter="{Binding PhotoId}" Tag="{Binding FilePath}"
                                     Click="MainImage_Click">
                                 <Grid Name="thumbGrd" Height="{Binding ActualHeight, ElementName=button, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}">
@@ -121,9 +122,9 @@
             <StackPanel  Margin="0" Grid.Row="0"   Grid.Column="1">
                 <TextBox Name="txtK"  Margin="5" Grid.Row="0"  Width="150" BorderThickness="5" BorderBrush="Red"  Grid.Column="0"></TextBox>
             </StackPanel>
-        </Grid>-->        
+        </Grid>-->
 
-
+        <!--VerticalAlignment="Top" />-->
         <Grid Name="ModalDialogParent">
             <Grid.RowDefinitions>
                 <!--<RowDefinition Height="122" />
