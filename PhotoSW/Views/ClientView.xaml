@@ -15,7 +15,7 @@
                     <ControlTemplate TargetType="{x:Type ListBoxItem}" >
 
                         <Border Name="IconBorder" Background="#4E4E4E" BorderThickness="1" Margin="15,0,10,15">
-                            <!--CornerRadius="18"-->
+                            <!--CornerRadius="18" -->
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="SelectionStates">
                                     <VisualState x:Name="Unselected" />
