@@ -1,6 +1,6 @@
 ﻿<Window x:Class="PhotoSW.Views.ClientView" Title="ClientView"
         Loaded="Window_Loaded"  WindowState="Minimized" ResizeMode="CanMinimize"
-        Background="#696969" WindowStyle="SingleBorderWindow" Topmost="False" Height="Auto" Width="Auto"          
+        Background="black" WindowStyle="SingleBorderWindow" Topmost="False" Height="Auto" Width="Auto"          
         BorderBrush="Red" BorderThickness="2"
         WindowStartupLocation="Manual" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
