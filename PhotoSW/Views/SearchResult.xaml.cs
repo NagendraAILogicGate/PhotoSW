@@ -152,6 +152,7 @@ namespace PhotoSW.Views
         private string QRCode = "";
         private string currentPhotoName = "";
         private SearchResult.SearchTypeConfig searchConfig = (SearchResult.SearchTypeConfig)0;
+		private int viewCount = 0;
 
 		private List<string> imageList = new List<string>
 		{
@@ -314,7 +315,7 @@ namespace PhotoSW.Views
 
 		private void GetConfigPageSize()
 		{
-             ConfigBusiness configBusiness = new  ConfigBusiness();
+            ConfigBusiness configBusiness = new ConfigBusiness();
 			List<long> objConfigMasterIds = new List<long>
 			{
 				21L,
@@ -5337,8 +5338,10 @@ namespace PhotoSW.Views
 				}
 				int num = RobotImageLoader.GroupImages.Count;
 				int num2 = RobotImageLoader.PrintImages.Count;
-			//	this.SetMessageText("Grouped");
-				int arg_7D_0 = (this.vwGroup.Text == "View Group") ? 1 : 0;
+				this.viewCount = num;
+				
+            //	this.SetMessageText("Grouped");
+                int arg_7D_0 = (this.vwGroup.Text == "View Group") ? 1 : 0;
 				IL_7D:
 				bool flag2 = arg_7D_0 == 0 && !(this.pagename == "Saveback");
 				IL_98:
@@ -5673,9 +5676,33 @@ namespace PhotoSW.Views
 			//	this.SPSelectAll.Visibility = Visibility.Visible;
 			}
 			this.ViewGroup();
-		}
 
-		private void btnImageAddToGroup_Click(object sender, RoutedEventArgs e)
+			ClientView clientView = null;
+			
+			foreach (Window window in System.Windows.Application.Current.Windows)
+			{
+				if (window.Title == "ClientView")
+				{
+					clientView = (ClientView)window;					
+				}
+			}
+			if (clientView != null)
+			{
+
+			}
+			else
+			{
+				clientView = new ClientView();
+			}
+			string str = this.vwGroup.Text;
+			int countnum = this.viewCount;
+
+            clientView.LoadWindow1(str, countnum);
+			//clientView.LoadImagestoList();
+
+        }
+
+        private void btnImageAddToGroup_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -6294,7 +6321,29 @@ namespace PhotoSW.Views
 					}
 				}
 				this.ViewGroup();
-				IL_6A5:
+
+                ClientView clientView = null;
+
+                foreach (Window window in System.Windows.Application.Current.Windows)
+                {
+                    if (window.Title == "ClientView")
+                    {
+                        clientView = (ClientView)window;
+                    }
+                }
+                if (clientView != null)
+                {
+
+                }
+                else
+                {
+                    clientView = new ClientView();
+
+                }
+				clientView.SelectClientView(this._currentImageId);
+
+
+                IL_6A5:
 				if (this.pagename == "Placeback")
 				{
 					this.CheckForAllImgSelectToPrint();
@@ -9238,8 +9287,29 @@ namespace PhotoSW.Views
 			{
 				this.SearchImages();
 				this.Ok.IsEnabled = true;
+
+                ClientView clientView = null;
+                foreach(Window window in System.Windows.Application.Current.Windows)
+                {
+                    if (window.Title == "ClientView")
+                    {
+                        clientView = (ClientView)window;
+                    }
+                }
+                if (clientView != null)
+                {
+
+                }
+                else
+                {
+                    clientView = new ClientView();
+                }
+                this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+
+				clientView.LoadWindow();
+
 			}
-			while (-1 == 0);
+            while (-1 == 0);
 		}
 
 		private void OpenAssociateWindow()
@@ -10119,7 +10189,7 @@ namespace PhotoSW.Views
 				RobotImageLoader.MinPhotoIdCriteria = (expr_149 ? 1L : 0L);
 				RobotImageLoader.IsZeroSearchNeeded = true;
 				RobotImageLoader.currentCount = 0;
-				RobotImageLoader.LoadImages();
+				var obj = RobotImageLoader.LoadImages();
 				this.LoadImages();
 				this.FillImageList();
 				IL_174:

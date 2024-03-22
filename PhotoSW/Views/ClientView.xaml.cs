@@ -61,6 +61,7 @@ namespace PhotoSW.Views
 
         public int FilpFrom = 0;
 
+        private string viewGroupList = string.Empty;    
         public static string selectImageForFB = "";
         public static List<string> listImageForFB = new List<string>();
         public BitmapImage unlockImage;
@@ -150,7 +151,7 @@ namespace PhotoSW.Views
 
         private int searchType = 3;
 
-
+        private int viewCount = 0;
         private int currentWidth = 0;
 
         private string currentBarCodePath = "";
@@ -350,6 +351,398 @@ namespace PhotoSW.Views
             {
                 string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
                 ErrorHandler.ErrorHandler.LogFileWrite(message);
+            }
+        }
+
+
+        public void LoadWindow1(string str, int count)
+        {
+            try
+            {
+                //this.txbUserName.Text = LoginUser.UserName;
+                //this.txbStoreName.Text = LoginUser.StoreName;
+                this.viewCount = count;
+                this.returntoHome = true;
+                RobotImageLoader.GetConfigData();
+                RobotImageLoader.LstUnlocknames = new List<string>();
+                RobotImageLoader.IsPreviewModeActive = false;
+                bool flag = !RobotImageLoader.Is9ImgViewActive;
+                bool arg_5F_0 = flag;
+                int arg_6F2_0;
+                bool expr_21F;
+                do
+                {
+                    if (!arg_5F_0)
+                    {
+                        this.scrollIndexWithoutPreview = 9;
+                        this.scrollIndexWithPreview = 9;
+                    }
+                    RobotImageLoader.thumbSet = this.scrollIndexWithoutPreview;
+                    if (this.pagename != "Saveback")
+                    {
+                        if (this.serachType == 1)
+                        {
+                            this.searchDetails.NewRecord = 0;
+                            this.searchDetails.StartIndex = 0L;
+                            RobotImageLoader.Is16ImgViewActive = false;
+                            RobotImageLoader.Is9ImgViewActive = true;
+                            this.searchDetails.PageSize = 9;
+                        }
+                        this.serachType = 0;
+                        this.searchDetails.PageNumber = 1;
+                        //this.SetMediaType();
+                        RobotImageLoader.LoadImages(this.searchDetails);
+                        flag = !(RobotImageLoader.SearchCriteria != "TimeWithQrcode");
+                        bool expr_11F = (arg_6F2_0 = (flag ? 1 : 0)) != 0;
+                        if (false)
+                        {
+                            goto IL_6F1;
+                        }
+                        if (!expr_11F)
+                        {
+                            //this.btnPrevButton.IsEnabled = true;
+                            //this.btnNextButton.IsEnabled = true;
+                            //this.clearGifCollage();
+                            //this.btnEdit.Visibility = Visibility.Visible;
+                        }
+                        if (5 == 0)
+                        {
+                            goto IL_408;
+                        }
+                    }
+                    if (RobotImageLoader.robotImages != null)
+                    {
+                        this.count = RobotImageLoader.robotImages.Count;
+                    }
+                    if (RobotImageLoader.GroupImages == null)
+                    {
+                        RobotImageLoader.GroupImages = new List<LstMyItems>();
+                    }
+                    if (RobotImageLoader.PrintImages == null)
+                    {
+                        RobotImageLoader.PrintImages = new List<LstMyItems>();
+                    }
+                    if (this.scrollIndexWithoutPreview != 9)
+                    {
+                        goto IL_2A5;
+                    }
+                    if (RobotImageLoader.GroupImages != null && RobotImageLoader.GroupImages.Count > 0)
+                    {
+                        RobotImageLoader.GroupImages.ForEach(delegate (LstMyItems t)
+                        {
+                            if (!false)
+                            {
+                                t.GridMainHeight = 190;
+                                if (!false)
+                                {
+                                    if (false)
+                                    {
+                                        return;
+                                    }
+                                    t.GridMainWidth = 226;
+                                }
+                            }
+                            do
+                            {
+                                t.GridMainRowHeight1 = 140;
+                                int expr_2A = 50;
+                                if (4 != 0)
+                                {
+                                    t.GridMainRowHeight2 = expr_2A;
+                                }
+                            }
+                            while (-1 == 0);
+                        });
+                    }
+                    flag = (RobotImageLoader.PrintImages == null || RobotImageLoader.PrintImages.Count <= 0);
+                    expr_21F = (arg_5F_0 = flag);
+                }
+                while (-1 == 0);
+                if (!expr_21F)
+                {
+                    RobotImageLoader.PrintImages.ForEach(delegate (LstMyItems t)
+                    {
+                        if (!false)
+                        {
+                            t.GridMainHeight = 190;
+                            if (!false)
+                            {
+                                if (false)
+                                {
+                                    return;
+                                }
+                                t.GridMainWidth = 226;
+                            }
+                        }
+                        do
+                        {
+                            t.GridMainRowHeight1 = 140;
+                            int expr_2A = 50;
+                            if (4 != 0)
+                            {
+                                t.GridMainRowHeight2 = expr_2A;
+                            }
+                        }
+                        while (-1 == 0);
+                    });
+                }
+                if (RobotImageLoader.robotImages == null || RobotImageLoader.robotImages.Count <= 0)
+                {
+                    goto IL_29E;
+                }
+            IL_274:
+                RobotImageLoader.robotImages.ForEach(delegate (LstMyItems t)
+                {
+                    if (!false)
+                    {
+                        t.GridMainHeight = 190;
+                        if (!false)
+                        {
+                            if (false)
+                            {
+                                return;
+                            }
+                            t.GridMainWidth = 226;
+                        }
+                    }
+                    do
+                    {
+                        t.GridMainRowHeight1 = 140;
+                        int expr_2A = 50;
+                        if (4 != 0)
+                        {
+                            t.GridMainRowHeight2 = expr_2A;
+                        }
+                    }
+                    while (-1 == 0);
+                });
+            IL_29E:
+                if (false)
+                {
+                    goto IL_6F0;
+                }
+            IL_2A5:
+                this._sharpeff.Strength = 0.075000000000000011;
+                this._sharpeff.PixelWidth = 0.0015;
+                this._sharpeff.PixelHeight = 0.0015;
+                this.GrdSharpen.Effect = this._sharpeff;
+                //this.PreviewPhoto();
+                flag = (!(RobotImageLoader.SearchCriteria == "Time") && !(RobotImageLoader.SearchCriteria == "QRCODE") && !(RobotImageLoader.SearchCriteria == "TimeWithQrcode"));
+            IL_337:
+                if (!flag)
+                {
+                    //this.btnPrevButton.Visibility = Visibility.Visible;
+                    //this.btnNextButton.Visibility = Visibility.Visible;
+                    ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Hidden);
+                }
+                else if (RobotImageLoader.RFID == "")
+                {
+                    //this.btnPrevButton.Visibility = Visibility.Hidden;
+                    //this.btnNextButton.Visibility = Visibility.Hidden;
+                    ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Visible);
+                    if (false)
+                    {
+                        goto IL_274;
+                    }
+                }
+                else
+                {
+                    //this.btnPrevButton.Visibility = Visibility.Visible;
+                    //this.btnNextButton.Visibility = Visibility.Visible;
+                    ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Hidden);
+                    //this.vwGroup.Text = "View Group";
+                }
+                MainWindow instance;
+                if (!(this.pagename == "MainGroup"))
+                {
+                    if (this.pagename == "Saveback")
+                    {
+                        try
+                        {
+                            if (MainWindow.Instance != null)
+                            {
+                                instance = MainWindow.Instance;
+                            }
+                            else
+                            {
+                                instance = MainWindow.Instance;
+                                if (2 == 0)
+                                {
+                                    goto IL_4BB;
+                                }
+                            }
+                            if (instance != null && !(instance.IsGoupped == "View All"))
+                            {
+                                instance.IsGoupped = "View Group";
+                                //this.vwGroup.Text = "View Group";
+                                this.lstImages.Items.Clear();
+                                this.continueCalculating = true;
+                                //this.SetMessageText("Grouped");
+                                //this.SetMessageText("");
+                                if (RobotImageLoader._objnewincrement != null && RobotImageLoader._objnewincrement.Count == 0)
+                                {
+                                    RobotImageLoader._objnewincrement = RobotImageLoader.robotImages;
+                                }
+                                this.LoadImagestoList(str);
+                                goto IL_53E;
+                            }
+                        IL_4BB:
+                            //this.ViewGroup();
+                            if (true)
+                            {
+                                goto IL_54E;
+                            }
+                        IL_53E:
+                            this.FillImageList();
+                            this.CheckSelectAllGroup();
+                        IL_54E:;
+                        }
+                        catch (Exception serviceException)
+                        {
+                            string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                            ErrorHandler.ErrorHandler.LogFileWrite(message);
+                        }
+                        goto IL_6A5;
+                    }
+                    if (this.pagename == "Placeback")
+                    {
+                        try
+                        {
+                            if (RobotImageLoader.robotImages.Count == 0)
+                            {
+                                RobotImageLoader.LoadImages();
+                            }
+                            if (RobotImageLoader.robotImages.Count != 0)
+                            {
+                                bool flag2 = false;
+                                while (true)
+                                {
+                                IL_668:
+                                    flag = !flag2;
+                                    while (flag)
+                                    {
+                                        if (6 != 0)
+                                        {
+                                            LstMyItems lstMyItems = new LstMyItems();
+                                            lstMyItems = RobotImageLoader.robotImages.Where(delegate (LstMyItems xb)
+                                            {
+                                                bool result;
+                                                do
+                                                {
+                                                    if (true && !false)
+                                                    {
+                                                        result = (xb.PhotoId == this.Savebackpid.ToInt32(false));
+                                                    }
+                                                    while (false)
+                                                    {
+                                                    }
+                                                }
+                                                while (8 == 0);
+                                                return result;
+                                            }).FirstOrDefault<LstMyItems>();
+                                            if (lstMyItems != null)
+                                            {
+                                                goto Block_50;
+                                            }
+                                            if (RobotImageLoader.robotImages.Count != 0)
+                                            {
+                                                RobotImageLoader.LoadImages();
+                                                goto IL_668;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    goto IL_675;
+                                }
+                            Block_50:
+                                this.continueCalculating = true;
+                                if (this.lstImages.Items.Count > 0)
+                                {
+                                    this.lstImages.Items.Clear();
+                                }
+                                this.LoadImagestoList(str);
+                            IL_675:;
+                                //	this.SetMessageText("Grouped");
+                            }
+                        }
+                        catch (Exception serviceException)
+                        {
+                            string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                            ErrorHandler.ErrorHandler.LogFileWrite(message);
+                        }
+                        goto IL_6A5;
+                    }
+                    // need to pass pareameter with check; 
+                    this.LoadImages(str);
+                    goto IL_6A5;
+                }
+            IL_408:
+
+                if (!flag)
+                {
+                    //this.vwGroup.Text = "View Group";
+                    if (8 == 0)
+                    {
+                        goto IL_337;
+                    }
+                }
+            //this.ViewGroup();
+            IL_6A5:
+                if (this.pagename == "Placeback")
+                {
+                    this.CheckForAllImgSelectToPrint();
+                    goto IL_708;
+                }
+                if (this.pagename != "MainGroup")
+                {
+                    arg_6F2_0 = ((!(this.pagename != "Saveback")) ? 1 : 0);
+                    goto IL_6F1;
+                }
+            IL_6F0:
+                arg_6F2_0 = 1;
+            IL_6F1:
+                if (arg_6F2_0 == 0)
+                {
+                    this.FillImageList();
+                    this.CheckSelectAllGroup();
+                }
+            IL_708:;
+            }
+            catch (Exception serviceException)
+            {
+                string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                ErrorHandler.ErrorHandler.LogFileWrite(message);
+            }
+            finally
+            {
+                MemoryManagement.FlushMemory();
+            }
+            this.IMGFrame.Visibility = Visibility.Collapsed;
+            Grid.SetColumnSpan(this.thumbPreview, 2);
+            Grid.SetColumn(this.thumbPreview, 0);
+            this.thumbPreview.Margin = new Thickness(0.0);
+            if (RobotImageLoader.robotImages != null)
+            {
+                if (RobotImageLoader.Is16ImgViewActive && !RobotImageLoader.Is9ImgViewActive)
+                {
+                    //this.imgwithPreview.Source = new BitmapImage(new Uri("/images/thumbnailview1.png", UriKind.Relative));
+                    ////this.imgwithoutPreview.Source = new BitmapImage(new Uri("images/16blocks_red.png", UriKind.Relative));
+                    //this.imgwithoutPreview9.Source = new BitmapImage(new Uri("/images/9Blocks_black.png", UriKind.Relative));
+                    //this.ImageSize(16);
+                }
+                else if (!RobotImageLoader.Is16ImgViewActive && RobotImageLoader.Is9ImgViewActive)
+                {
+                    //this.imgwithPreview.Source = new BitmapImage(new Uri("/images/thumbnailview1.png", UriKind.Relative));
+                    ////	this.imgwithoutPreview.Source = new BitmapImage(new Uri("images/16blocks_black.png", UriKind.Relative));
+                    //this.imgwithoutPreview9.Source = new BitmapImage(new Uri("/images/9Blocks_red.png", UriKind.Relative));
+                    //this.ImageSize(9);
+                }
+                else
+                {
+                    //this.imgwithPreview.Source = new BitmapImage(new Uri("/images/thumbnailview1.png", UriKind.Relative));
+                    ////	this.imgwithoutPreview.Source = new BitmapImage(new Uri("images/16blocks_black.png", UriKind.Relative));
+                    //this.imgwithoutPreview9.Source = new BitmapImage(new Uri("/images/9Blocks_black.png", UriKind.Relative));
+                }
             }
         }
 
@@ -881,6 +1274,99 @@ namespace PhotoSW.Views
             base.Close();
         }
 
+        private void LoadImages(string str)
+        {
+            try
+            {
+                //this.txtimageofphotographer.Visibility = Visibility.Collapsed;
+                //this.txtcountspace.Visibility = Visibility.Collapsed;
+
+                if (RobotImageLoader.robotImages.Count != 0)
+                {
+                    int arg_77_0;
+                    if (RobotImageLoader.UserId > 0)
+                    {
+                        if (!(RobotImageLoader.SearchCriteria == "Time"))
+                        {
+                            bool expr_1C3 = (arg_77_0 = ((RobotImageLoader.SearchCriteria == "TimeWithQrcode") ? 1 : 0)) != 0;
+                            if (!false)
+                            {
+                                arg_77_0 = ((!expr_1C3) ? 1 : 0);
+                            }
+                        }
+                        else
+                        {
+                            arg_77_0 = 0;
+                        }
+                    }
+                    else
+                    {
+                        arg_77_0 = 1;
+                    }
+
+                    while (true)
+                    {
+                        RobotImageLoader.IsLastPage = false;
+                        this.lstImages.Items.Clear();
+                        this.num = 0;
+                        if (!this.continueCalculating)
+                        {
+                            goto IL_112;
+                        }
+                        if (8 == 0)
+                        {
+                            goto IL_180;
+                        }
+                        this.continueCalculating = false;
+                    IL_14C:
+                        if (4 == 0)
+                        {
+                            continue;
+                        }
+                        if (!false)
+                        {
+                            break;
+                        }
+                    IL_112:
+                        this.continueCalculating = true;
+                        if (RobotImageLoader.robotImages == null)
+                        {
+                            RobotImageLoader.LoadImages();
+                        }
+                        this.LoadImagestoList(str);
+                        this.CheckSelectAllGroup();
+                        //	this.SPSelectAll.Visibility = Visibility.Visible;
+                        goto IL_14C;
+                    }
+                }
+                else
+                {
+                    this.lstImages.Items.Clear();
+                    RobotImageLoader.IsLastPage = true;
+                }
+            IL_156:
+                if (2 == 0)
+                {
+                    goto IL_156;
+                }
+            //	this.SetMessageText("Grouped");
+            IL_180:;
+            }
+            catch (Exception serviceException)
+            {
+                if (8 != 0)
+                {
+                    string message = ErrorHandler.ErrorHandler.CreateErrorMessage(serviceException);
+                    ErrorHandler.ErrorHandler.LogFileWrite(message);
+                }
+            }
+            finally
+            {
+            }
+            if (!false)
+            {
+            }
+        }
 
         private void LoadImages()
         {
@@ -1035,7 +1521,8 @@ namespace PhotoSW.Views
             // this.chkSelectAll.Visibility = Visibility.Visible;
         }
 
-        private void LoadImagestoList()
+
+        public void LoadImagestoList(string str)
         {
             this.imgDefault.Visibility = Visibility.Collapsed;
             int num = RobotImageLoader.robotImages.Count;
@@ -1058,7 +1545,150 @@ namespace PhotoSW.Views
                 {
                     goto IL_271;
                 }
-                this.lstImages.Items.Add(lstMyItems);
+                if(str == "View All")
+                {
+                    this.lstImages.Items.Add(lstMyItems);
+                    this.viewGroupList = str;
+                }
+                else
+                {
+                    this.lstImages.Items.Add(lstMyItems);
+                    this.viewGroupList = "";
+                }
+                int arg_B7_0;
+            //  bool arg_15E_0 = ((this.pagename == "Saveback") ? (arg_B7_0 = 0) : (arg_B7_0 = ((!(this.pagename == "Placeback")) ? 1 : 0))) != 0;
+            IL_B0:
+                if (8 == 0)
+                {
+                    goto IL_15D;
+                }
+                //if (arg_B7_0 != 0)
+                //{
+                //    goto IL_14D;
+                //}
+                //if (lstMyItems.PhotoId != this.Savebackpid.ToInt32(false))
+                //{
+                //    goto IL_14C;
+                //}
+
+                if (false)
+                {
+                    goto IL_14B;
+                }
+                this.lstImages.SelectedIndex = this.lstImages.Items.Count - 1;
+            IL_FC:
+                this.lstImages.ScrollIntoView(this.lstImages.SelectedIndex);
+                ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                listBoxItem.Focus();
+                this.pagename = "";
+            IL_14B:
+            IL_14C:
+            IL_14D:
+            //  arg_15E_0 = (lstMyItems.Name == RobotImageLoader.RFID);
+            IL_15D:
+                //if (!arg_15E_0)
+                //{
+                //    goto IL_1DA;
+                //}
+                //  bool expr_171 = (arg_B7_0 = ((arg_15E_0 = (this.lstImages.SelectedItem == null)) ? 1 : 0)) != 0;
+                if (false)
+                {
+                    goto IL_B0;
+                }
+                // flag = !expr_171;
+            }
+            else
+            {
+                this.continueCalculating = false;
+                if (6 != 0)
+                {
+                    this.num = 0;
+                    return;
+                }
+            }
+            if (!flag)
+            {
+                if (2 == 0)
+                {
+                    goto IL_270;
+                }
+                //this.lstImages.SelectedItem = lstMyItems;
+                //this.lstImages.ScrollIntoView(this.lstImages.SelectedIndex);
+                //ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                //listBoxItem.Focus();
+            }
+        IL_1DA:
+            int arg_1E6_0;
+            int arg_200_0 = arg_1E6_0 = this.num;
+            while (2 != 0)
+            {
+                if (arg_1E6_0 == num - 1)
+                {
+                    bool expr_1F4 = (arg_1E6_0 = (arg_200_0 = ((this.lstImages.SelectedIndex == -1) ? 1 : 0))) != 0;
+                    if (false)
+                    {
+                        continue;
+                    }
+                    arg_200_0 = ((!expr_1F4) ? 1 : 0);
+                }
+                else
+                {
+                    arg_200_0 = 1;
+                }
+                break;
+            }
+            if (arg_200_0 == 0)
+            {
+                this.lstImages.SelectedIndex = 0;
+                this.lstImages.ScrollIntoView(this.lstImages.SelectedIndex);
+                ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                listBoxItem.Focus();
+            }
+            base.Dispatcher.BeginInvoke(DispatcherPriority.Background, new SearchResult.NextPrimeDelegate(this.LoadImagestoList));
+        IL_270:
+        IL_271:
+            this.num++;
+        }
+
+
+        public void LoadImagestoList()
+        {
+            this.imgDefault.Visibility = Visibility.Collapsed;
+            int num = RobotImageLoader.robotImages.Count;
+            string test = this.viewGroupList;
+            LstMyItems expr_2A9 = new LstMyItems();
+            LstMyItems lstMyItems;
+            if (true)
+            {
+                lstMyItems = expr_2A9;
+            }
+            //  this.txtSelectedImages.Foreground = new SolidColorBrush(Colors.White);
+            bool flag = this.num >= num;
+            if (!flag)
+            {
+                if (false)
+                {
+                    goto IL_FC;
+                }
+                lstMyItems = RobotImageLoader.robotImages[this.num];
+                if (!this.continueCalculating)
+                {
+                    goto IL_271;
+                }
+                if(this.viewGroupList == "View All")
+                {
+                    if(viewCount > 1)
+                        while (viewCount > 1)
+                        {
+                            this.lstImages.Items.Add(lstMyItems);
+                            viewCount--;
+                        }
+                }
+                else
+                {
+                    this.lstImages.Items.Add(lstMyItems);
+                }
+               
                 int arg_B7_0;
             //  bool arg_15E_0 = ((this.pagename == "Saveback") ? (arg_B7_0 = 0) : (arg_B7_0 = ((!(this.pagename == "Placeback")) ? 1 : 0))) != 0;
             IL_B0:
@@ -2554,6 +3184,7 @@ namespace PhotoSW.Views
                         this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
                         this._currentImage = ((LstMyItems)this.lstImages.SelectedItem).Name;
                         this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+
                         lstMyItems = (from t in RobotImageLoader.GroupImages
                                       where t.PhotoId == this._currentImageId
                                       select t).FirstOrDefault<LstMyItems>();
@@ -2561,6 +3192,7 @@ namespace PhotoSW.Views
                         lstMyItems2 = (from t in RobotImageLoader.PrintImages
                                        where t.PhotoId == curItem.PhotoId
                                        select t).FirstOrDefault<LstMyItems>();
+
                         if (lstMyItems2 != null)
                         {
                             if (false)
@@ -2628,6 +3260,7 @@ namespace PhotoSW.Views
                         lstMyItems2 = (from t in RobotImageLoader.PrintImages
                                        where t.PhotoId == curItem.PhotoId
                                        select t).FirstOrDefault<LstMyItems>();
+
                         if (lstMyItems2 == null)
                         {
                             goto IL_510;
@@ -2656,10 +3289,12 @@ namespace PhotoSW.Views
             IL_52E:
                 goto IL_6CA;
             IL_534:
+
                 this.lstImages.ScrollIntoView(this.lstImages.SelectedItem);
                 this.txtMainImage.Text = ((LstMyItems)this.lstImages.SelectedItem).Name;
                 this._currentImage = ((LstMyItems)this.lstImages.SelectedItem).Name;
                 this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+
                 lstMyItems = (from t in RobotImageLoader.GroupImages
                               where t.PhotoId == this._currentImageId
                               select t).FirstOrDefault<LstMyItems>();
