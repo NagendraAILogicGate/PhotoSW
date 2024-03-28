@@ -107,7 +107,7 @@ namespace PhotoSW
 
 		public static int thumbSet = 20;
 
-		public static int MediaTypes = 3;
+		public static int MediaTypes = 0;
 
 		public static bool Is9ImgViewActive = false;
 
@@ -185,8 +185,8 @@ namespace PhotoSW
 				{
 					Stopwatch stopwatch = CommonUtility.Watch();
 					stopwatch.Start();
-					RobotImageLoader.SelectPhotoByZeroSearch(list, ssInfo, moderatePhotosList, photoBusiness, RobotImageLoader.MediaTypes);
-					if (stopwatch != null)
+					RobotImageLoader.SelectPhotoByZeroSearch(list, ssInfo, moderatePhotosList, photoBusiness, RobotImageLoader.MediaTypes);					
+                    if (stopwatch != null)
 					{
 						CommonUtility.WatchStop("Search 0", stopwatch);
 					}
@@ -970,8 +970,8 @@ namespace PhotoSW
 			}
 			else
 			{
-				list = phBiz.GetAllPhotosByPage(ssInfo, num, RobotImageLoader.thumbSet, RobotImageLoader.IsNextPage, out RobotImageLoader.MaxPhotoId, out RobotImageLoader.IsMorePrevImages, out RobotImageLoader.MinPhotoId, mediaType).ToList<PhotoInfo>();
-				RobotImageLoader.IsMoreNextImages = (num != -1 && RobotImageLoader.MaxPhotoId + 1L != (long)num);
+				list = phBiz.GetAllPhotosByPage(ssInfo, num, RobotImageLoader.thumbSet, RobotImageLoader.IsNextPage, out RobotImageLoader.MaxPhotoId, out RobotImageLoader.IsMorePrevImages, out RobotImageLoader.MinPhotoId, mediaType).ToList<PhotoInfo>();				
+                RobotImageLoader.IsMoreNextImages = (num != -1 && RobotImageLoader.MaxPhotoId + 1L != (long)num);
 			}
 			RobotImageLoader.IsNextPage = false;
 			RobotImageLoader.totalCount = list.Count;
@@ -1094,7 +1094,7 @@ namespace PhotoSW
             string subStoreId = "0";
             if (LoginUser.DefaultSubstores.Contains(","))
                 subStoreId = LoginUser.DefaultSubstores.Split(',')[0];
-            source = (from t in phBiz.GetAllPhotosforSearch(subStoreId, System.Convert.ToInt64(RobotImageLoader.RFID), num, LoginUser.IsPhotographerSerailSearchActive, RobotImageLoader.StartIndexRFID, RobotImageLoader._rfidSearch, RobotImageLoader.NewRecord, out RobotImageLoader.MaxPhotoIdCriteria, out RobotImageLoader.MinPhotoIdCriteria, RobotImageLoader.MediaTypes)
+            source = (from t in phBiz.GetAllPhotosforSearch(subStoreId, System.Convert.ToInt64(RobotImageLoader.RFID), num, LoginUser.IsPhotographerSerailSearchActive, RobotImageLoader.StartIndexRFID, RobotImageLoader._rfidSearch, RobotImageLoader.NewRecord, out RobotImageLoader.MaxPhotoIdCriteria, out RobotImageLoader.MinPhotoIdCriteria,RobotImageLoader.MediaTypes)
 			orderby t.DG_Photos_pkey descending
 			select t).ToList<PhotoInfo>();
 			System.Collections.Generic.List<PhotoInfo> list = new System.Collections.Generic.List<PhotoInfo>();

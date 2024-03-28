@@ -819,8 +819,10 @@
             </Button>
 
             <TextBox Name="txtImageId"  Margin="30,85,10,0" Grid.Row="0" TextBlock.FontSize="18"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="150" Height="35"
-                     BorderThickness="5" BorderBrush="Red"  Grid.Column="0" TextChanged="txtImageId_TextChanged"></TextBox>
-           
+                     KeyDown="OnKeyDownHandler" BorderThickness="5" BorderBrush="Red"  Grid.Column="0" TextChanged="txtImageId_TextChanged"> <!--TextChanged="txtImageId_TextChanged"-->                
+            </TextBox>
+
+            
             <Button Name="btnHome1" Style="{DynamicResource TransparentImage}" Margin="8" IsDefault="False" HorizontalAlignment="Center"  VerticalAlignment="Top"  Background="Transparent" BorderBrush="Transparent" Width="245" Height="25"   Click="btnHome_Click">
                 <ContentControl>
                     <Image Stretch="Fill" Source="/PhotoSW;component/images/homeLogo.png" />

@@ -5346,8 +5346,7 @@ namespace PhotoSW.Views
 				bool flag2 = arg_7D_0 == 0 && !(this.pagename == "Saveback");
 				IL_98:
 				if (!flag2)
-				{
-                    
+				{                    
                     this.rdbtnAll.IsChecked = new bool?(true);
 					this.continueCalculating = false;
 					if (num > 0)
@@ -5357,7 +5356,7 @@ namespace PhotoSW.Views
                         //this.btnPrevButton.Visibility = Visibility.Collapsed;
                         //this.btnNextButton.Visibility = Visibility.Collapsed;
 
-                       // this.btnEdit.Visibility = Visibility.Collapsed;
+                        // this.btnEdit.Visibility = Visibility.Collapsed;
                         //this.spEditCollage.Visibility = Visibility.Visible;
 
                         ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Visible);
@@ -5549,10 +5548,11 @@ namespace PhotoSW.Views
                     ScrollViewer.SetVerticalScrollBarVisibility(this.lstImages, ScrollBarVisibility.Hidden);
 					RobotImageLoader.GroupId = "";
 					RobotImageLoader.SearchCriteria = "";
-					RobotImageLoader.RFID = "0";
+					//RobotImageLoader.RFID = "0";
 					this.continueCalculating = false;
 					this.num = 0;
-					bool expr_7DB = (arg_7D_0 = ((RobotImageLoader.RFID == "0") ? 1 : 0)) != 0;
+					//bool expr_7DB = (arg_7D_0 = ((RobotImageLoader.RFID == "0") ? 1 : 0)) != 0;
+					bool expr_7DB = (arg_7D_0 = ((RobotImageLoader.RFID != "0") ? 1 : 0)) != 0;
 					if (!false)
 					{
 						if (expr_7DB)
@@ -5660,8 +5660,7 @@ namespace PhotoSW.Views
 		}
 
 		public void btnViewGroup_Click(object sender, RoutedEventArgs e)
-		{
-            
+		{            
             if (-1 != 0 && 8 != 0)
 			{
 				if (true)
@@ -5673,17 +5672,17 @@ namespace PhotoSW.Views
 					this.MediaStop();
 					this.pagename = "";
 				}
-			//	this.SPSelectAll.Visibility = Visibility.Visible;
+				//this.SPSelectAll.Visibility = Visibility.Visible;
 			}
+
 			this.ViewGroup();
 
 			ClientView clientView = null;
-			
 			foreach (Window window in System.Windows.Application.Current.Windows)
 			{
 				if (window.Title == "ClientView")
 				{
-					clientView = (ClientView)window;					
+					clientView = (ClientView)window;
 				}
 			}
 			if (clientView != null)
@@ -5694,13 +5693,41 @@ namespace PhotoSW.Views
 			{
 				clientView = new ClientView();
 			}
+
 			string str = this.vwGroup.Text;
+			List<LstMyItems> list = new List<LstMyItems>();
 			int countnum = this.viewCount;
+			if (str == "View All")
+			{
+				var obj = RobotImageLoader.GroupImages.GetEnumerator();
+				while (obj.MoveNext())
+				{
+					LstMyItems photoItem = obj.Current;
+					LstMyItems lstMyItems = (from t in RobotImageLoader.GroupImages
+											 where t.PhotoId == photoItem.PhotoId
+											 select t).FirstOrDefault<LstMyItems>();
 
-            clientView.LoadWindow1(str, countnum);
-			//clientView.LoadImagestoList();
+					list.Add(lstMyItems);
+				}
+                this.grdSelectAll.Visibility = Visibility.Visible;
+            }
+			else
+			{
+				var obj = RobotImageLoader.robotImages.GetEnumerator();
+				while (obj.MoveNext())
+				{
+					LstMyItems photoItem = obj.Current;
+					LstMyItems lstMyItems = (from t in RobotImageLoader.robotImages
+											 where t.PhotoId == photoItem.PhotoId
+											 select t).FirstOrDefault<LstMyItems>();
 
-        }
+					list.Add(lstMyItems);
+				}
+                this.grdSelectAll.Visibility = Visibility.Collapsed;
+            }
+
+			clientView.LoadImagestoList1(list, str);
+		}
 
         private void btnImageAddToGroup_Click(object sender, RoutedEventArgs e)
 		{
@@ -5982,7 +6009,8 @@ namespace PhotoSW.Views
             this.txtSelectedImages.Visibility = Visibility.Collapsed;
             this.spEditCollage.Visibility = Visibility.Collapsed;
             this.spEditGifAnimation.Visibility = Visibility.Collapsed;
-            }
+            this.grdSelectAll.Visibility = Visibility.Collapsed;
+        }
 		public void LoadWindow()
 		{
 			try
@@ -7898,7 +7926,7 @@ namespace PhotoSW.Views
 						this.num = 0;
 						this.vwGroup.Text = "View Group";
 					}
-					this.grdSelectAll.Visibility = Visibility.Visible;
+					this.grdSelectAll.Visibility = Visibility.Collapsed;
 					this.LoadImages();
 				//	this.SPSelectAll.Visibility = Visibility.Visible;
 					goto IL_259;
@@ -7921,7 +7949,7 @@ namespace PhotoSW.Views
 				}
 				goto IL_2A8;
 				IL_249:
-				this.grdSelectAll.Visibility = Visibility.Visible;
+				this.grdSelectAll.Visibility = Visibility.Collapsed;
 				IL_258:
 				IL_259:
 				goto IL_31D;
@@ -7943,7 +7971,7 @@ namespace PhotoSW.Views
 				this.vwGroup.Text = "View Group";
 				IL_2FB:
 			//	this.SetMessageText("Grouped");
-				this.grdSelectAll.Visibility = Visibility.Visible;
+				this.grdSelectAll.Visibility = Visibility.Collapsed;
 				this.LoadImages();
 				IL_31C:
 				IL_31D:
@@ -9576,17 +9604,62 @@ namespace PhotoSW.Views
 			}
 		}
 
-		private void txtImageId_TextChanged(object sender, TextChangedEventArgs e)
+       
+
+        private void OnKeyDownHandler(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+			if (e.Key == Key.Return)
+			{
+                if (!false)
+                {
+                    this.Ok.IsEnabled = false;
+                    if (false)
+                    {
+                        return;
+                    }
+                    this.MediaStop();
+                }
+                do
+                {
+                    this.SearchImages();
+                    this.Ok.IsEnabled = true;
+
+                    ClientView clientView = null;
+                    foreach (Window window in System.Windows.Application.Current.Windows)
+                    {
+                        if (window.Title == "ClientView")
+                        {
+                            clientView = (ClientView)window;
+                        }
+                    }
+                    if (clientView != null)
+                    {
+
+                    }
+                    else
+                    {
+                        clientView = new ClientView();
+                    }
+                    this._currentImageId = ((LstMyItems)this.lstImages.SelectedItem).PhotoId;
+
+                    clientView.LoadWindow();
+
+                }
+                while (-1 == 0);
+            }
+        }
+
+        private void txtImageId_TextChanged(object sender, TextChangedEventArgs e)
 		{
-        if(this.txtImageId.Text.Contains('.'))
-            {
-            this.txtImageId.Text = this.txtImageId.Text.Replace(".", "");
-            }
-        if(this.txtImageId.Text.Contains('-'))
-            {
-            this.txtImageId.Text = this.txtImageId.Text.Replace("-", "");
-            }
-        this.txtImageId.CaretIndex = this.txtImageId.Text.Length;
+			if(this.txtImageId.Text.Contains('.'))
+			{
+				this.txtImageId.Text = this.txtImageId.Text.Replace(".", "");
+			}
+			if(this.txtImageId.Text.Contains('-'))
+			{
+				this.txtImageId.Text = this.txtImageId.Text.Replace("-", "");
+			}
+			this.txtImageId.CaretIndex = this.txtImageId.Text.Length;
 		}
 
 		private void MediaStop()
@@ -10124,7 +10197,7 @@ namespace PhotoSW.Views
 				do
 				{
 					this.searchConfig = SearchResult.SearchTypeConfig.ImageVideo;
-					RobotImageLoader.MediaTypes = 3;
+					RobotImageLoader.MediaTypes = 0;
 					bool flag = !(this.vwGroup.Text == "View All");
 					bool arg_3E_0 = flag;
 					while (arg_3E_0)

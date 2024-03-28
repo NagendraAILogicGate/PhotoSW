@@ -27787,6 +27787,7 @@ namespace PhotoSW.Views
             {
                 MemoryManagement.FlushMemory();
                 this.Zomout(true);
+                this.ImageFixSize(true);
                 this.IsMoveEnabled = false;
                 this.MoveImageStart();
                 this.ImageMove();
