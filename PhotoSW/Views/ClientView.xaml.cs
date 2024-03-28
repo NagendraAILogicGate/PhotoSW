@@ -1128,10 +1128,14 @@ namespace PhotoSW.Views
                 }
                 this.lstImages.SelectedIndex = this.lstImages.Items.Count - 1;
             IL_FC:
-                this.lstImages.ScrollIntoView(this.lstImages.SelectedIndex);
-                ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
-                listBoxItem.Focus();
-                this.pagename = "";
+                if(this.lstImages.Items.Count > 0)
+                {
+                    this.lstImages.ScrollIntoView(this.lstImages.SelectedIndex);
+                    ListBoxItem listBoxItem = (ListBoxItem)this.lstImages.ItemContainerGenerator.ContainerFromItem(this.lstImages.SelectedItem);
+                    listBoxItem.Focus();
+                    this.pagename = "";
+                }
+                
             IL_14B:
             IL_14C:
             IL_14D:
